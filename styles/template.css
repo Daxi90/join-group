@@ -1,0 +1,91 @@
+/* Allgemeine Stile */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+header {
+    background-color: #4589ff;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#sidebar {
+    background-color: #e9ecef;
+    padding: 20px;
+    height: 100%;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+main {
+    flex-grow: 1;
+    padding: 32px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.kanban-board {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    overflow: auto;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.kanban-column {
+    flex-grow: 1;
+    margin: 0 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    box-sizing: border-box;
+}
+
+/* Mobile Ansicht */
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        height: auto;
+        order: 2;
+    }
+
+    main {
+        order: 1;
+    }
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar li {
+    margin-bottom: 20px;
+}
+
+#sidebar a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+#sidebar img {
+    margin-right: 10px;
+}
