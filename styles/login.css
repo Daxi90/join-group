@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.join-logo-blue {
+    position: absolute;
+    top: 80px;
+    left: 77px;
+    width: 100px;
+    height: 122px;
+}
+
+.sign-up-link-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 67px;
+    width: 315px;
+    height: 48px;
+    left: 67.04%;
+}
+
+.sign-up-link-question {
+    margin-right: 17.5px;
+}
+
+.sign-up-link-link {
+    margin-left: 17.5px;
+    color: white;
+    background-color: rgb(69,137,255);
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+}
+
+.sign-up-link-link:hover {
+    cursor: pointer;
+    background-color: rgb(93, 152, 255);
+}
+
+.login-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    width: 652px;
+    height: 510px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-title {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.form-container {
+    width: 422px;
+    height: 152px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-field-email-container {
+    display: flex;
+    align-items: center;
+    width: 422px;
+    justify-content: center;
+    border-bottom: 1px solid grey;
+    height: 48px;
+    margin-bottom: 28px;
+}
+
+.input-field-email {
+    width: 400px;
+    border: none;
+}
+
+.input-field-password-container {
+    display: flex;
+    align-items: center;
+    width: 422px;
+    justify-content: center;
+    border-bottom: 1px solid grey;
+    height: 48px;
+    margin-bottom: 28px;
+}
+
+.input-field-password {
+    width: 400px;
+    border: none;
+}
+
+.f-password-link {
+    color: rgb(69,137,255);
+    text-decoration: none;
+}
+
+.login-link-container {
+    display: flex;
+    justify-content: space-between;
+}
