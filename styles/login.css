@@ -10,8 +10,8 @@ body {
     position: absolute;
     top: 80px;
     left: 77px;
-    width: 100px;
-    height: 122px;
+    width: 100.03px;
+    height: 121.97px;
 }
 
 .sign-up-link-container {
@@ -21,7 +21,7 @@ body {
     top: 67px;
     width: 315px;
     height: 48px;
-    left: 67.04%;
+    left: 72.1528%;
 }
 
 .sign-up-link-question {
@@ -31,7 +31,7 @@ body {
 .sign-up-link-link {
     margin-left: 17.5px;
     color: white;
-    background-color: rgb(69,137,255);
+    background-color: rgb(69, 137, 255);
     padding: 12px;
     border-radius: 12px;
     border: none;
@@ -39,7 +39,7 @@ body {
 
 .sign-up-link-link:hover {
     cursor: pointer;
-    background-color: rgb(93, 152, 255);
+    background-color: rgb(120, 170, 255);
 }
 
 .login-container {
@@ -53,17 +53,24 @@ body {
 }
 
 .login-title {
+    height: 74px;
+    width: 150px;
     font-size: 48px;
     font-weight: 700;
+    text-align: center;
+    border-bottom: 3px solid rgb(69, 137, 255);
 }
 
 .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-fields-container {
     width: 422px;
     height: 152px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    margin-bottom: 35px;
 }
 
 .input-field-email-container {
@@ -71,14 +78,49 @@ body {
     align-items: center;
     width: 422px;
     justify-content: center;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgb(220, 220, 220);
     height: 48px;
     margin-bottom: 28px;
 }
 
 .input-field-email {
-    width: 400px;
+    width: 90%;
     border: none;
+    height: 24px;
+    outline: none;
+}
+
+.input-field-email::placeholder
+
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+    {
+    color: rgb(220, 220, 220);
+    opacity: 1;
+    /*Firefox*/
+}
+
+.input-field-email:-ms-input-placeholder
+
+/* Internet Explorer 10-11 */
+    {
+    color: rgb(220, 220, 220);
+}
+
+.input-field-email::-ms-input-placeholder
+
+/* Microsoft Edge */
+    {
+    color: rgb(220, 220, 220);
+}
+
+.login-password-icon-contaienr {
+    width: 24px;
+    height: 24px;
+}
+
+.login-email-icon {
+    width: 20px;
+    height: 16px;
 }
 
 .input-field-password-container {
@@ -86,30 +128,124 @@ body {
     align-items: center;
     width: 422px;
     justify-content: center;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid rgb(220, 220, 220);
     height: 48px;
     margin-bottom: 28px;
 }
 
 .input-field-password {
-    width: 400px;
+    width: 90%;
     border: none;
+    height: 24px;
+    outline: none;
 }
+
+.input-field-password::placeholder
+
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+    {
+    color: rgb(220, 220, 220);
+    opacity: 1;
+    /*Firefox*/
+}
+
+.input-field-password:-ms-input-placeholder
+
+/* Internet Explorer 10-11 */
+    {
+    color: rgb(220, 220, 220);
+}
+
+.input-field-password::-ms-input-placeholder
+
+/* Microsoft Edge */
+    {
+    color: rgb(220, 220, 220);
+}
+
+.login-password-icon-contaienr {
+    width: 24px;
+    height: 24px;
+}
+
+.login-password-icon {
+    width: 16px;
+    height: 21px;
+}
+
+/*custom checkbox*/
 
 .checkbox-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.checkbox {
-    color: rgb(69,137,255);
-    background-color: black;
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
+
+.checkmark {
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border: 2px solid rgb(69, 137, 255);
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    background-color: rgb(119, 169, 255);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: rgb(69, 137, 255);
+}
+
+.checkmark:after {
+    content: "";
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+/*custom checkbox end */
 
 .f-password-link {
-    color: rgb(69,137,255);
+    color: rgb(69, 137, 255);
     text-decoration: none;
+}
+
+.f-password-link:hover {
+    color: rgb(119, 169, 255);
+}
+
+.f-password-link:focus {
+    color: rgb(22, 79, 177)
 }
 
 .account-options {
@@ -123,4 +259,60 @@ body {
     display: flex;
     justify-content: space-between;
     width: 367px;
+}
+
+.login-button {
+    font-size: 23px;
+    font-weight: 400;
+    border: none;
+    background-color: rgb(69, 137, 255);
+    color: white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: rgb(120, 170, 255);
+}
+
+.login-guest-button {
+    font-size: 23px;
+    font-weight: 400;
+    color: #647188;
+    border: 1px solid #647188;
+    border-radius: 8px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 35px;
+    padding-right: 35px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.login-guest-button:hover {
+    background-color: rgb(223, 223, 223);
+}
+
+.legal-container {
+    position: absolute;
+    width: 100%;
+    top: 92.48%;
+    left: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.legal {
+    width: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.legal a {
+    text-decoration: none;
+    color: #42526E;
 }
