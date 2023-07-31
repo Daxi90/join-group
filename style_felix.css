@@ -1,0 +1,69 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 912px;
+    height: 591px;
+    margin: 0 auto;
+}
+
+.toplayer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 191px;
+    margin-bottom: 20px;
+}
+
+.botlayer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.taskBox {
+
+    padding: 40px;
+    border: 0.5px solid lightgray;
+    border-radius: 30px;
+    width: 124px;
+    height: 111px;
+}
+
+.urgentbox {
+    width: 600px;
+    height: 111px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 40px;
+    background-color: #4589FF;
+    color: white;
+}
+
+.circle {
+    border: 3px solid white;
+    border-radius: 40px;
+    
+}
+
+.bigNumbers {
+    font-size: 4rem;
+}
