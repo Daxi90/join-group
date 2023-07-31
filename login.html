@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="login.js"></script>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <img class="join-logo-blue" src="assets/templates/img/join-header-logo-blue.png">
+    <div class="sign-up-link-container">
+        <p class="sign-up-link-question">Not a Join User?</p>
+        <button class="sign-up-link-link">Sign up</button>
+    </div>
+    <div class="login-container">
+        <div class="login-title-container">
+            <p class="login-title">Log in</p>
+        </div>
+        <form class="form-container" onsubmit="login(); return false">
+            <div class="input-fields-container">
+                <div class="input-field-email-container">
+                    <input class="input-field-email" type="email" id="email" placeholder="Email">
+                    <div class="login-email-icon-container">
+                        <img class="login-email-icon" src="assets/templates/img/mail.png">
+                    </div>
+                </div>
+                <div class="input-field-password-container">
+                    <input class="input-field-password" type="text" id="password" placeholder="Password">
+                    <div class="login-password-icon-container">
+                        <img class="login-password-icon" src="assets/templates/img/lock.png">                    
+                    </div>
+                </div>                
+            </div>
+            <div class="account-options">
+                <label class="checkbox-container">
+                    <input class="checkbox" type="checkbox" name="myCheckbox" value="1"><span class="checkmark"></span>
+                    Remember me
+                </label>
+                <a href="#" class="f-password-link">I forgot my password</a>
+            </div>
+            <div class="login-link-container">
+                    <button class="login-button">Login</button>
+                    <button class="login-guest-button">Guest log in</button>
+            </div>
+            
+        </form>
+
+
+    </div>
+    <div class="legal-container">
+        <div class="legal">
+            <a href="#" class="privacy-policy">Privacy Policy</a>
+            <a href="#" class="legal-notice">Legal Notice</a>
+        </div>
+    </div>
+</body>
+</html>
