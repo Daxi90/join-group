@@ -53,6 +53,7 @@ main {
 .menu-item {
   padding: 8px 30px;
   border-radius: 8px;
+  gap: 8px;
 }
 
 .menu-item:hover {
@@ -88,6 +89,8 @@ main {
   .menu-item {
     flex-direction: column;
     font-size: 15px;
+    align-items: center;
+    justify-content: center;
   }
 
   main {
@@ -109,8 +112,23 @@ main {
   align-items: center;
   text-decoration: none;
   color: #333;
+  padding: 10px;
 }
 
 #sidebar img {
-  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+nav{
+  height: 65px;
+}
+
+@media (max-width: 500px){
+  .menu-item img{
+      height: 20px;
+  }
+
+  .menu-desc{
+      font-size: 10px;
+  }
 }
