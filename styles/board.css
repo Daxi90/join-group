@@ -1,0 +1,65 @@
+.kanban-board {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  overflow: auto;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.kanban-column {
+  flex-grow: 1;
+  margin: 0 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  min-width: 300px;
+}
+
+.kanban-card {
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 24px !important;
+  margin-bottom: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.kanban-card:last-child {
+  margin-bottom: 0;
+} 
+
+/* Für WebKit-Browser (wie Chrome und Safari) */
+.kanban-column::-webkit-scrollbar {
+  display: none;
+}
+
+/* Für Internet Explorer und Edge */
+.kanban-column {
+  -ms-overflow-style: none;
+}
+
+/* Für Firefox */
+.kanban-column {
+  scrollbar-width: none;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h3{
+  color: #42526e;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+@media (max-width: 950px){
+    .kanban-column {
+        min-width: 200px;
+      }
+}
+
