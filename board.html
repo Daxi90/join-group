@@ -1,75 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/template.css" />
-    <link rel="stylesheet" href="./styles/board.css">
+    <link rel="stylesheet" href="./styles/board.css" />
     <title>Join</title>
-</head>
-<body onload="init()">
+  </head>
+  <body onload="init()">
     <div id="header" w3-include-html="./assets/templates/header.html"></div>
     <div id="container">
-        <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
-        <main>
-            <!-- Hauptinhalt / Content -->
-            <div class="kanban-board">
-                <div class="kanban-column">
-                  <h3>To Do</h3>
-                  <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 1</p>
-                  </div>
-                  <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                      <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 2</p>
-                  </div>
-                </div>
-                <div class="kanban-column">
-                  <h3>In Progress</h3>
-                  <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 3</p>
-                  </div>
-                </div>
-                <div class="kanban-column">
-                  <h3>Done</h3>
-                  <div draggable="true" class="kanban-card">
-                    <p>Aufgabe 4</p>
-                  </div>
-                </div>
-              </div>
-        </main>
+      <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
+      <main>
+        <!-- Hauptinhalt / Content -->
+        <div class="kanban-board">
+          <div class="kanban-column">
+            <div class="flex">
+              <h3>To do</h3>
+              <img src="./assets/img/plus-button-v1.png" alt="" />
+            </div>
+            <div draggable="true" class="kanban-card">
+              <p>Aufgabe 1</p>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="flex">
+              <h3>In progress</h3>
+              <img src="./assets/img/plus-button-v1.png" alt="" />
+            </div>
+
+            <div draggable="true" class="kanban-card">
+              <p>Aufgabe 3</p>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="flex">
+              <h3>Await Feedback</h3>
+              <img src="./assets/img/plus-button-v1.png" alt="" />
+            </div>
+
+            <div draggable="true" class="kanban-card">
+              <p>Aufgabe 4</p>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="flex">
+              <h3>Done</h3>
+              <img src="./assets/img/plus-button-v1.png" alt="" />
+            </div>
+
+            <div draggable="true" class="kanban-card">
+              <p>Aufgabe 4</p>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
     <script src="./js/include.js"></script>
     <script src="./js/script.js"></script>
-</body>
+  </body>
 </html>
