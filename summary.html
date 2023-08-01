@@ -1,80 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summary</title>
-    <link rel="stylesheet" href="style_felix.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/summary.css">
+    <link rel="stylesheet" href="./styles/template.css" />
+    <title>Join</title>
 </head>
-
-<body>
-    <div id="main">
-        <div>
-            <h1>Good morning, <p id="user">Eingeloggter User</p>
-            </h1>
-        </div>
-        <div class="toplayer">
-            <div id="urgent" class="row urgentbox">
-                <div>
-                    <div class="row">
-                        <img src="/assets/img/urgent.svg" class="circle">
-                        <h2 class="bigNumbers">1</h2>
+<body onload="init()">
+    <div id="header" w3-include-html="./assets/templates/header.html"></div>
+    <div id="container">
+        <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
+        <main>
+            <!-- Hauptinhalt / Content -->
+            <div class="summaryBox">
+            <div>
+                <h1>Good morning, <span id="user">Eingeloggter User</span>
+                </h1>
+            </div>
+            <div class="toplayer">
+                <div id="urgent" class="row urgentbox">
+                    <div  class="urgentboxleft">
+                        <div class="row">             
+                                <img src="/assets/img/urgent.svg" class="circle">
+                            <h2 class="bigNumbers">1</h2>
+                        </div>
+                        <p>Tasks Urgent</p>
                     </div>
-                    <p>Tasks Urgent</p>
-                </div>
-                <img src="assets/img/divider.svg" alt="">
-                <div>
+                    <img src="assets/img/divider.svg" alt="">
                     <div>
-                        <h2>October 16, 2022</h2>
-                        <h3>Upcomming Deadline</h3>
+                        <div class="urgentboxright">
+                            <h2>October 16, 2022</h2>
+                            <span>Upcomming Deadline</span>
+                        </div>
+                    </div>    
+                </div>
+                <div id="TaskTD" class="taskBox">
+                    <div class="row">
+                        <img src="/assets/img/TaskTD.svg" alt="">
+                    <h2>1</h2>
                     </div>
-                </div>    
-            </div>
-            <div id="TaskTD" class="taskBox">
-                <div class="row">
-                    <img src="/assets/img/TaskTD.svg" alt="">
-                <h2>1</h2>
+                    <div>Tasks To-Do</div>
                 </div>
-                <div>Tasks To-Do</div>
             </div>
-        </div>
-        <div class="botlayer">
-            <div id="taskIB" class="taskBox">
-                <div class="row">
-                    <img src="/assets/img/TaskIB.svg" alt="">
-                    <h2>5</h2>
+            <div class="botlayer">
+                <div id="taskIB" class="taskBox">
+                    <div class="row">
+                        <img src="/assets/img/TaskIB.svg" alt="">
+                        <h2>5</h2>
+                    </div>
+                    <p>Tasks in Board</p>
                 </div>
-                <p>Tasks in Board</p>
-            </div>
-            <div id="taskIP" class="taskBox">
-                <div class="row">
-                    <img src="/assets/img/TaskIP.svg" alt="">
-                    <h2>2</h2>
+                <div id="taskIP" class="taskBox">
+                    <div class="row">
+                        <img src="/assets/img/TaskIP.svg" alt="">
+                        <h2>2</h2>
+                    </div>
+                    <p>Tasks in Progress</p>
                 </div>
-                <p>Tasks in Progress</p>
-            </div>
-            <div id="AFeedback" class="taskBox">
-                <div class="row">
-                    <img src="assets/img/AFeedback.svg" alt="">
-                    <h2>2</h2>
+                <div id="AFeedback" class="taskBox">
+                    <div class="row">
+                        <img src="assets/img/AFeedback.svg" alt="">
+                        <h2>2</h2>
+                    </div>
+                    <p>Awaiting Feedback</p>
                 </div>
-                <p>Awaiting Feedback</p>
-            </div>
-            <div id="done" class="taskBox">
-                <div class="row">
-                    <img src="assets/img/Done.svg" alt="">
-                    <h2>2</h2>
+                <div id="done" class="taskBox">
+                    <div class="row">
+                        <img src="assets/img/Done.svg" alt="">
+                        <h2>2</h2>
+                    </div>
+                    <p>Tasks Done</p>
                 </div>
-                <p>Tasks Done</p>
             </div>
-        </div>
-
+        </div>    
+        </main>
     </div>
+    <script src="./js/include.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

@@ -37,12 +37,18 @@ body{
 }
 
 .taskBox {
-
     padding: 40px;
     border: 0.5px solid lightgray;
     border-radius: 30px;
     width: 124px;
     height: 111px;
+    transition: all 0.3s ease; 
+}
+
+
+.taskBox:hover {
+    transform: scale(1.05);  
+    border-top-left-radius: 0; 
 }
 
 .urgentbox {
@@ -56,14 +62,63 @@ body{
     padding: 40px;
     background-color: #4589FF;
     color: white;
+    align-items: center;
+    transition: all 0.3s ease; 
 }
 
-.circle {
-    border: 3px solid white;
-    border-radius: 40px;
+.urgentboxright {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
     
 }
 
+
+.circle {
+    height: 5rem;
+    width: 5rem;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+
+
 .bigNumbers {
     font-size: 4.5rem;
+    margin: unset;
+}
+
+#user {
+    color: #4589FF;
+}
+
+.summaryBox {
+    width: 58rem;
+    margin: 4.5rem;
+}
+
+.urgentboxleft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:  center;
+    height: 3rem;
+}
+
+.urgentbox:hover {
+    transform: scale(1.05);  
+    border-top-left-radius: 0;  
+    background-color: white;  
+    color: #4589FF; 
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.urgentbox:hover .my-svg {
+    fill: #4589FF;
+}
+
+#TaskTD {
+    background-color: #D2E3FF;
 }
