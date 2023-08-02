@@ -27,6 +27,10 @@
   position: relative; 
 }
 
+.add-Btn{
+  cursor: pointer;
+}
+
 .kanban-card:last-child {
   margin-bottom: 0;
 } 
@@ -67,7 +71,7 @@
 }
 
 .progress-bar {
-  height: 20px;
+  height: 10px;
   background: #DDDDDD;
   margin-bottom: 5px;
   border-radius: 10px;
