@@ -8,18 +8,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/template.css" />
+    <link rel="stylesheet" href="styles/contacts.css">
+    <script src="./js/include.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="js/contacts.js"></script>
     <title>Join</title>
 </head>
 <body onload="init()">
     <div id="header" w3-include-html="./assets/templates/header.html"></div>
     <div id="container">
         <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
-        <main>
+        
+        <div class="contacts-content">
+            
             <!-- Hauptinhalt / Content -->
-            <h1>Das ist die CONTACTS HTML</h1>
-        </main>
+            <div class="contacts-list" id="contacts">
+            <div class="new-contact-button-container">
+                <button class="new-contact-button">Add new contact <img src="assets/img/addContact.svg"></button>
+            </div>
+                
+            </div>
+            <div class="contact">
+
+            </div>
+        </div>
     </div>
-    <script src="./js/include.js"></script>
-    <script src="./js/script.js"></script>
 </body>
 </html>
