@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/template.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
     <title>Join</title>
 </head>
+
 <body onload="init()">
     <div id="header" w3-include-html="./assets/templates/header.html"></div>
     <div id="container">
         <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
         <main>
             <!-- Hauptinhalt / Content -->
-            <h1>Das ist die ADD TASK HTML</h1>
+            <form onsubmit="addTask(); return false;" class="taskwidth">
+                <div>
+                    <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
+                </div>
+                <span>Description</span>
+                <div>
+                    <textarea type="text" class="textarea"></textarea>
+                </div>
+                <span>Due date</span>
+                <div>
+                    <input type="date" class="date">
+                </div>
+                <div class="priority">
+                    <span>Priority</span>
+                    <div class="priorityButtons">
+                    <button>Urgent <img src="/assets/img/urgentIcon.svg" alt=""></button>
+                    <button>Medium <img src="/assets/img/mediumIcon.svg" alt=""></button>
+                    <button>Low <img src="/assets/img/lowIcon.svg" alt=""></button>
+                    </div>
+                </div>
+                <div>
+                    <span>Assigned to</span>
+                    <label for="Acontact"></label>
+                    <select name="Acontact" id="Acontact">
+                        <option value="jens">Jens</option>
+                        <option value="david">David</option>
+                        <option value="felix">Felix</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Category</span>
+                    <label for="category"></label>
+                    <select name="category" id="">
+                        <option value="Technical task">Technical task</option>
+                        <option value="User Story">User story</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Subtasks</span>
+                    <label for="subtasks"></label>
+                    <select name="subtasks" id="">
+                        <option value="Add new Subtask">Add new subtask</option>
+                    </select>
+                </div>
+            </form>
+            <div>
+                <button>Clear</button>
+                <button>Create task</button>
+            </div>
         </main>
     </div>
     <script src="./js/include.js"></script>
     <script src="./js/script.js"></script>
 </body>
+
 </html>

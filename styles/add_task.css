@@ -1,0 +1,39 @@
+.titleInput {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+    font-size: larger;
+    width: 440px;
+}
+
+.textarea {
+    border-radius: 5px;
+    width: 440px;
+    min-height: 75px;
+}
+
+
+.date {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid gray;
+    margin-bottom: 4px;
+    color: gray;
+    width: 440px;
+}
+
+.taskwidth {
+    width: 440px;
+    height: 100vh;
+    margin-top: 50px;
+}
+
+.priority {
+    height: 82px;
+}
+
+.priorityButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
