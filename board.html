@@ -20,11 +20,31 @@
       <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
       <main>
         <!-- Hauptinhalt / Content -->
+        <div class="search-and-create">
+          <div class="search-input">
+            <input type="text" placeholder="Find Task" />
+            <div class="separator"></div>
+            <img
+              id="searchIcon"
+              src="./assets/img/search.png"
+              alt="Search Icon"
+            />
+          </div>
+          <button class="add-task-btn">
+            Add task
+            <img src="./assets/img/plus-button.png" alt="Plus Icon" />
+          </button>
+        </div>
+
         <div class="kanban-board">
           <div class="kanban-column">
             <div class="flex">
               <h3>To do</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="" />
+              <img
+                class="add-Btn"
+                src="./assets/img/plus-button-v1.png"
+                alt=""
+              />
             </div>
             <div draggable="true" class="kanban-card">
               <div class="category">User Story</div>
@@ -51,7 +71,11 @@
           <div class="kanban-column">
             <div class="flex">
               <h3>In progress</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="" />
+              <img
+                class="add-Btn"
+                src="./assets/img/plus-button-v1.png"
+                alt=""
+              />
             </div>
 
             <div draggable="true" class="kanban-card no-tasks">
@@ -61,7 +85,11 @@
           <div class="kanban-column">
             <div class="flex">
               <h3>Await Feedback</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="" />
+              <img
+                class="add-Btn"
+                src="./assets/img/plus-button-v1.png"
+                alt=""
+              />
             </div>
             <div draggable="true" class="kanban-card">
               <div class="category">User Story</div>
@@ -88,7 +116,11 @@
           <div class="kanban-column">
             <div class="flex">
               <h3>Done</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="" />
+              <img
+                class="add-Btn"
+                src="./assets/img/plus-button-v1.png"
+                alt=""
+              />
             </div>
 
             <div draggable="true" class="kanban-card">

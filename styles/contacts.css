@@ -1,0 +1,77 @@
+.contacts-content {
+    display: flex;
+}
+
+.new-contact-button {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(69, 137, 255, 1);
+    align-items: center;
+    width: 357px;
+    height: 56px;
+    padding: 16px 10px 16px 10px;
+    border-radius: 10px;
+    border: 1px;
+    gap: 10px;
+    color: #fff;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.new-contact-button:hover {
+    
+}
+
+.new-contact-button-container {
+    width: 456px;
+    height: 104px;
+    padding: 32px 24px 16px 24px;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacts-list {
+    width: 456px;
+    height: 100%;
+    box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+}
+
+.contact {
+    width: 352px;
+    height: 77px;
+    padding: 15px 24px 15px 24px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-initals {
+    height: 42px;
+    width: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 48px;
+    background-color: blue;
+}
+
+.c-information {
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+}
+
+.c-name {
+    margin-bottom: 2.5px;
+    font-size: 22px;
+}
+
+.c-mail {
+    color: rgba(69, 137, 255, 1);
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 2.5px;
+}
