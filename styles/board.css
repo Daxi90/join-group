@@ -73,6 +73,10 @@
   height: 20px;
 }
 
+#searchIcon{
+  cursor: pointer;
+}
+
 @media (max-width: 1500px) {
   .search-and-create {
     width: 90%;

@@ -24,6 +24,12 @@ nav{
   color: rgba(66, 82, 110, 1) !important;
 }
 
+ul{
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+
 #container {
   display: flex;
   flex-grow: 1;
@@ -94,6 +100,7 @@ main {
     width: 100%;
     height: auto;
     order: 2;
+    padding: 5px;
   }
 
   nav ul {
@@ -120,6 +127,11 @@ main {
   main {
     order: 1;
   }
+
+  #sidebar li {
+    margin-bottom: 0px !important;
+  }
+  
 }
 
 #sidebar ul {
