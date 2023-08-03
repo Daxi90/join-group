@@ -17,7 +17,7 @@
   border-radius: 10px;
   border: 1px solid rgba(168, 168, 168, 1);
   gap: 10px;
-  height: 51px; /* Fügen Sie diese Zeile hinzu */
+  height: 51px; 
 }
 
 .search-input, .add-task-btn {
@@ -39,7 +39,7 @@
   flex-grow: 1;
   border: none;
   outline: none;
-  height: 100%; /* Fügen Sie diese Zeile hinzu */
+  height: 100%; 
 }
 
 .search-input .separator {
