@@ -34,7 +34,7 @@
                     <input type="date" class="date" placeholder="dd/mm/yyyy">
                 </div>
                 <div class="priority">
-                    <span>Priority</span>
+                    <div class="mb20">Priority</div>
                     <div class="priorityButtonsContainer">
                         <button type="button" class="prioButton prioUrgent">
                             Urgent
@@ -53,15 +53,30 @@
                         </button>
                     </div>
                 </div>                
-                <div>
+                <div class="assignedTo">
                     <span>Assigned to</span>
-                    <label for="Acontact"></label>
-                    <select name="Acontact" id="Acontact">
-                        <option value="jens">Jens</option>
-                        <option value="david">David</option>
-                        <option value="felix">Felix</option>
-                    </select>
-                </div>
+                    <div class="custom-select">
+                        <div class="selected-option">Select contacts to assign</div>
+                        <div class="options">
+                            <div class="option">
+                                <div class="initials">J</div>
+                                <span class="name">Jens</span>
+                                <input type="checkbox">
+                            </div>
+                            <div class="option">
+                                <div class="initials">D</div>
+                                <span class="name">David</span>
+                                <input type="checkbox">
+                            </div>
+                            <div class="option">
+                                <div class="initials">F</div>
+                                <span class="name">Felix</span>
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                                 
                 <div>
                     <span>Category</span>
                     <label for="category"></label>

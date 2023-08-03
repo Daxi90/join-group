@@ -26,3 +26,14 @@ for (var i = 0; i < buttons.length; i++) {
     }
   });
 }
+
+document.querySelector('.selected-option').addEventListener('click', function() {
+    this.parentElement.classList.toggle('open');
+});
+
+document.querySelectorAll('.option').forEach(option => {
+    option.addEventListener('click', function() {
+        this.closest('.custom-select').querySelector('.selected-option').innerText = this.querySelector('.name').innerText;
+        this.parentElement.classList.remove('open');
+    });
+});

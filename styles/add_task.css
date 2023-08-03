@@ -2,7 +2,7 @@
     border: none;
     outline: none;
     border-bottom: 1px solid #D1D1D1;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 408px;
     height: 28px;
     padding: 13px 16px 13px 16px;
@@ -15,7 +15,7 @@
     border: none;
     outline: none;
     border-bottom: 1px solid gray;
-    margin-bottom: 4px;
+    margin-bottom: 30px;
     color: gray;
     width: 440px;
 }
@@ -36,11 +36,13 @@
 
 .priority {
     height: 82px;
+    margin-bottom: 20px
 }
 
 .priorityButtonsContainer {
     display: flex;
     justify-content: space-between;
+    
 
 }
 
@@ -48,11 +50,13 @@
     width: 420px;
     min-height: 83px;
     border-radius: 5px;
+    border-top-left-radius: 0;
     font-family: 'Open Sans', sans-serif;
     padding: 10px 10px 10px 10px;
     height: 83px;
     color: #D1D1D1;
     margin-top: 4px;
+    margin-bottom: 20px;
 }
 
 .prioButton {
@@ -126,4 +130,90 @@
   .prioLow.selected .icon-active {
     display: inline;
   }
+
+/* Für Firefox */
+input::placeholder {
+    color: #D1D1D1;
+  }
   
+  /* Für Google Chrome, Opera und Safari */
+  input::-webkit-input-placeholder {
+    color: #D1D1D1;
+  }
+  
+  /* Für Internet Explorer und Edge */
+  input:-ms-input-placeholder {
+    color: #D1D1D1;
+  }
+
+  
+  .assignedTo {
+    width: 440px;
+    height: 79px;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.selected-option {
+    border-bottom: 1px solid gray;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid gray;
+    display: none;
+}
+
+.option {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #D2E3FF;
+    border-radius: 10px;
+}
+
+.custom-select.open .options {
+    display: block;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}  
+
+
+.option {
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.initials {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #D2E3FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.option:hover {
+    background: #D2E3FF;
+    border-radius: 10px;
+}
