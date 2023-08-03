@@ -1,18 +1,15 @@
 .titleInput {
     border: none;
     outline: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #D1D1D1;
     margin-bottom: 10px;
-    font-size: larger;
-    width: 440px;
+    width: 408px;
+    height: 28px;
+    padding: 13px 16px 13px 16px;
+    font-size: 35px;
+    color: #D1D1D1;
+    font-weight: 1000;
 }
-
-.textarea {
-    border-radius: 5px;
-    width: 440px;
-    min-height: 75px;
-}
-
 
 .date {
     border: none;
@@ -22,6 +19,14 @@
     color: gray;
     width: 440px;
 }
+
+.date::-webkit-calendar-picker-indicator {
+    background: url('/assets/img/calendarIcon.svg');
+    color: 4589FF ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
 
 .taskwidth {
     width: 440px;
@@ -33,7 +38,92 @@
     height: 82px;
 }
 
-.priorityButtons {
+.priorityButtonsContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+
 }
+
+.textarea {
+    width: 420px;
+    min-height: 83px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px 10px 10px 10px;
+    height: 83px;
+    color: #D1D1D1;
+    margin-top: 4px;
+}
+
+.prioButton {
+    width: 136px;
+    height: 51px;
+    padding: 18px 10px 18px 10px;
+    gap: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px #00000029;
+    line-height: 22.8px;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+.prioUrgent:hover {
+    border-color: #FF3D00;
+  }
+  
+  .prioMedium:hover {
+    border-color: #FFA800;
+  }
+  
+  .prioLow:hover {
+    border-color: #7AE229;
+  }
+  
+  .prioUrgent.selected {
+    background-color: #FF3D00;
+    color: white;
+  }
+  
+  .prioMedium.selected {
+    background-color: #FFA800;
+    color: white;
+  }
+  
+  .prioLow.selected {
+    background-color: #7AE229;
+    color: white;
+  }
+
+  .prioUrgent.selected .icon {
+    display: none;
+  }
+  
+  .prioUrgent.selected .icon-active {
+    display: inline;
+  }
+
+  .prioMedium.selected .icon {
+    display: none;
+  }
+  
+  .prioMedium.selected .icon-active {
+    display: inline;
+  }
+
+  .prioLow.selected .icon {
+    display: none;
+  }
+  
+  .prioLow.selected .icon-active {
+    display: inline;
+  }
+  
