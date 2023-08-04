@@ -1,19 +1,21 @@
-
 let contacts = [
     {
         'name': 'testn testl',
         'email': 'teste',
-        'phone': 'testp'
+        'phone': 'testp',
+        'color': 'blue'
     },
     {
         'name': 'testn testl',
         'email': 'teste',
-        'phone': 'testp'
+        'phone': 'testp',
+        'color': 'red'
     },
     {
         'name': 'testn testl',
         'email': 'teste',
-        'phone': 'testp'
+        'phone': 'testp',
+        'color': 'green'
     }
 ];
 
