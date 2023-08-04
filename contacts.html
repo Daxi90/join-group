@@ -16,24 +16,60 @@
 </head>
 <body onload="init()">
     <div id="header" w3-include-html="./assets/templates/header.html"></div>
+    <div class="new-contact-container">
+        <div class="new-contact">
+            <div class="new-contact-header">
+                <img src="assets/img/joinLogoWhite.svg">
+                <span class="new-contact-title">Add contact</span>
+                <span class="new-contact-intro">Tasks are better with a team!</span>
+            </div>
+            <div class="new-contact-information">
+                <img class="new-contact-img" src="assets/img/contactWhite.svg">
+                <form class="new-contact-input-container">
+                    <div class="new-contact-input-field">
+                        <input class="new-contact-input" placeholder="Name">
+                        <img src="assets/img/contactGrey.svg">
+                    </div>
+                    <div class="new-contact-input-field">
+                        <input class="new-contact-input" placeholder="Email">
+                        <img src="assets/img/mail.svg">
+                    </div>
+                    <div class="new-contact-input-field">
+                        <input class="new-contact-input" placeholder="Phone">
+                        <img src="assets/img/phone.svg">
+                    </div>
+                    <div class="new-contact-buttons-container">
+                        <button class="new-contact-cancel">
+                            <span>Cancel</span>
+                            <img src="assets/img/X_Grey.svg">
+                        </button>
+                        <button class="new-contact-create">
+                            <span>Create contact</span>
+                            <img src="assets/img/check.svg">
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
     <div id="container">
+
         <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
         
         <div class="contacts-content">
             
             <!-- Hauptinhalt / Content -->
             <div class="contacts-list" id="contacts">
-            <div class="new-contact-button-container">
-                <button class="new-contact-button">Add new contact <img src="assets/img/addContact.svg"></button>
-            </div>
+                <div class="new-contact-button-container">
+                    <button class="new-contact-button">Add new contact <img src="assets/img/addContact.svg"></button>
+                </div>
                 
             </div>
             <div class="contact-container">
-                <div class="new-contact">
 
-                </div>
                 <div class="">
-
+                    
                 </div>
             </div>
         </div>

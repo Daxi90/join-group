@@ -29,7 +29,6 @@ function renderContacts() {
     }
 }
 
-
 function renderContact(contact, i) {
     return `
         <div class="contact" id="contact${i}">
