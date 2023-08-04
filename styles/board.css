@@ -17,10 +17,11 @@
   border-radius: 10px;
   border: 1px solid rgba(168, 168, 168, 1);
   gap: 10px;
-  height: 51px; 
+  height: 51px;
 }
 
-.search-input, .add-task-btn {
+.search-input,
+.add-task-btn {
   height: 51px;
   box-sizing: border-box;
 }
@@ -31,15 +32,14 @@
 
 .add-task-btn {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
-
 
 .search-input input {
   flex-grow: 1;
   border: none;
   outline: none;
-  height: 100%; 
+  height: 100%;
 }
 
 .search-input .separator {
@@ -73,7 +73,7 @@
   height: 20px;
 }
 
-#searchIcon{
+#searchIcon {
   cursor: pointer;
 }
 
@@ -259,4 +259,85 @@ h3 {
   .kanban-column {
     min-width: 200px;
   }
+}
+
+.single-task-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffffb9;
+}
+
+.add-task-card {
+  background-color: #ffffff;
+  width: 30%;
+  height: 80%;
+  border-radius: 30px;
+  padding: 48px 40px;
+}
+
+.header-infos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.single-task-category {
+  background: rgba(255, 122, 0, 1);
+  color: #ffffff;
+  padding: 4px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: inline-block;
+  max-width: 50%;
+}
+
+.single-task-title {
+  display: block;
+  font-size: 61px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 73.2px */
+  margin: 24px 0px;
+}
+
+.single-task-desc{
+  display: block;
+  margin-bottom: 24px;
+}
+
+.single-task-date{
+  margin-bottom: 24px;
+}
+
+.single-task-prio{
+  margin-bottom: 24px;
+}
+
+.single-task-assignee{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 5px;
+  width: 25px; /* adjust as per your need */
+  height: 25px; /* adjust as per your need */
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  margin-right: 16px;
+}
+
+.single-task-assigned-contacts{
+  padding: 7px 16px;
+}
+
+.single-task-assignesd-to-heading{
+  display:block;
+  margin-bottom: 8px;
 }
