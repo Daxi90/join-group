@@ -275,8 +275,8 @@ h3 {
 
 .add-task-card {
   background-color: #ffffff;
-  width: 20%;
-  height: 70%;
+  width: 30%;
+  height: 80%;
   border-radius: 30px;
   padding: 48px 40px;
 }
@@ -309,4 +309,30 @@ h3 {
 .single-task-desc{
   display: block;
   margin-bottom: 24px;
+}
+
+.single-task-date{
+  margin-bottom: 24px;
+}
+
+.single-task-prio{
+  margin-bottom: 24px;
+}
+
+.single-task-assignee{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 5px;
+  width: 25px; /* adjust as per your need */
+  height: 25px; /* adjust as per your need */
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  margin-right: 16px;
+}
+
+.single-task-assigned-contacts{
+  padding: 7px 16px;
 }
