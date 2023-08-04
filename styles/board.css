@@ -336,3 +336,8 @@ h3 {
 .single-task-assigned-contacts{
   padding: 7px 16px;
 }
+
+.single-task-assignesd-to-heading{
+  display:block;
+  margin-bottom: 8px;
+}
