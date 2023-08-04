@@ -260,3 +260,31 @@ h3 {
     min-width: 200px;
   }
 }
+
+
+.single-task-modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffffb9;
+}
+
+.add-task-card{
+  background-color: #f08a8a;
+  width: 20%;
+  height: 70%;
+  border-radius: 30px;
+  padding: 48px 40px;
+}
+
+.header-infos{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
