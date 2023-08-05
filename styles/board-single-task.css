@@ -1,0 +1,277 @@
+/*SINGLE TASK STYLES*/
+
+.single-task-assignee {
+    background: #ff0000;
+  }
+  
+  .single-task-assigned {
+    margin-bottom: 24px;
+  }
+  
+  /* Für WebKit-Browser (wie Chrome und Safari) */
+  .kanban-column::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Für Internet Explorer und Edge */
+  .kanban-column {
+    -ms-overflow-style: none;
+  }
+  
+  /* Für Firefox */
+  .kanban-column {
+    scrollbar-width: none;
+  }
+  
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  h3 {
+    color: #42526e;
+    font-size: 23px;
+    font-weight: 700;
+  }
+  
+  .no-tasks {
+    background-color: rgba(231, 231, 231, 1);
+    color: rgba(168, 168, 168, 1);
+    border: 1px dotted rgba(168, 168, 168, 1);
+    text-align: center;
+  }
+  
+  @media (max-width: 950px) {
+    .kanban-column {
+      min-width: 200px;
+    }
+  }
+  
+  .flex-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .flex-space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .single-task-modal {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffffb9;
+    
+  }
+  
+  .add-task-card {
+    position: relative;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border-radius: 30px;
+    padding: 48px 40px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  }
+  
+  .seperator{
+    height: 20px;
+    background-color: rgb(163, 163, 163);
+    width: 1px;
+    margin: 8px;
+  }
+  
+  @media (max-width: 1500px) {
+    .add-task-card {
+      width: 60%;
+    }
+  }
+  
+  
+  @media (max-width: 900px) {
+    .single-task-title {
+      font-size: 25px !important;
+    }
+  
+    .action-buttons {
+      display: none !important;
+    }
+  
+    .seperator {
+      display: none !important;
+    }
+  
+    .action-buttons-mobile-container {
+      display: flex !important;
+    }
+  
+    .subtasks-container {
+      display: none !important;
+    }
+  
+    .subtasks {
+      display: none !important;
+    }
+  
+    .priobatch {
+      padding: 4px 18px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+      background: #FF3D00;
+      color: white;
+    }
+  
+    .priobatch img {
+      filter: brightness(0) invert(1);
+    }
+  
+    .close-btn {
+      display: none;
+    }
+  
+    .action-buttons-mobile-container .close-btn-mobile {
+      display: block !important;
+    }
+  }
+  
+  .close-btn-mobile {
+    display: flex;
+  }
+  
+  @media (min-width: 901px) {
+    .action-buttons-mobile-container {
+      display: none !important;
+    }
+  
+    .action-buttons {
+      display: flex !important;
+    }
+  
+    .close-btn-mobile {
+      display: none !important;
+    }
+  
+    .close-btn {
+      display: block !important;
+    }
+  }
+
+  
+  
+  .single-task-title {
+    display: block;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 120%; /* 73.2px */
+    margin: 24px 0;
+  }
+  
+  .single-task-desc,
+  .single-task-date,
+  .single-task-prio {
+    display: flex;
+    margin-bottom: 24px;
+  }
+  
+  .single-task-assignee {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    margin-right: 16px;
+  }
+  
+  .single-task-assigned-contacts-container {
+    max-height: 100px; /* Sie können diesen Wert an Ihre Bedürfnisse anpassen */
+    overflow-y: auto;
+  }
+  
+  .single-task-assigned-contacts,
+  .single-task-single-subtask {
+    padding: 7px 16px;
+    gap: 8px;
+  }
+  
+  .single-task-single-subtask:hover{
+    background-color: #d2e3ff;
+    border-radius: 8px;
+  }
+  
+  .single-task-assignesd-to-heading {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .bold-text {
+    color: #42526e;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 24px; /* Abstand vom unteren Rand der Karte */
+    right: 24px; /* Abstand vom rechten Rand der Karte */
+    width: calc(100% - 48px); /* Breite der Karte abzüglich des Abstandes */
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .action-button:hover{
+    color: #4589ff;
+    font-weight: bold;
+  }
+  
+  .action-button img {
+    margin-right: 8px;
+  }
+  
+  .action-buttons-mobile-container{
+    display: none;
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .action-btn-mobile-edit{
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4589ff;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px 0px 10px 10px;
+  }
+  
+  .action-btn-mobile-delete{
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px 10px 0px 10px;
+    border: 1px solid #4589FF;
+  }
