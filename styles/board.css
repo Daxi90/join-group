@@ -1,4 +1,4 @@
-.d-none{
+.d-none {
   display: none !important;
 }
 
@@ -235,7 +235,6 @@
   margin-bottom: 24px;
 }
 
-
 /* Für WebKit-Browser (wie Chrome und Safari) */
 .kanban-column::-webkit-scrollbar {
   display: none;
@@ -281,15 +280,25 @@ h3 {
   align-items: center;
 }
 
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .single-task-modal {
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: #ffffffb9;
 }
 
 .add-task-card {
+  position: relative;
   background-color: #ffffff;
   width: 30%;
   height: 80%;
@@ -297,10 +306,26 @@ h3 {
   padding: 48px 40px;
 }
 
+@media (max-width: 1500px) {
+  .add-task-card {
+    width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .single-task-title {
+    font-size: 25px !important;
+  }
+}
+
 .header-infos {
   justify-content: space-between;
 }
 
+.subtasks-container {
+  max-height: 200px; /* Sie können diesen Wert an Ihre Bedürfnisse anpassen */
+  overflow-y: auto;
+}
 .single-task-category {
   background: rgba(255, 122, 0, 1);
   color: #ffffff;
@@ -319,7 +344,9 @@ h3 {
   margin: 24px 0;
 }
 
-.single-task-desc, .single-task-date, .single-task-prio {
+.single-task-desc,
+.single-task-date,
+.single-task-prio {
   display: block;
   margin-bottom: 24px;
 }
@@ -338,9 +365,15 @@ h3 {
   margin-right: 16px;
 }
 
-.single-task-assigned-contacts, .single-task-single-subtask {
+.single-task-assigned-contacts-container {
+  max-height: 100px; /* Sie können diesen Wert an Ihre Bedürfnisse anpassen */
+  overflow-y: auto;
+}
+
+.single-task-assigned-contacts,
+.single-task-single-subtask {
   padding: 7px 16px;
-  gap: 8px
+  gap: 8px;
 }
 
 .single-task-assignesd-to-heading {
@@ -349,5 +382,25 @@ h3 {
 }
 
 .bold-text {
-  color: #42526E;
+  color: #42526e;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 24px; /* Abstand vom unteren Rand der Karte */
+  right: 24px; /* Abstand vom rechten Rand der Karte */
+  width: calc(100% - 48px); /* Breite der Karte abzüglich des Abstandes */
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.action-button img {
+  margin-right: 8px;
 }

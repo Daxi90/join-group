@@ -192,7 +192,7 @@
     </div>
     <div class="single-task-modal flex-center">
       <div class="add-task-card">
-        <div class="header-infos flex-center">
+        <div class="header-infos flex-space-between">
           <div class="single-task-category">User Story</div>
           <img class="close-btn" src="./assets/img/close.svg" alt="Close button" />
         </div>
@@ -207,20 +207,40 @@
           <img src="./assets/img/mediumIcon.svg" alt="Medium Priority" />
         </div>
         <h2 class="single-task-assignesd-to-heading"><b class="bold-text">Assigned To:</b></h2>
-        <div class="single-task-assigned-contacts">
-          <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
+        <div class="single-task-assigned-contacts-container">
+          <div class="single-task-assigned-contacts">
+            <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
+          </div>
+          <!-- Repeat the above div as needed for more contacts -->
         </div>
-        <!-- Repeat the above div as needed for more contacts -->
+
+        
         <h2><b class="bold-text">Subtasks</b></h2>
-        <div class="single-task-single-subtask flex-center">
-          <img src="./assets/img/checkmark.svg" alt="Checked">
-          <span>Task title</span>
+        <div class="subtasks-container">
+          <div class="single-task-single-subtask flex-center">
+            <img src="./assets/img/checkmark.svg" alt="Checked">
+            <span>Task title</span>
+          </div>
+          <div class="single-task-single-subtask flex-center">
+            <img src="./assets/img/checkmark-checked.svg" alt="Checked">
+            <span>Task title</span>
+          </div>
+          <!-- Repeat the above div as needed for more subtasks -->
         </div>
-        <div class="single-task-single-subtask flex-center">
-          <img src="./assets/img/checkmark-checked.svg" alt="Checked">
-          <span>Task title</span>
-        </div>
+        
         <!-- Repeat the above div as needed for more subtasks -->
+        <!-- Neue Action-Buttons direkt unter den Subtasks -->
+        <div class="action-buttons">
+          <div class="action-button">
+            <img src="./assets/img/delete.svg" alt="Delete">
+            <span>Delete</span>
+          </div>
+          <div class="action-button">
+            <img src="./assets/img/edit.svg" alt="Edit">
+            <span>Edit</span>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
     
