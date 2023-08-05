@@ -192,36 +192,38 @@
     </div>
     <div class="single-task-modal d-none">
       <div class="add-task-card">
-        <div class="header-infos">
+        <div class="header-infos flex">
           <div class="single-task-category">User Story</div>
-          <img class="close-btn" src="./assets/img/close.svg" alt="" />
+          <img class="close-btn" src="./assets/img/close.svg" alt="Close" />
         </div>
-        <span class="single-task-title"
-          >Kochwelt Page & Recipe Recommender</span
-        >
-        <span class="single-task-desc"
-          >Build start page with recipe recommendation.</span
-        >
-        <div class="single-task-date">
-          <b style="margin-right: 25px">Due Date:</b> <span>10/05/2023</span>
+        <h2 class="single-task-title">Kochwelt Page & Recipe Recommender</h2>
+        <p class="single-task-desc">Build start page with recipe recommendation.</p>
+        <div class="single-task-details">
+          <div class="single-task-date flex">
+            <b>Due Date:</b> <span>10/05/2023</span>
+          </div>
+          <div class="single-task-prio ">
+            <b>Priority:</b>
+            <span>Medium</span>
+            <img src="./assets/img/mediumIcon.svg" alt="Medium Priority" />
+          </div>
         </div>
-        <div class="single-task-prio">
-          <b style="margin-right: 25px">Priority:</b>
-          <span style="margin-left: 18px; margin-right: 10px">Medium</span>
-          <img src="./assets/img/mediumIcon.svg" alt="" />
+        <div class="single-task-assigned">
+          <h3>Assigned To:</h3>
+          <div class="single-task-assigned-contacts">
+            <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
+          </div>
+          <!-- repeat as needed -->
         </div>
-        <span class="single-task-assignesd-to-heading"><b>Assigned To:</b></span>
-        <div class="single-task-assigned-contacts">
-          <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
+        <h3>Subtasks</h3>
+        <div class="single-task-single-subtask">
+          <img src="./assets/img/checkmark.svg" alt="Checkmark">
+          <span>Task title</span>
         </div>
-        <div class="single-task-assigned-contacts">
-          <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
-        </div>
-        <div class="single-task-assigned-contacts">
-          <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
-        </div>
+        <!-- repeat as needed -->
       </div>
     </div>
+    
     <script src="./js/include.js"></script>
     <script src="./js/script.js"></script>
   </body>

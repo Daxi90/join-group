@@ -1,3 +1,24 @@
+/* General styling */
+b {
+  margin-right: 25px;
+  color: #42526E;
+}
+
+h2, h3 {
+  color: #42526E;
+}
+
+h3 {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .search-and-create {
   display: flex;
   justify-content: space-between;
@@ -298,17 +319,32 @@ h3 {
 }
 
 .single-task-title {
-  display: block;
   font-size: 61px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 120%; /* 73.2px */
+  line-height: 120%;
   margin: 24px 0px;
 }
 
 .single-task-desc{
-  display: block;
   margin-bottom: 24px;
+}
+
+.single-task-details > div {
+  margin-bottom: 24px;
+}
+
+.single-task-assigned-contacts {
+  padding: 7px 16px;
+}
+
+.single-task-assignee {
+  /* existing styles */
+  margin-right: 16px;
+}
+
+.single-task-single-subtask {
+  gap: 16px;
+  padding: 0px 16px;
 }
 
 .single-task-date{
@@ -340,4 +376,11 @@ h3 {
 .single-task-assignesd-to-heading{
   display:block;
   margin-bottom: 8px;
+}
+
+.single-task-single-subtask{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0px 16px;
 }
