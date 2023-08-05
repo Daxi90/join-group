@@ -134,6 +134,33 @@
   position: relative;
 }
 
+/* Für WebKit-Browser (wie Chrome und Safari) */
+.kanban-column::-webkit-scrollbar {
+  display: none;
+}
+
+/* Für Internet Explorer und Edge */
+.kanban-column {
+  -ms-overflow-style: none;
+}
+
+/* Für Firefox */
+.kanban-column {
+  scrollbar-width: none;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h3 {
+  color: #42526e;
+  font-size: 23px;
+  font-weight: 700;
+}
+
 .add-Btn {
   cursor: pointer;
 }
