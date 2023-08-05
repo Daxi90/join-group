@@ -1,3 +1,7 @@
+.d-none{
+  display: none !important;
+}
+
 .search-and-create {
   display: flex;
   justify-content: space-between;
@@ -221,6 +225,17 @@
   height: 15px;
 }
 
+/*SINGLE TASK STYLES*/
+
+.single-task-assignee {
+  background: #ff0000;
+}
+
+.single-task-assigned {
+  margin-bottom: 24px;
+}
+
+
 /* Für WebKit-Browser (wie Chrome und Safari) */
 .kanban-column::-webkit-scrollbar {
   display: none;
@@ -261,15 +276,16 @@ h3 {
   }
 }
 
-.single-task-modal {
+.flex-center {
   display: flex;
   align-items: center;
+}
+
+.single-task-modal {
+  display: flex;
   justify-content: center;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: 0; bottom: 0; left: 0; right: 0;
   background-color: #ffffffb9;
 }
 
@@ -282,8 +298,6 @@ h3 {
 }
 
 .header-infos {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -300,44 +314,40 @@ h3 {
 .single-task-title {
   display: block;
   font-size: 61px;
-  font-style: normal;
   font-weight: 700;
   line-height: 120%; /* 73.2px */
-  margin: 24px 0px;
+  margin: 24px 0;
 }
 
-.single-task-desc{
+.single-task-desc, .single-task-date, .single-task-prio {
   display: block;
   margin-bottom: 24px;
 }
 
-.single-task-date{
-  margin-bottom: 24px;
-}
-
-.single-task-prio{
-  margin-bottom: 24px;
-}
-
-.single-task-assignee{
+.single-task-assignee {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   padding: 5px;
-  width: 25px; /* adjust as per your need */
-  height: 25px; /* adjust as per your need */
+  width: 25px;
+  height: 25px;
   color: #ffffff;
   font-size: 12px;
   text-align: center;
   margin-right: 16px;
 }
 
-.single-task-assigned-contacts{
+.single-task-assigned-contacts, .single-task-single-subtask {
   padding: 7px 16px;
+  gap: 8px
 }
 
-.single-task-assignesd-to-heading{
-  display:block;
+.single-task-assignesd-to-heading {
+  display: block;
   margin-bottom: 8px;
+}
+
+.bold-text {
+  color: #42526E;
 }
