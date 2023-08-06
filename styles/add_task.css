@@ -149,13 +149,12 @@ input::placeholder {
   
   .assignedTo {
     width: 440px;
-    height: 79px;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
 
 .custom-select {
-    position: relative;
     width: 100%;
 }
 
@@ -166,7 +165,6 @@ input::placeholder {
 }
 
 .options {
-    position: absolute;
     top: 100%;
     left: 0;
     right: 0;
@@ -178,6 +176,8 @@ input::placeholder {
 .option {
     padding: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
 }
 
 .option:hover {
@@ -200,20 +200,40 @@ input::placeholder {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 7px 16px 7px 16px;
 }
 
 .initials {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #D2E3FF;
+    width: 42px;
+    height: 42px;
+    border: 2px solid white;
+    border-radius: 45px;
+    background: #FF7A00;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 5px;
+    color: white;
+    font-size: 12px;
 }
 
 .option:hover {
     background: #D2E3FF;
     border-radius: 10px;
+    color: white;
+}
+
+.contactLine {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.name {
+    align-self: center;
+    font-size: 19px;
+}
+
+.relative {
+    position: relative;
 }
