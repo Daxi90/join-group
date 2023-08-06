@@ -225,7 +225,8 @@ body {
 
 .checkbox-container .checkmark:after {
     width: 5px;
-    height: 10px;
+    bottom: 20px;
+    height: 15px;
     border: solid white;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);

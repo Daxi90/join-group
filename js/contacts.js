@@ -28,7 +28,7 @@ function renderContacts() {
 function renderContact(contact, i) {
     return `
         <div class="contact" id="contact${i}">
-            <div class="c-initals">${contact['initials']}</div>
+            <div class="c-initals" style="background-color:${contact['color']}">${contact['initials']}</div>
             <div class="c-information">
                 <span class="c-name">${contact['name']}</span>
                 <a class="c-mail" href="mailto:${contact['email']}">${contact['email']}</a>
@@ -42,16 +42,16 @@ function createContact() {
     let mail = document.getElementById('contactMail');
     let phone = document.getElementById('contactPhone');
     let initials =  createInitals(name.value);
+    let color = colorRandomizer();
 
     let contact = {
         'name': name.value,
-        'mail': mail.value,
+        'email': mail.value,
         'phone': phone.value,
         'initials': initials,
-        'color': 'blue'
+        'color': color
     };
 
-    
     contacts.push(contact);
     renderContacts();
 
@@ -65,4 +65,10 @@ function createInitals(name) {
     let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
     console.log(initials);
     return initials;
+}
+
+function colorRandomizer() {
+    const generateHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}`;
+
+    return generateHex();
 }
