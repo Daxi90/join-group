@@ -115,6 +115,7 @@
 
   .close-btn {
     display: none;
+    cursor: pointer;
   }
 
   .action-buttons-mobile-container .close-btn-mobile {
@@ -124,6 +125,7 @@
 
 .close-btn-mobile {
   display: flex;
+  cursor: pointer;
 }
 
 @media (min-width: 901px) {
@@ -141,6 +143,7 @@
 
   .close-btn {
     display: block !important;
+    cursor: pointer !important;
   }
 }
 
