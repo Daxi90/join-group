@@ -1,0 +1,29 @@
+.legal-header-line{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.legal-header-line span{
+    color: #000;
+    font-family: Open Sans;
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 73.2px */
+}
+
+a.menu-item {
+    visibility: hidden;
+}
+
+.legal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.legal-header img{
+    cursor:pointer;
+}
