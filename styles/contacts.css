@@ -92,7 +92,7 @@
     justify-content: flex-end;
     width: 100%;
     height: 100vh;
-    z-index: 100;
+    z-index: 2;
     background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -216,4 +216,33 @@
 .new-contact-cancel:hover {
     color: #4589FF;
     border: 1px solid #4589FF;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.error-msg-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -color: rgba(255, 255, 255, 0.5);
+}
+
+.error-msg {
+    display: flex;
+    flex-direction: column;
+    background-color: #4589FF;
+    color: white;
+    border-radius: 16px;
+    text-align: center;
+    width: 180px;
+    height: 115px;
+    padding: 4px;
+    z-index: 100;
 }

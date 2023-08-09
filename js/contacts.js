@@ -17,7 +17,7 @@ let contacts = [
 
 function renderContacts() {
     let contactsList = document.getElementById('contacts');
-    contactsList.innerHTML  = ''
+    contactsList.innerHTML = ''
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
 
@@ -41,7 +41,7 @@ function createContact() {
     let name = document.getElementById('contactName');
     let mail = document.getElementById('contactMail');
     let phone = document.getElementById('contactPhone');
-    let initials =  createInitals(name.value);
+    let initials = createInitals(name.value);
     let color = colorRandomizer();
 
     let contact = {
@@ -71,4 +71,16 @@ function colorRandomizer() {
     const generateHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}`;
 
     return generateHex();
+}
+
+function validateNameInput() {
+    let input = document.getElementById('contactName')
+    if (input.value.split(" ").length != 2) {
+        input.value = '';
+        document.getElementById('errorMsg').classList.remove('d-none');
+    }
+}
+
+function closeErrorMsg() {
+    document.getElementById('errorMsg').classList.add('d-none');
 }

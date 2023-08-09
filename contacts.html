@@ -16,6 +16,14 @@
 </head>
 <body onload="init()">
     <div id="header" w3-include-html="./assets/templates/header.html"></div>
+
+    <div class="error-msg-container d-none" id="errorMsg" onclick="closeErrorMsg()">
+        <div class="error-msg" onclick="closeErrorMsg()">
+            <span>The field "name" must contain 2 words.</span>
+            <span>Please enter the full name.</span>
+            <span>&lt;Click to Continue&gt;</span>
+        </div>
+    </div>
     <div class="new-contact-container">
         <div class="new-contact">
             <div class="new-contact-header">
@@ -27,12 +35,12 @@
                 <img class="new-contact-img" src="assets/img/contactWhite.svg">
                 <form class="new-contact-input-container">
                     <div class="new-contact-input-field">
-                        <input class="new-contact-input"  placeholder="Name" type="text" name="two-words"
-                        pattern="^\w+\s+\w+$" title="Please enter two words separated by a space." id="contactName" >
+                        <input class="new-contact-input" placeholder="Name" type="text" name="two-words"
+                             required title="Please enter two words separated by a space." id="contactName" onblur="validateNameInput()">
                         <img src="assets/img/contactGrey.svg">
                     </div>
                     <div class="new-contact-input-field">
-                        <input class="new-contact-input" placeholder="Email" id="contactMail" type="email" >
+                        <input class="new-contact-input" placeholder="Email" id="contactMail" type="email">
                         <img src="assets/img/mail.svg">
                     </div>
                     <div class="new-contact-input-field">
@@ -44,16 +52,21 @@
                             <span>Cancel</span>
                             <img src="assets/img/X_Grey.svg">
                         </button>
-                        <button class="new-contact-create" type="button" onclick="createContact()">
+                        <button class="new-contact-create" type="submit" value="submit" onclick="createContact()">
                             <span>Create contact</span>
                             <img src="assets/img/check.svg">
                         </button>
+                        <button>
+
+                        </button>
                     </div>
                 </form>
+                <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.</div>
 
             </div>
         </div>
     </div>
+
     <div id="container">
 
         <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
