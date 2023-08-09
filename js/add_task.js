@@ -1,3 +1,5 @@
+function taskFormJS() {
+
 // Bindet den Klick-Event an jeden Button
 var buttons = document.querySelectorAll('.prioButton');
 for (var i = 0; i < buttons.length; i++) {
@@ -37,3 +39,4 @@ document.querySelectorAll('.option').forEach(option => {
         this.parentElement.classList.remove('open');
     });
 });
+}

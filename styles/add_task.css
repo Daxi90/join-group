@@ -22,11 +22,11 @@
 
 .date::-webkit-calendar-picker-indicator {
     background: url('/assets/img/calendarIcon.svg');
-    color: 4589FF ;
+    color: 4589FF;
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer;
-  }
+}
 
 .taskwidth {
     width: 440px;
@@ -42,7 +42,7 @@
 .priorityButtonsContainer {
     display: flex;
     justify-content: space-between;
-    
+
 
 }
 
@@ -80,74 +80,75 @@
     border-bottom: 2px solid transparent;
     transition: border-color 0.3s, background-color 0.3s, color 0.3s;
 }
+
 .prioUrgent:hover {
     border-color: #FF3D00;
-  }
-  
-  .prioMedium:hover {
+}
+
+.prioMedium:hover {
     border-color: #FFA800;
-  }
-  
-  .prioLow:hover {
+}
+
+.prioLow:hover {
     border-color: #7AE229;
-  }
-  
-  .prioUrgent.selected {
+}
+
+.prioUrgent.selected {
     background-color: #FF3D00;
     color: white;
-  }
-  
-  .prioMedium.selected {
+}
+
+.prioMedium.selected {
     background-color: #FFA800;
     color: white;
-  }
-  
-  .prioLow.selected {
+}
+
+.prioLow.selected {
     background-color: #7AE229;
     color: white;
-  }
+}
 
-  .prioUrgent.selected .icon {
+.prioUrgent.selected .icon {
     display: none;
-  }
-  
-  .prioUrgent.selected .icon-active {
-    display: inline;
-  }
+}
 
-  .prioMedium.selected .icon {
-    display: none;
-  }
-  
-  .prioMedium.selected .icon-active {
+.prioUrgent.selected .icon-active {
     display: inline;
-  }
+}
 
-  .prioLow.selected .icon {
+.prioMedium.selected .icon {
     display: none;
-  }
-  
-  .prioLow.selected .icon-active {
+}
+
+.prioMedium.selected .icon-active {
     display: inline;
-  }
+}
+
+.prioLow.selected .icon {
+    display: none;
+}
+
+.prioLow.selected .icon-active {
+    display: inline;
+}
 
 /* Für Firefox */
 input::placeholder {
     color: #D1D1D1;
-  }
-  
-  /* Für Google Chrome, Opera und Safari */
-  input::-webkit-input-placeholder {
-    color: #D1D1D1;
-  }
-  
-  /* Für Internet Explorer und Edge */
-  input:-ms-input-placeholder {
-    color: #D1D1D1;
-  }
+}
 
-  
-  .assignedTo {
+/* Für Google Chrome, Opera und Safari */
+input::-webkit-input-placeholder {
+    color: #D1D1D1;
+}
+
+/* Für Internet Explorer und Edge */
+input:-ms-input-placeholder {
+    color: #D1D1D1;
+}
+
+
+.assignedTo {
     width: 440px;
     height: auto;
     display: flex;
@@ -191,7 +192,7 @@ input::placeholder {
 
 .mb20 {
     margin-bottom: 20px;
-}  
+}
 
 
 .option {
@@ -236,4 +237,27 @@ input::placeholder {
 
 .relative {
     position: relative;
+}
+
+.addContact {
+    display: flex;
+    height: 56px;
+    padding: 16px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    background: var(--white, #FFF);
+    border-radius: 10px;
+    border: 1px solid var(--version-2-main-color, #4589FF);
+    background: var(--version-2-main-color, #4589FF);
+}
+
+.buttonBox {
+    display: flex;
+    width: 440px;
+    padding: 8px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
 }
