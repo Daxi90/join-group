@@ -84,3 +84,13 @@ function validateNameInput() {
 function closeErrorMsg() {
     document.getElementById('errorMsg').classList.add('d-none');
 }
+
+function showCreateContact() {
+    document.getElementById('newContactContainer').classList.remove('d-none');
+    document.getElementById('newContact').classList.add('new-contact-show');
+}
+
+function closeCreatContact() {
+    document.getElementById('newContactContainer').classList.add('d-none');
+    document.getElementById('newContact').classList.remove('new-contact-show');
+}
