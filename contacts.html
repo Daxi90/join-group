@@ -37,11 +37,11 @@
             </div>
             <div class="new-contact-information">
                 <img class="new-contact-img" src="assets/img/contactWhite.svg">
-                <form class="new-contact-input-container">
+                <form class="new-contact-input-container" onsubmit="createContact(); return false;">
                     <div class="new-contact-input-field">
                         <input class="new-contact-input" placeholder="Name" type="text" name="two-words" required
-                            title="Please enter two words separated by a space." id="contactName"
-                            onblur="validateNameInput()">
+                            title="Please enter two words separated by a space." id="contactName" pattern="^\w+\s+\w+$">
+                            <!-- onblur="validateNameInput()" -->
                         <img src="assets/img/contactGrey.svg">
                     </div>
                     <div class="new-contact-input-field">
@@ -57,7 +57,7 @@
                             <span>Cancel</span>
                             <img src="assets/img/X_Grey.svg">
                         </button>
-                        <button class="new-contact-create" type="submit" value="submit" onclick="createContact()">
+                        <button class="new-contact-create" type="submit" value="submit">
                             <span>Create contact</span>
                             <img src="assets/img/check.svg">
                         </button>

@@ -38,6 +38,7 @@ function renderContact(contact, i) {
 }
 
 function createContact() {
+    validateNameInput();
     let name = document.getElementById('contactName');
     let mail = document.getElementById('contactMail');
     let phone = document.getElementById('contactPhone');
