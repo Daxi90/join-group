@@ -191,72 +191,12 @@
         </div>
       </main>
     </div>
-      <div class="single-task-modal flex-center">
-      <div class="add-task-card">
-        <div class="header-infos flex-space-between">
-          <div class="single-task-category">User Story</div>
-          <img class="close-btn" src="./assets/img/close.svg" alt="Close button" />
-          <img class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
-        </div>
-        <h1 class="single-task-title">Kochwelt Page & Recipe Recommender</h1>
-        <p class="single-task-desc">Build start page with recipe recommendation.</p>
-        <div class="single-task-date">
-          <b class="bold-text" style="margin-right: 25px;">Due Date:</b> <span>10/05/2023</span>
-        </div>
-        <div class="single-task-prio">
-          <b class="bold-text" style="margin-right: 25px;">Priority:</b>
-          <div class="priobatch">
-            <span style="margin-left: 18px; margin-right: 10px">Medium</span>
-            <img src="./assets/img/mediumIcon.svg" alt="Medium Priority" />
-          </div>
-          
-        </div>
-        <h2 class="single-task-assignesd-to-heading"><b class="bold-text">Assigned To:</b></h2>
-        <div class="single-task-assigned-contacts-container">
-          <div class="single-task-assigned-contacts">
-            <span class="single-task-assignee" style="background: #ff0000">AS</span> <span>Sofia Müller (You)</span>
-          </div>
-          <!-- Repeat the above div as needed for more contacts -->
-        </div>
-
-        
-        <h2><b class="bold-text subtasks">Subtasks</b></h2>
-        <div class="subtasks-container">
-          <div class="single-task-single-subtask flex-center">
-            <img src="./assets/img/checkmark.svg" alt="Checked">
-            <span>Task title</span>
-          </div>
-          <div class="single-task-single-subtask flex-center">
-            <img src="./assets/img/checkmark-checked.svg" alt="Checked">
-            <span>Task title</span>
-          </div>
-          <!-- Repeat the above div as needed for more subtasks -->
-        </div>
-        
-        <div class="action-buttons">
-          <div class="action-button">
-            <img src="./assets/img/delete.svg" alt="Delete">
-            <span>Delete</span>
-          </div>
-          <div class="seperator"></div>
-          <div class="action-button">
-            <img src="./assets/img/edit.svg" alt="Edit">
-            <span>Edit</span>
-          </div>
-        </div>
-        <div class="action-buttons-mobile-container">
-          <div class="action-btn-mobile-edit">
-            <img src="./assets/img/edit-mobile.svg" alt="">
-          </div>
-          <div class="action-btn-mobile-delete">
-            <img src="./assets/img/delete.svg" alt="">
-          </div>          
-        </div>
-      </div>
-      </div>
+    <div id="single-task-modal" class="single-task-modal flex-center d-none">
+      <!--Rendered by "./js/board_render_single_task.js"-->
     </div>
     
     <script src="./js/include.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/board_render_single_task.js"></script>
   </body>
 </html>
