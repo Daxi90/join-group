@@ -58,27 +58,44 @@
                         </div>
                         <input type="checkbox">
                     </div>
-                    <div class="x^x^">
-                    <button class="addContact">Add new contact <img src="assets/img/addContact.svg" alt=""></button>
+                    <div class="optionButton">
+                    <button type="button" class="addContact">Add new contact <img src="assets/img/addContact.svg" alt=""></button>
                 </div>    
                 </div>
             </div>
-          </div>                     
+        </div>
+        <div class="selected-contacts"></div>                     
         <div class="relative">
             <span>Category</span>
-            <label for="category"></label>
-            <select name="category" id="">
-                <option value="Technical task">Technical task</option>
-                <option value="User Story">User story</option>
-            </select>
-        </div>
+            <div class="custom-select category-select">
+                <div class="selected-option">Select Category</div>
+                <div class="options">
+                    <div class="option">Technical task</div>
+                    <div class="option">User story</div>
+                </div>
+            </div>
+        </div>        
         <div class="relative">
             <span>Subtasks</span>
-            <label for="subtasks"></label>
-            <select name="subtasks" id="">
-                <option value="Add new Subtask">Add new subtask</option>
-            </select>
-        </div>
+            <div class="custom-select subtasks-select">
+                <div class="selected-option">Select Subtask</div>
+                <div class="options">
+                    <div class="option">
+                        Contact Form 
+                        <span class="selectors">
+                            <span class="edit">✎</span> | <span class="delete">✖</span>
+                        </span>
+                    </div>
+                    <div class="option">
+                        Write legal imprint 
+                        <span class="selectors">
+                            <span class="edit">✎</span> | <span class="delete">✖</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="subtasks-list"></div>
+            </div>
+        </div>        
     </form>
     <div>
         <button>Clear</button>

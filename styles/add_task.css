@@ -224,6 +224,14 @@ input:-ms-input-placeholder {
     color: white;
 }
 
+.optionButton {
+    display: flex;
+    justify-content: center;
+    width: 408px;
+    height: 56px;
+    padding: 8px 16px 8px 16px;
+}
+
 .contactLine {
     display: flex;
     flex-direction: row;
@@ -241,8 +249,9 @@ input:-ms-input-placeholder {
 
 .addContact {
     display: flex;
+    width: 408px;
     height: 56px;
-    padding: 16px 10px;
+    padding: 16px 10px 16px 10px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -250,7 +259,16 @@ input:-ms-input-placeholder {
     background: var(--white, #FFF);
     border-radius: 10px;
     border: 1px solid var(--version-2-main-color, #4589FF);
+    color: white;
     background: var(--version-2-main-color, #4589FF);
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 27.6px;
+}
+
+.addContact:hover {
+    background-color: #005DFF;
+    cursor: pointer;
 }
 
 .buttonBox {
@@ -260,4 +278,45 @@ input:-ms-input-placeholder {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+}
+
+.selected-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.selected-initials {
+    background-color: #D2E3FF;
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.selectors {
+    float: right;
+    font-size: 14px;
+}
+
+.edit, .delete {
+    cursor: pointer;
+    padding: 0 5px;
+    color: #4589FF;
+}
+
+.edit:hover, .delete:hover {
+    color: #D2E3FF;
+}
+
+.subtask-icons {
+    display: none;
+}
+
+.subtask-item:hover .subtask-icons {
+    display: inline;
 }
