@@ -17,6 +17,7 @@ let contacts = [
 
 function renderContacts() {
     let contactsList = document.getElementById('contacts');
+    renderClickedContact();
     contactsList.innerHTML = ''
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
@@ -38,7 +39,6 @@ function renderContact(contact, i) {
 }
 
 function createContact() {
-    validateNameInput();
     let name = document.getElementById('contactName');
     let mail = document.getElementById('contactMail');
     let phone = document.getElementById('contactPhone');
@@ -74,13 +74,13 @@ function colorRandomizer() {
     return generateHex();
 }
 
-function validateNameInput() {
+/* function validateNameInput() {
     let input = document.getElementById('contactName')
     if (input.value.split(" ").length != 2) {
         input.value = '';
         document.getElementById('errorMsg').classList.remove('d-none');
     }
-}
+} */
 
 function closeErrorMsg() {
     document.getElementById('errorMsg').classList.add('d-none');
@@ -94,4 +94,35 @@ function showCreateContact() {
 function closeCreatContact() {
     document.getElementById('newContactContainer').classList.add('d-none');
     document.getElementById('newContact').classList.remove('new-contact-show');
+}
+
+function renderClickedContact() {
+    document.getElementById('contactContainer').innerHTML =
+     `              
+    <div class="name-container">
+        <div class="contact-initals">
+            TT
+        </div>
+        <div class="contact-name">
+            <span class="contact-name-name">Anton Mayer</span>
+            <div class="contact-name-icons-container">
+                <button class="contact-button">
+                    <img class="contact-icon" src="assets/img/edit.svg">
+                    <span class="contact-button-text">Edit</span>
+                </button>
+                <button class="contact-button">
+                    <img class="contact-icon" src="assets/img/delete.svg">
+                    <span class="contact-button-text">Delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <span>Contact Information</span>
+        <span>Email</span>
+        <span id="mail"></span>
+        <span>Phone</span>
+        <span id="phone"></span>
+    </div>
+    `;
 }
