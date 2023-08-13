@@ -35,6 +35,7 @@ body {
     padding: 12px;
     border-radius: 12px;
     border: none;
+    text-decoration: none;
 }
 
 .sign-up-link-link:hover {

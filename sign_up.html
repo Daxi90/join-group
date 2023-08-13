@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/sign_up.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
+</head>
+<body>
+    <img class="sign-up-logo" src="assets/img/joinLogoWhiteBig.svg">
+    <div class="sign-up-container">
+        <div class="header">
+            <a href="login.html"><img class="link-back-login" src="assets/img/blueArrowLeft.svg"></a>
+            <h1>Sign Up</h1>
+        </div>
+        <div class="title-margin-bottom">
+
+        </div>
+        <form onsubmit="register(); return false;">
+            <div class="sign-up-input-fields-container">
+                <div class="input-field-password-container">
+                    <input class="input-field-password" type="text" id="signUpUser" placeholder="Name">
+                    <div class="login-password-icon-container">
+                        <img class="login-password-icon" src="assets/img/contactGrey.svg">                    
+                    </div>
+                </div>     
+                <div class="input-field-email-container">
+                    <input class="input-field-email" type="email" id="signUpMail" placeholder="Email">
+                    <div class="login-email-icon-container">
+                        <img class="login-email-icon" src="assets/templates/img/mail.png">
+                    </div>
+                </div>
+                <div class="input-field-password-container">
+                    <input class="input-field-password" type="text" id="signUpPassword" placeholder="Password">
+                    <div class="login-password-icon-container">
+                        <img class="login-password-icon" src="assets/templates/img/lock.png">                    
+                    </div>
+                </div>       
+                <div class="input-field-password-container">
+                    <input class="input-field-password" type="text" id="password" placeholder="Confirm Password">
+                    <div class="login-password-icon-container">
+                        <img class="login-password-icon" src="assets/templates/img/lock.png">                    
+                    </div>
+                </div>                
+            </div>
+            <div class="sign-up-legal-container">
+                <label class="checkbox-container">
+                    <input class="checkbox" type="checkbox" name="myCheckbox" value="1"><span class="checkmark"></span>
+                    <div>I accept the <a href="privacypolicy.html">privacy policy</a></div>
+                </label>
+            </div>
+            <button class="sign-up-button">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

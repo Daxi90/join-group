@@ -117,7 +117,7 @@ function renderClickedContact() {
             </div>
         </div>
     </div>
-    <div>
+    <div class="contact-information">
         <span>Contact Information</span>
         <span>Email</span>
         <span id="mail"></span>
