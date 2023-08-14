@@ -56,7 +56,7 @@ function renderTaskCardById(taskId) {
         </div>
         ${subtasksHtml}
         <div class="action-buttons">
-            <div class="action-button">
+            <div onclick="removeTask(${task.id})" class="action-button">
                 <img src="./assets/img/delete.svg" alt="Delete">
                 <span>Delete</span>
             </div>
@@ -84,5 +84,12 @@ function renderTaskCardById(taskId) {
 
 function closeTaskCard(){
     document.getElementById('single-task-modal').classList.add('d-none');
+}
+
+function removeTask(id){
+    id = id -1;
+    tasks.splice(id,1);
+    closeTaskCard();
+    kanbanInit();
 }
 

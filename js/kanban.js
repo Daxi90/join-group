@@ -19,6 +19,12 @@ function renderEmptyTaskCard(statusName) {
     </div>`;
 }
 
+function resetBoard(board) {
+    // Setzt den Inhalt der übergebenen Tafel zurück, wobei der Header beibehalten wird.
+    const header = board.firstElementChild.outerHTML;
+    board.innerHTML = header;
+}
+
 
 
 function renderTask(task) {
@@ -54,11 +60,16 @@ function renderTask(task) {
 
 
 function kanbanInit() {
-    // Die Aufgaben sortieren und an die entsprechenden Stellen hinzufügen
     let todoBoard = document.getElementById('todoBoard');
     let inProgressBoard = document.getElementById('inProgressBoard');
     let awaitFeedBackBoard = document.getElementById('awaitFeedBackBoard');
     let doneBoard = document.getElementById('doneBoard');
+
+    // Setzen Sie den Inhalt jeder Spalte zurück.
+    resetBoard(todoBoard);
+    resetBoard(inProgressBoard);
+    resetBoard(awaitFeedBackBoard);
+    resetBoard(doneBoard);
 
     let todoTasks = tasks.filter(task => task.status === 'todo');
     let inProgressTasks = tasks.filter(task => task.status === 'inprogress');
@@ -73,7 +84,7 @@ function kanbanInit() {
     tasks.forEach(task => {
         let newCard = document.createElement('div');
         newCard.innerHTML = renderTask(task);
-        newCard = newCard.firstElementChild; // Holt das innere Element, damit es korrekt angehängt werden kann
+        newCard = newCard.firstElementChild; 
 
         switch (task.status) {
             case 'todo':
