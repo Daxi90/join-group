@@ -145,59 +145,101 @@ function taskFormJS() {
 
 async function loadContacts() {
     let contacts = await getItem('contactsKey'); // Ersetzen Sie 'contactsKey' durch den richtigen Schlüssel für Ihre Kontakte
-    renderContacts(contacts);
+    renderContactsTab(contacts);
 }
 
-function renderContacts(contacts) {
-    const optionsContainer = document.querySelector('.options');
-    
-    // Leert den aktuellen Inhalt des Options-Containers
-    optionsContainer.innerHTML = '';
+function renderContactsTab(contacts) {
+    document.querySelector('.options').addEventListener('click', function (event) {
+        const option = event.target.closest('.option');
+        if (!option) return;  // Beendet die Funktion, wenn außerhalb einer Option geklickt wurde
 
-    contacts.forEach(contact => {
-        // Erstellen Sie die nötigen DOM-Elemente und setzen Sie die Werte aus Ihren Kontaktdaten
-        let option = document.createElement('div');
-        option.classList.add('option');
+        const checkbox = option.querySelector('input[type="checkbox"]');
+        const name = option.querySelector('.name').innerText;
 
-        let contactLine = document.createElement('div');
-        contactLine.classList.add('contactLine');
+        if (event.target.matches('.contactLine, .contactLine *')) {
+            // Wenn auf contactLine oder eines seiner Kinder geklickt wurde
+            checkbox.checked = !checkbox.checked;
+        }
 
-        let initials = document.createElement('div');
-        initials.classList.add('initials');
-        initials.style.backgroundColor = contact.color; // Setzen Sie die Hintergrundfarbe des Initials
-        initials.innerText = contact.initials;
-
-        let name = document.createElement('span');
-        name.classList.add('name');
-        name.innerText = contact.name;
-
-        contactLine.appendChild(initials);
-        contactLine.appendChild(name);
-
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-
-        option.appendChild(contactLine);
-        option.appendChild(checkbox);
-
-        optionsContainer.appendChild(option);
+        if (checkbox.checked) {
+            addNameToSelection(name);
+        } else {
+            removeNameFromSelection(name);
+        }
     });
 
-    // Fügen Sie den "Add new contact"-Button hinzu
-    let optionButton = document.createElement('div');
-    optionButton.classList.add('optionButton');
-    let addButton = document.createElement('button');
-    addButton.type = 'button';
-    addButton.classList.add('addContact');
-    addButton.innerHTML = 'Add new contact <img src="assets/img/addContact.svg" alt="">';
-    optionButton.appendChild(addButton);
+    function addNameToSelection(name) {
+        const initials = name.split(' ').map(word => word[0]).join('');
+        const initialsDiv = document.createElement('div');
+        initialsDiv.classList.add('selected-initials');
+        initialsDiv.innerText = initials;
 
-    optionsContainer.appendChild(optionButton);
+        document.querySelector('.selected-contacts').appendChild(initialsDiv);
+    }
 
-    // Aktualisieren Sie die Event Listener, da der DOM geändert wurde
-    taskFormJS();
-}
+    function removeNameFromSelection(name) {
+        const initials = name.split(' ').map(word => word[0]).join('');
+        const allSelectedInitials = document.querySelectorAll('.selected-initials');
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadContacts();
-});
+        allSelectedInitials.forEach(selectedInitial => {
+            if (selectedInitial.innerText === initials) {
+                selectedInitial.remove();
+            }
+        });
+    }
+
+    async function loadContacts() {
+        let contacts = await getItem('contactsKey');
+        renderContactsTab(contacts);
+    }
+
+    function renderContactsTab(contacts) {
+        const optionsContainer = document.querySelector('.options');
+        optionsContainer.innerHTML = '';
+    
+        contacts.forEach(contact => {
+            let option = document.createElement('div');
+            option.classList.add('option');
+    
+            let contactLine = document.createElement('div');
+            contactLine.classList.add('contactLine');
+    
+            let initials = document.createElement('div');
+            initials.classList.add('initials');
+            initials.style.backgroundColor = contact.color;
+            initials.innerText = contact.initials;
+    
+            let name = document.createElement('span');
+            name.classList.add('name');
+            name.innerText = contact.name;
+    
+            contactLine.appendChild(initials);
+            contactLine.appendChild(name);
+    
+            let checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+    
+            option.appendChild(contactLine);
+            option.appendChild(checkbox);
+    
+            optionsContainer.appendChild(option);
+        });
+    
+        let optionButton = document.createElement('div');
+        optionButton.classList.add('optionButton');
+    
+        let addButton = document.createElement('button');
+        addButton.type = 'button';
+        addButton.classList.add('addContact');
+        addButton.innerHTML = 'Add new contact <img src="assets/img/addContact.svg" alt="">';
+        addButton.addEventListener('click', createContact); // Event Listener hinzufügen
+    
+        optionButton.appendChild(addButton);
+        optionsContainer.appendChild(optionButton);
+    }
+    
+
+    document.addEventListener('DOMContentLoaded', function () {
+        loadContacts();
+    });
+}    
