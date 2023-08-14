@@ -2,6 +2,7 @@ let currentDraggedElement;
 
 function startDragging(id){
     currentDraggedElement = id;
+    document.getElementById('task-'+id).classList.add('rotate');
 };
 
 function allowDrop(ev) {

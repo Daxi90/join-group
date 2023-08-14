@@ -256,3 +256,8 @@ h3 {
   background-color: #42526e1f;
   border-radius: 15px;
 }
+
+.rotate{
+  transform: rotate(5deg);
+  transition: 150ms;
+}
