@@ -12,6 +12,15 @@ function renderAssignedPersons(persons) {
     `).join('');
 }
 
+function renderEmptyTaskCard(statusName) {
+    return `
+    <div draggable="true" class="kanban-card no-tasks">
+        <p>No Tasks ${statusName}</p>
+    </div>`;
+}
+
+
+
 function renderTask(task) {
     let completedSubtasks = task.subtasks.filter(st => st.completed).length;
     let totalSubtasks = task.subtasks.length;
@@ -36,10 +45,12 @@ function renderTask(task) {
             ${renderAssignedPersons(task.assignedPersons)}
         </div>
         <div class="priority">
-            <img src="./assets/img/prio-${task.priority.toLowerCase()}.png" alt="priority" />
+            <img src="./assets/img/prio-${task.priority.toLowerCase()}.svg" alt="priority" />
         </div>
     </div>`;
 }
+
+
 
 
 function kanbanInit() {
@@ -49,39 +60,36 @@ function kanbanInit() {
     let awaitFeedBackBoard = document.getElementById('awaitFeedBackBoard');
     let doneBoard = document.getElementById('doneBoard');
 
+    let todoTasks = tasks.filter(task => task.status === 'todo');
+    let inProgressTasks = tasks.filter(task => task.status === 'inprogress');
+    let awaitFeedbackTasks = tasks.filter(task => task.status === 'awaitfeedback');
+    let doneTasks = tasks.filter(task => task.status === 'done');
+
+    if (!todoTasks.length) todoBoard.innerHTML += renderEmptyTaskCard("To do");
+    if (!inProgressTasks.length) inProgressBoard.innerHTML += renderEmptyTaskCard("In Progress");
+    if (!awaitFeedbackTasks.length) awaitFeedBackBoard.innerHTML += renderEmptyTaskCard("Await Feedback");
+    if (!doneTasks.length) doneBoard.innerHTML += renderEmptyTaskCard("Done");
+
     tasks.forEach(task => {
+        let newCard = document.createElement('div');
+        newCard.innerHTML = renderTask(task);
+        newCard = newCard.firstElementChild; // Holt das innere Element, damit es korrekt angehängt werden kann
+
         switch (task.status) {
             case 'todo':
-                todoBoard.innerHTML += renderTask(task);
+                todoBoard.appendChild(newCard);
                 break;
             case 'inprogress':
-                inProgressBoard.innerHTML += renderTask(task);
+                inProgressBoard.appendChild(newCard);
                 break;
             case 'awaitfeedback':
-                awaitFeedBackBoard.innerHTML += renderTask(task);
+                awaitFeedBackBoard.appendChild(newCard);
                 break;
             case 'done':
-                doneBoard.innerHTML += renderTask(task);
+                doneBoard.appendChild(newCard);
                 break;
         }
     });
-
-    // Überprüfen, ob in einer Spalte Aufgaben vorhanden sind; wenn nicht, eine "No tasks" Karte hinzufügen
-    if (!todoBoard.innerHTML.includes("kanban-card")) {
-        todoBoard.innerHTML += '<div draggable="true" class="kanban-card no-tasks"><p>No Tasks To Do</p></div>';
-    }
-
-    if (!inProgressBoard.innerHTML.includes("kanban-card")) {
-        inProgressBoard.innerHTML += '<div draggable="true" class="kanban-card no-tasks"><p>No Tasks In progress</p></div>';
-    }
-
-    if (!awaitFeedBackBoard.innerHTML.includes("kanban-card")) {
-        awaitFeedBackBoard.innerHTML += '<div draggable="true" class="kanban-card no-tasks"><p>No Tasks Awaiting Feedback</p></div>';
-    }
-
-    if (!doneBoard.innerHTML.includes("kanban-card")) {
-        doneBoard.innerHTML += '<div draggable="true" class="kanban-card no-tasks"><p>No Tasks Done</p></div>';
-    }
 }
 
 

@@ -9,7 +9,7 @@ let tasks = [
         "title": "Task 1",
         "description": "Beschreibung für Task 1",
         "completionDate": "2023-08-15",
-        "priority": "Hoch",
+        "priority": "high",
         "assignedPersons": [
             "1",
             "2"
@@ -29,7 +29,7 @@ let tasks = [
     },
     {
         "id": 2,
-        "status":"done",
+        "status":"todo",
         "category": {
             "name": "User Story",
             "backgroundColor": "#0ff0f0"
@@ -47,6 +47,29 @@ let tasks = [
                 "id": 2.1,
                 "title": "Subtask 2.1",
                 "completed": false
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "status":"inprogress",
+        "category": {
+            "name": "User Story",
+            "backgroundColor": "#0ff0f0"
+        },
+        "title": "Task 2",
+        "description": "Beschreibung für Task 3",
+        "completionDate": "2023-08-20",
+        "priority": "low",
+        "assignedPersons": [
+            "2",
+            "1"
+        ],
+        "subtasks": [
+            {
+                "id": 2.1,
+                "title": "Subtask 2.1",
+                "completed": true
             }
         ]
     }
