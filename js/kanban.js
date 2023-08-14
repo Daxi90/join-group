@@ -42,7 +42,7 @@ function renderTask(task) {
 }
 
 
-function init() {
+function kanbanInit() {
     // Die Aufgaben sortieren und an die entsprechenden Stellen hinzufügen
     let todoBoard = document.getElementById('todoBoard');
     let inProgressBoard = document.getElementById('inProgressBoard');
@@ -83,3 +83,6 @@ function init() {
         doneBoard.innerHTML += '<div draggable="true" class="kanban-card no-tasks"><p>No Tasks Done</p></div>';
     }
 }
+
+
+kanbanInit();
