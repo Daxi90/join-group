@@ -142,23 +142,62 @@ function taskFormJS() {
     });
 }
 
-let tasks = [
-    {
-        'title': 'Toller Titel',
-        'description': 'Tolle Beschreibung',
-        'dueDate': '01.01.23',
-        'priority': 'medium',
-        'assignedContacts': [],
-        'category': [],
-        'subtasks': [],
-    },
-    {
-        'title': 'Toller Titel2',
-        'description': 'Tolle Beschreibung2',
-        'dueDate': '01.01.23',
-        'priority': 'low',
-        'assignedContacts': [],
-        'category': [],
-        'subtasks': [],
-    }
-];
+
+async function loadContacts() {
+    let contacts = await getItem('contactsKey'); // Ersetzen Sie 'contactsKey' durch den richtigen Schlüssel für Ihre Kontakte
+    renderContacts(contacts);
+}
+
+function renderContacts(contacts) {
+    const optionsContainer = document.querySelector('.options');
+    
+    // Leert den aktuellen Inhalt des Options-Containers
+    optionsContainer.innerHTML = '';
+
+    contacts.forEach(contact => {
+        // Erstellen Sie die nötigen DOM-Elemente und setzen Sie die Werte aus Ihren Kontaktdaten
+        let option = document.createElement('div');
+        option.classList.add('option');
+
+        let contactLine = document.createElement('div');
+        contactLine.classList.add('contactLine');
+
+        let initials = document.createElement('div');
+        initials.classList.add('initials');
+        initials.style.backgroundColor = contact.color; // Setzen Sie die Hintergrundfarbe des Initials
+        initials.innerText = contact.initials;
+
+        let name = document.createElement('span');
+        name.classList.add('name');
+        name.innerText = contact.name;
+
+        contactLine.appendChild(initials);
+        contactLine.appendChild(name);
+
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        option.appendChild(contactLine);
+        option.appendChild(checkbox);
+
+        optionsContainer.appendChild(option);
+    });
+
+    // Fügen Sie den "Add new contact"-Button hinzu
+    let optionButton = document.createElement('div');
+    optionButton.classList.add('optionButton');
+    let addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.classList.add('addContact');
+    addButton.innerHTML = 'Add new contact <img src="assets/img/addContact.svg" alt="">';
+    optionButton.appendChild(addButton);
+
+    optionsContainer.appendChild(optionButton);
+
+    // Aktualisieren Sie die Event Listener, da der DOM geändert wurde
+    taskFormJS();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadContacts();
+});
