@@ -1,6 +1,6 @@
 
 function renderTaskCardById(taskId) {
-    const task = jsonData.tasks.find(t => t.id === taskId);
+    const task = tasks.find(t => t.id === taskId);
 
     if (!task) {
         console.error('No task found with ID:', taskId);
@@ -35,8 +35,8 @@ function renderTaskCardById(taskId) {
     <div class="add-task-card">
         <div class="header-infos flex-space-between">
             <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
-            <img class="close-btn" src="./assets/img/close.svg" alt="Close button" />
-            <img class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
+            <img onclick="closeTaskCard()" class="close-btn" src="./assets/img/close.svg" alt="Close button" />
+            <img oclick="closeTaskCard()" class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
         </div>
         <h1 class="single-task-title">${task.title}</h1>
         <p class="single-task-desc">${task.description}</p>
@@ -80,6 +80,10 @@ function renderTaskCardById(taskId) {
     document.getElementById('single-task-modal').innerHTML = html;
     // Klasse 'd-none' entfernen
     document.getElementById('single-task-modal').classList.remove('d-none');
+}
+
+function closeTaskCard(){
+    document.getElementById('single-task-modal').classList.add('d-none');
 }
 
 renderTaskCardById(1);

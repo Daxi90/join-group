@@ -38,155 +38,17 @@
         </div>
 
         <div class="kanban-board">
-          <div class="kanban-column">
-            <div class="flex">
-              <h3>To do</h3>
-              <img
-                class="add-Btn"
-                src="./assets/img/plus-button-v1.png"
-                alt=""
-              />
-            </div>
-            <div draggable="true" class="kanban-card">
-              <div class="category">User Story</div>
-              <h4 class="task-title">Contact Form & Imprint</h4>
-              <p class="short-desc">
-                Create a contact form and imprint page...
-              </p>
-              <div class="progress">
-                <div class="progress-bar">
-                  <div class="progress-done" style="width: 10%"></div>
-                </div>
-                <span class="progress-text">1/10 Subtasks</span>
-              </div>
-              <div class="assignees">
-                <span class="assignee" style="background: #ff0000">AS</span>
-                <span class="assignee" style="background: #00ff00">DE</span>
-                <span class="assignee" style="background: #0000ff">EF</span>
-              </div>
-              <div class="priority">
-                <img src="./assets/img/prio-hoch.png" alt="priority" />
-              </div>
-            </div>
+          <div id="todoBoard" class="kanban-column">
+            <!--Rendered by kanban.js-->
           </div>
-          <div class="kanban-column">
-            <div class="flex">
-              <h3>In progress</h3>
-              <img
-                class="add-Btn"
-                src="./assets/img/plus-button-v1.png"
-                alt=""
-              />
-            </div>
-
-            <div draggable="true" class="kanban-card no-tasks">
-              <p>No Tasks In progress</p>
-            </div>
+          <div id="inProgressBoard" class="kanban-column">
+            <!--Rendered by kanban.js-->
           </div>
-          <div class="kanban-column">
-            <div class="flex">
-              <h3>Await Feedback</h3>
-              <img
-                class="add-Btn"
-                src="./assets/img/plus-button-v1.png"
-                alt=""
-              />
-            </div>
-            <div draggable="true" class="kanban-card">
-              <div class="category">User Story</div>
-              <h4 class="task-title">Contact Form & Imprint</h4>
-              <p class="short-desc">
-                Create a contact form and imprint page...
-              </p>
-              <div class="progress">
-                <div class="progress-bar">
-                  <div class="progress-done" style="width: 10%"></div>
-                </div>
-                <span class="progress-text">1/10 Subtasks</span>
-              </div>
-              <div class="assignees">
-                <span class="assignee" style="background: #ff0000">AS</span>
-                <span class="assignee" style="background: #00ff00">DE</span>
-                <span class="assignee" style="background: #0000ff">EF</span>
-              </div>
-              <div class="priority">
-                <img src="./assets/img/prio-hoch.png" alt="priority" />
-              </div>
-            </div>
+          <div id="awaitFeedBackBoard" class="kanban-column">
+            <!--Rendered by kanban.js-->
           </div>
-          <div class="kanban-column">
-            <div class="flex">
-              <h3>Done</h3>
-              <img
-                class="add-Btn"
-                src="./assets/img/plus-button-v1.png"
-                alt=""
-              />
-            </div>
-
-            <div draggable="true" class="kanban-card">
-              <div class="category">User Story</div>
-              <h4 class="task-title">Contact Form & Imprint</h4>
-              <p class="short-desc">
-                Create a contact form and imprint page...
-              </p>
-              <div class="progress">
-                <div class="progress-bar">
-                  <div class="progress-done" style="width: 10%"></div>
-                </div>
-                <span class="progress-text">1/10 Subtasks</span>
-              </div>
-              <div class="assignees">
-                <span class="assignee" style="background: #ff0000">AS</span>
-                <span class="assignee" style="background: #00ff00">DE</span>
-                <span class="assignee" style="background: #0000ff">EF</span>
-              </div>
-              <div class="priority">
-                <img src="./assets/img/prio-hoch.png" alt="priority" />
-              </div>
-            </div>
-            <div draggable="true" class="kanban-card">
-              <div class="category">User Story</div>
-              <h4 class="task-title">Contact Form & Imprint</h4>
-              <p class="short-desc">
-                Create a contact form and imprint page...
-              </p>
-              <div class="progress">
-                <div class="progress-bar">
-                  <div class="progress-done" style="width: 10%"></div>
-                </div>
-                <span class="progress-text">1/10 Subtasks</span>
-              </div>
-              <div class="assignees">
-                <span class="assignee" style="background: #ff0000">AS</span>
-                <span class="assignee" style="background: #00ff00">DE</span>
-                <span class="assignee" style="background: #0000ff">EF</span>
-              </div>
-              <div class="priority">
-                <img src="./assets/img/prio-hoch.png" alt="priority" />
-              </div>
-            </div>
-            <div draggable="true" class="kanban-card">
-              <div class="category">User Story</div>
-              <h4 class="task-title">Contact Form & Imprint</h4>
-              <p class="short-desc">
-                Create a contact form and imprint page...
-              </p>
-              <div class="progress">
-                <div class="progress-bar">
-                  <div class="progress-done" style="width: 10%"></div>
-                </div>
-                <span class="progress-text">1/10 Subtasks</span>
-              </div>
-              <div class="assignees">
-                <span class="assignee" style="background: #ff0000">AS</span>
-                <span class="assignee" style="background: #00ff00">DE</span>
-                <span class="assignee" style="background: #0000ff">EF</span>
-              </div>
-              <div class="priority">
-                <img src="./assets/img/prio-hoch.png" alt="priority" />
-              </div>
-            </div>
+          <div id="doneBoard" class="kanban-column">
+            <!--Rendered by kanban.js-->
           </div>
         </div>
       </main>
@@ -197,6 +59,9 @@
     
     <script src="./js/include.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/data.js"></script>
     <script src="./js/board_render_single_task.js"></script>
+    <script src="./js/kanban.js"></script>
+    
   </body>
 </html>
