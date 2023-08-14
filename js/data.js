@@ -1,6 +1,6 @@
 let tasks = [
     {
-        "id": 1,
+        "id": 0,
         "status":"todo",
         "category": {
             "name": "User Story",
@@ -28,7 +28,7 @@ let tasks = [
         ]
     },
     {
-        "id": 2,
+        "id": 1,
         "status":"todo",
         "category": {
             "name": "User Story",
@@ -51,7 +51,7 @@ let tasks = [
         ]
     },
     {
-        "id": 3,
+        "id": 2,
         "status":"inprogress",
         "category": {
             "name": "User Story",

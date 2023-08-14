@@ -38,7 +38,7 @@
         </div>
 
         <div class="kanban-board">
-          <div id="todoBoard" class="kanban-column">
+          <div id="todoBoard" class="kanban-column"  ondrop="moveTo('todo')" ondragover="allowDrop(event)">
             <div class="flex">
               <h3>To do</h3>
               <img
@@ -49,21 +49,21 @@
             </div>
             <!--Rendered by kanban.js-->
           </div>
-          <div id="inProgressBoard" class="kanban-column">
+          <div id="inProgressBoard" class="kanban-column" ondrop="moveTo('inprogress')" ondragover="allowDrop(event)">
             <div class="flex">
               <h3>In Progress</h3>
               <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
-          <div id="awaitFeedBackBoard" class="kanban-column">
+          <div id="awaitFeedBackBoard" class="kanban-column" ondrop="moveTo('awaitfeedback')" ondragover="allowDrop(event)">
             <div class="flex">
               <h3>Await Feedback</h3>
               <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
-          <div id="doneBoard" class="kanban-column">
+          <div id="doneBoard" class="kanban-column"  ondrop="moveTo('done')" ondragover="allowDrop(event)">
             <div class="flex">
               <h3>Done</h3>
               <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
@@ -82,6 +82,7 @@
     <script src="./js/data.js"></script>
     <script src="./js/board_render_single_task.js"></script>
     <script src="./js/kanban.js"></script>
+    <script src="./js/drag-drop.js"></script>
     
   </body>
 </html>

@@ -14,7 +14,7 @@ function renderAssignedPersons(persons) {
 
 function renderEmptyTaskCard(statusName) {
     return `
-    <div draggable="true" class="kanban-card no-tasks">
+    <div class="kanban-card no-tasks">
         <p>No Tasks ${statusName}</p>
     </div>`;
 }
@@ -42,7 +42,7 @@ function renderTask(task) {
     ` : '';
 
     return `
-    <div draggable="true" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
+    <div draggable="true" ondragstart="startDragging(${task.id})" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
         <div class="category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
         <h4 class="task-title">${task.title}</h4>
         <p class="short-desc">${task.description}</p>

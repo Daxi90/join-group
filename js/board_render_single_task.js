@@ -87,7 +87,6 @@ function closeTaskCard(){
 }
 
 function removeTask(id){
-    id = id -1;
     tasks.splice(id,1);
     closeTaskCard();
     kanbanInit();
