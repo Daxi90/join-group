@@ -86,4 +86,3 @@ function closeTaskCard(){
     document.getElementById('single-task-modal').classList.add('d-none');
 }
 
-renderTaskCardById(1);

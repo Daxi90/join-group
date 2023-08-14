@@ -46,7 +46,7 @@ let tasks = [
             {
                 "id": 2.1,
                 "title": "Subtask 2.1",
-                "completed": true
+                "completed": false
             }
         ]
     }

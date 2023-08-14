@@ -27,7 +27,7 @@ function renderTask(task) {
     ` : '';
 
     return `
-    <div draggable="true" class="kanban-card">
+    <div draggable="true" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
         <div class="category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
         <h4 class="task-title">${task.title}</h4>
         <p class="short-desc">${task.description}</p>
@@ -40,6 +40,7 @@ function renderTask(task) {
         </div>
     </div>`;
 }
+
 
 function init() {
     // Die Aufgaben sortieren und an die entsprechenden Stellen hinzufügen
