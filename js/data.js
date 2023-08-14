@@ -77,3 +77,22 @@ let tasks = [
         ]
     }
 ]
+
+let contacts = [
+    {
+        'name': 'testn testl',
+        'email': 'teste',
+        'phone': 'testp',
+        'initials': 'TT',
+        'color': 'blue',
+        'id': 0
+    },
+    {
+        'name': 'testn testl',
+        'email': 'teste',
+        'phone': 'testp',
+        'initials': 'TT',
+        'color': 'red',
+        'id': 1
+    },
+];

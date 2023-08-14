@@ -1,21 +1,13 @@
-let contacts = [
-    {
-        'name': 'testn testl',
-        'email': 'teste',
-        'phone': 'testp',
-        'initials': 'TT',
-        'color': 'blue'
-    },
-    {
-        'name': 'testn testl',
-        'email': 'teste',
-        'phone': 'testp',
-        'initials': 'TT',
-        'color': 'red'
-    },
-];
+async function getContacts() {
+    try {
+        contacts = JSON.parse(await getItem('contacts'));
+    } catch(e) {
+        console.error('Loading error:', e);
+    }
+}
 
 function renderContacts() {
+
     let contactsList = document.getElementById('contacts');
     renderClickedContact();
     contactsList.innerHTML = ''
@@ -38,22 +30,23 @@ function renderContact(contact, i) {
         `;
 }
 
-function createContact() {
+async function createContact() {
     let name = document.getElementById('contactName');
     let mail = document.getElementById('contactMail');
     let phone = document.getElementById('contactPhone');
     let initials = createInitals(name.value);
     let color = colorRandomizer();
+    let id = contacts.length;
 
-    let contact = {
-        'name': name.value,
-        'email': mail.value,
-        'phone': phone.value,
-        'initials': initials,
-        'color': color
-    };
-
-    contacts.push(contact);
+    contacts.push({
+        name: name.value,
+        email: mail.value,
+        phone: phone.value,
+        initials: initials,
+        color: color,
+        id: id
+    });
+    await setItem('contacts', JSON.stringify(contacts));
     renderContacts();
 
     name.value = '';
