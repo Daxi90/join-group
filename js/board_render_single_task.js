@@ -1,55 +1,3 @@
-const jsonData = {
-    "tasks": [
-        {
-            "id": 1,
-            "category": {
-                "name": "Kategorie 1",
-                "backgroundColor": "#ff0000"
-            },
-            "title": "Task 1",
-            "description": "Beschreibung für Task 1",
-            "completionDate": "2023-08-15",
-            "priority": "Hoch",
-            "assignedPersons": [
-                "Person A",
-                "Person B"
-            ],
-            "subtasks": [
-                {
-                    "id": 1.1,
-                    "title": "Subtask 1.1",
-                    "completed": false
-                },
-                {
-                    "id": 1.2,
-                    "title": "Subtask 1.2",
-                    "completed": true
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "category": {
-                "name": "Kategorie 2",
-                "backgroundColor": "#00ff00"
-            },
-            "title": "Task 2",
-            "description": "Beschreibung für Task 2",
-            "completionDate": "2023-08-20",
-            "priority": "Mittel",
-            "assignedPersons": [
-                "Person C"
-            ],
-            "subtasks": [
-                {
-                    "id": 2.1,
-                    "title": "Subtask 2.1",
-                    "completed": true
-                }
-            ]
-        }
-    ]
-};
 
 function renderTaskCardById(taskId) {
     const task = jsonData.tasks.find(t => t.id === taskId);
@@ -86,7 +34,7 @@ function renderTaskCardById(taskId) {
     const html = `
     <div class="add-task-card">
         <div class="header-infos flex-space-between">
-            <div class="single-task-category">${task.category.name}</div>
+            <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
             <img class="close-btn" src="./assets/img/close.svg" alt="Close button" />
             <img class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
         </div>
@@ -134,4 +82,4 @@ function renderTaskCardById(taskId) {
     document.getElementById('single-task-modal').classList.remove('d-none');
 }
 
-renderTaskCardById(2);
+renderTaskCardById(1);
