@@ -253,6 +253,11 @@ h3 {
 }
 
 .onDragOver{
-  background-color: #42526e1f;
+  background-color: #d2e3ff2c;
   border-radius: 15px;
+}
+
+.rotate{
+  transform: rotate(5deg);
+  transition: 150ms;
 }

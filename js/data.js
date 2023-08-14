@@ -1,3 +1,6 @@
+// ACHTUNG!! Bei den Subtasks aufpassen, dass diese immer eine einyigartige ID haben, ansonsten werden diese nicht gefunden
+// Am Besten so wie in den Demodaten beschrieben, die ID vom Haupttask + fortlaufende Nummer Beispiel: 1.2 für Haupttask 1 und Subtask 2
+
 let tasks = [
     {
         "id": 0,
@@ -16,12 +19,12 @@ let tasks = [
         ],
         "subtasks": [
             {
-                "id": 1.1,
+                "id": 0.1,
                 "title": "Subtask 1.1",
                 "completed": false
             },
             {
-                "id": 1.2,
+                "id": 0.2,
                 "title": "Subtask 1.2",
                 "completed": true
             }
@@ -44,7 +47,7 @@ let tasks = [
         ],
         "subtasks": [
             {
-                "id": 2.1,
+                "id": 1.1,
                 "title": "Subtask 2.1",
                 "completed": false
             }
