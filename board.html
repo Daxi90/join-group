@@ -38,7 +38,7 @@
         </div>
 
         <div class="kanban-board">
-          <div id="todoBoard" class="kanban-column"  ondrop="moveTo('todo')" ondragover="allowDrop(event)">
+          <div id="todoBoard" class="kanban-column"  ondrop="moveTo('todo')" ondragover="allowDrop(event); highlight('todoBoard');" ondragleave="removeHighlight('todoBoard')">
             <div class="flex">
               <h3>To do</h3>
               <img
@@ -49,21 +49,21 @@
             </div>
             <!--Rendered by kanban.js-->
           </div>
-          <div id="inProgressBoard" class="kanban-column" ondrop="moveTo('inprogress')" ondragover="allowDrop(event)">
+          <div id="inProgressBoard" class="kanban-column" ondrop="moveTo('inprogress')" ondragover="allowDrop(event); highlight('inProgressBoard');" ondragleave="removeHighlight('inProgressBoard')">
             <div class="flex">
               <h3>In Progress</h3>
               <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
-          <div id="awaitFeedBackBoard" class="kanban-column" ondrop="moveTo('awaitfeedback')" ondragover="allowDrop(event)">
+          <div id="awaitFeedBackBoard" class="kanban-column" ondrop="moveTo('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitFeedBackBoard');" ondragleave="removeHighlight('awaitFeedBackBoard')">
             <div class="flex">
               <h3>Await Feedback</h3>
               <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
-          <div id="doneBoard" class="kanban-column"  ondrop="moveTo('done')" ondragover="allowDrop(event)">
+          <div id="doneBoard" class="kanban-column"  ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('doneBoard');" ondragleave="removeHighlight('doneBoard')">
             <div class="flex">
               <h3>Done</h3>
               <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
