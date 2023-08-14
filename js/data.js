@@ -16,12 +16,12 @@ let tasks = [
         ],
         "subtasks": [
             {
-                "id": 1.1,
+                "id": 0.1,
                 "title": "Subtask 1.1",
                 "completed": false
             },
             {
-                "id": 1.2,
+                "id": 0.2,
                 "title": "Subtask 1.2",
                 "completed": true
             }
@@ -44,7 +44,7 @@ let tasks = [
         ],
         "subtasks": [
             {
-                "id": 2.1,
+                "id": 1.1,
                 "title": "Subtask 2.1",
                 "completed": false
             }

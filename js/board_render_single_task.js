@@ -16,7 +16,7 @@ function renderTaskCardById(taskId) {
             const checkmarkSrc = subtask.completed ? "./assets/img/checkmark-checked.svg" : "./assets/img/checkmark.svg";
             subtasksHtml += `
             <div class="single-task-single-subtask flex-center">
-                <img src="${checkmarkSrc}" alt="Checked">
+                <img id="subtask-${subtask.id}" src="${checkmarkSrc}" alt="Checked" onclick="clickSubTask('${subtask.id}')">
                 <span>${subtask.title}</span>
             </div>`;
         }
@@ -36,7 +36,7 @@ function renderTaskCardById(taskId) {
         <div class="header-infos flex-space-between">
             <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
             <img onclick="closeTaskCard()" class="close-btn" src="./assets/img/close.svg" alt="Close button" />
-            <img oclick="closeTaskCard()" class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
+            <img onclick="closeTaskCard()" class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
         </div>
         <h1 class="single-task-title">${task.title}</h1>
         <p class="single-task-desc">${task.description}</p>
@@ -84,6 +84,7 @@ function renderTaskCardById(taskId) {
 
 function closeTaskCard(){
     document.getElementById('single-task-modal').classList.add('d-none');
+    kanbanInit();
 }
 
 function removeTask(id){
@@ -91,4 +92,32 @@ function removeTask(id){
     closeTaskCard();
     kanbanInit();
 }
+
+function clickSubTask(subtaskIdStr) {
+    const subtaskId = parseFloat(subtaskIdStr); // Konvertiert die ID in eine Zahl
+
+    // Finden Sie die übergeordnete Aufgabe, die diesen Subtask enthält
+    const parentTask = tasks.find(task => task.subtasks && task.subtasks.some(st => st.id === subtaskId));
+    
+    if (!parentTask) {
+        console.error('Kein übergeordneter Task für Subtask-ID gefunden:', subtaskId);
+        return;
+    }
+
+    // Finden Sie den eigentlichen Subtask in dieser Aufgabe
+    const subtask = parentTask.subtasks.find(st => st.id === subtaskId);
+
+    if (!subtask) {
+        console.error('Kein Subtask mit ID gefunden:', subtaskId);
+        return;
+    }
+
+    // Ändern Sie den "completed"-Status
+    subtask.completed = !subtask.completed;
+
+    // Daten neu rendern
+    renderTaskCardById(parentTask.id);
+}
+
+
 
