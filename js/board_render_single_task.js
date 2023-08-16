@@ -26,12 +26,12 @@ function renderTaskCardById(taskId) {
 
     const assignedContactsHtml = task.assignedPersons.map(person => `
         <div class="single-task-assigned-contacts">
-            <span class="single-task-assignee" style="background: #ff0000">AS</span>
-            <span>${person}</span>
+            <span class="single-task-assignee" style="background: ${contacts[person].color}">${contacts[person].initials}</span>
+            <span>${contacts[person].name}</span>
         </div>
     `).join('');
 
-    const html = `
+    const html = /*html*/`
     <div class="add-task-card">
         <div class="header-infos flex-space-between">
             <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
@@ -46,7 +46,7 @@ function renderTaskCardById(taskId) {
         <div class="single-task-prio">
             <b class="bold-text" style="margin-right: 25px;">Priority:</b>
             <div class="priobatch">
-                <span style="margin-left: 18px; margin-right: 10px">${task.priority}</span>
+                <span style="margin-left: 18px; margin-right: 10px; text-transform: capitalize;">${task.priority}</span>
                 <img src="./assets/img/mediumIcon.svg" alt="Medium Priority" />
             </div>
         </div>
@@ -84,13 +84,13 @@ function renderTaskCardById(taskId) {
 
 function closeTaskCard(){
     document.getElementById('single-task-modal').classList.add('d-none');
-    kanbanInit();
+    kanbanInit(tasks);
 }
 
 function removeTask(id){
     tasks.splice(id,1);
     closeTaskCard();
-    kanbanInit();
+    kanbanInit(tasks);
 }
 
 function clickSubTask(subtaskIdStr) {

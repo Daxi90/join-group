@@ -16,7 +16,7 @@ function moveTo(newstatus){
     document.getElementById('inProgressBoard').classList.remove('onDragOver');
     document.getElementById('awaitFeedBackBoard').classList.remove('onDragOver');
     document.getElementById('doneBoard').classList.remove('onDragOver');
-    kanbanInit();
+    kanbanInit(tasks);
 };
 
 function highlight(element){
