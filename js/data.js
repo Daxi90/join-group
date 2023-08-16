@@ -24,6 +24,16 @@ let tasks = [
                 "id": 0.2,
                 "title": "Subtask 1.2",
                 "completed": true
+            },
+            {
+                "id": 0.3,
+                "title": "Subtask 1.3",
+                "completed": true
+            },
+            {
+                "id": 0.4,
+                "title": "Subtask 1.4",
+                "completed": true
             }
         ]
     },
