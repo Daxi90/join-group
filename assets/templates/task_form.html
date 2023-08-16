@@ -37,27 +37,7 @@
             <div class="custom-select">
                 <div class="selected-option">Select contacts to assign</div>
                 <div class="options">
-                    <div class="option">
-                        <div class="contactLine">
-                            <div class="initials">JL</div>
-                        <span class="name">Jens Labudda</span>
-                        </div>
-                        <input type="checkbox">
-                    </div>
-                    <div class="option">
-                        <div class="contactLine">
-                        <div class="initials">DH</div>
-                        <span class="name">David Hollerwöger</span>
-                        </div>
-                        <input type="checkbox">
-                    </div>
-                    <div class="option">
-                        <div class="contactLine">
-                            <div class="initials">FB</div>
-                            <span class="name">Felix Blasers</span>
-                        </div>
-                        <input type="checkbox">
-                    </div>
+                   
                     <div class="optionButton">
                     <button type="button" class="addContact">Add new contact <img src="assets/img/addContact.svg" alt=""></button>
                 </div>    
@@ -97,8 +77,8 @@
             </div>
         </div>        
     </form>
-    <div>
-        <button>Clear</button>
-        <button>Create task</button>
+    <div class="submit">
+        <button onclick="clearInput()" class="clearInput">Clear x</button>
+        <button onclick="addTask()" class="createTask">Create task</button>
     </div>
 </main>
