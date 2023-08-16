@@ -1,4 +1,17 @@
 
+let searchBar = document.getElementById('searchBar');
+
+searchBar.addEventListener('input', function(){
+    let filteredTasks = tasks.filter(filterByName);
+    kanbanInit(filteredTasks);
+})
+
+
+function filterByName(task){
+    return task.title.toLowerCase().includes(searchBar.value.toLowerCase());
+}
+
+
 function renderTaskCard(task){
     renderAssignees(task);
     return /*html*/`
@@ -72,7 +85,7 @@ function noTasksCard(status){
     `;
 }
 
-function kanbanInit(){
+function kanbanInit(tasksToRender){
     let todoContainer = document.getElementById('todoBoard');
     let inProgressContainer = document.getElementById('inProgressBoard');
     let awaitFeedbackContainer = document.getElementById('awaitFeedBackBoard');
@@ -83,7 +96,7 @@ function kanbanInit(){
     clearContainer('awaitFeedBackBoard');
     clearContainer('doneBoard');
 
-    tasks.forEach(task => {
+    tasksToRender.forEach(task => {
         if(task.status == 'todo'){
             todoContainer.innerHTML += renderTaskCard(task);
         }else if(task.status == 'inprogress'){
@@ -111,3 +124,5 @@ function kanbanInit(){
         doneContainer.innerHTML += noTasksCard("Done");
     }
 }
+
+
