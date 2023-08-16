@@ -1,4 +1,4 @@
-function taskFormJS() {
+function taskFormJS() { // renders add_task functionality
     bindPrioButtonEvents();
     bindSelectedOptionEvents();
     bindContactLineEvents();
@@ -117,12 +117,17 @@ async function loadContacts() {
 }
 
 function renderContacts(contacts) {
-    const optionsContainer = document.querySelector('.options');
+    const optionsContainer = document.querySelector('options');
+    if (optionsContainer) {
     optionsContainer.innerHTML = '';
     contacts.forEach(contact => {
         createContactElement(contact, optionsContainer);
     });
     createAddContactButton(optionsContainer);
+
+} else {
+    console.warn("Das Element mit der ID '#options' wurde nicht gefunden.");
+}
 }
 
 function createContactElement(contact, container) {
