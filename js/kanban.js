@@ -1,107 +1,113 @@
-// Beispiel für Farbzuteilung für zugewiesene Personen. 
-// Sie können dies natürlich anpassen und ggf. mit Namen und anderen Informationen ergänzen.
-const personColors = {
-    "1": "#ff0000", // Rot für Person 1
-    "2": "#00ff00", // Grün für Person 2
-    "3": "#0000ff"  // Blau für Person 3
-};
 
-function renderAssignedPersons(persons) {
-    return persons.map(person => `
-        <span class="assignee" style="background: ${personColors[person] || '#000'}">${person}</span>
-    `).join('');
-}
-
-function renderEmptyTaskCard(statusName) {
-    return `
-    <div class="kanban-card no-tasks">
-        <p>No Tasks ${statusName}</p>
-    </div>`;
-}
-
-function resetBoard(board) {
-    // Setzt den Inhalt der übergebenen Tafel zurück, wobei der Header beibehalten wird.
-    const header = board.firstElementChild.outerHTML;
-    board.innerHTML = header;
-}
-
-
-
-function renderTask(task) {
-    let completedSubtasks = task.subtasks.filter(st => st.completed).length;
-    let totalSubtasks = task.subtasks.length;
-    let progressPercentage = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-
-    let progressDiv = totalSubtasks > 0 ? `
-        <div class="progress">
-            <div class="progress-bar">
-                <div class="progress-done" style="width: ${progressPercentage}%"></div>
-            </div>
-            <span class="progress-text">${completedSubtasks}/${totalSubtasks} Subtasks</span>
-        </div>
-    ` : '';
-
-    return `
-    <div draggable="true" ondragstart="startDragging(${task.id})" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
+function renderTaskCard(task){
+    renderAssignees(task);
+    return /*html*/`
+    <div draggable="true" ondragstart="startDragging(0)" class="kanban-card" id="task-0" onclick="renderTaskCardById(0)">
         <div class="category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
         <h4 class="task-title">${task.title}</h4>
         <p class="short-desc">${task.description}</p>
-        ${progressDiv}
+
+        <div class="progress">
+            ${renderProgressBar(task)}
+        </div>
+
         <div class="assignees">
-            ${renderAssignedPersons(task.assignedPersons)}
+            ${renderAssignees(task)}
         </div>
         <div class="priority">
-            <img src="./assets/img/prio-${task.priority.toLowerCase()}.svg" alt="priority" />
+            <img src="./assets/img/prio-${task.priority}.svg" alt="priority" />
         </div>
-    </div>`;
+    </div>
+    `
 }
 
+function renderProgressBar(task){
+    let sumSubtasks = task.subtasks.length;
+    let sumCompletedTasks = 0;
+    let completedPercent;
 
-
-
-function kanbanInit() {
-    let todoBoard = document.getElementById('todoBoard');
-    let inProgressBoard = document.getElementById('inProgressBoard');
-    let awaitFeedBackBoard = document.getElementById('awaitFeedBackBoard');
-    let doneBoard = document.getElementById('doneBoard');
-
-    // Setzen Sie den Inhalt jeder Spalte zurück.
-    resetBoard(todoBoard);
-    resetBoard(inProgressBoard);
-    resetBoard(awaitFeedBackBoard);
-    resetBoard(doneBoard);
-
-    let todoTasks = tasks.filter(task => task.status === 'todo');
-    let inProgressTasks = tasks.filter(task => task.status === 'inprogress');
-    let awaitFeedbackTasks = tasks.filter(task => task.status === 'awaitfeedback');
-    let doneTasks = tasks.filter(task => task.status === 'done');
-
-    if (!todoTasks.length) todoBoard.innerHTML += renderEmptyTaskCard("To do");
-    if (!inProgressTasks.length) inProgressBoard.innerHTML += renderEmptyTaskCard("In Progress");
-    if (!awaitFeedbackTasks.length) awaitFeedBackBoard.innerHTML += renderEmptyTaskCard("Await Feedback");
-    if (!doneTasks.length) doneBoard.innerHTML += renderEmptyTaskCard("Done");
-
-    tasks.forEach(task => {
-        let newCard = document.createElement('div');
-        newCard.innerHTML = renderTask(task);
-        newCard = newCard.firstElementChild; 
-
-        switch (task.status) {
-            case 'todo':
-                todoBoard.appendChild(newCard);
-                break;
-            case 'inprogress':
-                inProgressBoard.appendChild(newCard);
-                break;
-            case 'awaitfeedback':
-                awaitFeedBackBoard.appendChild(newCard);
-                break;
-            case 'done':
-                doneBoard.appendChild(newCard);
-                break;
+    task.subtasks.forEach(subtask => {
+        if(subtask.completed){
+            sumCompletedTasks += 1;
         }
     });
+
+    completedPercent = (sumCompletedTasks / sumSubtasks) * 100;
+    
+    return `
+    <div class="progress-bar">
+        <div class="progress-done" style="width: ${completedPercent}%"></div>
+    </div>
+    <span class="progress-text">${sumCompletedTasks}/${sumSubtasks} Subtasks</span>
+    `
 }
 
+function renderAssignees(task){
+    let personsHTML ='';
 
-kanbanInit();
+    task.assignedPersons.forEach(person => {
+        if(contacts[person]){
+            personsHTML += `<span class="assignee" style="background: ${contacts[person].color}">${contacts[person].initials}</span>`
+        }else{
+            console.log("Keine gültige Person gefunden");
+        }
+        
+    });
+
+    return personsHTML;
+}
+
+function clearContainer(element){
+    let container = document.getElementById(element);
+    let headerContent = container.firstElementChild;
+    container.innerHTML = '';
+    container.appendChild(headerContent);
+}
+
+function noTasksCard(status){
+    return /*html*/`
+        <div class="kanban-card no-tasks">
+          <p>No Tasks ${status}</p>
+        </div>
+    `;
+}
+
+function kanbanInit(){
+    let todoContainer = document.getElementById('todoBoard');
+    let inProgressContainer = document.getElementById('inProgressBoard');
+    let awaitFeedbackContainer = document.getElementById('awaitFeedBackBoard');
+    let doneContainer = document.getElementById('doneBoard');
+
+    clearContainer('todoBoard');
+    clearContainer('inProgressBoard');
+    clearContainer('awaitFeedBackBoard');
+    clearContainer('doneBoard');
+
+    tasks.forEach(task => {
+        if(task.status == 'todo'){
+            todoContainer.innerHTML += renderTaskCard(task);
+        }else if(task.status == 'inprogress'){
+            inProgressContainer.innerHTML += renderTaskCard(task);
+        }else if(task.status == 'awaitfeedback'){
+            awaitFeedbackContainer.innerHTML += renderTaskCard(task);
+        }else if(task.status == 'done'){
+            doneContainer.innerHTML += renderTaskCard(task);
+        }else{
+            console.log('Unbekannter Status im Task');
+        }
+    });
+
+    // Überprüfen ob Karten hinzugefügt wurden. Falls nicht, die "Keine Tasks"-Karte hinzufügen
+    if(todoContainer.children.length == 1) {
+        todoContainer.innerHTML += noTasksCard("ToDo");
+    }
+    if(inProgressContainer.children.length == 1) {
+        inProgressContainer.innerHTML += noTasksCard("In Progress");
+    }
+    if(awaitFeedbackContainer.children.length == 1) {
+        awaitFeedbackContainer.innerHTML += noTasksCard("Awaiting Feedback");
+    }
+    if(doneContainer.children.length == 1) {
+        doneContainer.innerHTML += noTasksCard("Done");
+    }
+}

@@ -13,10 +13,7 @@ let tasks = [
         "description": "Beschreibung für Task 1",
         "completionDate": "2023-08-15",
         "priority": "high",
-        "assignedPersons": [
-            "1",
-            "2"
-        ],
+        "assignedPersons": [1],
         "subtasks": [
             {
                 "id": 0.1,
@@ -41,10 +38,7 @@ let tasks = [
         "description": "Beschreibung für Task 2",
         "completionDate": "2023-08-20",
         "priority": "medium",
-        "assignedPersons": [
-            "3",
-            "1"
-        ],
+        "assignedPersons": [1,0],
         "subtasks": [
             {
                 "id": 1.1,
@@ -64,10 +58,7 @@ let tasks = [
         "description": "Beschreibung für Task 3",
         "completionDate": "2023-08-20",
         "priority": "low",
-        "assignedPersons": [
-            "2",
-            "1"
-        ],
+        "assignedPersons": [1,0],
         "subtasks": [
             {
                 "id": 2.1,
@@ -91,7 +82,7 @@ let contacts = [
         'name': 'testn testl',
         'email': 'teste',
         'phone': 'testp',
-        'initials': 'TT',
+        'initials': 'DH',
         'color': 'red',
         'id': 1
     },
