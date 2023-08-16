@@ -30,7 +30,7 @@
 
 .taskwidth {
     width: 440px;
-    height: 100vh;
+    height: fit-content;
     margin-top: 50px;
     margin-left: unset;
 }
@@ -336,4 +336,33 @@ input:-ms-input-placeholder {
 main {
     padding-left: 12px;
     padding-top: 12px;
+}
+
+.submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+    gap: 4px;
+}
+
+.clearInput {
+    width: 136px;
+    height: 61px;
+    font-size: 23px;
+    padding: 16px 10px 16px 10px;
+    border-radius: 10px;
+    border: 1px solid ;
+    gap: 10px;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF);
+}
+
+.createTask {
+    width: 174px;
+    height: 60px;
+    padding: 16px 10px 16px 10px;
+    border-radius: 10px;
+    gap: 4px;
+    background: #4589FF;
+    color: #FFFFFF;
+    font-size: 23px;
 }

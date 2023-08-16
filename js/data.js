@@ -13,10 +13,7 @@ let tasks = [
         "description": "Beschreibung für Task 1",
         "completionDate": "2023-08-15",
         "priority": "high",
-        "assignedPersons": [
-            "1",
-            "2"
-        ],
+        "assignedPersons": [1],
         "subtasks": [
             {
                 "id": 0.1,
@@ -26,6 +23,16 @@ let tasks = [
             {
                 "id": 0.2,
                 "title": "Subtask 1.2",
+                "completed": true
+            },
+            {
+                "id": 0.3,
+                "title": "Subtask 1.3",
+                "completed": true
+            },
+            {
+                "id": 0.4,
+                "title": "Subtask 1.4",
                 "completed": true
             }
         ]
@@ -41,10 +48,7 @@ let tasks = [
         "description": "Beschreibung für Task 2",
         "completionDate": "2023-08-20",
         "priority": "medium",
-        "assignedPersons": [
-            "3",
-            "1"
-        ],
+        "assignedPersons": [1,0],
         "subtasks": [
             {
                 "id": 1.1,
@@ -64,10 +68,7 @@ let tasks = [
         "description": "Beschreibung für Task 3",
         "completionDate": "2023-08-20",
         "priority": "low",
-        "assignedPersons": [
-            "2",
-            "1"
-        ],
+        "assignedPersons": [1,0],
         "subtasks": [
             {
                 "id": 2.1,
@@ -77,3 +78,22 @@ let tasks = [
         ]
     }
 ]
+
+let contacts = [
+    {
+        'name': 'testn testl',
+        'email': 'teste',
+        'phone': 'testp',
+        'initials': 'TT',
+        'color': 'blue',
+        'id': 0
+    },
+    {
+        'name': 'testn testl',
+        'email': 'teste',
+        'phone': 'testp',
+        'initials': 'DH',
+        'color': 'red',
+        'id': 1
+    },
+];

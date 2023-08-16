@@ -9,6 +9,7 @@ async function loadUsers(){
 }
 
 async function register() {
+   /*  users = await getItem('users'); */
     let signUpUser = document.getElementById('signUpUser');
     let signUpMail = document.getElementById('signUpMail');
     let signUpPassword = document.getElementById('signUpPassword');
@@ -18,9 +19,10 @@ async function register() {
         password: signUpPassword.value
     })
 
-    setItem('users', JSON.stringify(users));
+    await setItem('users', JSON.stringify(users));
 
     resetForm();
+    
 }
 
 function resetForm() {
@@ -28,3 +30,4 @@ function resetForm() {
     signUpMail.value = '';
     signUpPassword.value = '';
 }
+
