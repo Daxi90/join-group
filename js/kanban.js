@@ -2,7 +2,7 @@
 function renderTaskCard(task){
     renderAssignees(task);
     return /*html*/`
-    <div draggable="true" ondragstart="startDragging(0)" class="kanban-card" id="task-0" onclick="renderTaskCardById(0)">
+    <div draggable="true" ondragstart="startDragging(${task.id})" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
         <div class="category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
         <h4 class="task-title">${task.title}</h4>
         <p class="short-desc">${task.description}</p>
