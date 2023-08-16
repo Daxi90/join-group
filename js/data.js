@@ -60,7 +60,7 @@ let tasks = [
             "name": "User Story",
             "backgroundColor": "#0ff0f0"
         },
-        "title": "Task 2",
+        "title": "Task 3",
         "description": "Beschreibung für Task 3",
         "completionDate": "2023-08-20",
         "priority": "low",
