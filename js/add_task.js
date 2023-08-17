@@ -1,4 +1,4 @@
-function taskFormJS() { // renders add_task functionality
+async function taskFormJS() { // renders add_task functionality
     bindPrioButtonEvents();
     bindSelectedOptionEvents();
     bindContactLineEvents();
@@ -113,21 +113,18 @@ function bindSubtaskSelectEvents() {
 
 async function loadContacts() {
     let contacts = await getItem('contacts'); // Fetches contacts from API
+    contacts = JSON.parse(contacts);
     renderContacts(contacts);
 }
 
 function renderContacts(contacts) {
-    const optionsContainer = document.querySelector('options');
-    if (optionsContainer) {
+    const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
     contacts.forEach(contact => {
         createContactElement(contact, optionsContainer);
     });
     createAddContactButton(optionsContainer);
 
-} else {
-    console.warn("Das Element mit der ID '#options' wurde nicht gefunden.");
-}
 }
 
 function createContactElement(contact, container) {
@@ -174,4 +171,5 @@ function createAddContactButton(container) {
 // Wird aufgerufen, wenn das Dokument geladen ist
 document.addEventListener('DOMContentLoaded', function() {
     loadContacts();
+    taskFormJS();
 });

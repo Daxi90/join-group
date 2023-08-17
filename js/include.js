@@ -2,6 +2,7 @@ async function init() {
     await includeHTML();
     loadUsers();
     getContacts();
+    taskFormJS();
 }
 
 async function includeHTML() {
@@ -16,5 +17,5 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
-    taskFormJS();
+    
 }
