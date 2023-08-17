@@ -30,6 +30,12 @@ body {
     background: var(--white, #FFF);
 }
 
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .header {
     display: flex;
     justify-content: center;
@@ -39,7 +45,6 @@ body {
 
 .sign-up-input-fields-container {
     display: flex;
-    height: 284px;
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
@@ -57,3 +62,4 @@ body {
 .sign-up-button:hover {
     background: var(--ligth-blue, #005DFF);
 }
+
