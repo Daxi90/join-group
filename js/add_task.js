@@ -168,8 +168,8 @@ function createAddContactButton(container) {
     container.appendChild(optionButton);
 }
 
-// Wird aufgerufen, wenn das Dokument geladen ist
-document.addEventListener('DOMContentLoaded', function() {
-    loadContacts();
-    taskFormJS();
-});
+// // Wird aufgerufen, wenn das Dokument geladen ist
+// document.addEventListener('DOMContentLoaded', async function() {
+//     await loadContacts();
+//     taskFormJS();
+// });
