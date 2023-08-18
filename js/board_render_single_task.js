@@ -1,4 +1,9 @@
 
+/**
+ * Renders the task card for a specific task by its ID.
+ *
+ * @param {number} taskId - The ID of the task to be rendered.
+ */
 function renderTaskCardById(taskId) {
     const task = tasks.find(t => t.id === taskId);
 
@@ -82,17 +87,33 @@ function renderTaskCardById(taskId) {
     document.getElementById('single-task-modal').classList.remove('d-none');
 }
 
+
+/**
+ * Closes the task card modal.
+ */
 function closeTaskCard(){
     document.getElementById('single-task-modal').classList.add('d-none');
     kanbanInit(tasks);
 }
 
+
+/**
+ * Removes a task by its ID.
+ *
+ * @param {number} id - The ID of the task to be removed.
+ */
 function removeTask(id){
     tasks.splice(id,1);
     closeTaskCard();
     kanbanInit(tasks);
 }
 
+
+/**
+ * Handles the click event for a subtask, toggling its completed status.
+ *
+ * @param {string} subtaskIdStr - The ID of the subtask (as a string) that was clicked.
+ */
 function clickSubTask(subtaskIdStr) {
     const subtaskId = parseFloat(subtaskIdStr); // Konvertiert die ID in eine Zahl
 

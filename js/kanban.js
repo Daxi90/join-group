@@ -1,17 +1,41 @@
 
+/**
+ * @type {HTMLElement}
+ */
 let searchBar = document.getElementById('searchBar');
 
+/**
+ * Event listener to filter tasks by name when the search bar input changes.
+ */
 searchBar.addEventListener('input', function(){
     let filteredTasks = tasks.filter(filterByName);
     kanbanInit(filteredTasks);
 })
 
 
+/**
+ * Filters tasks by their title.
+ *
+ * @param {Object} task - The task object.
+ * @param {string} task.title - The title of the task.
+ * @returns {boolean} - True if the task title includes the search value, false otherwise.
+ */
 function filterByName(task){
     return task.title.toLowerCase().includes(searchBar.value.toLowerCase());
 }
 
 
+/**
+ * Renders a task card as an HTML string.
+ *
+ * @param {Object} task - The task object.
+ * @param {number} task.id - The ID of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {Object} task.category - The category object associated with the task.
+ * @param {string} task.priority - The priority of the task.
+ * @returns {string} - The HTML string representing the task card.
+ */
 function renderTaskCard(task){
     renderAssignees(task);
     return /*html*/`
@@ -34,6 +58,14 @@ function renderTaskCard(task){
     `
 }
 
+
+/**
+ * Renders a progress bar as an HTML string.
+ *
+ * @param {Object} task - The task object.
+ * @param {Array} task.subtasks - An array of subtasks.
+ * @returns {string} - The HTML string representing the progress bar.
+ */
 function renderProgressBar(task){
     let sumSubtasks = task.subtasks.length;
     let sumCompletedTasks = 0;
@@ -55,6 +87,14 @@ function renderProgressBar(task){
     `
 }
 
+
+/**
+ * Renders assignees as an HTML string.
+ *
+ * @param {Object} task - The task object.
+ * @param {Array<number>} task.assignedPersons - An array of assigned person IDs.
+ * @returns {string} - The HTML string representing the assignees.
+ */
 function renderAssignees(task){
     let personsHTML ='';
 
@@ -70,6 +110,12 @@ function renderAssignees(task){
     return personsHTML;
 }
 
+
+/**
+ * Clears the content of a container except for its header.
+ *
+ * @param {string} element - The ID of the container element.
+ */
 function clearContainer(element){
     let container = document.getElementById(element);
     let headerContent = container.firstElementChild;
@@ -77,6 +123,13 @@ function clearContainer(element){
     container.appendChild(headerContent);
 }
 
+
+/**
+ * Renders a "No Tasks" card as an HTML string.
+ *
+ * @param {string} status - The status indicating why there are no tasks.
+ * @returns {string} - The HTML string representing the "No Tasks" card.
+ */
 function noTasksCard(status){
     return /*html*/`
         <div class="kanban-card no-tasks">
@@ -85,6 +138,12 @@ function noTasksCard(status){
     `;
 }
 
+
+/**
+ * Initializes the kanban boards by rendering the tasks based on their statuses.
+ *
+ * @param {Array<Object>} tasksToRender - An array of tasks to render.
+ */
 function kanbanInit(tasksToRender){
     let todoContainer = document.getElementById('todoBoard');
     let inProgressContainer = document.getElementById('inProgressBoard');
