@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/img/joinLogoWhite.svg" type="image/x-icon">
     <title>Login</title>
-    <script src="login.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/reset_password.js"></script>
+
     <link rel="stylesheet" href="styles/login.css">
 </head>
-<body>
+<body onload="loadUsers()">
     <img class="join-logo-blue" src="assets/img/joinLogoBlue.svg">
     <div class="sign-up-link-container">
         <p class="sign-up-link-question">Not a Join User?</p>
@@ -47,15 +51,11 @@
             </div>
             
         </form>
-        <div class="message-container">
-            <div class="message">
-                Your password has been resetted successfully
-            </div>
-        </div>
+
 
     </div>
-    <div class="legal-container d-none" id="resetPasswordMessage">
-        <div class="legal d-none">
+    <div class="legal-container" >
+        <div class="legal">
             <a href="#" class="privacy-policy">Privacy Policy</a>
             <a href="#" class="legal-notice">Legal Notice</a>
         </div>

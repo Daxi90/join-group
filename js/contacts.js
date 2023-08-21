@@ -4,9 +4,10 @@ async function getContacts() {
     } catch(e) {
         console.error('Loading error:', e);
     }
+    renderContactsContacts();
 }
 
-function renderContacts() {
+function renderContactsContacts() {
 
     let contactsList = document.getElementById('contacts');
     renderClickedContact();
@@ -14,11 +15,11 @@ function renderContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
 
-        contactsList.innerHTML += renderContact(contact, i);
+        contactsList.innerHTML += renderContactContacts(contact, i);
     }
 }
 
-function renderContact(contact, i) {
+function renderContactContacts(contact, i) {
     return `
         <div class="contact" id="contact${i}">
             <div class="c-initals" style="background-color:${contact['color']}">${contact['initials']}</div>
@@ -47,7 +48,7 @@ async function createContact() {
         id: id
     });
     await setItem('contacts', JSON.stringify(contacts));
-    renderContacts();
+    renderContactsContacts();
 
     name.value = '';
     mail.value = '';
@@ -119,3 +120,5 @@ function renderClickedContact() {
     </div>
     `;
 }
+
+document.addEventListener('DOMContentLoaded', getContacts());
