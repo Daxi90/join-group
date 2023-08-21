@@ -1,3 +1,17 @@
+const TASKS_KEY = 'tasks';
+
+async function loadTasksFromAPI() {
+    try {
+        const loadedTasks = JSON.parse (await getItem (TASKS_KEY));
+        if (loadedTasks) {
+            tasks = loadedTasks;
+        }
+        console.log('Tasks erfolgreich aus der API geladen');
+    } catch (error) {
+        console.error('Fehler beim Laden der Tasks aus der API:', error);
+    }
+}
+
 async function taskFormJS() { // renders add_task functionality
     bindPrioButtonEvents();
     bindSelectedOptionEvents();
@@ -126,13 +140,13 @@ function bindSubtaskSelectEvents() {
 }
 
 
-async function loadContacts() {
+async function loadContactsTab() {
     let contacts = await getItem('contacts'); // Fetches contacts from API
     contacts = JSON.parse(contacts);
-    renderContacts(contacts);
+    renderContactsTab(contacts);
 }
 
-function renderContacts(contacts) {
+function renderContactsTab(contacts) {
     const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
     contacts.forEach(contact => {
@@ -183,44 +197,61 @@ function createAddContactButton(container) {
     container.appendChild(optionButton);
 }
 
-function addTask() {
+function getSelectedContactsInitials() {
+    return Array.from(document.querySelectorAll('.selected-contacts .selected-initials'))
+        .map(initialElem => initialElem.textContent);
+}
+
+async function addTask(){
+    // Aus den Eingabefeldern extrahierte Daten:
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let duedate = document.getElementById('duedate').value;
-
-    // Priority
     let priorityButtons = document.querySelectorAll('.prioButton');
     let priority = null;
     priorityButtons.forEach(button => {
-        if (button.classList.contains('selected')) { // Assuming you add a 'selected' class to the clicked priority button
+        if (button.classList.contains('selected')) {
             priority = button.textContent.trim();
         }
     });
-
-    // Assigned to
-    let assignedTo = document.querySelector('.assignedTo .selected-option').textContent;
-
-    // Category
+    let assignedTo = getSelectedContactsInitials(); // Initialen, aber Sie müssen diese wahrscheinlich in tatsächliche Benutzer-IDs konvertieren
     let category = document.querySelector('.category-select .selected-option').textContent;
-
-    // Subtasks
     let subtasks = Array.from(document.querySelectorAll('.subtasks-select .selected-option'))
         .map(option => option.textContent.trim());
 
-    // Combine all data into an object
-    let taskData = {
+    let newTaskId = tasks.length;
+
+    // Erstellung des neuen Task-Objekts
+    let newTask = {
+        id: newTaskId,
+        status: "todo",
+        category: {
+            name: category,
+            backgroundColor: contacts.color,
+        },
         title: title,
         description: description,
-        duedate: duedate,
+        completionDate: duedate,
         priority: priority,
-        assignedTo: assignedTo,
-        category: category,
+        assignedPersons: assignedTo, // Beachten Sie, dass Sie die Initialen möglicherweise in tatsächliche IDs konvertieren müssen
         subtasks: subtasks
     };
 
-    // Print data to console (or save it wherever you want)
-    console.log(taskData);
+    // Hinzufügen des neuen Task-Objekts zum tasks Array
+    tasks.push(newTask);
 
-    // If you're storing this in a database or elsewhere, you'd make that call here.
+    console.log('Neuer Task hinzugefügt:', newTask);
+
+    await saveTasksToAPI();
 }
+
+async function saveTasksToAPI() {
+    try {
+        await setItem(TASKS_KEY, tasks);
+        console.log('Tasks erfolgreich in der API gespeichert');
+    } catch (error) {
+        console.error('Fehler beim Speichern der Tasks in der API:', error);
+    }
+}
+
 
