@@ -12,6 +12,11 @@ async function loadTasksFromAPI() {
     }
 }
 
+async function loadContactsFromAPI() {
+    APIcontacts = JSON.parse(await getItem('contacts'));
+    contacts = APIcontacts;
+}
+
 async function taskFormJS() { // renders add_task functionality
     bindPrioButtonEvents();
     bindSelectedOptionEvents();
@@ -53,27 +58,38 @@ function bindSelectedOptionEvents() {
 }
 
 function bindContactLineEvents() {
-    document.querySelectorAll('.contactLine').forEach(contact => {
-        contact.addEventListener('click', function () {
-            const checkbox = this.closest('.option').querySelector('input[type="checkbox"]');
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function () {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            const name = this.querySelector('.name').innerText;
+            const initials = name.split(' ').map(word => word[0]).join('');
+            console.log("Suche nach Initialen:", initials);
+          
+            const contact = contacts.find(contact => contact.initials === initials);
+            console.log("Gefundener Kontakt:", contact);
+
+            // Hier die Farbe direkt aus dem 'contact'-Objekt abrufen:
+            const color = contact ? contact.color : 'gray';
+
             checkbox.checked = !checkbox.checked;
 
-            const name = this.querySelector('.name').innerText;
             if (checkbox.checked) {
-                addNameToSelection(name);
+                addNameToSelection(name, color);
             } else {
                 removeNameFromSelection(name);
             }
         });
     });
 }
+
+
 
 function bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function () {
             const name = this.closest('.option').querySelector('.name').innerText;
             if (this.checked) {
-                addNameToSelection(name);
+                addNameToSelection(name, color);
             } else {
                 removeNameFromSelection(name);
             }
@@ -81,13 +97,22 @@ function bindCheckboxEvents() {
     });
 }
 
-function addNameToSelection(name) {
+function addNameToSelection(name, color) {
     const initials = name.split(' ').map(word => word[0]).join('');
+    const contact = contacts.find(contact => contact.initials === initials);
+
+    // if (!contact) {
+    //     console.error('Contact not found for name:', name);
+    //     return;
+    // }
+
     const initialsDiv = document.createElement('div');
     initialsDiv.classList.add('selected-initials');
+    initialsDiv.style.backgroundColor = color; // Anwendung der Farbe
     initialsDiv.innerText = initials;
     document.querySelector('.selected-contacts').appendChild(initialsDiv);
 }
+
 
 function removeNameFromSelection(name) {
     const initials = name.split(' ').map(word => word[0]).join('');
