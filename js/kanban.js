@@ -154,7 +154,7 @@ function kanbanInit(tasksToRender){
     clearContainer('inProgressBoard');
     clearContainer('awaitFeedBackBoard');
     clearContainer('doneBoard');
-    loadTasksFromAPI();
+   
 
     tasksToRender.forEach(task => {
         if(task.status == 'todo'){
@@ -190,4 +190,7 @@ async function loadTasksFromAPI() {
     tasks =  APItasks;
 }
 
+document.addEventListener('DOMContentLoaded', async function(){
+    await loadTasksFromAPI();
+})
 

@@ -22,6 +22,6 @@ async function includeHTML() {
 
 document.addEventListener('htmlIncluded', async function() {
     await loadContactsTab();
-    await loadContactsFromAPI()
+    await loadContactsFromAPI();
     taskFormJS();
 });
