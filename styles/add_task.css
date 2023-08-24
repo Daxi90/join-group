@@ -293,7 +293,6 @@ input:-ms-input-placeholder {
 }
 
 .selected-initials {
-    background-color: #D2E3FF;
     border-radius: 50%;
     border: 1px solid white;
     width: 42px;
@@ -302,6 +301,7 @@ input:-ms-input-placeholder {
     align-items: center;
     justify-content: center;
     margin-right: 10px;
+    color: white;
 }
 
 .selectors {
