@@ -1,0 +1,51 @@
+#help-headline{
+    font-size: 61px;
+    margin-bottom: 24px;
+}
+
+.sub-headline{
+    font-size: 33px;
+    margin-bottom: 24px;
+}
+
+.step-guide-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.step-container{
+    display: flex;
+    align-items:flex-start;
+    justify-content: flex-start;
+    gap: 35px;
+}
+
+.step-desc{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.step-number{
+    color: var(--ligth-blue, #005DFF);
+    font-family: Open Sans;
+    font-size: 33px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 39.6px */
+}
+
+.step-header{
+    color: var(--ligth-blue, #005DFF);
+    font-family: Open Sans;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 22.8px */
+}
+
+.highlight-join{
+    color: #4589FF;
+}

@@ -26,7 +26,5 @@ document.addEventListener('htmlIncluded', async function() {
         await loadContactsFromAPI();
         taskFormJS();
     }
-    
-
    
 });

@@ -2,7 +2,12 @@
     <img src="./assets/templates/img/join-header-logo.png" alt="" />
     <div class="header-info">
         <span id="header-tool-info">Kanban Project Management Tool</span>
-        <img id="header-help-icon" src="./assets/templates/img/help.png" alt="">
-        <img src="./assets/templates/img/user.png" alt="">
+        <a href="../../help.html"><img id="header-help-icon" src="./assets/templates/img/help.png" alt=""></a>
+        <img onclick="document.getElementById('header-navigation').classList.toggle('d-none');" src="./assets/templates/img/user.png" alt="">
+        <div id="header-navigation" class="d-none">
+            <a class="menu-item" href="../../legalnotice.html">Legal Notice</a>
+            <a class="menu-item" href="../../legalnotice.html">Privacy Policy</a>
+            <a class="menu-item" href="../../login.html">Log out</a>
+        </div>
     </div>
 </header>
