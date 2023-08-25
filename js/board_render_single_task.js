@@ -104,6 +104,7 @@ function closeTaskCard(){
  */
 function removeTask(id){
     tasks.splice(id,1);
+    setItem('tasks', tasks);
     closeTaskCard();
     kanbanInit(tasks);
 }

@@ -192,5 +192,6 @@ async function loadTasksFromAPI() {
 
 document.addEventListener('DOMContentLoaded', async function(){
     await loadTasksFromAPI();
+    kanbanInit(tasks);
 })
 
