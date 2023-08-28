@@ -156,9 +156,11 @@ input:-ms-input-placeholder {
 
 .assignedTo {
     width: 440px;
+    max-height: 383px;
     height: auto;
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .custom-select {
@@ -178,13 +180,17 @@ input:-ms-input-placeholder {
     background: white;
     border-bottom: 1px solid gray;
     display: none;
+    overflow-y: auto;
+    max-height: 340px;
 }
 
 .option {
     padding: 5px;
     cursor: pointer;
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 7px 16px 7px 16px;
 }
 
 .option:hover {
@@ -200,15 +206,6 @@ input:-ms-input-placeholder {
     margin-bottom: 20px;
 }
 
-
-.option {
-    padding: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px 16px 7px 16px;
-}
 
 .initials {
     width: 42px;
@@ -346,6 +343,9 @@ main {
 }
 
 .clearInput {
+    display:flex;
+    align-items: center;
+    justify-content: center;
     width: 136px;
     height: 61px;
     font-size: 23px;
@@ -354,6 +354,23 @@ main {
     border: 1px solid ;
     gap: 10px;
     background: linear-gradient(0deg, #FFFFFF, #FFFFFF);
+    border: 1px solid #647188;
+    color: #647188
+}
+
+.clearInput:hover {
+    color: #4589FF;
+    border-color: #4589FF;
+    box-shadow: 0px 4px 8px 0px #00000033;
+}
+
+
+.clearstroke {
+    stroke: var(--stroke-color, #647188);
+}
+
+.clearInput:hover .clearstroke {
+    --stroke-color: #4589FF;
 }
 
 .createTask {
@@ -365,4 +382,43 @@ main {
     background: #4589FF;
     color: #FFFFFF;
     font-size: 23px;
+    display: flex;
+    align-items: center;
+    border: none;
+    box-shadow: 0px 4px 8px 0px #00000033;
+}
+
+.createTask:hover {
+    cursor: pointer;
+    background: #005DFF;
+    transition: 0.3s ease-in-out;
+
+}
+
+.search-contacts {
+    border: none;
+    font-size: 19px;
+    width: 440px;
+}
+
+.search-contacts:focus {
+    outline: none;
+    font-size: 19px;
+    width: 440px;
+}
+
+.JuCe {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.divider {
+    border-left: 1px solid gray;
+    height: 100%;
+}
+
+.subtask-buttons {
+    display: inline-block;
 }

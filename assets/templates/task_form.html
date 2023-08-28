@@ -35,20 +35,26 @@
         <div class="assignedTo">
             <span class="FW700">Assigned to</span>
             <div class="custom-select">
-                <div class="selected-option">Select contacts to assign</div>
+                <div class="selected-option JuCe">
+                    <input type="text" class="search-contacts" placeholder="Select contacts to assign"><img src="/assets/img/dropdownDown.svg" class="DDB">
+                </div>                
                 <div id="options" class="options">
                    
                     <div class="optionButton">
-                    <button type="button" class="addContact">Add new contact <img src="assets/img/addContact.svg" alt=""></button>
-                </div>    
+                    
                 </div>
+                <button type="button" class="addContact">Add new contact <img src="assets/img/addContact.svg" alt=""></button>
+                </div>
+                
             </div>
         </div>
-        <div class="selected-contacts"></div>                     
+        <div class="selected-contacts relative"></div>                     
         <div class="relative">
             <span class="FW700">Category</span>
             <div class="custom-select category-select">
-                <div class="selected-option">Select Category</div>
+                <div class="selected-option JuCe">Select Category
+                    <img src="/assets/img/dropdownDown.svg" class="DDB">
+                </div>
                 <div class="options">
                     <div class="option">Technical task</div>
                     <div class="option">User story</div>
@@ -58,27 +64,25 @@
         <div class="relative">
             <span class="FW700">Subtasks</span>
             <div class="custom-select subtasks-select">
-                <div class="selected-option">Select Subtask</div>
+                <div class="selected-option">Add new Subtask</div>
                 <div class="options">
-                    <div class="option">
-                        Contact Form 
-                        <span class="selectors">
-                            <span class="edit">✎</span> | <span class="delete">✖</span>
-                        </span>
+                    <div id="subtasks-container">
+                        <input type="text" id="new-subtask" placeholder="Add new subtask" formnovalidate>
+                        <button id="add-subtask" type="button"><img src="/assets/img/blueplus.svg"></button><button><img src="/assets/img/blueX.svg" alt=""></button>
                     </div>
-                    <div class="option">
-                        Write legal imprint 
-                        <span class="selectors">
-                            <span class="edit">✎</span> | <span class="delete">✖</span>
-                        </span>
-                    </div>
+                    
                 </div>
                 <div class="subtasks-list"></div>
             </div>
         </div>        
     </form>
     <div class="submit">
-        <button onclick="clearInput()" class="clearInput">Clear x</button>
-        <button onclick="addTask()" class="createTask">Create task</button>
+        <button onclick="clearInput()" class="clearInput">
+            Clear
+            <svg class="my-svg" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="clearstroke" d="M12.0008 12.5001L17.2438 17.7431M6.75781 17.7431L12.0008 12.5001L6.75781 17.7431ZM17.2438 7.25708L11.9998 12.5001L17.2438 7.25708ZM11.9998 12.5001L6.75781 7.25708L11.9998 12.5001Z" stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>          
+        <button onclick="addTask()" class="createTask">Create task <img src="/assets/img/check.svg" alt=""></button>
     </div>
 </main>

@@ -24,6 +24,7 @@ async function taskFormJS() { // renders add_task functionality
     bindCheckboxEvents();
     bindCategorySelectEvents();
     bindSubtaskSelectEvents();
+    bindSearchEvent();
 }
 
 function bindPrioButtonEvents() {
@@ -52,10 +53,19 @@ function togglePrioButtonState(target) {
 function bindSelectedOptionEvents() {
     document.querySelectorAll('.selected-option').forEach(selectedOption => {
         selectedOption.addEventListener('click', function () {
-            this.parentElement.classList.toggle('open');
+            const dropdownIcon = this.querySelector('.DDB'); // Zugriff auf das Dropdown-Icon
+
+            if (this.parentElement.classList.contains('open')) {
+                this.parentElement.classList.remove('open');
+                dropdownIcon.src = '/assets/img/dropdownDown.svg'; // Ändern des Icons, wenn das Dropdown geschlossen wird
+            } else {
+                this.parentElement.classList.add('open');
+                dropdownIcon.src = '/assets/img/dropdownUp.svg'; // Ändern des Icons, wenn das Dropdown geöffnet wird
+            }
         });
     });
 }
+
 
 function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
@@ -63,11 +73,7 @@ function bindContactLineEvents() {
             const checkbox = this.querySelector('input[type="checkbox"]');
             const name = this.querySelector('.name').innerText;
             const initials = name.split(' ').map(word => word[0]).join('');
-            console.log("Suche nach Initialen:", initials);
-          
             const contact = contacts.find(contact => contact.initials === initials);
-            console.log("Gefundener Kontakt:", contact);
-
             // Hier die Farbe direkt aus dem 'contact'-Objekt abrufen:
             const color = contact ? contact.color : 'gray';
 
@@ -82,12 +88,15 @@ function bindContactLineEvents() {
     });
 }
 
-
-
 function bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('click', function () {
+        checkbox.addEventListener('click', function (event) {
+            // Verhindert, dass das Event zum Container-Element aufsteigt
+            event.stopPropagation();
+
             const name = this.closest('.option').querySelector('.name').innerText;
+            const color = this.closest('.option').querySelector('.color').style.backgroundColor;
+
             if (this.checked) {
                 addNameToSelection(name, color);
             } else {
@@ -97,15 +106,10 @@ function bindCheckboxEvents() {
     });
 }
 
+
 function addNameToSelection(name, color) {
     const initials = name.split(' ').map(word => word[0]).join('');
     const contact = contacts.find(contact => contact.initials === initials);
-
-    // if (!contact) {
-    //     console.error('Contact not found for name:', name);
-    //     return;
-    // }
-
     const initialsDiv = document.createElement('div');
     initialsDiv.classList.add('selected-initials');
     initialsDiv.style.backgroundColor = color; // Anwendung der Farbe
@@ -120,6 +124,23 @@ function removeNameFromSelection(name) {
         if (selectedInitial.innerText === initials) {
             selectedInitial.remove();
         }
+    });
+}
+
+function bindSearchEvent() {
+    const searchInput = document.querySelector('.search-contacts');
+    searchInput.addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        const options = document.querySelectorAll('.option');
+
+        options.forEach(option => {
+            const name = option.querySelector('.name').innerText.toLowerCase();
+            if (name.includes(searchValue)) {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
+        });
     });
 }
 
@@ -279,4 +300,58 @@ async function saveTasksToAPI() {
     }
 }
 
+document.addEventListener('click', function (event) {
+    const customSelect = document.querySelector('.custom-select');
+    if (customSelect && !customSelect.contains(event.target) && customSelect.classList.contains('open')) {
+      customSelect.classList.remove('open');
+    }
+  });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const addSubtaskButton = document.getElementById('add-subtask');
+    const newSubtaskInput = document.getElementById('new-subtask');
+    const subtasksContainer = document.getElementById('subtasks-container');
+
+    addSubtaskButton.addEventListener('click', function() {
+        const subtaskTitle = newSubtaskInput.value.trim();
+
+        if (subtaskTitle) {
+            const newSubtask = document.createElement('div');
+            newSubtask.classList.add('subtask');
+            newSubtask.textContent = subtaskTitle;
+
+            const buttonsDiv = document.createElement('div');
+            buttonsDiv.classList.add('subtask-buttons');
+            
+            const divider = document.createElement('div');
+            divider.classList.add('divider');
+
+            const confirmButton = document.createElement('button');
+            confirmButton.classList.add('confirm');
+            confirmButton.textContent = '✓';
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete');
+            deleteButton.textContent = '✗';
+
+            buttonsDiv.appendChild(divider);
+            buttonsDiv.appendChild(confirmButton);
+            buttonsDiv.appendChild(deleteButton);
+
+            newSubtask.appendChild(buttonsDiv);
+            subtasksContainer.appendChild(newSubtask);
+
+            // Optional: Speichern der Subtask in einer Datenbank oder im Local Storage
+            saveSubtask(subtaskTitle);
+
+            // Eingabefeld leeren
+            newSubtaskInput.value = '';
+        }
+    });
+});
+
+function saveSubtask(title) {
+    // Hier können Sie den Code zum Speichern der Subtask implementieren.
+}
+
+  
