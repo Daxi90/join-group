@@ -21,7 +21,7 @@ function renderContactsContacts() {
 
 function renderContactContacts(contact, i) {
     return `
-        <div class="contact" id="contact${i}">
+        <div class="contact" id="contact${i}" onclick="getSingleContactData(${i})">
             <div class="c-initals" style="background-color:${contact['color']}">${contact['initials']}</div>
             <div class="c-information">
                 <span class="c-name">${contact['name']}</span>
@@ -68,14 +68,6 @@ function colorRandomizer() {
     return generateHex();
 }
 
-/* function validateNameInput() {
-    let input = document.getElementById('contactName')
-    if (input.value.split(" ").length != 2) {
-        input.value = '';
-        document.getElementById('errorMsg').classList.remove('d-none');
-    }
-} */
-
 function closeErrorMsg() {
     document.getElementById('errorMsg').classList.add('d-none');
 }
@@ -90,15 +82,25 @@ function closeCreatContact() {
     document.getElementById('newContact').classList.remove('new-contact-show');
 }
 
-function renderClickedContact() {
-    document.getElementById('contactContainer').innerHTML =
-     `              
+function getSingleContactData(i) {
+    let singleContactName = contacts[i]['name'];
+    let singleContactEmail = contacts[i]['email'];
+    let singleContactPhone = contacts[i]['phone'];
+    let singleContactColor = contacts[i]['color'];
+    let singleContactInitials = contacts[i]['initials'];
+    document.getElementById('contactContainer').innerHTML = renderClickedContact(singleContactName, singleContactEmail, singleContactPhone,singleContactInitials, singleContactColor, i);
+}
+
+function renderClickedContact(singleContactName, singleContactEmail, singleContactPhone,singleContactInitials, singleContactColor, i) {
+    return `              
     <div class="name-container">
-        <div class="contact-initals">
-            TT
+        <div class="singleContactColorCircle" style="background-color:${singleContactColor}">
+            <div class="contact-initals">
+                ${singleContactInitials}
+            </div>
         </div>
         <div class="contact-name">
-            <span class="contact-name-name">Anton Mayer</span>
+            <span class="contact-name-name">${singleContactName}</span>
             <div class="contact-name-icons-container">
                 <button class="contact-button">
                     <img class="contact-icon" src="assets/img/edit.svg">
@@ -106,19 +108,23 @@ function renderClickedContact() {
                 </button>
                 <button class="contact-button">
                     <img class="contact-icon" src="assets/img/delete.svg">
-                    <span class="contact-button-text">Delete</span>
+                    <span class="contact-button-text" onclick="deleteContact(i)">Delete</span>
                 </button>
             </div>
         </div>
     </div>
     <div class="contact-information">
-        <span>Contact Information</span>
-        <span>Email</span>
-        <span id="mail"></span>
-        <span>Phone</span>
-        <span id="phone"></span>
+        <span class="contact-information-title">Contact Information</span>
+        <span class="contact-information-subtitle">Email</span>
+        <a id="mail" class="contact-information-mail" href="mailto:${singleContactEmail}">${singleContactEmail}</a>
+        <span class="contact-information-subtitle">Phone</span>
+        <span id="phone">${singleContactPhone}</span>
     </div>
     `;
+}
+
+function deleteContact(i) {
+    
 }
 
 document.addEventListener('DOMContentLoaded', getContacts());

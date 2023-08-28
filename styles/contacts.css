@@ -70,6 +70,16 @@
     align-items: center;
 }
 
+.contact:hover {
+    background: var(--version-2-main-color, #4589FF);
+    cursor: pointer;
+    color: white;
+}
+
+.contact:hover a {
+    color: white;
+}
+
 .c-initals {
     height: 42px;
     width: 42px;
@@ -102,7 +112,6 @@
     width: 584px;
     padding: 91px 46px;
     flex-direction: column;
-    align-items: center;
     gap: 12px;
 }
 
@@ -285,19 +294,24 @@
     z-index: 100;
 }
 
-.contact-container {}
-
 .name-container {
     display: flex;
     align-items: center;
 }
 
 .contact-initals {
-    padding: 83px;
-    background-color: #005DFF;
-    border-radius: 130px;
     color: white;
     font-size: 47px;
+
+}
+
+.singleContactColorCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 130px;
+    height: 120px;
+    width: 120px;
     margin-right: 56px;
 }
 
@@ -350,4 +364,34 @@
 .contact-button:hover .contact-icon {
     height: 26px;
     width: 26px;
+}
+
+.contact-information {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 21px;
+}
+
+.contact-information-title {
+    color: #000;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 120%;
+    margin-bottom: 21px;
+}
+
+.contact-information-subtitle {
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 120%;
+    margin-bottom: 15px;
+}
+
+.contact-information-mail {
+    margin-bottom: 22px;
+    color: rgba(69, 137, 255, 1);
+    text-decoration: none;
 }
