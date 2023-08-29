@@ -87,6 +87,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 48px;
+    color: white;
 }
 
 .c-information {
@@ -103,7 +104,6 @@
 .c-mail {
     color: rgba(69, 137, 255, 1);
     font-size: 16px;
-    text-decoration: none;
     margin-top: 2.5px;
 }
 
@@ -171,6 +171,10 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    flex: 1;
+    background-color: white;
+    padding-top: 72px;
+    width: 584px;
 }
 
 .new-contact-img {
@@ -394,4 +398,45 @@
     margin-bottom: 22px;
     color: rgba(69, 137, 255, 1);
     text-decoration: none;
+}
+
+.edit-contact-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.edit-contact-header {
+    display: flex;
+    width: 492px;
+    height: 180px;
+    padding: 91px 46px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: var(--ligth-blue, #005DFF);
+    color: #fff;
+    border-radius: 0px 30px 0px 0px;
+}
+
+.edit-contact {
+    height: 100vh;
+    width: 584px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    border-radius: 30px 0px 30px 30px;
+    transform: translateX(-584px);
+    transition: all 225ms ease-in-out;
+}
+
+.edit-contact-show {
+    transform: translateX(0px);
 }

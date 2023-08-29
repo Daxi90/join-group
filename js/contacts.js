@@ -1,7 +1,9 @@
+let editContactIndex = 0
+
 async function getContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
-    } catch(e) {
+    } catch (e) {
         console.error('Loading error:', e);
     }
     renderContactsContacts();
@@ -25,7 +27,7 @@ function renderContactContacts(contact, i) {
             <div class="c-initals" style="background-color:${contact['color']}">${contact['initials']}</div>
             <div class="c-information">
                 <span class="c-name">${contact['name']}</span>
-                <a class="c-mail" href="mailto:${contact['email']}">${contact['email']}</a>
+                <span class="c-mail">${contact['email']}</span>
             </div>
         </div>
         `;
@@ -75,6 +77,7 @@ function closeErrorMsg() {
 function showCreateContact() {
     document.getElementById('newContactContainer').classList.remove('d-none');
     document.getElementById('newContact').classList.add('new-contact-show');
+    
 }
 
 function closeCreatContact() {
@@ -88,10 +91,10 @@ function getSingleContactData(i) {
     let singleContactPhone = contacts[i]['phone'];
     let singleContactColor = contacts[i]['color'];
     let singleContactInitials = contacts[i]['initials'];
-    document.getElementById('contactContainer').innerHTML = renderClickedContact(singleContactName, singleContactEmail, singleContactPhone,singleContactInitials, singleContactColor, i);
+    document.getElementById('contactContainer').innerHTML = renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i);
 }
 
-function renderClickedContact(singleContactName, singleContactEmail, singleContactPhone,singleContactInitials, singleContactColor, i) {
+function renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i) {
     return `              
     <div class="name-container">
         <div class="singleContactColorCircle" style="background-color:${singleContactColor}">
@@ -104,11 +107,11 @@ function renderClickedContact(singleContactName, singleContactEmail, singleConta
             <div class="contact-name-icons-container">
                 <button class="contact-button">
                     <img class="contact-icon" src="assets/img/edit.svg">
-                    <span class="contact-button-text">Edit</span>
+                    <span class="contact-button-text" onclick="showEditContact(${i})">Edit</span>
                 </button>
                 <button class="contact-button">
                     <img class="contact-icon" src="assets/img/delete.svg">
-                    <span class="contact-button-text" onclick="deleteContact(i)">Delete</span>
+                    <span class="contact-button-text" onclick="deleteContact(${i})">Delete</span>
                 </button>
             </div>
         </div>
@@ -123,8 +126,41 @@ function renderClickedContact(singleContactName, singleContactEmail, singleConta
     `;
 }
 
-function deleteContact(i) {
-    
+async function deleteContact(i) {
+    contacts.splice(i, 1);
+    renderContactsContacts();
+    await setItem('contacts', JSON.stringify(contacts));
+}
+
+function showEditContact(i) {
+    document.getElementById('editContactContainer').classList.remove('d-none');
+    document.getElementById('editContact').classList.add('edit-contact-show');
+    editContactIndex = i
+}
+
+function closeEditContact() {
+    document.getElementById('editContactContainer').classList.add('d-none');
+    document.getElementById('editContact').classList.remove('edit-contact-show');
+}
+
+async function editContact() {
+
+    let name = document.getElementById("editContactName");
+    let email = document.getElementById("editContactMail");
+    let phone = document.getElementById("editContactPhone");
+    let initials = createInitals(name.value);
+    let contactIndex = editContactIndex
+
+    contacts[contactIndex].name = name.value;
+    contacts[contactIndex].email = email.value;
+    contacts[contactIndex].phone = phone.value;
+    contacts[contactIndex].initials = initials;
+
+    await setItem('contacts', JSON.stringify(contacts));
+    renderContactsContacts();
+    closeEditContact();
+    console.log(contacts);
 }
 
 document.addEventListener('DOMContentLoaded', getContacts());
+
