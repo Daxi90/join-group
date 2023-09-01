@@ -1,6 +1,6 @@
 <main>
     <!-- Hauptinhalt / Content -->
-    <div class="taskwidth">
+    <form onsubmit="addTask(); return false;" class="taskwidth">
         <div>
             <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
         </div>
@@ -55,23 +55,27 @@
                 <div class="selected-option JuCe">Select Category
                     <div class="DDB-container"><img src="/assets/img/dropdownDown.svg" class="DDB"></div>
                 </div>
-                    <div class="options">
-                        <div class="option">Technical task</div>
-                        <div class="option">User story</div>
-                    </div>
+                <div class="options">
+                    <div class="option">Technical task</div>
+                    <div class="option">User story</div>
+                </div>
             </div>
-            <div class="subtasks-select" id="subtasks-container">
-                <div class="FW700">Subtasks</div>
-                <div class="selected-subclass_option subclassSB" id="add-subtask">Add new Subtask 
-                    <div class="DDB-container"><img src="/assets/img/blueplus.svg"></div>
+            <div>
+                <span class="FW700">Subtasks</span>
+                <div class="custom-select subtasks-select" id="subtasks-container">
+                <div class="custom-select subtask-dropdown">
+                    <div class="selected-option subclassSB" id="add-subtask">Add new Subtask 
+                      <div class="DDB-container"><img src="/assets/img/blueplus.svg"></div>
+                    </div>
+                    <div class="options" id="new-subtask">
+                      <!-- Hier werden die hinzugefügten Subtasks aufgelistet -->
+                    </div>
                 </div>
-                <div class="subtask_options" id="new-subtask">
-                    <div class="subtasks-list"></div>
-                </div>
-            </div>  
+                <div class="subtasks-list"></div>
+            </div>
         </div>
                      
-    </div>
+    </form>
     <div class="submit">
         <button onclick="clearInput()" class="clearInput">
             Clear

@@ -179,7 +179,7 @@ input:-ms-input-placeholder {
     right: 0;
     background: white;
     border-bottom: 1px solid gray;
-    display: none;
+    display: none !important;
     overflow-y: auto;
     max-height: 340px;
 }
@@ -199,7 +199,7 @@ input:-ms-input-placeholder {
 }
 
 .custom-select.open .options {
-    display: block;
+    display: block !important;
 }
 
 .mb20 {
@@ -244,10 +244,6 @@ input:-ms-input-placeholder {
 .name {
     align-self: center;
     font-size: 19px;
-}
-
-.relative {
-    position: relative;
 }
 
 .addContact {
@@ -422,3 +418,28 @@ main {
 .subtask-buttons {
     display: inline-block;
 }
+
+.subclassSB {
+    display: flex;
+    justify-content: space-between;
+}
+
+.DDB-container {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DDB-container:hover {
+    border-radius: 25px;
+    background-color: #D2E3FF;
+}
+
+.subtasks-list {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+

@@ -1,3 +1,16 @@
+const TASKS_KEY = 'tasks';
+async function loadTasksFromAPI() {
+    try {
+        const loadedTasks = JSON.parse(await getItem(TASKS_KEY));
+        if (loadedTasks) {
+            tasks = loadedTasks;
+        }
+        console.log('Tasks erfolgreich aus der API geladen');
+    } catch (error) {
+        console.error('Fehler beim Laden der Tasks aus der API:', error);
+    }
+}
+
 async function loadContactsFromAPI() {
     APIcontacts = JSON.parse(await getItem('contacts'));
     contacts = APIcontacts;
@@ -11,14 +24,6 @@ async function taskFormJS() { // renders add_task functionality
     bindCategorySelectEvents();
     bindSubtaskSelectEvents();
     bindSearchEvent();
-    document.querySelectorAll('.custom-select').forEach(dropdown => {
-        dropdown.addEventListener('click', function () {
-            const optionsContainer = this.querySelector('.options');
-            if (optionsContainer) {
-                optionsContainer.style.display = optionsContainer.style.display === 'none' ? 'block' : 'none';
-            }
-        });
-    });
 }
 
 function bindPrioButtonEvents() {
@@ -75,9 +80,8 @@ function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
-            const nameElement = this.querySelector('.name');
-            const name = nameElement ? nameElement.innerText : null;
-            const initials = contacts.initials
+            const name = this.querySelector('.name').innerText;
+            const initials = name.split(' ').map(word => word[0]).join('');
             const contact = contacts.find(contact => contact.initials === initials);
             // Hier die Farbe direkt aus dem 'contact'-Objekt abrufen:
             const color = contact ? contact.color : 'gray';
@@ -112,26 +116,19 @@ function bindCheckboxEvents() {
 }
 
 
-function addNameToSelection(name) {
-    // Finden des Kontakts im contacts-Array anhand des Namens
-    const contact = contacts.find(contact => contact.name === name);
-
-    if (contact) { // Überprüfen, ob der Kontakt gefunden wurde
-        const initials = contact.initials; // Initialen aus dem Array
-        const color = contact.color; // Farbe aus dem Array
-
-        const initialsDiv = document.createElement('div');
-        initialsDiv.classList.add('selected-initials');
-        initialsDiv.style.backgroundColor = color; // Anwendung der Farbe
-        initialsDiv.innerText = initials;
-
-        document.querySelector('.selected-contacts').appendChild(initialsDiv);
-    }
+function addNameToSelection(name, color) {
+    const initials = name.split(' ').map(word => word[0]).join('');
+    const contact = contacts.find(contact => contact.initials === initials);
+    const initialsDiv = document.createElement('div');
+    initialsDiv.classList.add('selected-initials');
+    initialsDiv.style.backgroundColor = color; // Anwendung der Farbe
+    initialsDiv.innerText = initials;
+    document.querySelector('.selected-contacts').appendChild(initialsDiv);
 }
 
 
 function removeNameFromSelection(name) {
-    const initials = contacts.initials;
+    const initials = name.split(' ').map(word => word[0]).join('');
     document.querySelectorAll('.selected-initials').forEach(selectedInitial => {
         if (selectedInitial.innerText === initials) {
             selectedInitial.remove();
@@ -146,14 +143,11 @@ function bindSearchEvent() {
         const options = document.querySelectorAll('.option');
 
         options.forEach(option => {
-            const nameElement = option.querySelector('.name');
-            if (nameElement) {
-                const name = nameElement.innerText.toLowerCase();
-                if (name.includes(searchValue)) {
-                    option.style.display = 'inline';
-                } else {
-                    option.style.display = 'none';
-                }
+            const name = option.querySelector('.name').innerText.toLowerCase();
+            if (name.includes(searchValue)) {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
             }
         });
     });
@@ -170,80 +164,35 @@ function bindCategorySelectEvents() {
 }
 
 function bindSubtaskSelectEvents() {
-    // Schritt 1: Klick öffnet das Eingabefeld
-    const addSubtaskElement = document.querySelector('#add-subtask');
-    addSubtaskElement.addEventListener('click', function () {
-        // Verstecke den "Add new Subtask"-Text und das Plus-Symbol
-        addSubtaskElement.style.display = 'none';
+    document.querySelectorAll('.subtasks-select .option').forEach(option => {
+        option.addEventListener('click', function () {
+            const parent = this.closest('.subtasks-select');
+            const subtaskList = parent.querySelector('.subtasks-list');
 
-        const inputField = document.createElement('input');
-        inputField.setAttribute('type', 'text');
-        inputField.setAttribute('id', 'subtask-input');
-        inputField.setAttribute('placeholder', 'Enter new Subtask');
-
-        const checkButton = document.createElement('button');
-        checkButton.innerHTML = 'Check';
-        checkButton.addEventListener('click', function () {
-            // Schritt 2: User gibt Subtask ein und bestätigt diesen mit "Check"
-            const subtaskValue = inputField.value.trim();
-            if (subtaskValue) {
-                // Schritt 3: Anzeige des vom User generierten Subtasks
+            // Prüfen, ob dieser Subtask bereits ausgewählt wurde
+            const cleanText = this.innerText.trim().split('\n')[0];
+            const existingItem = subtaskList.querySelector(`[data-subtask="${cleanText}"]`);
+            if (existingItem) {
+                existingItem.remove();
+            } else {
                 const subtaskItem = document.createElement('span');
                 subtaskItem.classList.add('subtask-item');
-                subtaskItem.setAttribute('data-subtask', subtaskValue);
-
-                // Listenpunkt hinzufügen
-                const listPoint = document.createElement('span');
-                listPoint.innerText = '• ';
-                subtaskItem.appendChild(listPoint);
-
-                // Text hinzufügen
-                const subtaskText = document.createElement('span');
-                subtaskText.innerText = subtaskValue;
-                subtaskItem.appendChild(subtaskText);
-
-                // Erstellung der beiden Buttons
-                const editButton = document.createElement('button');
-                editButton.innerHTML = 'Edit';
-                editButton.classList.add('edit-button');
-
-                const deleteButton = document.createElement('button');
-                deleteButton.innerHTML = 'Delete';
-                deleteButton.classList.add('delete-button');
-
-                // Hinzufügen der Buttons zum Subtask-Element
-                subtaskItem.appendChild(editButton);
-                subtaskItem.appendChild(deleteButton);
-
-                // Fügen Sie den neuen Subtask zur Subtasks-Liste hinzu
-                const subtaskList = document.querySelector('.subtasks-list');
+                subtaskItem.setAttribute('data-subtask', cleanText);
+                subtaskItem.innerText = cleanText;
                 subtaskList.appendChild(subtaskItem);
-
-                // Entfernen des Eingabefelds und des Check-Buttons, da sie nicht mehr benötigt werden
-                inputField.remove();
-                checkButton.remove();
-
-                // Zeige den "Add new Subtask"-Text und das Plus-Symbol wieder an
-                addSubtaskElement.style.display = 'flex';
-
-            } else {
-                alert('Please enter a subtask.');
             }
+
+
+            // Aktualisieren des "selected-option"-Textes basierend auf den ausgewählten Subtasks
+            const selectedSubtasks = Array.from(subtaskList.querySelectorAll('.subtask-item'))
+                .map(item => item.innerText.trim());
+            const selectedOption = parent.querySelector('.selected-option');
+            selectedOption.innerText = selectedSubtasks.length > 0 ? selectedSubtasks.join(', ') : "Select Subtask";
+
+            parent.classList.remove('open');
         });
-
-        // Fügen Sie das Eingabefeld und den Check-Button zum DOM hinzu
-        const subtaskContainer = document.querySelector('#subtasks-container');
-        const newSubtask = document.querySelector('#new-subtask');
-
-        // Fügen Sie das Eingabefeld und den Check-Button vor dem #new-subtask-Element ein
-        subtaskContainer.insertBefore(inputField, newSubtask);
-        subtaskContainer.insertBefore(checkButton, newSubtask);
     });
 }
-
-
-
-
 
 
 async function loadContactsTab() {
@@ -308,65 +257,115 @@ function getSelectedContactsInitials() {
         .map(initialElem => initialElem.textContent);
 }
 
+w3.includeHTML(function() {
+    // DOM fully loaded and parsed
+    console.log('DOM fully loaded and parsed');
 
-// Globales Klick-Event hinzufügen
-document.addEventListener('click', function (event) {
-    const openDropdowns = document.querySelectorAll('.custom-select'); // Ihre Dropdown-Elemente
-    let targetElement = event.target; // geklicktes Element
-
-    // Über alle offenen Dropdowns iterieren
-    openDropdowns.forEach(dropdown => {
-        // Überprüfen, ob das geklickte Element oder eines seiner Elternelemente das Dropdown ist
-        let insideDropdown = false;
-
-        do {
-            if (targetElement == dropdown) {
-                // Dies ist ein Klick innerhalb des Dropdowns
-                insideDropdown = true;
-                break;
-            }
-            // Gehen Sie das DOM hoch
-            if (targetElement) {
-                targetElement = targetElement.parentNode;
-            }
-        } while (targetElement);
-
-        if (!insideDropdown) {
-            // Dies ist ein Klick außerhalb des Dropdowns, also Dropdown schließen
-            const optionsContainer = dropdown.querySelector('.options');
-            if (optionsContainer) {
-                optionsContainer.style.display = 'none'; // Oder Ihre Methode zum Schließen
-            }
+    // Event Listener für das Schließen des Dropdowns beim Klicken außerhalb
+    document.addEventListener('click', function (event) {
+        const customSelect = document.querySelector('.custom-select');
+        if (customSelect && !customSelect.contains(event.target) && customSelect.classList.contains('open')) {
+            customSelect.classList.remove('open');
         }
     });
+
+    // Referenzen zu den relevanten HTML-Elementen
+    const addSubtaskButton = document.getElementById('add-subtask');
+    const newSubtaskInput = document.getElementById('new-subtask');
+    const subtasksContainer = document.getElementById('subtasks-container');
+    const subclassSB = document.querySelector('.subclassSB');
+    const subtaskDropdown = document.querySelector('.subtask-dropdown');
+
+
+    console.log("addSubtaskButton:", addSubtaskButton);
+    console.log("newSubtaskInput:", newSubtaskInput);
+    console.log("subtasksContainer:", subtasksContainer);
+
+    // Event Listener für den "Add Subtask" Button
+    if (addSubtaskButton && newSubtaskInput && subtasksContainer) {
+        addSubtaskButton.addEventListener('click', function () {
+            const subtaskTitle = newSubtaskInput.value.trim();
+            if (subtaskTitle) {
+                const newSubtask = document.createElement('div');
+                newSubtask.classList.add('subtask');
+                newSubtask.textContent = subtaskTitle;
+                const buttonsDiv = document.createElement('div');
+                buttonsDiv.classList.add('subtask-buttons');
+                const divider = document.createElement('div');
+                divider.classList.add('divider');
+                const confirmButton = document.createElement('button');
+                confirmButton.classList.add('confirm');
+                confirmButton.textContent = '✓';
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete');
+                deleteButton.textContent = '✗';
+                buttonsDiv.appendChild(divider);
+                buttonsDiv.appendChild(confirmButton);
+                buttonsDiv.appendChild(deleteButton);
+                newSubtask.appendChild(buttonsDiv);
+                subtasksContainer.appendChild(newSubtask);
+                saveSubtask(subtaskTitle);
+                newSubtaskInput.value = '';
+            }
+        });
+    }
+
+    console.log("subclassSB:", subclassSB);
+    console.log("subtaskDropdown:", subtaskDropdown);
+
+    // Event Listener für den "Add New Subtask" Bereich
+    if (subclassSB && subtaskDropdown) {
+        console.log('subclassSB and subtaskDropdown exist');
+        subclassSB.addEventListener('click', function () {
+            this.style.display = 'none';
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.placeholder = 'New Subtask';
+            console.log(inputField);
+            const checkBtn = document.createElement('button');
+            checkBtn.innerText = '✓';
+            console.log(checkBtn);
+            const cancelBtn = document.createElement('button');
+            cancelBtn.innerText = '✗';
+            console.log(cancelBtn);
+            checkBtn.addEventListener('click', function () {
+                const newSubtask = document.createElement('div');
+                newSubtask.innerText = inputField.value;
+                document.querySelector('.options').appendChild(newSubtask);
+                subtaskDropdown.removeChild(inputField);
+                subtaskDropdown.removeChild(checkBtn);
+                subtaskDropdown.removeChild(cancelBtn);
+                subclassSB.style.display = 'block';
+            });
+            cancelBtn.addEventListener('click', function () {
+                subtaskDropdown.removeChild(inputField);
+                subtaskDropdown.removeChild(checkBtn);
+                subtaskDropdown.removeChild(cancelBtn);
+                subclassSB.style.display = 'block';
+            });
+            subtaskDropdown.appendChild(inputField);
+            subtaskDropdown.appendChild(checkBtn);
+            subtaskDropdown.appendChild(cancelBtn);
+        });
+    }
 });
 
-
-// let tasks = []; // Ihr Array für gespeicherte Aufgaben
-
-// Diese Funktion fügt eine neue Aufgabe hinzu
 async function addTask() {
-    // Aus den Eingabefeldern extrahierte Daten
+    // Aus den Eingabefeldern extrahierte Daten:
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let duedate = document.getElementById('duedate').value;
     let priorityButtons = document.querySelectorAll('.prioButton');
     let priority = null;
-
     priorityButtons.forEach(button => {
         if (button.classList.contains('selected')) {
             priority = button.textContent.trim();
         }
     });
-
-    let assignedTo = getSelectedContactsInitials(); // Sie müssen diese wahrscheinlich in tatsächliche Benutzer-IDs konvertieren
+    let assignedTo = getSelectedContactsInitials(); // Initialen, aber Sie müssen diese wahrscheinlich in tatsächliche Benutzer-IDs konvertieren
     let category = document.querySelector('.category-select .selected-option').textContent;
-    let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
-        .map((option, index) => ({
-            id: `${tasks.length}.${index + 1}`,
-            title: option.textContent.trim(),
-            completed: false
-        }));
+    let subtasks = Array.from(document.querySelectorAll('.subtasks-select .selected-option'))
+        .map(option => option.textContent.trim());
 
     let newTaskId = tasks.length;
 
@@ -376,7 +375,7 @@ async function addTask() {
         status: "todo",
         category: {
             name: category,
-            backgroundColor: "#ff0000" // Diese Farbe muss dynamisch generiert werden
+            backgroundColor: contacts.color,
         },
         title: title,
         description: description,
@@ -391,22 +390,12 @@ async function addTask() {
 
     console.log('Neuer Task hinzugefügt:', newTask);
 
-    // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
     await saveTasksToAPI();
-
-
-    document.querySelector('#titleInput').value = '';
-    document.querySelector('#descriptionInput').value = '';
-    document.querySelector('#prioritySelect').selectedIndex = 0;
-    document.querySelector('#assignedPersonsSelect').value = [];
-    document.querySelectorAll('.subtask-item').forEach(item => item.remove());
-
 }
-
 
 async function saveTasksToAPI() {
     try {
-        await setItem('tasks', tasks);
+        await setItem(TASKS_KEY, tasks);
         console.log('Tasks erfolgreich in der API gespeichert');
     } catch (error) {
         console.error('Fehler beim Speichern der Tasks in der API:', error);
