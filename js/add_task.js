@@ -169,82 +169,132 @@ function bindCategorySelectEvents() {
     });
 }
 
+function createInputElement() {
+    const inputField = document.createElement('input');
+    inputField.setAttribute('type', 'text');
+    inputField.setAttribute('id', 'subtask-input');
+    inputField.setAttribute('placeholder', 'Add new Subtask');
+    inputField.classList.add('subtasks_input');
+    return inputField;
+}
+
+function createButtonWithImage(src, imgClass, btnClass) {
+    const button = document.createElement('button');
+    const image = document.createElement('img');
+    image.setAttribute('src', src);
+    image.classList.add(imgClass);
+    button.appendChild(image);
+    button.classList.add(btnClass);
+    return button;
+}
+
+function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement) {
+    const subtaskList = document.querySelector('.subtasks-list');
+    const subtaskItem = document.createElement('li');
+    subtaskItem.classList.add('subtask-item');
+    subtaskItem.setAttribute('data-subtask', subtaskValue);
+
+    const subtaskText = document.createElement('span');
+    subtaskText.innerText = subtaskValue;
+    subtaskItem.appendChild(subtaskText);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
+
+    const editButton = createButtonWithText('Edit', 'edit-button');
+    const deleteButton = createButtonWithText('Delete', 'delete-button');
+
+    buttonContainer.appendChild(editButton);
+    buttonContainer.appendChild(deleteButton);
+
+    subtaskItem.appendChild(buttonContainer);
+
+    editButton.addEventListener('click', function () {
+        // Finde das Textelement innerhalb des Subtask-Elements
+        const subtaskTextElement = this.parentElement.querySelector('span:not([class])');
+        this.style.display = 'none'
+
+        // Erstelle ein neues Eingabefeld und setze den aktuellen Text als Wert
+        const editInput = document.createElement('input');
+        editInput.type = 'text';
+        editInput.value = subtaskTextElement.innerText;
+
+        // Ersetze den Text durch das Eingabefeld
+        this.parentElement.replaceChild(editInput, subtaskTextElement);
+
+        // Erstelle einen "Speichern"-Button
+        const saveButton = document.createElement('button');
+        saveButton.innerText = 'Save';
+
+        // Füge den "Speichern"-Button neben dem "Bearbeiten"-Button hinzu
+        this.parentElement.insertBefore(saveButton, this);
+
+        // EventListener für den "Speichern"-Button
+        saveButton.addEventListener('click', function () {
+            // Aktualisiere den Text des Subtasks
+            subtaskTextElement.innerText = editInput.value;
+
+            // Ersetze das Eingabefeld wieder durch den Text
+            this.parentElement.replaceChild(subtaskTextElement, editInput);
+
+            // Entferne den "Speichern"-Button
+            this.remove();
+            editButton.style.display = 'inline';
+        });
+    });
+
+
+    deleteButton.addEventListener('click', function () {
+        this.parentElement.remove();
+    });
+
+    subtaskList.appendChild(subtaskItem);
+
+    inputField.remove();
+    checkButton.remove();
+    cancelButton.remove();
+    addSubtaskElement.style.display = 'flex';
+}
+
+function createButtonWithText(text, btnClass) {
+    const button = document.createElement('button');
+    button.innerText = text;
+    button.classList.add(btnClass);
+    return button;
+}
+
+
 function bindSubtaskSelectEvents() {
-    // Schritt 1: Klick öffnet das Eingabefeld
     const addSubtaskElement = document.querySelector('#add-subtask');
+    const subtaskContainer = document.querySelector('#subtasks-container');
+    const newSubtask = document.querySelector('#new-subtask');
+
     addSubtaskElement.addEventListener('click', function () {
-        // Verstecke den "Add new Subtask"-Text und das Plus-Symbol
         addSubtaskElement.style.display = 'none';
 
-        const inputField = document.createElement('input');
-        inputField.setAttribute('type', 'text');
-        inputField.setAttribute('id', 'subtask-input');
-        inputField.setAttribute('placeholder', 'Enter new Subtask');
+        const inputField = createInputElement();
+        const checkButton = createButtonWithImage('/assets/img/blueplus.svg', 'checkBTN', 'checkIMG');
+        const cancelButton = createButtonWithImage('/assets/img/blueX.svg', 'cancelBTN', 'cancelBTN');
 
-        const checkButton = document.createElement('button');
-        checkButton.innerHTML = 'Check';
         checkButton.addEventListener('click', function () {
-            // Schritt 2: User gibt Subtask ein und bestätigt diesen mit "Check"
+            console.log('subtask added');
             const subtaskValue = inputField.value.trim();
             if (subtaskValue) {
-                // Schritt 3: Anzeige des vom User generierten Subtasks
-                const subtaskItem = document.createElement('span');
-                subtaskItem.classList.add('subtask-item');
-                subtaskItem.setAttribute('data-subtask', subtaskValue);
-
-                // Listenpunkt hinzufügen
-                const listPoint = document.createElement('span');
-                listPoint.innerText = '• ';
-                subtaskItem.appendChild(listPoint);
-
-                // Text hinzufügen
-                const subtaskText = document.createElement('span');
-                subtaskText.innerText = subtaskValue;
-                subtaskItem.appendChild(subtaskText);
-
-                // Erstellung der beiden Buttons
-                const editButton = document.createElement('button');
-                editButton.innerHTML = 'Edit';
-                editButton.classList.add('edit-button');
-
-                const deleteButton = document.createElement('button');
-                deleteButton.innerHTML = 'Delete';
-                deleteButton.classList.add('delete-button');
-
-                // Hinzufügen der Buttons zum Subtask-Element
-                subtaskItem.appendChild(editButton);
-                subtaskItem.appendChild(deleteButton);
-
-                // Fügen Sie den neuen Subtask zur Subtasks-Liste hinzu
-                const subtaskList = document.querySelector('.subtasks-list');
-                subtaskList.appendChild(subtaskItem);
-
-                // Entfernen des Eingabefelds und des Check-Buttons, da sie nicht mehr benötigt werden
-                inputField.remove();
-                checkButton.remove();
-
-                // Zeige den "Add new Subtask"-Text und das Plus-Symbol wieder an
-                addSubtaskElement.style.display = 'flex';
-
+                addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement);
             } else {
                 alert('Please enter a subtask.');
             }
         });
+        
+        cancelButton.addEventListener('click', function () {
+            inputField.value = '';
+        })
 
-        // Fügen Sie das Eingabefeld und den Check-Button zum DOM hinzu
-        const subtaskContainer = document.querySelector('#subtasks-container');
-        const newSubtask = document.querySelector('#new-subtask');
-
-        // Fügen Sie das Eingabefeld und den Check-Button vor dem #new-subtask-Element ein
         subtaskContainer.insertBefore(inputField, newSubtask);
         subtaskContainer.insertBefore(checkButton, newSubtask);
+        subtaskContainer.insertBefore(cancelButton, newSubtask);
     });
 }
-
-
-
-
-
 
 async function loadContactsTab() {
     let contacts = await getItem('contacts'); // Fetches contacts from API
@@ -341,9 +391,6 @@ document.addEventListener('click', function (event) {
     });
 });
 
-
-// let tasks = []; // Ihr Array für gespeicherte Aufgaben
-
 // Diese Funktion fügt eine neue Aufgabe hinzu
 async function addTask() {
     // Aus den Eingabefeldern extrahierte Daten
@@ -394,15 +441,12 @@ async function addTask() {
     // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
     await saveTasksToAPI();
 
-
     document.querySelector('#titleInput').value = '';
     document.querySelector('#descriptionInput').value = '';
     document.querySelector('#prioritySelect').selectedIndex = 0;
     document.querySelector('#assignedPersonsSelect').value = [];
     document.querySelectorAll('.subtask-item').forEach(item => item.remove());
-
 }
-
 
 async function saveTasksToAPI() {
     try {

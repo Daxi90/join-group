@@ -159,8 +159,6 @@ input:-ms-input-placeholder {
 
 .assignedTo-container {
     width: 440px;
-    max-height: 383px;
-    height: 79px;
     display: flex;
     flex-direction: column;
 }
@@ -172,6 +170,7 @@ input:-ms-input-placeholder {
 
 .subtasks-container {
     height: 79px;
+    width: 440px;
 }
 
 .custom-select {
@@ -462,7 +461,7 @@ main {
 }
 
 .DDB-container:hover {
-    border-radius: 25px;
+    border-radius: 50%;
     background-color: #D2E3FF;
 }
 
@@ -470,5 +469,28 @@ main {
     display: flex;
     flex-direction: column;
     height: fit-content;
+}
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fontgray {
+    color: #D1D1D1;
+}
+
+.subtasks_input {
+    border: none;
+    width: 360px;
+}
+
+.subtasks_input:focus {
+    outline: none;
+    background-color: white;
+}
+
+.checkIMG, .cancelBTN {
+    border: none;
+    background-color: white;
 }
 
