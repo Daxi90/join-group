@@ -39,7 +39,7 @@ async function createContact() {
     let phone = document.getElementById('contactPhone');
     let initials = createInitals(name.value);
     let color = colorRandomizer();
-    let id = contacts.length;
+    let id = contacts[contacts.length - 1]['id'] + 1;
 
     contacts.push({
         name: name.value,
