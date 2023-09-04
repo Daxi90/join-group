@@ -29,10 +29,13 @@
 }
 
 .taskwidth {
+    display: flex;
+    flex-direction: column;
     width: 440px;
     height: fit-content;
     margin-top: 50px;
     margin-left: unset;
+    gap: 24px;
 }
 
 .priority {
@@ -154,13 +157,21 @@ input:-ms-input-placeholder {
 }
 
 
-.assignedTo {
+.assignedTo-container {
     width: 440px;
     max-height: 383px;
-    height: auto;
+    height: 79px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+}
+
+.category-container {
+    min-height: 79px;
+    height: auto;
+}
+
+.subtasks-container {
+    height: 79px;
 }
 
 .custom-select {
@@ -169,8 +180,12 @@ input:-ms-input-placeholder {
 
 .selected-option {
     border-bottom: 1px solid gray;
-    padding: 5px;
+    padding: 12px 16px 12px 16px;
     cursor: pointer;
+}
+
+.selected-option:hover {
+    border-bottom: 1px solid #4589FF;
 }
 
 .options {
@@ -282,7 +297,6 @@ input:-ms-input-placeholder {
 .selected-contacts {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px;
 }
 
 .selected-initials {
@@ -395,6 +409,8 @@ main {
     border: none;
     font-size: 19px;
     width: 440px;
+    color: black;
+
 }
 
 .search-contacts:focus {
@@ -403,10 +419,16 @@ main {
     width: 440px;
 }
 
+.search-contacts::placeholder {
+    color: black;
+}
+
+
 .JuCe {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -421,7 +443,14 @@ main {
 
 .subclassSB {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    padding: 12px 16px 12px 16px;
+    border-bottom: 1px solid gray;
+}
+
+.subclassSB:hover {
+    border-bottom: 1px solid #4589FF;
 }
 
 .DDB-container {
