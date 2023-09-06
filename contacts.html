@@ -36,45 +36,46 @@
             <span>&lt;Click to Continue&gt;</span>
         </div>
     </div>
-    <div class="new-contact-container d-none" id="newContactContainer">
-        <div class="new-contact" id="newContact">
-            <div class="new-contact-header">
-                <img src="assets/img/joinLogoWhite.svg">
-                <span class="new-contact-title">Add contact</span>
-                <span class="new-contact-intro">Tasks are better with a team!</span>
-            </div>
-            <div class="new-contact-information">
-                <img class="new-contact-img" src="assets/img/contactWhite.svg">
-                <form class="new-contact-input-container" onsubmit="createContact(); return false;">
-                    <div class="new-contact-input-field">
-                        <input class="new-contact-input" placeholder="Name" type="text" required
-                            title="Please enter the full name" id="contactName" pattern="^\w+\s+\w+$">
-                            <!-- onblur="validateNameInput()" -->
-                        <img src="assets/img/contactGrey.svg">
-                    </div>
-                    <div class="new-contact-input-field">
-                        <input class="new-contact-input" placeholder="Email" id="contactMail" type="email">
-                        <img src="assets/img/mail.svg">
-                    </div>
-                    <div class="new-contact-input-field">
-                        <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number">
-                        <img src="assets/img/phone.svg">
-                    </div>
-                    <div class="new-contact-buttons-container">
-                        <button class="new-contact-cancel" onclick="closeCreatContact()">
-                            <span>Cancel</span>
-                            <img src="assets/img/X_Grey.svg">
-                        </button>
-                        <button class="new-contact-create" type="submit" value="submit">
-                            <span>Create contact</span>
-                            <img src="assets/img/check.svg">
-                        </button>
-                    </div>
-                </form>
-                <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.
-                </div>
+    <div class="contact-blur-overlay d-none" id="contactBlurOverlay">
 
+    </div>
+    <div class="new-contact" id="newContact">
+        <div class="new-contact-header">
+            <img src="assets/img/joinLogoWhite.svg">
+            <span class="new-contact-title">Add contact</span>
+            <span class="new-contact-intro">Tasks are better with a team!</span>
+        </div>
+        <div class="new-contact-information">
+            <img class="new-contact-img" src="assets/img/contactWhite.svg">
+            <form class="new-contact-input-container" onsubmit="createContact(); return false;">
+                <div class="new-contact-input-field">
+                    <input class="new-contact-input" placeholder="Name" type="text" required
+                        title="Please enter the full name" id="contactName" pattern="^\w+\s+\w+$">
+                    <!-- onblur="validateNameInput()" -->
+                    <img src="assets/img/contactGrey.svg">
+                </div>
+                <div class="new-contact-input-field">
+                    <input class="new-contact-input" placeholder="Email" id="contactMail" type="email">
+                    <img src="assets/img/mail.svg">
+                </div>
+                <div class="new-contact-input-field">
+                    <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number">
+                    <img src="assets/img/phone.svg">
+                </div>
+                <div class="new-contact-buttons-container">
+                    <button class="new-contact-cancel" onclick="closeCreatContact()">
+                        <span>Cancel</span>
+                        <img src="assets/img/X_Grey.svg">
+                    </button>
+                    <button class="new-contact-create" type="submit" value="submit">
+                        <span>Create contact</span>
+                        <img src="assets/img/check.svg">
+                    </button>
+                </div>
+            </form>
+            <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.
             </div>
+
         </div>
     </div>
     <div class="edit-contact-container d-none" id="editContactContainer">
@@ -89,7 +90,7 @@
                     <div class="new-contact-input-field">
                         <input class="new-contact-input" placeholder="Name" type="text" required
                             title="Please enter the full name" id="editContactName" pattern="^\w+\s+\w+$">
-                            <!-- onblur="validateNameInput()" -->
+                        <!-- onblur="validateNameInput()" -->
                         <img src="assets/img/contactGrey.svg">
                     </div>
                     <div class="new-contact-input-field">
@@ -97,7 +98,8 @@
                         <img src="assets/img/mail.svg">
                     </div>
                     <div class="new-contact-input-field">
-                        <input class="new-contact-input hide-arrow" placeholder="Phone" id="editContactPhone" type="number">
+                        <input class="new-contact-input hide-arrow" placeholder="Phone" id="editContactPhone"
+                            type="number">
                         <img src="assets/img/phone.svg">
                     </div>
                     <div class="new-contact-buttons-container">

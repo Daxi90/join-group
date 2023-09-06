@@ -75,14 +75,13 @@ function closeErrorMsg() {
 }
 
 function showCreateContact() {
-    document.getElementById('newContactContainer').classList.remove('d-none');
     document.getElementById('newContact').classList.add('new-contact-show');
-    
+    document.getElementById('contactBlurOverlay').classList.remove('d-none');
 }
 
 function closeCreatContact() {
-    document.getElementById('newContactContainer').classList.add('d-none');
     document.getElementById('newContact').classList.remove('new-contact-show');
+    document.getElementById('contactBlurOverlay').classList.add('d-none');
 }
 
 function getSingleContactData(i) {
