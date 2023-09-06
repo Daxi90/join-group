@@ -70,7 +70,6 @@ function bindSelectedOptionEvents() {
 }
 
 
-
 function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function () {
@@ -188,6 +187,13 @@ function createButtonWithImage(src, imgClass, btnClass) {
     return button;
 }
 
+function createDivider(src, className) {
+    const divider = document.createElement('img');
+    divider.setAttribute('src', src);
+    divider.classList.add(className);
+    return divider;
+}
+
 function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement) {
     const subtaskList = document.querySelector('.subtasks-list');
     const subtaskItem = document.createElement('li');
@@ -195,23 +201,26 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
     subtaskItem.setAttribute('data-subtask', subtaskValue);
 
     const subtaskText = document.createElement('span');
-    subtaskText.innerText = subtaskValue;
+    subtaskText.innerText = '● ' + subtaskValue;
     subtaskItem.appendChild(subtaskText);
 
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
 
-    const editButton = createButtonWithText('Edit', 'edit-button');
-    const deleteButton = createButtonWithText('Delete', 'delete-button');
+    const editButton = createButtonWithImage('./assets/img/blueedit.svg', 'edit-icon', 'edit-button');
+    const deleteButton = createButtonWithImage('./assets/img/trash.svg', 'delete-icon', 'delete-button');
+    const divider = createDivider('/assets/img/smalldivider.svg', 'smalldivider');
 
     buttonContainer.appendChild(editButton);
+    buttonContainer.appendChild(divider);
     buttonContainer.appendChild(deleteButton);
 
     subtaskItem.appendChild(buttonContainer);
 
     editButton.addEventListener('click', function () {
         // Finde das Textelement innerhalb des Subtask-Elements
-        const subtaskTextElement = this.parentElement.querySelector('span:not([class])');
+        const subtaskItemElement = this.closest('.subtask-item');
+        const subtaskTextElement = subtaskItemElement.querySelector('span:not([class])');
         this.style.display = 'none'
 
         // Erstelle ein neues Eingabefeld und setze den aktuellen Text als Wert
@@ -220,11 +229,11 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
         editInput.value = subtaskTextElement.innerText;
 
         // Ersetze den Text durch das Eingabefeld
-        this.parentElement.replaceChild(editInput, subtaskTextElement);
+        subtaskItemElement.replaceChild(editInput, subtaskTextElement);
 
         // Erstelle einen "Speichern"-Button
-        const saveButton = document.createElement('button');
-        saveButton.innerText = 'Save';
+        const saveButton = createButtonWithImage('./assets/img/bluecheck.svg', 'check-icon', 'check-button');
+
 
         // Füge den "Speichern"-Button neben dem "Bearbeiten"-Button hinzu
         this.parentElement.insertBefore(saveButton, this);
@@ -235,7 +244,7 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
             subtaskTextElement.innerText = editInput.value;
 
             // Ersetze das Eingabefeld wieder durch den Text
-            this.parentElement.replaceChild(subtaskTextElement, editInput);
+            subtaskItemElement.replaceChild(subtaskTextElement, editInput);
 
             // Entferne den "Speichern"-Button
             this.remove();
@@ -245,7 +254,7 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
 
 
     deleteButton.addEventListener('click', function () {
-        this.parentElement.remove();
+        this.closest('.subtask-item').remove();
     });
 
     subtaskList.appendChild(subtaskItem);
@@ -285,9 +294,13 @@ function bindSubtaskSelectEvents() {
                 alert('Please enter a subtask.');
             }
         });
-        
+
         cancelButton.addEventListener('click', function () {
             inputField.value = '';
+            inputField.remove();
+            checkButton.remove();
+            cancelButton.remove();
+            addSubtaskElement.style.display = 'flex';
         })
 
         subtaskContainer.insertBefore(inputField, newSubtask);
