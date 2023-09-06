@@ -207,11 +207,11 @@ body {
     justify-content: center;
 }
 
-.checkbox-container:hover input ~ .checkmark {
+.checkbox-container:hover input~.checkmark {
     background-color: rgb(119, 169, 255);
 }
 
-.checkbox-container input:checked ~ .checkmark {
+.checkbox-container input:checked~.checkmark {
     background-color: rgb(69, 137, 255);
 }
 
@@ -220,7 +220,7 @@ body {
     display: none;
 }
 
-.checkbox-container input:checked ~ .checkmark:after {
+.checkbox-container input:checked~.checkmark:after {
     display: block;
 }
 
@@ -233,7 +233,7 @@ body {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}
 
 /*custom checkbox end */
 
@@ -339,6 +339,26 @@ body {
     align-items: center;
     top: 0;
     height: 80px;
+}
+
+.login-checkmark-unchecked {
+    cursor: pointer;
+}
+
+.login-checkmark-unchecked:hover {
+    cursor: pointer;
+    border-radius: 51px;
+    background: #EDF2FA;
+}
+
+.login-checkmark-checked {
+    cursor: pointer;
+}
+
+.login-checkmark-checked:hover {
+    cursor: pointer;
+    border-radius: 51px;
+    background: #EDF2FA;
 }
 
 .d-none {

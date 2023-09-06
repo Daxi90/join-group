@@ -15,3 +15,13 @@ function login() {
         mail.reportValidity();
     }
 }
+
+function rememberMe() {
+    document.getElementById('loginCheckmark').classList.add('d-none');
+    document.getElementById('loginCheckmarkChecked').classList.remove('d-none');
+}
+
+function dontRememberMe() {
+    document.getElementById('loginCheckmark').classList.remove('d-none');
+    document.getElementById('loginCheckmarkChecked').classList.add('d-none');
+}
