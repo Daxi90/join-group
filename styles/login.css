@@ -6,22 +6,24 @@ body {
     height: 100vh;
 }
 
-.join-logo-blue {
+.login-header-container {
     position: absolute;
-    top: 80px;
-    left: 77px;
+    top: 67px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.join-logo-blue {
     width: 6.94%;
     height: 11.91vh
 }
 
 .sign-up-link-container {
-    position: absolute;
     display: flex;
     align-items: center;
-    top: 67px;
-    width: 315px;
+    width: 216px;
     height: 48px;
-    left: 74.1528%;
 }
 
 .sign-up-link-question {
@@ -72,7 +74,8 @@ body {
 }
 
 .input-fields-container {
-    width: 422px;
+    --parentWidth: 422px;
+    width: var(--parentWidth);
     height: 152px;
     margin-bottom: 35px;
 }
@@ -80,7 +83,7 @@ body {
 .input-field-email-container {
     display: flex;
     align-items: center;
-    width: 422px;
+    width: auto;
     justify-content: center;
     border-bottom: 1px solid rgb(220, 220, 220);
     height: 48px;
@@ -130,7 +133,7 @@ body {
 .input-field-password-container {
     display: flex;
     align-items: center;
-    width: 422px;
+    width: auto;
     justify-content: center;
     border-bottom: 1px solid rgb(220, 220, 220);
     height: 48px;
@@ -256,6 +259,7 @@ body {
 .account-options {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 355px;
     margin-bottom: 35px;
 }
@@ -368,4 +372,8 @@ body {
 
 .d-none {
     display: none !important;
+}
+
+.login-media-sign-up {
+    display: none;
 }
