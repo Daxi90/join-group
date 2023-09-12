@@ -29,12 +29,21 @@ function renderTaskCardById(taskId) {
         subtasksHtml += `</div>`;
     }
 
-    const assignedContactsHtml = task.assignedPersons.map(person => `
-        <div class="single-task-assigned-contacts">
-            <span class="single-task-assignee" style="background: ${contacts[person].color}">${contacts[person].initials}</span>
-            <span>${contacts[person].name}</span>
-        </div>
-    `).join('');
+    const assignedContactsHtml = task.assignedPersons.map(person => {
+        const contact = contacts.find(c => c.id === person);
+        if (!contact) {
+            console.error(`No contact found with ID: ${person}`);
+            return '';
+        }
+    
+        return `
+            <div class="single-task-assigned-contacts">
+                <span class="single-task-assignee" style="background: ${contact.color}">${contact.initials}</span>
+                <span>${contact.name}</span>
+            </div>
+        `;
+    }).join('');
+    
 
     const html = /*html*/`
     <div class="add-task-card">
