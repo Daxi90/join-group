@@ -20,8 +20,7 @@ function countTasksByStatus(status, elementId) {
 // Laden der Tasks und danach die Zählfunktionen aufrufen
 loadTasksFromAPI().then(() => {
     countTasksByStatus("todo", "TaskTD");
-    countTasksByStatus("inProgress", "taskIP");
+    countTasksByStatus("inprogress", "taskIP");
     countTasksByStatus("awaitingFeedback", "AFeedback");
     countTasksByStatus("done", "done");
 });
-
