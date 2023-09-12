@@ -21,6 +21,6 @@ function countTasksByStatus(status, elementId) {
 loadTasksFromAPI().then(() => {
     countTasksByStatus("todo", "TaskTD");
     countTasksByStatus("inprogress", "taskIP");
-    countTasksByStatus("awaitingFeedback", "AFeedback");
+    countTasksByStatus("awaitfeedback", "AFeedback");
     countTasksByStatus("done", "done");
 });
