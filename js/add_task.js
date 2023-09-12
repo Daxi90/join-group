@@ -81,12 +81,13 @@ function bindContactLineEvents() {
             // Hier die Farbe direkt aus dem 'contact'-Objekt abrufen:
             const color = contact ? contact.color : 'gray';
 
-            checkbox.checked = !checkbox.checked;
-
-            if (checkbox.checked) {
-                addNameToSelection(name, color);
-            } else {
-                removeNameFromSelection(name);
+            if (checkbox) { // Prüft den Fall ob einen Checkbox existiert
+                checkbox.checked = !checkbox.checked;
+                if (checkbox.checked) {
+                    addNameToSelection(name, color);
+                } else {
+                    removeNameFromSelection(name);
+                }
             }
         });
     });
@@ -118,15 +119,18 @@ function addNameToSelection(name) {
     if (contact) { // Überprüfen, ob der Kontakt gefunden wurde
         const initials = contact.initials; // Initialen aus dem Array
         const color = contact.color; // Farbe aus dem Array
+        const id = contact.id; // ID aus dem Array
 
         const initialsDiv = document.createElement('div');
         initialsDiv.classList.add('selected-initials');
         initialsDiv.style.backgroundColor = color; // Anwendung der Farbe
         initialsDiv.innerText = initials;
+        initialsDiv.setAttribute('data-contact-id', id); // Hinzufügen der ID
 
         document.querySelector('.selected-contacts').appendChild(initialsDiv);
     }
 }
+
 
 
 function removeNameFromSelection(name) {
@@ -149,7 +153,7 @@ function bindSearchEvent() {
             if (nameElement) {
                 const name = nameElement.innerText.toLowerCase();
                 if (name.includes(searchValue)) {
-                    option.style.display = 'inline';
+                    option.style.display = 'flex';
                 } else {
                     option.style.display = 'none';
                 }
@@ -322,8 +326,21 @@ function renderContactsTab(contacts) {
         createContactElement(contact, optionsContainer);
     });
     createAddContactButton(optionsContainer);
-
 }
+
+function renderContactsWithID() {
+    let contactListDiv = document.getElementById("contactList");
+    contactListDiv.innerHTML = '';  // Den aktuellen Inhalt löschen
+    contacts.forEach(contact => {
+        let contactDiv = document.createElement("div");
+        contactDiv.classList.add("contact-option");
+        contactDiv.setAttribute("data-contact-id", contact.id);  // Die ID als Data-Attribut hinzufügen
+        contactDiv.innerText = contact.initials;
+        contactListDiv.appendChild(contactDiv);
+    });
+}
+
+
 
 function createContactElement(contact, container) {
     let option = document.createElement('div');
@@ -336,6 +353,7 @@ function createContactElement(contact, container) {
     initials.classList.add('initials');
     initials.style.backgroundColor = contact.color;
     initials.innerText = contact.initials;
+    initials.setAttribute('data-contact-id', contact.id);
 
     let name = document.createElement('span');
     name.classList.add('name');
@@ -419,7 +437,11 @@ async function addTask() {
         }
     });
 
-    let assignedTo = getSelectedContactsInitials(); // Sie müssen diese wahrscheinlich in tatsächliche Benutzer-IDs konvertieren
+    let assignedTo = Array.from(document.querySelectorAll('.selected-initials')).map(element => {
+        console.log(element)
+        return parseInt(element.getAttribute("data-contact-id"));
+    });
+
     let category = document.querySelector('.category-select .selected-option').textContent;
     let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
         .map((option, index) => ({
@@ -454,10 +476,14 @@ async function addTask() {
     // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
     await saveTasksToAPI();
 
-    document.querySelector('#titleInput').value = '';
-    document.querySelector('#descriptionInput').value = '';
-    document.querySelector('#prioritySelect').selectedIndex = 0;
-    document.querySelector('#assignedPersonsSelect').value = [];
+    document.querySelector('.titleInput').value = '';
+    document.querySelector('#description').value = '';
+    const selectedPrioButton = document.querySelector('.prioButton.selected');
+    if (selectedPrioButton) {
+        togglePrioButtonState(selectedPrioButton);
+    }
+    document.querySelector('.selected-contacts').innerHTML = '';
+    resetCategorySelect();
     document.querySelectorAll('.subtask-item').forEach(item => item.remove());
 }
 
@@ -468,4 +494,22 @@ async function saveTasksToAPI() {
     } catch (error) {
         console.error('Fehler beim Speichern der Tasks in der API:', error);
     }
+}
+
+function resetCategorySelect() {
+    const parent = document.querySelector('.category-select');
+    parent.querySelector('.selected-option').innerText = "Select Category"; // Setzen Sie hier Ihren Standardtext ein.
+}
+
+
+function clearInput() {
+    document.querySelector('.titleInput').value = '';
+    document.querySelector('#description').value = '';
+    const selectedPrioButton = document.querySelector('.prioButton.selected');
+    if (selectedPrioButton) {
+        togglePrioButtonState(selectedPrioButton);
+    }
+    document.querySelector('.selected-contacts').innerHTML = '';
+    resetCategorySelect();
+    document.querySelectorAll('.subtask-item').forEach(item => item.remove());
 }

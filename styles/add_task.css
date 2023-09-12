@@ -508,7 +508,7 @@ main {
     background-color: white;
 }
 
-.checkIMG:hover, .cancelBTN :hover {
+.checkBTN:hover, .cancelBTN :hover {
     border: none;
     background-color: #D2E3FF;
     border-radius: 25px;
