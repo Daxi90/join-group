@@ -189,9 +189,14 @@ async function loadTasksFromAPI() {
     let APItasks = JSON.parse(await getItem('tasks'));
     tasks =  APItasks;
 }
+async function loadContactsFromAPI() {
+    let APIContacts = JSON.parse(await getItem('contacts'));
+    contacts =  APIContacts;
+}
 
 document.addEventListener('DOMContentLoaded', async function(){
     await loadTasksFromAPI();
+    await loadContactsFromAPI();
     kanbanInit(tasks);
 })
 
