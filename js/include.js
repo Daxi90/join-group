@@ -21,7 +21,7 @@ async function includeHTML() {
 }
 
 document.addEventListener('htmlIncluded', async function() {
-    if(!window.location.href.includes('board')) {
+    if(window.location.href.includes('board')) {
         await loadContactsTab();
         await loadContactsFromAPI();
         taskFormJS();
