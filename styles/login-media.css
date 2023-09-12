@@ -1,0 +1,86 @@
+@media(max-width: 1050px) {
+
+    .login-container {
+        width: 47%;
+    }
+
+    .input-fields-container {
+        width: 300px;
+    }
+
+    .login-link-container {
+        width: 330px;
+    }
+
+    .account-options {
+        width: 315px;
+    }
+
+}
+
+@media(max-width: 540px) {
+    body {
+        flex-direction: column;
+    }
+
+    .login-header-container {
+        top: 15px;
+    }
+
+    .join-logo-blue {
+        width: 64px;
+        height: 78.031px;
+    }
+
+    .sign-up-link-container {
+        display: none;
+    }
+
+    .login-media-sign-up {
+        display: block;
+        width: 80%;
+    }
+
+    .login-container {
+        width: 80%;
+    }
+}
+
+@media(max-width: 428px) {
+    .login-header-container {
+        top: 38px;
+        left: 38px;
+    }
+
+    .login-container {
+        width: 90%;
+        height: auto;
+        padding-bottom: 32px;
+    }
+
+    .input-fields-container {
+        margin-bottom: 0px;
+    }
+
+    .account-options {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 16px;
+        margin-left: 16px;
+    }
+
+    .login-link-container {
+        flex-direction: column;
+        gap: 21px;
+        align-items: center;
+    }
+
+    .login-button {
+        width: 180px;
+    }
+
+    .login-guest-button {
+        width: 180px;
+        padding:10px;
+    }
+}
