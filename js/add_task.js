@@ -36,7 +36,6 @@ function togglePrioButtonState(target) {
         button.querySelector('.icon').style.display = 'inline';
         button.querySelector('.icon-active').style.display = 'none';
     });
-
     if (!isActive) {
         target.classList.add('selected');
         target.querySelector('.icon').style.display = 'none';
@@ -44,94 +43,95 @@ function togglePrioButtonState(target) {
     }
 }
 
+function toggleDropdownIcon(dropdownIcon, isOpen) {
+    const iconPath = isOpen ? '/assets/img/dropdownUp.svg' : '/assets/img/dropdownDown.svg';
+    if (dropdownIcon) {
+        dropdownIcon.src = iconPath;
+    }
+}
+
 function bindSelectedOptionEvents() {
     document.querySelectorAll('.selected-option').forEach(selectedOption => {
         selectedOption.addEventListener('click', function () {
-            const dropdownIcon = this.querySelector('.DDB'); // Zugriff auf das Dropdown-Icon
-
-            if (dropdownIcon) { // Nur wenn es ein DDB (Dropdown-Icon) gibt, ändern wir das Icon
-                if (this.parentElement.classList.contains('open')) {
-                    this.parentElement.classList.remove('open');
-                    dropdownIcon.src = '/assets/img/dropdownDown.svg'; // Ändern des Icons, wenn das Dropdown geschlossen wird
-                } else {
-                    this.parentElement.classList.add('open');
-                    dropdownIcon.src = '/assets/img/dropdownUp.svg'; // Ändern des Icons, wenn das Dropdown geöffnet wird
-                }
-            } else {
-                // Logik für das spezielle Subtasks-Dropdown (oder andere Dropdowns ohne DDB)
-                if (this.parentElement.classList.contains('open')) {
-                    this.parentElement.classList.remove('open');
-                } else {
-                    this.parentElement.classList.add('open');
-                }
-            }
+            const parentElement = this.parentElement;
+            const dropdownIcon = this.querySelector('.DDB');
+            const isOpen = parentElement.classList.toggle('open');
+            toggleDropdownIcon(dropdownIcon, isOpen);
         });
     });
 }
 
+
+function getNameAndColor(element, contacts) {
+    const nameElement = element.querySelector('.name');
+    const name = nameElement ? nameElement.innerText : null;
+    const initials = contacts.initials;
+    const contact = contacts.find(contact => contact.initials === initials);
+    const color = contact ? contact.color : 'gray';
+    return { name, color };
+}
+
+function toggleCheckboxSelection(checkbox, name, color) {
+    checkbox.checked = !checkbox.checked;
+    if (checkbox.checked) {
+        addNameToSelection(name, color);
+    } else {
+        removeNameFromSelection(name);
+    }
+}
 
 function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
-            const nameElement = this.querySelector('.name');
-            const name = nameElement ? nameElement.innerText : null;
-            const initials = contacts.initials
-            const contact = contacts.find(contact => contact.initials === initials);
-            // Hier die Farbe direkt aus dem 'contact'-Objekt abrufen:
-            const color = contact ? contact.color : 'gray';
-
-            if (checkbox) { // Prüft den Fall ob einen Checkbox existiert
-                checkbox.checked = !checkbox.checked;
-                if (checkbox.checked) {
-                    addNameToSelection(name, color);
-                } else {
-                    removeNameFromSelection(name);
-                }
+            const { name, color } = getNameAndColor(this, contacts);
+            
+            if (checkbox) { 
+                toggleCheckboxSelection(checkbox, name, color);
             }
         });
     });
 }
 
+
+function toggleCheckboxSelection(checkbox, name, color) {
+    checkbox.checked = !checkbox.checked;
+    if (checkbox.checked) {
+        addNameToSelection(name, color);
+    } else {
+        removeNameFromSelection(name);
+    }
+}
+
 function bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function (event) {
-            // Verhindert, dass das Event zum Container-Element aufsteigt
             event.stopPropagation();
-
-            const name = this.closest('.option').querySelector('.name').innerText;
-            const color = this.closest('.option').querySelector('.color').style.backgroundColor;
-
-            if (this.checked) {
-                addNameToSelection(name, color);
-            } else {
-                removeNameFromSelection(name);
-            }
+            
+            const optionElement = this.closest('.option');
+            const name = optionElement.querySelector('.name').innerText;
+            const color = optionElement.querySelector('.color').style.backgroundColor;
+            
+            toggleCheckboxSelection(this, name, color);
         });
     });
 }
 
 
 function addNameToSelection(name) {
-    // Finden des Kontakts im contacts-Array anhand des Namens
     const contact = contacts.find(contact => contact.name === name);
-
-    if (contact) { // Überprüfen, ob der Kontakt gefunden wurde
-        const initials = contact.initials; // Initialen aus dem Array
-        const color = contact.color; // Farbe aus dem Array
-        const id = contact.id; // ID aus dem Array
-
+    if (contact) {
+        const initials = contact.initials;
+        const color = contact.color;
+        const id = contact.id;
         const initialsDiv = document.createElement('div');
         initialsDiv.classList.add('selected-initials');
-        initialsDiv.style.backgroundColor = color; // Anwendung der Farbe
+        initialsDiv.style.backgroundColor = color;
         initialsDiv.innerText = initials;
-        initialsDiv.setAttribute('data-contact-id', id); // Hinzufügen der ID
-
+        initialsDiv.setAttribute('data-contact-id', id);
         document.querySelector('.selected-contacts').appendChild(initialsDiv);
     }
 }
-
-
 
 function removeNameFromSelection(name) {
     const initials = contacts.initials;
@@ -200,74 +200,87 @@ function createDivider(src, className) {
 
 function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement) {
     const subtaskList = document.querySelector('.subtasks-list');
-    const subtaskItem = document.createElement('li');
-    subtaskItem.classList.add('subtask-item');
-    subtaskItem.setAttribute('data-subtask', subtaskValue);
-
-    const subtaskText = document.createElement('span');
-    subtaskText.innerText = '● ' + subtaskValue;
+    
+    const subtaskItem = createSubtaskItem(subtaskValue);
+    const subtaskText = createSubtaskText(subtaskValue);
+    const buttonContainer = createButtonContainer();
+    
     subtaskItem.appendChild(subtaskText);
-
-    const buttonContainer = document.createElement('div');
-    buttonContainer.classList.add('button-container');
-
+    
     const editButton = createButtonWithImage('./assets/img/blueedit.svg', 'edit-icon', 'edit-button');
     const deleteButton = createButtonWithImage('./assets/img/trash.svg', 'delete-icon', 'delete-button');
     const divider = createDivider('/assets/img/smalldivider.svg', 'smalldivider');
-
+    
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(divider);
     buttonContainer.appendChild(deleteButton);
-
+    
     subtaskItem.appendChild(buttonContainer);
 
-    editButton.addEventListener('click', function () {
-        // Finde das Textelement innerhalb des Subtask-Elements
-        const subtaskItemElement = this.closest('.subtask-item');
-        const subtaskTextElement = subtaskItemElement.querySelector('span:not([class])');
-        this.style.display = 'none'
+    attachEditListener(editButton, subtaskItem, buttonContainer);
+    attachDeleteListener(deleteButton);
+    
+    subtaskList.appendChild(subtaskItem);
+    
+    removeElements([inputField, checkButton, cancelButton]);
+    addSubtaskElement.style.display = 'flex';
+}
 
-        // Erstelle ein neues Eingabefeld und setze den aktuellen Text als Wert
+
+function createSubtaskItem(subtaskValue) {
+    const subtaskItem = document.createElement('li');
+    subtaskItem.classList.add('subtask-item');
+    subtaskItem.setAttribute('data-subtask', subtaskValue);
+    return subtaskItem;
+}
+
+function createSubtaskText(subtaskValue) {
+    const subtaskText = document.createElement('span');
+    subtaskText.innerText = '● ' + subtaskValue;
+    return subtaskText;
+}
+
+function createButtonContainer() {
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
+    return buttonContainer;
+}
+
+function attachEditListener(editButton, subtaskItem, buttonContainer) {
+    editButton.addEventListener('click', function () {
+        const subtaskTextElement = subtaskItem.querySelector('span:not([class])');
+        this.style.display = 'none';
+        
         const editInput = document.createElement('input');
         editInput.type = 'text';
         editInput.value = subtaskTextElement.innerText;
-
-        // Ersetze den Text durch das Eingabefeld
-        subtaskItemElement.replaceChild(editInput, subtaskTextElement);
-
-        // Erstelle einen "Speichern"-Button
+        
+        subtaskItem.replaceChild(editInput, subtaskTextElement);
+        
         const saveButton = createButtonWithImage('./assets/img/bluecheck.svg', 'check-icon', 'check-button');
-
-
-        // Füge den "Speichern"-Button neben dem "Bearbeiten"-Button hinzu
-        this.parentElement.insertBefore(saveButton, this);
-
-        // EventListener für den "Speichern"-Button
+        buttonContainer.insertBefore(saveButton, this);
+        
         saveButton.addEventListener('click', function () {
-            // Aktualisiere den Text des Subtasks
             subtaskTextElement.innerText = editInput.value;
-
-            // Ersetze das Eingabefeld wieder durch den Text
-            subtaskItemElement.replaceChild(subtaskTextElement, editInput);
-
-            // Entferne den "Speichern"-Button
+            subtaskItem.replaceChild(subtaskTextElement, editInput);
             this.remove();
             editButton.style.display = 'inline';
         });
     });
+}
 
 
+function attachDeleteListener(deleteButton) {
     deleteButton.addEventListener('click', function () {
         this.closest('.subtask-item').remove();
     });
-
-    subtaskList.appendChild(subtaskItem);
-
-    inputField.remove();
-    checkButton.remove();
-    cancelButton.remove();
-    addSubtaskElement.style.display = 'flex';
 }
+
+
+function removeElements(elements) {
+    elements.forEach(element => element.remove());
+}
+
 
 function createButtonWithText(text, btnClass) {
     const button = document.createElement('button');
@@ -276,6 +289,28 @@ function createButtonWithText(text, btnClass) {
     return button;
 }
 
+
+function insertOrRemoveElements(elements, action, referenceElement) {
+    elements.forEach(element => {
+        action === 'insert' 
+            ? referenceElement.parentNode.insertBefore(element, referenceElement)
+            : element.remove();
+    });
+}
+
+function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement) {
+    const subtaskValue = inputField.value.trim();
+    if (subtaskValue) {
+        addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement);
+    } else {
+        alert('Please enter a subtask.');
+    }
+}
+
+function restoreAddSubtaskElement(elements, addSubtaskElement) {
+    insertOrRemoveElements(elements, 'remove');
+    addSubtaskElement.style.display = 'flex';
+}
 
 function bindSubtaskSelectEvents() {
     const addSubtaskElement = document.querySelector('#add-subtask');
@@ -289,29 +324,22 @@ function bindSubtaskSelectEvents() {
         const checkButton = createButtonWithImage('/assets/img/blueplus.svg', 'checkBTN', 'checkIMG');
         const cancelButton = createButtonWithImage('/assets/img/blueX.svg', 'cancelBTN', 'cancelBTN');
 
+        const elementsToInsert = [inputField, checkButton, cancelButton];
+
         checkButton.addEventListener('click', function () {
             console.log('subtask added');
-            const subtaskValue = inputField.value.trim();
-            if (subtaskValue) {
-                addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement);
-            } else {
-                alert('Please enter a subtask.');
-            }
+            validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement);
         });
 
         cancelButton.addEventListener('click', function () {
             inputField.value = '';
-            inputField.remove();
-            checkButton.remove();
-            cancelButton.remove();
-            addSubtaskElement.style.display = 'flex';
-        })
+            restoreAddSubtaskElement(elementsToInsert, addSubtaskElement);
+        });
 
-        subtaskContainer.insertBefore(inputField, newSubtask);
-        subtaskContainer.insertBefore(checkButton, newSubtask);
-        subtaskContainer.insertBefore(cancelButton, newSubtask);
+        insertOrRemoveElements(elementsToInsert, 'insert', newSubtask);
     });
 }
+
 
 async function loadContactsTab() {
     let contacts = await getItem('contacts'); // Fetches contacts from API
@@ -422,60 +450,40 @@ document.addEventListener('click', function (event) {
     });
 });
 
-// Diese Funktion fügt eine neue Aufgabe hinzu
-async function addTask() {
-    // Aus den Eingabefeldern extrahierte Daten
-    let title = document.getElementById('title').value;
-    let description = document.getElementById('description').value;
-    let duedate = document.getElementById('duedate').value;
+function extractInputValue(elementId) {
+    return document.getElementById(elementId).value;
+}
+
+function extractSelectedPriority() {
     let priorityButtons = document.querySelectorAll('.prioButton');
     let priority = null;
-
     priorityButtons.forEach(button => {
         if (button.classList.contains('selected')) {
             priority = button.textContent.trim();
         }
     });
+    return priority;
+}
 
-    let assignedTo = Array.from(document.querySelectorAll('.selected-initials')).map(element => {
-        console.log(element)
-        return parseInt(element.getAttribute("data-contact-id"));
-    });
-
-    let category = document.querySelector('.category-select .selected-option').textContent;
-    let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
-        .map((option, index) => ({
-            id: `${tasks.length}.${index + 1}`,
-            title: option.textContent.trim(),
-            completed: false
-        }));
-
+function createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks) {
     let newTaskId = tasks.length;
-
-    // Erstellung des neuen Task-Objekts
-    let newTask = {
+    return {
         id: newTaskId,
         status: "todo",
         category: {
             name: category,
-            backgroundColor: "#ff0000" // Diese Farbe muss dynamisch generiert werden
+            backgroundColor: "#ff0000" // Hier dynamisch generieren
         },
         title: title,
         description: description,
         completionDate: duedate,
         priority: priority,
-        assignedPersons: assignedTo, // Beachten Sie, dass Sie die Initialen möglicherweise in tatsächliche IDs konvertieren müssen
+        assignedPersons: assignedTo,
         subtasks: subtasks
     };
+}
 
-    // Hinzufügen des neuen Task-Objekts zum tasks Array
-    tasks.push(newTask);
-
-    console.log('Neuer Task hinzugefügt:', newTask);
-
-    // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
-    await saveTasksToAPI();
-
+function resetUI() {
     document.querySelector('.titleInput').value = '';
     document.querySelector('#description').value = '';
     const selectedPrioButton = document.querySelector('.prioButton.selected');
@@ -486,6 +494,40 @@ async function addTask() {
     resetCategorySelect();
     document.querySelectorAll('.subtask-item').forEach(item => item.remove());
 }
+
+async function addTask() {
+    // Aus den Eingabefeldern extrahierte Daten
+    let title = extractInputValue('title');
+    let description = extractInputValue('description');
+    let duedate = extractInputValue('duedate');
+    let priority = extractSelectedPriority();
+
+    let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
+        .map(element => parseInt(element.getAttribute("data-contact-id")));
+
+    let category = document.querySelector('.category-select .selected-option').textContent;
+    let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
+        .map((option, index) => ({
+            id: `${tasks.length}.${index + 1}`,
+            title: option.textContent.trim(),
+            completed: false
+        }));
+
+    // Erstellung des neuen Task-Objekts
+    let newTask = createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks);
+
+    // Hinzufügen des neuen Task-Objekts zum tasks Array
+    tasks.push(newTask);
+
+    console.log('Neuer Task hinzugefügt:', newTask);
+
+    // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
+    await saveTasksToAPI();
+
+    // UI zurücksetzen
+    resetUI();
+}
+
 
 async function saveTasksToAPI() {
     try {
@@ -498,9 +540,8 @@ async function saveTasksToAPI() {
 
 function resetCategorySelect() {
     const parent = document.querySelector('.category-select');
-    parent.querySelector('.selected-option').innerText = "Select Category"; // Setzen Sie hier Ihren Standardtext ein.
+    parent.querySelector('.selected-option').innerText = "Select Category";
 }
-
 
 function clearInput() {
     document.querySelector('.titleInput').value = '';
