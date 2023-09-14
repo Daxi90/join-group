@@ -1,51 +1,53 @@
-
 /**
  * Renders the task card for a specific task by its ID.
  *
  * @param {number} taskId - The ID of the task to be rendered.
  */
 function renderTaskCardById(taskId) {
-    const task = tasks.find(t => t.id === taskId);
+  const task = tasks.find((t) => t.id === taskId);
 
-    if (!task) {
-        console.error('No task found with ID:', taskId);
-        return;
-    }
+  if (!task) {
+    console.error("No task found with ID:", taskId);
+    return;
+  }
 
-    let subtasksHtml = '';
-    if (task.subtasks && task.subtasks.length > 0) {
-        subtasksHtml += `<h2><b class="bold-text subtasks">Subtasks</b></h2>
+  let subtasksHtml = "";
+  if (task.subtasks && task.subtasks.length > 0) {
+    subtasksHtml += `<h2><b class="bold-text subtasks">Subtasks</b></h2>
         <div class="subtasks-container">`;
 
-        for (const subtask of task.subtasks) {
-            const checkmarkSrc = subtask.completed ? "assets/img/checkmark-checked.svg" : "assets/img/checkmark.svg";
-            subtasksHtml += `
+    for (const subtask of task.subtasks) {
+      const checkmarkSrc = subtask.completed
+        ? "assets/img/checkmark-checked.svg"
+        : "assets/img/checkmark.svg";
+      subtasksHtml += `
             <div class="single-task-single-subtask flex-center">
                 <img id="subtask-${subtask.id}" src="${checkmarkSrc}" alt="Checked" onclick="clickSubTask('${subtask.id}')">
                 <span>${subtask.title}</span>
             </div>`;
-        }
-
-        subtasksHtml += `</div>`;
     }
 
-    const assignedContactsHtml = task.assignedPersons.map(person => {
-        const contact = contacts.find(c => c.id === person);
-        if (!contact) {
-            console.error(`No contact found with ID: ${person}`);
-            return '';
-        }
-    
-        return `
+    subtasksHtml += `</div>`;
+  }
+
+  const assignedContactsHtml = task.assignedPersons
+    .map((person) => {
+      const contact = contacts.find((c) => c.id === person);
+      if (!contact) {
+        console.error(`No contact found with ID: ${person}`);
+        return "";
+      }
+
+      return `
             <div class="single-task-assigned-contacts">
                 <span class="single-task-assignee" style="background: ${contact.color}">${contact.initials}</span>
                 <span>${contact.name}</span>
             </div>
         `;
-    }).join('');
-    
+    })
+    .join("");
 
-    const html = /*html*/`
+  const html = /*html*/ `
     <div class="add-task-card">
         <div class="header-infos flex-space-between">
             <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
@@ -91,33 +93,30 @@ function renderTaskCardById(taskId) {
     </div>
     `;
 
-    document.getElementById('single-task-modal').innerHTML = html;
-    // Klasse 'd-none' entfernen
-    document.getElementById('single-task-modal').classList.remove('d-none');
+  document.getElementById("single-task-modal").innerHTML = html;
+  // Klasse 'd-none' entfernen
+  document.getElementById("single-task-modal").classList.remove("d-none");
 }
-
 
 /**
  * Closes the task card modal.
  */
-function closeTaskCard(){
-    document.getElementById('single-task-modal').classList.add('d-none');
-    kanbanInit(tasks);
+function closeTaskCard() {
+  document.getElementById("single-task-modal").classList.add("d-none");
+  kanbanInit(tasks);
 }
-
 
 /**
  * Removes a task by its ID.
  *
  * @param {number} id - The ID of the task to be removed.
  */
-function removeTask(id){
-    tasks.splice(id,1);
-    setItem('tasks', tasks);
-    closeTaskCard();
-    kanbanInit(tasks);
+function removeTask(id) {
+  tasks.splice(id, 1);
+  setItem("tasks", tasks);
+  closeTaskCard();
+  kanbanInit(tasks);
 }
-
 
 /**
  * Handles the click event for a subtask, toggling its completed status.
@@ -125,40 +124,45 @@ function removeTask(id){
  * @param {string} subtaskIdStr - The ID of the subtask (as a string) that was clicked.
  */
 function clickSubTask(subtaskIdStr) {
-    const subtaskId = parseFloat(subtaskIdStr); // Konvertiert die ID in eine Zahl
+  const subtaskId = parseFloat(subtaskIdStr); // Konvertiert die ID in eine Zahl
 
-    // Finden Sie die übergeordnete Aufgabe, die diesen Subtask enthält
-    const parentTask = tasks.find(task => task.subtasks && task.subtasks.some(st => st.id === subtaskId));
-    
-    if (!parentTask) {
-        console.error('Kein übergeordneter Task für Subtask-ID gefunden:', subtaskId);
-        return;
-    }
+  // Finden Sie die übergeordnete Aufgabe, die diesen Subtask enthält
+  const parentTask = tasks.find(
+    (task) => task.subtasks && task.subtasks.some((st) => st.id === subtaskId)
+  );
 
-    // Finden Sie den eigentlichen Subtask in dieser Aufgabe
-    const subtask = parentTask.subtasks.find(st => st.id === subtaskId);
+  if (!parentTask) {
+    console.error(
+      "Kein übergeordneter Task für Subtask-ID gefunden:",
+      subtaskId
+    );
+    return;
+  }
 
-    if (!subtask) {
-        console.error('Kein Subtask mit ID gefunden:', subtaskId);
-        return;
-    }
+  // Finden Sie den eigentlichen Subtask in dieser Aufgabe
+  const subtask = parentTask.subtasks.find((st) => st.id === subtaskId);
 
-    // Ändern Sie den "completed"-Status
-    subtask.completed = !subtask.completed;
+  if (!subtask) {
+    console.error("Kein Subtask mit ID gefunden:", subtaskId);
+    return;
+  }
 
-    // Daten neu rendern
-    renderTaskCardById(parentTask.id);
+  // Ändern Sie den "completed"-Status
+  subtask.completed = !subtask.completed;
+
+  // Daten neu rendern
+  renderTaskCardById(parentTask.id);
 }
 
-//----------------------------------------------------------------------------
+//------------------------------------RENDER EDIT FORM----------------------------------------
 function renderEditForm(taskId, selector) {
-    let task = tasks.find(t => t.id === taskId);
-    if(!task) {
-        console.error("Task mit dieser ID nicht gefunden");
-        return;
-    }
+  let task = tasks.find((t) => t.id === taskId);
+  if (!task) {
+    console.error("Task mit dieser ID nicht gefunden");
+    return;
+  }
 
-    let formHtml = `
+  let formHtml = /*html*/ `
     <div class="taskwidth">
         <div>
             <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
@@ -247,15 +251,10 @@ function renderEditForm(taskId, selector) {
     </div>
     `;
 
-    let targetElement = document.querySelector(selector);
-    if(!targetElement) {
-        console.error("Element mit dem Selector " + selector + " nicht gefunden");
-        return;
-    }
-    targetElement.innerHTML = formHtml;
+  let targetElement = document.querySelector(selector);
+  if (!targetElement) {
+    console.error("Element mit dem Selector " + selector + " nicht gefunden");
+    return;
+  }
+  targetElement.innerHTML = formHtml;
 }
-
-
-
-
-
