@@ -53,6 +53,7 @@
 .add-task-card {
   position: relative;
   background-color: #ffffff;
+  overflow: auto;
   width: 30%;
   height: 80%;
   border-radius: 30px;

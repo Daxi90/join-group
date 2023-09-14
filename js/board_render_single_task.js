@@ -257,4 +257,6 @@ function renderEditForm(taskId, selector) {
     return;
   }
   targetElement.innerHTML = formHtml;
+  taskFormJS();
+  loadContactsTab();
 }

@@ -71,15 +71,6 @@ function getNameAndColor(element, contacts) {
     return { name, color };
 }
 
-function toggleCheckboxSelection(checkbox, name, color) {
-    checkbox.checked = !checkbox.checked;
-    if (checkbox.checked) {
-        addNameToSelection(name, color);
-    } else {
-        removeNameFromSelection(name);
-    }
-}
-
 function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function () {
