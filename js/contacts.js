@@ -132,13 +132,13 @@ async function deleteContact(i) {
 }
 
 function showEditContact(i) {
-    document.getElementById('editContactContainer').classList.remove('d-none');
+    document.getElementById('contactBlurOverlay').classList.remove('d-none');
     document.getElementById('editContact').classList.add('edit-contact-show');
     editContactIndex = i
 }
 
 function closeEditContact() {
-    document.getElementById('editContactContainer').classList.add('d-none');
+    document.getElementById('contactBlurOverlay').classList.add('d-none');
     document.getElementById('editContact').classList.remove('edit-contact-show');
 }
 

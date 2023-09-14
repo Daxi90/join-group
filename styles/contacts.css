@@ -412,18 +412,6 @@ body {
     text-decoration: none;
 }
 
-.edit-contact-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100vh;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
 .edit-contact-header {
     display: flex;
     width: 492px;
@@ -438,6 +426,10 @@ body {
 }
 
 .edit-contact {
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: flex-start;
     height: 100vh;
     width: 584px;
     display: flex;
@@ -447,6 +439,7 @@ body {
     border-radius: 0px 30px 30px 30px;
     transform: translateX(-584px);
     transition: all 225ms ease-in-out;
+    z-index: 3;
 }
 
 .edit-contact-show {
