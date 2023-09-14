@@ -18,7 +18,7 @@ function renderTaskCardById(taskId) {
         <div class="subtasks-container">`;
 
         for (const subtask of task.subtasks) {
-            const checkmarkSrc = subtask.completed ? "./assets/img/checkmark-checked.svg" : "./assets/img/checkmark.svg";
+            const checkmarkSrc = subtask.completed ? "assets/img/checkmark-checked.svg" : "assets/img/checkmark.svg";
             subtasksHtml += `
             <div class="single-task-single-subtask flex-center">
                 <img id="subtask-${subtask.id}" src="${checkmarkSrc}" alt="Checked" onclick="clickSubTask('${subtask.id}')">
@@ -49,8 +49,8 @@ function renderTaskCardById(taskId) {
     <div class="add-task-card">
         <div class="header-infos flex-space-between">
             <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
-            <img onclick="closeTaskCard()" class="close-btn" src="./assets/img/close.svg" alt="Close button" />
-            <img onclick="closeTaskCard()" class="close-btn-mobile" src="./assets/img/arrow-left-line.svg" alt="Close button" />
+            <img onclick="closeTaskCard()" class="close-btn" src="assets/img/close.svg" alt="Close button" />
+            <img onclick="closeTaskCard()" class="close-btn-mobile" src="assets/img/arrow-left-line.svg" alt="Close button" />
         </div>
         <h1 class="single-task-title">${task.title}</h1>
         <p class="single-task-desc">${task.description}</p>
@@ -61,7 +61,7 @@ function renderTaskCardById(taskId) {
             <b class="bold-text" style="margin-right: 25px;">Priority:</b>
             <div class="priobatch">
                 <span style="margin-left: 18px; margin-right: 10px; text-transform: capitalize;">${task.priority}</span>
-                <img src="./assets/img/mediumIcon.svg" alt="Medium Priority" />
+                <img src="assets/img/mediumIcon.svg" alt="Medium Priority" />
             </div>
         </div>
         <h2 class="single-task-assignesd-to-heading"><b class="bold-text">Assigned To:</b></h2>
@@ -71,21 +71,21 @@ function renderTaskCardById(taskId) {
         ${subtasksHtml}
         <div class="action-buttons">
             <div onclick="removeTask(${task.id})" class="action-button">
-                <img src="./assets/img/delete.svg" alt="Delete">
+                <img src="assets/img/delete.svg" alt="Delete">
                 <span>Delete</span>
             </div>
             <div class="seperator"></div>
-            <div class="action-button">
-                <img src="./assets/img/edit.svg" alt="Edit">
+            <div onclick="editTask(${task.id})" class="action-button">
+                <img src="assets/img/edit.svg" alt="Edit">
                 <span>Edit</span>
             </div>
         </div>
         <div class="action-buttons-mobile-container">
-            <div class="action-btn-mobile-edit">
-                <img src="./assets/img/edit-mobile.svg" alt="">
+            <div  onclick="editTask(${task.id})" class="action-btn-mobile-edit">
+                <img src="assets/img/edit-mobile.svg" alt="">
             </div>
-            <div class="action-btn-mobile-delete">
-                <img src="./assets/img/delete.svg" alt="">
+            <div  onclick="removeTask(${task.id})" class="action-btn-mobile-delete">
+                <img src="assets/img/delete.svg" alt="">
             </div>          
         </div>
     </div>
@@ -149,6 +149,7 @@ function clickSubTask(subtaskIdStr) {
     // Daten neu rendern
     renderTaskCardById(parentTask.id);
 }
+
 
 
 

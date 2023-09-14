@@ -211,8 +211,8 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
 
-    const editButton = createButtonWithImage('./assets/img/blueedit.svg', 'edit-icon', 'edit-button');
-    const deleteButton = createButtonWithImage('./assets/img/trash.svg', 'delete-icon', 'delete-button');
+    const editButton = createButtonWithImage('assets/img/blueedit.svg', 'edit-icon', 'edit-button');
+    const deleteButton = createButtonWithImage('assets/img/trash.svg', 'delete-icon', 'delete-button');
     const divider = createDivider('/assets/img/smalldivider.svg', 'smalldivider');
 
     buttonContainer.appendChild(editButton);
@@ -236,7 +236,7 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
         subtaskItemElement.replaceChild(editInput, subtaskTextElement);
 
         // Erstelle einen "Speichern"-Button
-        const saveButton = createButtonWithImage('./assets/img/bluecheck.svg', 'check-icon', 'check-button');
+        const saveButton = createButtonWithImage('assets/img/bluecheck.svg', 'check-icon', 'check-button');
 
 
         // Füge den "Speichern"-Button neben dem "Bearbeiten"-Button hinzu

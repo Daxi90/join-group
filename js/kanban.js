@@ -52,7 +52,7 @@ function renderTaskCard(task){
             ${renderAssignees(task)}
         </div>
         <div class="priority">
-            <img src="./assets/img/prio-${task.priority}.svg" alt="priority" />
+            <img src="assets/img/prio-${task.priority}.svg" alt="priority" />
         </div>
     </div>
     `

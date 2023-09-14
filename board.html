@@ -9,17 +9,17 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/template.css" />
-    <link rel="stylesheet" href="./styles/board.css" />
-    <link rel="stylesheet" href="./styles/board-single-task.css">
-    <link rel="shortcut icon" href="./assets/img/joinLogoWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/template.css" />
+    <link rel="stylesheet" href="styles/board.css" />
+    <link rel="stylesheet" href="styles/board-single-task.css">
+    <link rel="shortcut icon" href="assets/img/joinLogoWhite.svg" type="image/x-icon">
     <title>Join</title>
   </head>
   <body onload="init(); kanbanInit(tasks);">
-    <div id="header" w3-include-html="./assets/templates/header.html"></div>
+    <div id="header" w3-include-html="assets/templates/header.html"></div>
     <div id="container">
-      <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
+      <div id="sidebar" w3-include-html="assets/templates/sidebar.html"></div>
       <main>
         <!-- Hauptinhalt / Content -->
         <div class="search-and-create">
@@ -28,13 +28,13 @@
             <div class="separator"></div>
             <img
               id="searchIcon"
-              src="./assets/img/search.png"
+              src="assets/img/search.png"
               alt="Search Icon"
             />
           </div>
           <button class="add-task-btn">
             Add task
-            <img src="./assets/img/plus-button.png" alt="Plus Icon" />
+            <img src="assets/img/plus-button.png" alt="Plus Icon" />
           </button>
         </div>
 
@@ -44,7 +44,7 @@
               <h3>To do</h3>
               <img
                 class="add-Btn"
-                src="./assets/img/plus-button-v1.png"
+                src="assets/img/plus-button-v1.png"
                 alt=""
               />
             </div>
@@ -53,21 +53,21 @@
           <div id="inProgressBoard" class="kanban-column" ondrop="moveTo('inprogress')" ondragover="allowDrop(event); highlight('inProgressBoard');" ondragleave="removeHighlight('inProgressBoard')">
             <div class="flex">
               <h3>In Progress</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
+              <img class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
           <div id="awaitFeedBackBoard" class="kanban-column" ondrop="moveTo('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitFeedBackBoard');" ondragleave="removeHighlight('awaitFeedBackBoard')">
             <div class="flex">
               <h3>Await Feedback</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
+              <img class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
           <div id="doneBoard" class="kanban-column"  ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('doneBoard');" ondragleave="removeHighlight('doneBoard')">
             <div class="flex">
               <h3>Done</h3>
-              <img class="add-Btn" src="./assets/img/plus-button-v1.png" alt="Add Task Button" />
+              <img class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
@@ -78,13 +78,13 @@
       <!--Rendered by "./js/board_render_single_task.js"-->
     </div>
     
-    <script src="./js/include.js"></script>
-    <script src="./js/script.js"></script>
-    <script src="./js/data.js"></script>
-    <script src="./js/storage.js"></script>
-    <script src="./js/board_render_single_task.js"></script>
-    <script src="./js/kanban.js"></script>
-    <script src="./js/drag-drop.js"></script>
+    <script src="js/include.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/board_render_single_task.js"></script>
+    <script src="js/kanban.js"></script>
+    <script src="js/drag-drop.js"></script>
     
   </body>
 </html>
