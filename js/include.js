@@ -20,9 +20,12 @@ async function includeHTML() {
 }
 
 document.addEventListener("htmlIncluded", async function () {
-  
+  if (
+    window.location.href.includes("board") ||
+    window.location.href.includes("add_task")
+  ) {
     await loadContactsFromAPI();
-
+  }
 
   if (window.location.href.includes("add_task")) {
     await loadContactsTab();
