@@ -84,7 +84,6 @@ function bindContactLineEvents() {
     });
 }
 
-
 function toggleCheckboxSelection(checkbox, name, color) {
     checkbox.checked = !checkbox.checked;
     if (checkbox.checked) {
@@ -101,7 +100,7 @@ function bindCheckboxEvents() {
             
             const optionElement = this.closest('.option');
             const name = optionElement.querySelector('.name').innerText;
-            const color = optionElement.querySelector('.color').style.backgroundColor;
+            const color = optionElement.querySelector('.initials').style.backgroundColor;
             
             toggleCheckboxSelection(this, name, color);
         });
@@ -125,13 +124,17 @@ function addNameToSelection(name) {
 }
 
 function removeNameFromSelection(name) {
-    const initials = contacts.initials;
-    document.querySelectorAll('.selected-initials').forEach(selectedInitial => {
-        if (selectedInitial.innerText === initials) {
-            selectedInitial.remove();
-        }
-    });
+    const contact = contacts.find(contact => contact.name === name);
+    if (contact) {
+        const initials = contact.initials;
+        document.querySelectorAll('.selected-initials').forEach(selectedInitial => {
+            if (selectedInitial.innerText === initials) {
+                selectedInitial.remove();
+            }
+        });
+    }
 }
+
 
 function bindSearchEvent() {
     const searchInput = document.querySelector('.search-contacts');
