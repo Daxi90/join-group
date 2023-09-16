@@ -98,9 +98,54 @@ function renderEditForm(taskId, selector){
     document.getElementById(fieldId).value = value;
   }
 
+  function selectPriorityButton(priority) {
+    let buttonClass;
+    switch (priority) {
+        case 'high':
+            buttonClass = '.prioUrgent';
+            break;
+        case 'medium':
+            buttonClass = '.prioMedium';
+            break;
+        case 'low':
+            buttonClass = '.prioLow';
+            break;
+    }
+    if (buttonClass) {
+        const targetButton = document.querySelector(buttonClass);
+        if (targetButton) {
+            togglePrioButtonState(targetButton);
+        }
+    }
+}
+
+function togglePrioButtonState(target) {
+    const isActive = target.classList.contains('selected');
+    document.querySelectorAll('.prioButton').forEach(button => {
+        button.classList.remove('selected');
+        button.querySelector('.icon').style.display = 'inline';
+        button.querySelector('.icon-active').style.display = 'none';
+    });
+    if (!isActive) {
+        target.classList.add('selected');
+        target.querySelector('.icon').style.display = 'none';
+        target.querySelector('.icon-active').style.display = 'inline';
+    }
+}
+
+function bindPrioButtonEvents() {
+    document.querySelectorAll('.prioButton').forEach(button => {
+        button.addEventListener('click', function (event) {
+            togglePrioButtonState(event.target);
+        });
+    });
+}
+
+    bindPrioButtonEvents();
+    
     putValueIntoField('title', task.title);
     putValueIntoField('description', task.description);
     putValueIntoField('duedate', task.completionDate);
-    
+    selectPriorityButton(task.priority);
 
 }
