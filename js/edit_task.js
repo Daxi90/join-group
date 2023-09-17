@@ -46,6 +46,7 @@ function renderEditForm(taskId, selector){
                     <input type="text" class="search-contacts" placeholder="Select contacts to assign"><div class="DDB-container"><img src="/assets/img/dropdownDown.svg" class="DDB"></div>
                 </div>                
                 <div id="options" class="options">
+                <div class="option"><div class="contactLine"><div class="initials" data-contact-id="3" style="background-color: rgb(26, 7, 136);">JL</div><span class="name">Jens Labudda</span></div><input type="checkbox"></div>
                    
                     <div class="optionButton">
                     
@@ -94,7 +95,22 @@ function renderEditForm(taskId, selector){
         <button onclick="addTask()" class="createTask">Create task <img src="/assets/img/check.svg" alt=""></button>
     </div>
     `
-  function putValueIntoField(fieldId, value){
+  
+
+
+    edit_bindPrioButtonEvents();
+
+    putValueIntoField('title', task.title);
+    putValueIntoField('description', task.description);
+    putValueIntoField('duedate', task.completionDate);
+    selectPriorityButton(task.priority);
+    bindDropdownEvents();
+
+}
+
+
+
+function putValueIntoField(fieldId, value){
     document.getElementById(fieldId).value = value;
   }
 
@@ -114,12 +130,12 @@ function renderEditForm(taskId, selector){
     if (buttonClass) {
         const targetButton = document.querySelector(buttonClass);
         if (targetButton) {
-            togglePrioButtonState(targetButton);
+            edit_togglePrioButtonState(targetButton);
         }
     }
 }
 
-function togglePrioButtonState(target) {
+function edit_togglePrioButtonState(target) {
     const isActive = target.classList.contains('selected');
     document.querySelectorAll('.prioButton').forEach(button => {
         button.classList.remove('selected');
@@ -133,19 +149,48 @@ function togglePrioButtonState(target) {
     }
 }
 
-function bindPrioButtonEvents() {
+function edit_bindPrioButtonEvents() {
     document.querySelectorAll('.prioButton').forEach(button => {
         button.addEventListener('click', function (event) {
-            togglePrioButtonState(event.target);
+            edit_togglePrioButtonState(event.target);
         });
     });
 }
 
-    bindPrioButtonEvents();
-    
-    putValueIntoField('title', task.title);
-    putValueIntoField('description', task.description);
-    putValueIntoField('duedate', task.completionDate);
-    selectPriorityButton(task.priority);
-
+// Dropdown öffnen/schließen
+function toggleDropdown(event) {
+    const dropdown = event.target.closest('.custom-select');
+    if (dropdown) {
+        const optionsContainer = dropdown.querySelector('.options');
+        if (optionsContainer.style.display === 'none' || !optionsContainer.style.display) {
+            optionsContainer.style.display = 'block';
+        } else {
+            optionsContainer.style.display = 'none';
+        }
+    }
 }
+
+// Klicken Sie außerhalb des Dropdowns, um es zu schließen
+function closeDropdownsOutsideClick(event) {
+    const dropdowns = document.querySelectorAll('.custom-select');
+    dropdowns.forEach(dropdown => {
+        if (!dropdown.contains(event.target)) {
+            const optionsContainer = dropdown.querySelector('.options');
+            if (optionsContainer) {
+                optionsContainer.style.display = 'none';
+            }
+        }
+    });
+}
+
+// Binden Sie die Event-Listener
+function bindDropdownEvents() {
+    document.querySelectorAll('.custom-select .selected-option').forEach(dropdown => {
+        dropdown.addEventListener('click', toggleDropdown);
+    });
+
+    document.addEventListener('click', closeDropdownsOutsideClick);
+}
+
+
+

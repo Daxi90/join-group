@@ -95,20 +95,22 @@ function renderProgressBar(task){
  * @param {Array<number>} task.assignedPersons - An array of assigned person IDs.
  * @returns {string} - The HTML string representing the assignees.
  */
-function renderAssignees(task){
-    let personsHTML ='';
+function renderAssignees(task) {
+    let personsHTML = '';
 
-    task.assignedPersons.forEach(person => {
-        if(contacts[person]){
-            personsHTML += `<span class="assignee" style="background: ${contacts[person].color}">${contacts[person].initials}</span>`
-        }else{
-            console.log("Keine gültige Person gefunden");
-        }
+    task.assignedPersons.forEach(personId => {
+        const person = contacts.find(contact => contact.id === personId);
         
+        if (person) {
+            personsHTML += `<span class="assignee" style="background: ${person.color}">${person.initials}</span>`;
+        } else {
+            console.log("Keine gültige Person gefunden für ID:", personId);
+        }
     });
 
     return personsHTML;
 }
+
 
 
 /**
