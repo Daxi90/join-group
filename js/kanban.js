@@ -188,17 +188,33 @@ function kanbanInit(tasksToRender){
 }
 
 async function loadTasksFromAPI() {
-    let APItasks = JSON.parse(await getItem('tasks'));
-    tasks =  APItasks;
+    try {
+        let APItasks = await JSON.parse(await getItem('tasks'));
+        tasks = APItasks;
+        let event = new Event("tasksFromApiloaded");
+        document.dispatchEvent(event);
+    } catch (error) {
+        console.error("Fehler beim Laden der Tasks:", error);
+    }
 }
+
 async function loadContactsFromAPI() {
-    let APIContacts = JSON.parse(await getItem('contacts'));
-    contacts =  APIContacts;
+    try {
+        let APIContacts = await JSON.parse(await getItem('contacts'));
+        contacts = APIContacts;
+        let event = new Event("contactsFromApiloaded");
+        document.dispatchEvent(event);
+    } catch (error) {
+        console.error("Fehler beim Laden der Kontakte:", error);
+    }
+}
+
+async function loadDataFromAPI() {
+    tasks = await JSON.parse(await getItem('tasks'));
+    contacts = await JSON.parse(await getItem('contacts'));
+    kanbanInit(tasks);
 }
 
 document.addEventListener('DOMContentLoaded', async function(){
-    await loadTasksFromAPI();
-    await loadContactsFromAPI();
-    kanbanInit(tasks);
+    await loadDataFromAPI();
 })
-

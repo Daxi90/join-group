@@ -426,6 +426,9 @@ function selectPriorityButton(priority) {
       case 'high':
           buttonClass = '.prioUrgent';
           break;
+      case 'urgent':
+          buttonClass = '.prioUrgent';
+          break;
       case 'medium':
           buttonClass = '.prioMedium';
           break;
