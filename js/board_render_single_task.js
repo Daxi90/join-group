@@ -63,7 +63,7 @@ function renderTaskCardById(taskId) {
             <b class="bold-text" style="margin-right: 25px;">Priority:</b>
             <div class="priobatch">
                 <span style="margin-left: 18px; margin-right: 10px; text-transform: capitalize;">${task.priority}</span>
-                <img src="assets/img/mediumIcon.svg" alt="Medium Priority" />
+                <img src="assets/img/prio-${task.priority}.svg" alt="${task.priority} Priority" />
             </div>
         </div>
         <h2 class="single-task-assignesd-to-heading"><b class="bold-text">Assigned To:</b></h2>
