@@ -352,6 +352,7 @@ task.subtasks = subtasks;
 }
 
 function selectPriorityButton(priority) {
+  priority = priority.toLowerCase();
   let buttonClass;
   switch (priority) {
     case "high":
