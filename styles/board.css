@@ -195,6 +195,7 @@ h3 {
   -webkit-line-clamp: 2; /* Anzahl der Zeilen */
   -webkit-box-orient: vertical;
   color: rgba(168, 168, 168, 1);
+  max-width: 300px;
 }
 
 .progress {
