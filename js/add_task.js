@@ -401,7 +401,7 @@ function createAddContactButton(container) {
     addButton.type = 'button';
     addButton.classList.add('addContact');
     addButton.innerHTML = 'Add new contact <img src="assets/img/addContact.svg" alt="">';
-    addButton.addEventListener('click', showCreateContactForm);
+    addButton.addEventListener('click', showCreateContact);
   
     optionButton.appendChild(addButton);
     container.appendChild(optionButton);
@@ -426,13 +426,14 @@ async function saveNewContact() {
     await setItem('contacts', JSON.stringify(contacts));
     loadContactsFromAPI();
     renderContactsTab(contacts);
+    bindCheckboxEvents(contacts);
+    bindContactLineEvents(contacts);
 
     name.value = '';
     mail.value = '';
     phone.value = '';
     
-    closeCreateContactForm();
-    renderContactsContacts();
+    closeCreateContact();
 }
 
 function createInitals(name) {
@@ -441,12 +442,14 @@ function createInitals(name) {
     return initials;
 }
 
-function showCreateContactForm() {
-    document.querySelector('.new-contact-container').style.display = 'block';
+function showCreateContact() {
+    document.getElementById('newContact').classList.add('new-contact-show');
+    // document.getElementById('contactBlurOverlay').classList.remove('d-none');
 }
 
-function closeCreateContactForm() {
-    document.querySelector('.new-contact-container').style.display = 'none';
+function closeCreateContact() {
+    document.getElementById('newContact').classList.remove('new-contact-show');
+    // document.getElementById('contactBlurOverlay').classList.add('d-none');
 }
 
 function colorRandomizer() {
