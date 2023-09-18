@@ -253,10 +253,10 @@ function fillFormWithData(taskData) {
     const isChecked = subtask.completed ? "checked" : "";
     subtasksHTML += `
     <li class="subtask-item">
-      <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
-      <label for="subtask-${subtask.id}">${subtask.title}</label>
-      <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
-    </li>`;
+    <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
+    <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
+    <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
+  </li>`;
   }
   subtasksList.innerHTML = subtasksHTML;
 }
@@ -324,11 +324,24 @@ function saveEditedTaskData(taskId) {
 
   // Subtasks
   let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
-  .map((option, index) => ({
-      id: `${tasks.length}.${index + 1}`,
-      title: option.textContent.trim().replace('● ', ''),
-      completed: false
-  }));
+  .map((subtask, index) => {
+      const inputElement = subtask.querySelector(`input[type="text"]`);
+      const spanElement = subtask.querySelector('span');
+      let title = '';
+  
+      if (inputElement) {
+          title = inputElement.value;
+      } else if (spanElement) {
+          title = spanElement.textContent.trim().replace('● ', '');
+      }
+  
+      return {
+          id: `${tasks.length}.${index + 1}`,
+          title: title,
+          completed: false // Du kannst hier auch den aktuellen Status erfassen, wenn du möchtest
+      };
+  });
+  
 
 task.subtasks = subtasks;
 
@@ -362,6 +375,14 @@ function selectPriorityButton(priority) {
       // Klasse 'selected' zum ausgewählten Button hinzufügen
       targetButton.classList.add("selected");
     }
+  }
+}
+
+function editSubtask(subtaskId, taskId, newValue) {
+  const task = tasks.find((t) => t.id == taskId);
+  const subtask = task.subtasks.find((st) => st.id === subtaskId);
+  if (subtask) {
+    subtask.title = newValue;
   }
 }
 
