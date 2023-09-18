@@ -278,6 +278,7 @@ function updateSelectedContacts(assignedPersons) {
   selectedContactsContainer.innerHTML = selectedContactsHTML;
 }
 
+
 function saveEditedTaskData(taskId) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) {

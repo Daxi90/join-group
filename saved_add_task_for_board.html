@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/img/joinLogoWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/template.css" />
+    <link rel="stylesheet" href="./styles/add_task.css" />
+    <link rel="stylesheet" href="./styles/contacts.css">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <title>Join</title>
+</head>
+<body onload="init();">
+    <div id="header" w3-include-html="./assets/templates/header.html"></div>
+    <div id="container">
+        <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
+        <main id="main" w3-include-html="./assets/templates/task_form.html">  
+        </main>
+        <div class="new-contact-container" style="display: none;">
+            <img class="new-contact-img" src="assets/img/contactWhite.svg">
+            <form class="new-contact-input-container" onsubmit="saveNewContact(); return false;">
+                <div class="new-contact-input-field">
+                    <input class="new-contact-input" placeholder="Name" type="text" required
+                        title="Please enter the full name" id="contactName" pattern="^\w+\s+\w+$">
+                    <!-- onblur="validateNameInput()" -->
+                    <img src="assets/img/contactGrey.svg">
+                </div>
+                <div class="new-contact-input-field">
+                    <input class="new-contact-input" placeholder="Email" id="contactMail" type="email">
+                    <img src="assets/img/mail.svg">
+                </div>
+                <div class="new-contact-input-field">
+                    <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number">
+                    <img src="assets/img/phone.svg">
+                </div>
+                <div class="new-contact-buttons-container">
+                    <button type="button" class="new-contact-cancel" onclick="closeCreateContactForm()">
+                        <span>Cancel</span>
+                        <img src="assets/img/X_Grey.svg">
+                    </button>
+                    <button class="new-contact-create" type="submit" value="submit">
+                        <span>Create contact</span>
+                        <img src="assets/img/check.svg">
+                    </button>
+                </div>
+            </form>
+            <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.
+            </div>
+    </div>
+    <script src="./js/data.js"></script>
+    <script src="./js/include.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/add_task.js"></script>
+</body>
+</html>
