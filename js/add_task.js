@@ -76,8 +76,8 @@ function bindContactLineEvents() {
         option.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
             const { name, color } = getNameAndColor(this, contacts);
-            
-            if (checkbox) { 
+
+            if (checkbox) {
                 toggleCheckboxSelection(checkbox, name, color);
             }
         });
@@ -97,11 +97,11 @@ function bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function (event) {
             event.stopPropagation();
-            
+
             const optionElement = this.closest('.option');
             const name = optionElement.querySelector('.name').innerText;
             const color = optionElement.querySelector('.initials').style.backgroundColor;
-            
+
             toggleCheckboxSelection(this, name, color);
         });
     });
@@ -194,28 +194,28 @@ function createDivider(src, className) {
 
 function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement) {
     const subtaskList = document.querySelector('.subtasks-list');
-    
+
     const subtaskItem = createSubtaskItem(subtaskValue);
     const subtaskText = createSubtaskText(subtaskValue);
     const buttonContainer = createButtonContainer();
-    
+
     subtaskItem.appendChild(subtaskText);
-    
+
     const editButton = createButtonWithImage('./assets/img/blueedit.svg', 'edit-icon', 'edit-button');
     const deleteButton = createButtonWithImage('./assets/img/trash.svg', 'delete-icon', 'delete-button');
     const divider = createDivider('/assets/img/smalldivider.svg', 'smalldivider');
-    
+
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(divider);
     buttonContainer.appendChild(deleteButton);
-    
+
     subtaskItem.appendChild(buttonContainer);
 
     attachEditListener(editButton, subtaskItem, buttonContainer);
     attachDeleteListener(deleteButton);
-    
+
     subtaskList.appendChild(subtaskItem);
-    
+
     removeElements([inputField, checkButton, cancelButton]);
     addSubtaskElement.style.display = 'flex';
 }
@@ -244,16 +244,16 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
     editButton.addEventListener('click', function () {
         const subtaskTextElement = subtaskItem.querySelector('span:not([class])');
         this.style.display = 'none';
-        
+
         const editInput = document.createElement('input');
         editInput.type = 'text';
         editInput.value = subtaskTextElement.innerText;
-        
+
         subtaskItem.replaceChild(editInput, subtaskTextElement);
-        
+
         const saveButton = createButtonWithImage('./assets/img/bluecheck.svg', 'check-icon', 'check-button');
         buttonContainer.insertBefore(saveButton, this);
-        
+
         saveButton.addEventListener('click', function () {
             subtaskTextElement.innerText = editInput.value;
             subtaskItem.replaceChild(subtaskTextElement, editInput);
@@ -286,7 +286,7 @@ function createButtonWithText(text, btnClass) {
 
 function insertOrRemoveElements(elements, action, referenceElement) {
     elements.forEach(element => {
-        action === 'insert' 
+        action === 'insert'
             ? referenceElement.parentNode.insertBefore(element, referenceElement)
             : element.remove();
     });
@@ -396,14 +396,63 @@ function createContactElement(contact, container) {
 function createAddContactButton(container) {
     let optionButton = document.createElement('div');
     optionButton.classList.add('optionButton');
-
+  
     let addButton = document.createElement('button');
     addButton.type = 'button';
     addButton.classList.add('addContact');
     addButton.innerHTML = 'Add new contact <img src="assets/img/addContact.svg" alt="">';
-
+    addButton.addEventListener('click', showCreateContactForm);
+  
     optionButton.appendChild(addButton);
     container.appendChild(optionButton);
+  }
+
+async function saveNewContact() {
+    let name = document.getElementById('contactName');
+    let mail = document.getElementById('contactMail');
+    let phone = document.getElementById('contactPhone');
+    let initials = createInitals(name.value);
+    let color = colorRandomizer();
+    let id = contacts[contacts.length - 1]['id'] + 1;
+
+    contacts.push({
+        name: name.value,
+        email: mail.value,
+        phone: phone.value,
+        initials: initials,
+        color: color,
+        id: id
+    });
+    await setItem('contacts', JSON.stringify(contacts));
+    loadContactsFromAPI();
+    renderContactsTab(contacts);
+
+    name.value = '';
+    mail.value = '';
+    phone.value = '';
+    
+    closeCreateContactForm();
+    renderContactsContacts();
+}
+
+function createInitals(name) {
+    let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+    console.log(initials);
+    return initials;
+}
+
+function showCreateContactForm() {
+    document.querySelector('.new-contact-container').style.display = 'block';
+}
+
+function closeCreateContactForm() {
+    document.querySelector('.new-contact-container').style.display = 'none';
+}
+
+function colorRandomizer() {
+    const generateHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}`;
+
+    return generateHex();
 }
 
 function getSelectedContactsInitials() {

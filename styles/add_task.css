@@ -546,11 +546,14 @@ main {
 
 .subtask-input {
     padding: 12px 16px 12px 16px;
-    border-bottom: 1px solid gray;
     font-size: 16px;
 }
 
 input {
     border: none;
     font-size: 16px;
+}
+
+.subtask_options {
+    border-top: 1px solid gray;
 }
