@@ -255,7 +255,7 @@ function fillFormWithData(taskData) {
     <li class="subtask-item">
       <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
       <label for="subtask-${subtask.id}">${subtask.title}</label>
-      <button onclick="deleteSubtask('${subtask.id}', '${taskData.id}')">Löschen</button>
+      <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
     </li>`;
   }
   subtasksList.innerHTML = subtasksHTML;
