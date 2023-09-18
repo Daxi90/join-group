@@ -1,13 +1,23 @@
 let editContactIndex = 0
+let id = 2
 
 async function getContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
+        id = JSON.parse(await getItem('id'));
     } catch (e) {
         console.error('Loading error:', e);
     }
     renderContactsContacts();
 }
+
+function sortContacts() {
+    contacts = contacts.sort((a, b) => {
+        if (a.name < b.name) {
+            return -1
+        }
+    });
+} 
 
 function renderContactsContacts() {
 
@@ -39,7 +49,7 @@ async function createContact() {
     let phone = document.getElementById('contactPhone');
     let initials = createInitals(name.value);
     let color = colorRandomizer();
-    let id = contacts[contacts.length - 1]['id'] + 1;
+    id = id + 1;
 
     contacts.push({
         name: name.value,
@@ -49,7 +59,9 @@ async function createContact() {
         color: color,
         id: id
     });
+    sortContacts();
     await setItem('contacts', JSON.stringify(contacts));
+    await setItem('id', JSON.stringify(id));
     renderContactsContacts();
 
     name.value = '';
@@ -106,11 +118,11 @@ function renderClickedContact(singleContactName, singleContactEmail, singleConta
             <div class="contact-name-icons-container">
                 <button class="contact-button">
                     <img class="contact-icon" src="assets/img/edit.svg">
-                    <span class="contact-button-text" onclick="showEditContact(${i})">Edit</span>
+                    <button class="contact-button-text" onclick="showEditContact(${i})">Edit</button>
                 </button>
                 <button class="contact-button">
                     <img class="contact-icon" src="assets/img/delete.svg">
-                    <span class="contact-button-text" onclick="deleteContact(${i})">Delete</span>
+                    <button class="contact-button-text" onclick="deleteContact(${i})">Delete</button>
                 </button>
             </div>
         </div>
