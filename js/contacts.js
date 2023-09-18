@@ -67,7 +67,7 @@ async function createContact() {
     name.value = '';
     mail.value = '';
     phone.value = '';
-
+    closeCreateContact();
 }
 
 function createInitals(name) {
@@ -91,7 +91,7 @@ function showCreateContact() {
     document.getElementById('contactBlurOverlay').classList.remove('d-none');
 }
 
-function closeCreatContact() {
+function closeCreateContact() {
     document.getElementById('newContact').classList.remove('new-contact-show');
     document.getElementById('contactBlurOverlay').classList.add('d-none');
 }
@@ -141,6 +141,7 @@ async function deleteContact(i) {
     contacts.splice(i, 1);
     renderContactsContacts();
     await setItem('contacts', JSON.stringify(contacts));
+    document.getElementById('contactContainer').innerHTML = '';
 }
 
 function showEditContact(i) {

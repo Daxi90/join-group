@@ -278,6 +278,7 @@ function updateSelectedContacts(assignedPersons) {
   selectedContactsContainer.innerHTML = selectedContactsHTML;
 }
 
+
 function saveEditedTaskData(taskId) {
   const task = tasks.find((t) => t.id === taskId);
   if (!task) {
@@ -352,6 +353,7 @@ task.subtasks = subtasks;
 }
 
 function selectPriorityButton(priority) {
+  priority = priority.toLowerCase();
   let buttonClass;
   switch (priority) {
     case "high":
