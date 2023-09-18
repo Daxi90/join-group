@@ -161,6 +161,7 @@
 .single-task-prio {
   display: flex;
   margin-bottom: 24px;
+  overflow: auto;
 }
 
 .single-task-assignee {
