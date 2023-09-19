@@ -44,9 +44,7 @@ function renderTaskCard(task){
         <h4 class="task-title">${task.title}</h4>
         <p class="short-desc">${task.description}</p>
 
-        <div class="progress">
-            ${renderProgressBar(task)}
-        </div>
+        ${task.subtasks.length > 0 ? `<div class="progress"> ${renderProgressBar(task)} </div>` : ''}
 
         <div class="assignees">
             ${renderAssignees(task)}
