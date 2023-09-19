@@ -218,3 +218,95 @@ async function loadDataFromAPI() {
 document.addEventListener('DOMContentLoaded', async function(){
     await loadDataFromAPI();
 })
+
+function loadAddTaskOffCanvas(){
+    loadContactsTab();
+    bindPrioButtonEvents();
+    bindSelectedOptionEvents();
+    bindCheckboxEvents();
+    bindCategorySelectEvents();
+    bindSubtaskSelectEvents();
+    bindSearchEvent();
+    document.querySelectorAll('.custom-select').forEach(dropdown => {
+        dropdown.addEventListener('click', function () {
+            const optionsContainer = this.querySelector('.options');
+            if (optionsContainer) {
+                optionsContainer.style.display = optionsContainer.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    });
+    addEventListenerToContacts();
+    document.getElementById('add-task-offcanvas').classList.toggle('d-none');
+}
+
+function addEventListenerToContacts(){
+    let contactChoice = document.querySelector('.selected-option');
+    contactChoice.addEventListener('click', function(){
+        new_bindContactLineEvents();
+    })
+}
+
+function new_bindContactLineEvents() {
+
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function () {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            const { name, color } = getNameAndColor(this, contacts);
+
+            if (checkbox) {
+                new_toggleCheckboxSelection(checkbox, name, color);
+            }
+        });
+    });
+}
+
+function new_toggleCheckboxSelection(checkbox, name, color) {
+    checkbox.checked = !checkbox.checked;
+    if (checkbox.checked) {
+        new_addNameToSelection(name, color);
+    } else {
+        new_removeNameFromSelection(name);
+    }
+}
+
+function new_bindCheckboxEvents() {
+    document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('click', function (event) {
+            event.stopPropagation();
+
+            const optionElement = this.closest('.option');
+            const name = optionElement.querySelector('.name').innerText;
+            const color = optionElement.querySelector('.initials').style.backgroundColor;
+
+            new_toggleCheckboxSelection(this, name, color);
+        });
+    });
+}
+
+
+function new_addNameToSelection(name) {
+    const contact = contacts.find(contact => contact.name === name);
+    if (contact) {
+        const initials = contact.initials;
+        const color = contact.color;
+        const id = contact.id;
+        const initialsDiv = document.createElement('div');
+        initialsDiv.classList.add('selected-initials');
+        initialsDiv.style.backgroundColor = color;
+        initialsDiv.innerText = initials;
+        initialsDiv.setAttribute('data-contact-id', id);
+        document.querySelector('.selected-contacts').appendChild(initialsDiv);
+    }
+}
+
+function new_removeNameFromSelection(name) {
+    const contact = contacts.find(contact => contact.name === name);
+    if (contact) {
+        const initials = contact.initials;
+        document.querySelectorAll('.selected-initials').forEach(selectedInitial => {
+            if (selectedInitial.innerText === initials) {
+                selectedInitial.remove();
+            }
+        });
+    }
+}

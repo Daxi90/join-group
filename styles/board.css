@@ -103,6 +103,10 @@
   .add-task-btn {
     display: none;
   }
+
+  #add-task-offcanvas{
+    width: 80% !important;
+   }
 }
 
 .kanban-board {
@@ -261,4 +265,17 @@ h3 {
 .rotate{
   transform: rotate(5deg);
   transition: 150ms;
+}
+
+#add-task-offcanvas{
+ position: absolute;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ width: 30%;
+ background-color: white;
+ overflow: auto;
+ padding: 16px;
+ border-top-left-radius: 30px;
+ border-bottom-left-radius: 30px;
 }
