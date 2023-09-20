@@ -1,26 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Open+Sans:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/img/joinLogoWhite.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/template.css" />
-    <title>Join</title>
+    <title>Login</title>
+    <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/reset_password.js"></script>
+
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/login-media.css">
+
 </head>
-<body onload="init()">
-    <div id="header" w3-include-html="./assets/templates/header.html"></div>
-    <div id="container">
-        <div id="sidebar" w3-include-html="./assets/templates/sidebar.html"></div>
-        <main>
-            <!-- Hauptinhalt / Content -->
-            <h1>Das ist die INDEX HTML</h1>
-        </main>
+<body onload="loadUsers()">
+    <div class="login-header-container">
+        <img class="join-logo-blue" src="assets/img/joinLogoBlue.svg">
+        <div class="sign-up-link-container">
+            <p class="sign-up-link-question">Not a Join User?</p>
+            <a href="sign_up.html" class="sign-up-link-link">Sign up</a>
+        </div>
     </div>
-    <script src="./js/include.js"></script>
-    <script src="./js/script.js"></script>
+    <div class="login-container">
+        <div class="login-title-container">
+            <p class="login-title">Log in</p>
+        </div>
+
+        <form class="form-container" onsubmit="login(); return false">
+            <div class="input-fields-container">
+                <div class="input-field-email-container">
+                    <input class="input-field-email" type="email" id="email" placeholder="Email" title="Your password or your Email has been incorrect">
+                    <div class="login-email-icon-container">
+                        <img class="login-email-icon" src="assets/templates/img/mail.png">
+                    </div>
+                </div>
+                <div class="input-field-password-container">
+                    <input class="input-field-password" type="password" id="password" placeholder="Password">
+                    <div class="login-password-icon-container">
+                        <img class="login-password-icon" src="assets/templates/img/lock.png">                    
+                    </div>
+                </div>                
+            </div>
+            <div class="account-options">
+                <label class="checkbox-container">
+                    <img class="login-checkmark-unchecked" src="assets/img/loginCheckmark.svg" onclick="rememberMe()" id="loginCheckmark">
+                    <img class="login-checkmark-checked d-none" src="assets/img/loginCheeckmarkChecked.svg" onclick="dontRememberMe()" id="loginCheckmarkChecked">
+                    Remember me
+                </label>
+                <a href="#" class="f-password-link">I forgot my password</a>
+            </div>
+            <div class="login-link-container">
+                    <button class="login-button">Login</button>
+                    <button class="login-guest-button">Guest log in</button>
+            </div>
+            
+        </form>
+
+
+    </div>
+    <div class="login-media-sign-up">
+        <div class="sign-up-link-container">
+            <p class="sign-up-link-question">Not a Join User?</p>
+            <a href="sign_up.html" class="sign-up-link-link">Sign up</a>
+        </div>
+    </div>
+    <div class="legal-container" >
+        <div class="legal">
+            <a href="#" class="privacy-policy">Privacy Policy</a>
+            <a href="#" class="legal-notice">Legal Notice</a>
+        </div>
+    </div>
 </body>
 </html>
