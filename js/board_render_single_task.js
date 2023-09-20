@@ -155,6 +155,11 @@ function clickSubTask(subtaskIdStr) {
 }
 
 //------------------------------------RENDER EDIT FORM----------------------------------------
+/**
+ * Renders an edit form within a specified container.
+ * @param {string|number} taskId - The ID of the task to edit.
+ * @param {string} containerId - The ID of the container where the form should be rendered.
+ */
 function renderEditForm(taskId, containerId) {
   const container = document.querySelector(containerId);
   if (!container) return;
@@ -169,12 +174,23 @@ function renderEditForm(taskId, containerId) {
   }
 }
 
+
+/**
+ * Fetches task data by its ID.
+ * @param {string|number} taskId - The ID of the task.
+ * @returns {Object} The task data object.
+ */
 function getTaskData(taskId) {
   // Hier können Sie die Daten für die gegebene Task-ID abrufen.
   // Zum Beispiel aus einem Array oder von einer API.
   return tasks.find((task) => task.id === taskId);
 }
 
+
+/**
+ * Populates the form with existing task data.
+ * @param {Object} taskData - The task data object.
+ */
 function fillFormWithData(taskData) {
   // Titel und Beschreibung
   document.getElementById("title").value = taskData.title;
@@ -235,6 +251,8 @@ function fillFormWithData(taskData) {
     optionsContainer.appendChild(optionDiv);
   }
 
+
+
   // Zugewiesene Kontakte im "selected-contacts"-Container anzeigen
   updateSelectedContacts(taskData.assignedPersons);
 
@@ -261,6 +279,10 @@ function fillFormWithData(taskData) {
   subtasksList.innerHTML = subtasksHTML;
 }
 
+  /**
+ * Updates the UI to reflect assigned persons.
+ * @param {Array} assignedPersons - The list of assigned persons' IDs.
+ */
 function updateSelectedContacts(assignedPersons) {
   const selectedContactsContainer =
     document.querySelector(".selected-contacts");
@@ -279,80 +301,114 @@ function updateSelectedContacts(assignedPersons) {
   bindContactLineEvents();
 }
 
+/**
+ * Find a task by its ID.
+ * @param {string} taskId - The ID of the task.
+ * @returns {Object} The task object.
+ */
+function getTaskById(taskId) {
+  return tasks.find(task => task.id === taskId);
+}
 
+/**
+ * Update task fields with new values.
+ * @param {Object} task - The task object.
+ * @param {string[]} fieldIds - The IDs of the fields to update.
+ */
+function updateTaskFields(task, fieldIds) {
+  fieldIds.forEach(id => {
+    task[id] = document.getElementById(id).value;
+  });
+}
+
+/**
+ * Get the selected priority.
+ * @returns {string} The selected priority.
+ */
+function getSelectedPriority() {
+  const buttons = document.querySelectorAll('.prioButton');
+  for (const button of buttons) {
+    if (button.classList.contains('selected')) {
+      return button.textContent.trim().toLowerCase();
+    }
+  }
+}
+
+/**
+ * Get the IDs of the assigned persons.
+ * @param {Object[]} contacts - The list of contact objects.
+ * @returns {string[]} The IDs of the assigned persons.
+ */
+function getAssignedPersons(contacts) {
+  const checkboxes = document.querySelectorAll('#options .option input[type="checkbox"]');
+  const selectedContacts = [];
+  
+  checkboxes.forEach((checkbox, index) => {
+    if (checkbox.checked) {
+      selectedContacts.push(contacts[index].id);
+    }
+  });
+
+  return selectedContacts;
+}
+
+/**
+ * Get the selected category.
+ * @returns {Object} The category object.
+ */
+function getSelectedCategory() {
+  const category = document.querySelector('.category-select .selected-option').textContent.trim();
+  return {
+    name: category,
+    backgroundColor: '#ff0000', // Standardwert
+  };
+}
+
+/**
+ * Get the list of subtasks.
+ * @returns {Object[]} The list of subtask objects.
+ */
+function getSubtasks() {
+  return Array.from(document.querySelectorAll('.subtask-item')).map((subtask, index) => {
+    const input = subtask.querySelector('input[type="text"]');
+    const span = subtask.querySelector('span');
+    const title = input ? input.value : span.textContent.trim().replace('● ', '');
+    return {
+      id: `${tasks.length}.${index + 1}`,
+      title,
+      completed: false
+    };
+  });
+}
+
+/**
+ * Save the edited task data.
+ * @param {string} taskId - The ID of the task to save.
+ */
 function saveEditedTaskData(taskId) {
-  const task = tasks.find((t) => t.id === taskId);
+  const task = getTaskById(taskId);
   if (!task) {
     console.error(`Task with ID ${taskId} not found.`);
     return;
   }
 
-  // Titel und Beschreibung
-  task.title = document.getElementById("title").value;
-  task.description = document.getElementById("description").value;
+  updateTaskFields(task, ['title', 'description', 'duedate']);
+  task.priority = getSelectedPriority();
+  task.assignedPersons = getAssignedPersons(contacts);
+  task.category = getSelectedCategory();
+  task.subtasks = getSubtasks();
 
-  // Fälligkeitsdatum
-  task.completionDate = document.getElementById("duedate").value;
-
-  // Priorität
-  const priorityButtons = document.querySelectorAll(".prioButton");
-  for (const button of priorityButtons) {
-    if (button.classList.contains("selected")) {
-      task.priority = button.textContent.trim().toLowerCase();
-      break;
-    }
-  }
-
-  // Zugewiesene Kontakte
-  const contactCheckboxes = document.querySelectorAll(
-    '#options .option input[type="checkbox"]'
-  );
-  task.assignedPersons = [];
-  contactCheckboxes.forEach((checkbox, index) => {
-    if (checkbox.checked) {
-      task.assignedPersons.push(contacts[index].id);
-    }
-  });
-
-  // Kategorie
-  const selectedCategory = document
-    .querySelector(".category-select .selected-option")
-    .textContent.trim();
-  task.category = {
-    name: selectedCategory,
-    // Hier setzen wir den Hintergrund auf einen Standardwert. Sie können dies anpassen, um den tatsächlichen Wert zu erhalten.
-    backgroundColor: "#ff0000",
-  };
-
-  // Subtasks
-  let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
-  .map((subtask, index) => {
-      const inputElement = subtask.querySelector(`input[type="text"]`);
-      const spanElement = subtask.querySelector('span');
-      let title = '';
-  
-      if (inputElement) {
-          title = inputElement.value;
-      } else if (spanElement) {
-          title = spanElement.textContent.trim().replace('● ', '');
-      }
-  
-      return {
-          id: `${tasks.length}.${index + 1}`,
-          title: title,
-          completed: false // Du kannst hier auch den aktuellen Status erfassen, wenn du möchtest
-      };
-  });
-  
-
-task.subtasks = subtasks;
-
-  // Hier können Sie weitere Schritte hinzufügen, z. B. das Aktualisieren des `tasks`-Arrays in Ihrem lokalen Speicher oder das Senden an einen Server.
-  setItem("tasks", tasks);
+  setItem('tasks', tasks); // Speichert die Änderungen
   closeTaskCard();
   kanbanInit(tasks);
 }
 
+
+
+/**
+ * Selects the appropriate priority button based on the task's priority.
+ * @param {string} priority - The priority level ('high', 'medium', 'low').
+ */
 function selectPriorityButton(priority) {
   priority = priority.toLowerCase();
   let buttonClass;
@@ -381,6 +437,13 @@ function selectPriorityButton(priority) {
   }
 }
 
+
+/**
+ * Edits a subtask within a task.
+ * @param {string|number} subtaskId - The ID of the subtask.
+ * @param {string|number} taskId - The ID of the parent task.
+ * @param {string} newValue - The new value for the subtask.
+ */
 function editSubtask(subtaskId, taskId, newValue) {
   const task = tasks.find((t) => t.id == taskId);
   const subtask = task.subtasks.find((st) => st.id === subtaskId);
@@ -389,6 +452,12 @@ function editSubtask(subtaskId, taskId, newValue) {
   }
 }
 
+
+/**
+ * Deletes a subtask from a task.
+ * @param {string|number} subtaskId - The ID of the subtask to delete.
+ * @param {string|number} taskId - The ID of the parent task.
+ */
 function deleteSubtask(subtaskId, taskId) {
   const task = tasks.find((t) => t.id == taskId);
   const index = task.subtasks.findIndex((st) => st.id === subtaskId);
@@ -399,6 +468,11 @@ function deleteSubtask(subtaskId, taskId) {
 }
 
 
+/**
+ * Generates and returns the HTML structure for the task edit form.
+ * @param {string|number} taskId - The ID of the task.
+ * @returns {string} HTML string representing the form.
+ */
 function getFormHTML(taskId) {
   return /*html*/ `
   <div class="taskwidth">
