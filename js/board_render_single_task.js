@@ -301,16 +301,30 @@ function updateSelectedContacts(assignedPersons) {
   bindContactLineEvents();
 }
 
+/**
+ * Find a task by its ID.
+ * @param {string} taskId - The ID of the task.
+ * @returns {Object} The task object.
+ */
 function getTaskById(taskId) {
   return tasks.find(task => task.id === taskId);
 }
 
+/**
+ * Update task fields with new values.
+ * @param {Object} task - The task object.
+ * @param {string[]} fieldIds - The IDs of the fields to update.
+ */
 function updateTaskFields(task, fieldIds) {
   fieldIds.forEach(id => {
     task[id] = document.getElementById(id).value;
   });
 }
 
+/**
+ * Get the selected priority.
+ * @returns {string} The selected priority.
+ */
 function getSelectedPriority() {
   const buttons = document.querySelectorAll('.prioButton');
   for (const button of buttons) {
@@ -320,6 +334,11 @@ function getSelectedPriority() {
   }
 }
 
+/**
+ * Get the IDs of the assigned persons.
+ * @param {Object[]} contacts - The list of contact objects.
+ * @returns {string[]} The IDs of the assigned persons.
+ */
 function getAssignedPersons(contacts) {
   const checkboxes = document.querySelectorAll('#options .option input[type="checkbox"]');
   const selectedContacts = [];
@@ -333,6 +352,10 @@ function getAssignedPersons(contacts) {
   return selectedContacts;
 }
 
+/**
+ * Get the selected category.
+ * @returns {Object} The category object.
+ */
 function getSelectedCategory() {
   const category = document.querySelector('.category-select .selected-option').textContent.trim();
   return {
@@ -341,6 +364,10 @@ function getSelectedCategory() {
   };
 }
 
+/**
+ * Get the list of subtasks.
+ * @returns {Object[]} The list of subtask objects.
+ */
 function getSubtasks() {
   return Array.from(document.querySelectorAll('.subtask-item')).map((subtask, index) => {
     const input = subtask.querySelector('input[type="text"]');
@@ -354,6 +381,10 @@ function getSubtasks() {
   });
 }
 
+/**
+ * Save the edited task data.
+ * @param {string} taskId - The ID of the task to save.
+ */
 function saveEditedTaskData(taskId) {
   const task = getTaskById(taskId);
   if (!task) {
