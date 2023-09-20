@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./styles/template.css" />
     <link rel="stylesheet" href="styles/contacts.css">
+    <link rel="stylesheet" href="styles/contacts-media.css">
+
 
     <script src="js/storage.js"></script>
     <script src="js/data.js"></script>
@@ -63,7 +65,7 @@
                     <img src="assets/img/phone.svg">
                 </div>
                 <div class="new-contact-buttons-container">
-                    <button type="button" class="new-contact-cancel" onclick="closeCreatContact()">
+                    <button type="button" class="new-contact-cancel" onclick="closeCreateContact()">
                         <span>Cancel</span>
                         <img src="assets/img/X_Grey.svg">
                     </button>
@@ -141,6 +143,12 @@
 
             </div>
         </div>
+    </div>
+    <div class="addContact-Button-Media" onclick="showCreateContact()">
+        <img src="assets/img/addContactButtonMedia.svg">
+    </div>
+    <div class="contact-media-Arrow-Back" onclick="closeContactMedia()" id="contactArrowBackMedia">
+        <img src="assets/img/arrowBackContactMedia.svg">
     </div>
 </body>
 

@@ -103,6 +103,7 @@ function getSingleContactData(i) {
     let singleContactColor = contacts[i]['color'];
     let singleContactInitials = contacts[i]['initials'];
     document.getElementById('contactContainer').innerHTML = renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i);
+    cssMediaclass();
 }
 
 function renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i) {
@@ -116,13 +117,13 @@ function renderClickedContact(singleContactName, singleContactEmail, singleConta
         <div class="contact-name">
             <span class="contact-name-name">${singleContactName}</span>
             <div class="contact-name-icons-container">
-                <button class="contact-button">
+                <button class="contact-button" onclick="showEditContact(${i})">
                     <img class="contact-icon" src="assets/img/edit.svg">
-                    <button class="contact-button-text" onclick="showEditContact(${i})">Edit</button>
+                    <div class="contact-button-text" type="button">Edit</div>
                 </button>
-                <button class="contact-button">
+                <button class="contact-button" onclick="deleteContact(${i})">
                     <img class="contact-icon" src="assets/img/delete.svg">
-                    <button class="contact-button-text" onclick="deleteContact(${i})">Delete</button>
+                    <div class="contact-button-text" type="button" >Delete</div>
                 </button>
             </div>
         </div>
@@ -173,6 +174,20 @@ async function editContact() {
     closeEditContact();
     console.log(contacts);
 }
+
+function cssMediaclass() {
+    if(screen.width <= 1024) {
+        document.getElementById('contactContainer').style = 'display: flex';
+        document.getElementById('contactArrowBackMedia').style = 'display: flex';
+    }
+}
+
+function closeContactMedia() {
+    document.getElementById('contactContainer').style = 'z-index: 0';
+    document.getElementById('contactArrowBackMedia').style = 'display: none';
+}
+
+
 
 document.addEventListener('DOMContentLoaded', getContacts());
 

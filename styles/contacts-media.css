@@ -1,0 +1,24 @@
+@media(max-width: 1024px) {
+    .contacts-content {
+        width: 100%;
+        z-index: 1;
+    }
+
+    .contact-container {
+
+        position: absolute;
+        z-index: 97;
+        width: 100%;
+        height: 95vh;
+        background-color: white;
+        display: none;
+    }
+
+    .addContact-Button-Media {
+        display: inline-flex;
+    }
+
+    #container {
+        overflow: auto;
+    }
+}
