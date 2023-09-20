@@ -269,13 +269,14 @@ function updateSelectedContacts(assignedPersons) {
     const contact = contacts.find((c) => c.id === assignedPersonId);
     if (contact) {
       selectedContactsHTML += `
-        <div class="single-task-assigned-contacts">
-          <span class="single-task-assignee" style="background: ${contact.color}">${contact.initials}</span>
-          <span>${contact.name}</span>
-        </div>`;
+      <div class="selected-initials" data-contact-id="${contact.id}" style="background-color: ${contact.color};">${contact.initials}</div>  
+      `;
+
+       
     }
   }
   selectedContactsContainer.innerHTML = selectedContactsHTML;
+  bindContactLineEvents();
 }
 
 

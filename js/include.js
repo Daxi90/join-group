@@ -20,15 +20,20 @@ async function includeHTML() {
 }
 
 document.addEventListener("htmlIncluded", async function () {
-  if (
-    window.location.href.includes("board") ||
-    window.location.href.includes("add_task")
-  ) {
-    await loadContactsFromAPI();
+  // Prüfen, ob wir uns auf der "board" oder "add_task" Seite befinden
+  if (window.location.href.includes("board") || window.location.href.includes("add_task")) {
+    await loadContactsFromAPI(); // Kontakte laden
   }
 
+  // Wenn wir uns auf der "board" Seite befinden
+  if (window.location.href.includes("board")) {
+    kanbanInit(tasks); // Kanban-Board initialisieren
+  }
+
+  // Wenn wir uns auf der "add_task" Seite befinden
   if (window.location.href.includes("add_task")) {
-    await loadContactsTab();
-    taskFormJS();
+    await loadContactsTab(); // Kontakt-Tab laden
+    taskFormJS(); // Task-Formular JavaScript
   }
 });
+
