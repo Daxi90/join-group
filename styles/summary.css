@@ -12,6 +12,10 @@ body{
     margin: 0 auto;
 }
 
+.headline {
+    text-align: center;
+}
+
 .toplayer {
     display: flex;
     flex-direction: row;
@@ -27,6 +31,7 @@ body{
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    gap: 5px;
 }
 
 .row {
@@ -48,11 +53,14 @@ body{
 
 .taskBox:hover {
     transform: scale(1.05);  
-    border-top-left-radius: 0; 
+    border-top-left-radius: 0;
+    background-color: #005DFF;
+    color: white;
+    cursor: pointer;
 }
 
 .urgentbox {
-    width: 600px;
+    width: 65%;
     height: 111px;
     display: flex;
     justify-content: space-evenly;
@@ -94,8 +102,10 @@ body{
 }
 
 .summaryBox {
-    width: 58rem;
-    margin: 4.5rem;
+    width: 95%;
+    margin: 0.5%;
+    gap: 10px;
+    display: grid;
 }
 
 .urgentboxleft {
@@ -121,4 +131,82 @@ body{
 
 #TaskTD {
     background-color: #D2E3FF;
+}
+
+.textcentered {
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .summaryBox {
+        padding: 2px;
+        width: 100%;
+        margin: 2px;
+        height: 100%;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .headline {
+        display: none;
+    }
+
+    .toplayer {
+        flex-direction: column;
+        gap: 5px;
+        height: fit-content;
+    }
+    
+    .urgentbox {
+        width: 90%;
+        height: 150px;
+    }
+    #TaskTD {
+        width: 90%;
+        height: 50px !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    #taskIB, #taskIP, #AFeedback, #done {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 122px;
+        height: 106px;
+    }
+
+    .botlayer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 15px;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+    .taskBox {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .urgentbox {
+        width: 280px;
+        height: 80px;
+    }
+
+    #TaskTD {
+        width: 280px;
+    }
+
+    #taskIB, #taskIP, #AFeedback, #done {
+        width: 102px;
+        height: 120Px;
+        padding: 15px 40px 15px 40px;
+
+    }
 }

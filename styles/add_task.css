@@ -342,6 +342,8 @@ input:-ms-input-placeholder {
 main {
     padding-left: 12px;
     padding-top: 12px;
+    display: flex;
+    flex-direction: column;
 }
 
 .submit {
@@ -556,4 +558,56 @@ input {
 
 .subtask_options {
     border-top: 1px solid gray;
+}
+
+@media only screen and (max-width: 520px) {
+    .clearInput {
+        display: none;
+    }
+
+    .submit {
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+    }
+
+    .taskwidth {
+        width: 95%;
+    }
+
+    .titleInput {
+        width: 95%;
+    }
+
+    .textarea {
+        width: 95%;
+    }
+
+    .date {
+        width: 95%;
+    }
+
+    .priority {
+        width: 95%;
+    }
+
+    .priorityButtonsContainer {
+        gap: 5px;
+    }
+
+    .prioButton {
+        width: 120px;
+    }
+
+    .assignedTo-container {
+        width: 95%;
+    }
+
+    .category-container {
+        width: 95%;
+    }
+
+    .subtasks-container {
+        width: 95%;
+    }
 }
