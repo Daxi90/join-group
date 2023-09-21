@@ -83,6 +83,12 @@
 
 @media (max-width: 1500px) {
   .search-and-create {
+    width: 70%;
+  }
+}
+
+@media (max-width: 890px) {
+  .search-and-create {
     width: 90%;
   }
 }

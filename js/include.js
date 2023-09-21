@@ -20,6 +20,8 @@ async function includeHTML() {
 }
 
 document.addEventListener("htmlIncluded", async function () {
+  highlightLinks();
+
   // Prüfen, ob wir uns auf der "board" oder "add_task" Seite befinden
   if (window.location.href.includes("board") || window.location.href.includes("add_task")) {
     await loadContactsFromAPI(); // Kontakte laden
@@ -36,4 +38,23 @@ document.addEventListener("htmlIncluded", async function () {
     taskFormJS(); // Task-Formular JavaScript
   }
 });
+
+
+function highlightLinks(){
+      // Bestimmen Sie die aktuelle Seite durch Abrufen des Pfads der URL
+      let path = window.location.pathname;
+      path = path.replace('/','');
+
+      // Wählen Sie alle Links im Navigationsmenü aus
+      let links = document.querySelectorAll('.menu-item, .legal-sites a');
+  
+      // Überprüfen Sie jeden Link
+      links.forEach(link => {
+          // Wenn der Pfad des Links zur aktuellen Seite führt
+          if (link.getAttribute('href').includes(path)) {
+              // Dann fügen Sie die "active" Klasse zu diesem Link hinzu
+              link.classList.add('active');
+          }
+      });
+}
 
