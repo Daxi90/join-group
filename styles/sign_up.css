@@ -28,12 +28,14 @@ body {
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
     border-radius: 30px;
     background: var(--white, #FFF);
+    width: 35%;
 }
 
 .sign-up-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 60%;
 }
 
 .header {
@@ -46,8 +48,7 @@ body {
 .sign-up-input-fields-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
+    width: 100%;
 }
 
 .sign-up-button {
@@ -63,3 +64,18 @@ body {
     background: var(--ligth-blue, #005DFF);
 }
 
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sign-up-legal-container {
+    margin-bottom: 20px;
+}
+
+.sign-up-header-container {
+    width: 100%;
+    display: flex;
+    margin-right: 33px;
+}

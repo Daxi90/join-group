@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles/sign_up.css">
     <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="styles/forgot_password+reset_password.css">
     <script src="js/include.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/register.js"></script>
@@ -14,14 +15,18 @@
 <body onload="loadUsers()">
     <img class="sign-up-logo" src="assets/img/joinLogoWhiteBig.svg">
     <div class="sign-up-container">
-        <div class="header">
+        <div class="sign-up-header-container">
             <a href="login.html"><img class="link-back-login" src="assets/img/blueArrowLeft.svg"></a>
-            <h1>Sign Up</h1>
+            <div class="forgot-password-header">
+                <h1>Sign Up</h1>
+                <div class="title-margin-bottom-forgot-password">
+            </div>
         </div>
-        <div class="title-margin-bottom">
+
+
 
         </div>
-        <form onsubmit="register(); return false;">
+        <form class="sign-up-form" onsubmit="register(); return false;">
             <div class="sign-up-input-fields-container">
                 <div class="input-field-password-container">
                     <input class="input-field-password" type="text" id="signUpUser" placeholder="Name">
@@ -50,7 +55,8 @@
             </div>
             <div class="sign-up-legal-container">
                 <label class="checkbox-container">
-                    <input class="checkbox" type="checkbox" name="myCheckbox" value="1"><span class="checkmark"></span>
+                    <img class="login-checkmark-unchecked" src="assets/img/loginCheckmark.svg" onclick="checkPrivacyPolicy()" id="signUpCheckmark">
+                    <img class="login-checkmark-checked d-none" src="assets/img/loginCheeckmarkChecked.svg" onclick="uncheckPrivacyPolicy()" id="signUpCheckmarkChecked">
                     <div>I accept the <a href="privacypolicy.html">privacy policy</a></div>
                 </label>
             </div>

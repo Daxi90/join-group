@@ -302,6 +302,7 @@ body {
     padding-right: 35px;
     cursor: pointer;
     background-color: white;
+    text-decoration: none;
 }
 
 .login-guest-button:hover {

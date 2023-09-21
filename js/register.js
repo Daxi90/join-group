@@ -31,3 +31,12 @@ function resetForm() {
     signUpPassword.value = '';
 }
 
+function checkPrivacyPolicy() {
+    document.getElementById('signUpCheckmark').classList.add('d-none');
+    document.getElementById('signUpCheckmarkChecked').classList.remove('d-none');
+}
+
+function uncheckPrivacyPolicy() {
+    document.getElementById('signUpCheckmark').classList.remove('d-none');
+    document.getElementById('signUpCheckmarkChecked').classList.add('d-none');
+}
