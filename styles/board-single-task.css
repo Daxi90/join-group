@@ -187,6 +187,7 @@
 .single-task-single-subtask {
   padding: 7px 16px;
   gap: 8px;
+  cursor: pointer;
 }
 
 .single-task-single-subtask:hover {
