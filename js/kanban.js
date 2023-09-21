@@ -21,7 +21,8 @@ searchBar.addEventListener('input', function(){
  * @returns {boolean} - True if the task title includes the search value, false otherwise.
  */
 function filterByName(task){
-    return task.title.toLowerCase().includes(searchBar.value.toLowerCase());
+    const searchText = searchBar.value.toLowerCase();
+    return task.title.toLowerCase().includes(searchText) || task.description.toLowerCase().includes(searchText);
 }
 
 

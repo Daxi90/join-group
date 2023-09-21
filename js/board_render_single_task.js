@@ -48,7 +48,7 @@ function renderTaskCardById(taskId) {
     .join("");
 
   const html = /*html*/ `
-    <div class="add-task-card">
+    <div onclick="event.stopPropagation();" class="add-task-card">
         <div class="header-infos flex-space-between">
             <div class="single-task-category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
             <img onclick="closeTaskCard()" class="close-btn" src="assets/img/close.svg" alt="Close button" />
