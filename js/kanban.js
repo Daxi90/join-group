@@ -38,6 +38,8 @@ function filterByName(task){
  * @returns {string} - The HTML string representing the task card.
  */
 function renderTaskCard(task){
+    let prio = task.priority.toLocaleLowerCase();
+
     renderAssignees(task);
     return /*html*/`
     <div draggable="true" ondragstart="startDragging(${task.id})" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
@@ -51,7 +53,7 @@ function renderTaskCard(task){
             ${renderAssignees(task)}
         </div>
         <div class="board-priority">
-            <img src="assets/img/prio-${task.priority}.svg" alt="priority" />
+            <img src="assets/img/prio-${prio}.svg" alt="priority" />
         </div>
     </div>
     `

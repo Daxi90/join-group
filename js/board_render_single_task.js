@@ -47,6 +47,8 @@ function renderTaskCardById(taskId) {
     })
     .join("");
 
+    let prio = task.priority.toLowerCase();
+
   const html = /*html*/ `
     <div onclick="event.stopPropagation();" class="add-task-card">
         <div class="header-infos flex-space-between">
@@ -62,8 +64,8 @@ function renderTaskCardById(taskId) {
         <div class="single-task-prio">
             <b class="bold-text" style="margin-right: 25px;">Priority:</b>
             <div class="priobatch">
-                <span style="margin-left: 18px; margin-right: 10px; text-transform: capitalize;">${task.priority}</span>
-                <img src="assets/img/prio-${task.priority}.svg" alt="${task.priority} Priority" />
+                <span style="margin-left: 18px; margin-right: 10px; text-transform: capitalize;">${prio}</span>
+                <img src="assets/img/prio-${prio}.svg" alt="${prio} Priority" />
             </div>
         </div>
         <h2 class="single-task-assignesd-to-heading"><b class="bold-text">Assigned To:</b></h2>
@@ -492,18 +494,18 @@ function getFormHTML(taskId) {
   <div class="priorityButtonsContainer">
       <button type="button" class="prioButton prioUrgent">
           Urgent
-          <img src="/assets/img/urgentIcon.svg" class="icon">
-          <img class="icon-active" src="/assets/img/urgentIcon_white.svg" style="display: none;">
+          <img src="./assets/img/urgentIcon.svg" class="icon">
+          <img class="icon-active" src="./assets/img/urgentIcon_white.svg" style="display: none;">
       </button>
       <button type="button" class="prioButton prioMedium">
           Medium
-          <img src="/assets/img/mediumIcon.svg" class="icon">
-          <img class="icon-active" src="/assets/img/mediumIcon_white.svg" style="display: none;">
+          <img src="./assets/img/mediumIcon.svg" class="icon">
+          <img class="icon-active" src="./assets/img/mediumIcon_white.svg" style="display: none;">
       </button>
       <button type="button" class="prioButton prioLow">
           Low 
-          <img src="/assets/img/lowIcon.svg" class="icon">
-          <img class="icon-active" src="/assets/img/lowIcon_white.svg" style="display: none;">
+          <img src="./assets/img/lowIcon.svg" class="icon">
+          <img class="icon-active" src="./assets/img/lowIcon_white.svg" style="display: none;">
       </button>
   </div>
 </div>                
@@ -511,7 +513,7 @@ function getFormHTML(taskId) {
   <span class="FW700">Assigned to</span>
   <div class="custom-select">
       <div class="selected-option JuCe">
-          <input type="text" class="search-contacts" placeholder="Select contacts to assign"><div class="DDB-container"><img src="/assets/img/dropdownDown.svg" class="DDB"></div>
+          <input type="text" class="search-contacts" placeholder="Select contacts to assign"><div class="DDB-container"><img src="./assets/img/dropdownDown.svg" class="DDB"></div>
       </div>                
       <div id="options" class="options">
       <div class="option"><div class="contactLine"><div class="initials" data-contact-id="3" style="background-color: rgb(26, 7, 136);">JL</div><span class="name">Jens Labudda</span></div><input type="checkbox"></div>
@@ -529,7 +531,7 @@ function getFormHTML(taskId) {
   <span class="FW700">Category</span>
   <div class="custom-select category-select">
       <div class="selected-option JuCe">Select Category
-          <div class="DDB-container"><img src="/assets/img/dropdownDown.svg" class="DDB"></div>
+          <div class="DDB-container"><img src="./assets/img/dropdownDown.svg" class="DDB"></div>
       </div>
           <div class="options">
               <div class="option">Technical task</div>
@@ -542,7 +544,7 @@ function getFormHTML(taskId) {
       <div class="FW700">Subtasks</div>
       <div class="selected-subclass_option subclassSB" id="add-subtask">
           <span class="fontgray">Add new Subtask</span> 
-          <div class="DDB-container"><img src="/assets/img/blueplus.svg"></div>
+          <div class="DDB-container"><img src="./assets/img/blueplus.svg"></div>
       </div>
       <div class="subtask_options" id="new-subtask">
           <ul class="subtasks-list">
@@ -554,7 +556,7 @@ function getFormHTML(taskId) {
            
 </div>
 <div class="submit">       
-<button onclick="saveEditedTaskData(${taskId})" class="saveTaskBtn">Save <img src="/assets/img/check.svg" alt=""></button>
+<button onclick="saveEditedTaskData(${taskId})" class="saveTaskBtn">Save <img src="./assets/img/check.svg" alt=""></button>
 </div>
     `;
 }
