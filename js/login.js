@@ -6,7 +6,7 @@ function login(event) {
     mail.setCustomValidity('');
 
     let user = users.find(u => u.mail === mail.value && u.password === password.value);
-    
+
     if (user) {
         window.location.href = "board.html";
     } else {

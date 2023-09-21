@@ -30,13 +30,13 @@
         <form class="form-container" onsubmit="login(); return false;">
             <div class="input-fields-container">
                 <div class="input-field-email-container">
-                    <input class="input-field-email" type="email" id="email" placeholder="Email" title="Your password or your Email has been incorrect">
+                    <input class="input-field-email" type="email" id="email" placeholder="Email" title="Your password or your Email has been incorrect" required>
                     <div class="login-email-icon-container">
                         <img class="login-email-icon" src="assets/templates/img/mail.png">
                     </div>
                 </div>
                 <div class="input-field-password-container">
-                    <input class="input-field-password" type="password" id="password" placeholder="Password">
+                    <input class="input-field-password" type="password" id="password" placeholder="Password" required>
                     <div class="login-password-icon-container">
                         <img class="login-password-icon" src="assets/templates/img/lock.png">                    
                     </div>
@@ -48,11 +48,11 @@
                     <img class="login-checkmark-checked d-none" src="assets/img/loginCheeckmarkChecked.svg" onclick="dontRememberMe()" id="loginCheckmarkChecked">
                     Remember me
                 </label>
-                <a href="#" class="f-password-link">I forgot my password</a>
+                <a href="forgot_password.html" class="f-password-link">I forgot my password</a>
             </div>
             <div class="login-link-container">
                     <button class="login-button">Login</button>
-                    <button class="login-guest-button">Guest log in</button>
+                    <a href="summary.html" class="login-guest-button">Guest log in</a>
             </div>
             
         </form>
