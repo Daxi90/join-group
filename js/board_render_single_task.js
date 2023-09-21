@@ -21,8 +21,8 @@ function renderTaskCardById(taskId) {
         ? "assets/img/checkmark-checked.svg"
         : "assets/img/checkmark.svg";
       subtasksHtml += `
-            <div class="single-task-single-subtask flex-center">
-                <img id="subtask-${subtask.id}" src="${checkmarkSrc}" alt="Checked" onclick="clickSubTask('${subtask.id}')">
+            <div class="single-task-single-subtask flex-center" onclick="clickSubTask('${subtask.id}')">
+                <img id="subtask-${subtask.id}" src="${checkmarkSrc}" alt="Checked" >
                 <span>${subtask.title}</span>
             </div>`;
     }
@@ -96,7 +96,6 @@ function renderTaskCardById(taskId) {
   document.getElementById("single-task-modal").innerHTML = html;
   // Klasse 'd-none' entfernen
   document.getElementById("single-task-modal").classList.remove("d-none");
-  registerEventlistenerSubtasksCheck();
 }
 
 /**
@@ -158,22 +157,7 @@ function clickSubTask(subtaskIdStr) {
   renderTaskCardById(parentTask.id);
 }
 
-function registerEventlistenerSubtasksCheck() {
-  document
-    .querySelector(".subtasks-container")
-    .addEventListener("click", (event) => {
-      // Finde den nächstgelegenen .single-task-single-subtask Container
-      let container = event.target.closest(".single-task-single-subtask");
-      if (!container) return; // Falls wir außerhalb geklickt haben, mach nichts
 
-      // Finde das img Element in diesem Container
-      let img = container.querySelector("img");
-
-      if (img && img.onclick) {
-        img.onclick();
-      }
-    });
-}
 
 //------------------------------------RENDER EDIT FORM----------------------------------------
 /**
