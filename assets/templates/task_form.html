@@ -60,22 +60,21 @@
                     </div>
             </div>
         </div>
-        <div class="subtasks-container">
-            <div class="subtasks-select" id="subtasks-container">
+        <div class="subtasks-container" id="subtasks-container">
+            <div class="subtasks-select" id="subtasksID">
                 <div class="FW700">Subtasks</div>
                 <div class="selected-subclass_option subclassSB" id="add-subtask">
-                    <span class="fontgray">Add new Subtask</span> 
+                    <span class="fontgray">Add new Subtask</span>
                     <div class="DDB-container"><img src="./assets/img/blueplus.svg"></div>
                 </div>
-                
             </div>
             <div class="subtask_options" id="new-subtask">
-                <ul class="subtasks-list">
-                    <!-- Hier kommen die Subtasks -->
-                </ul>
-            </div>   
-        </div>
-                     
+                <!-- Hier kommen dynamische Input- und Button-Container -->
+            </div>
+            <ul class="subtasks-list" id="subtaskList">
+                <!-- Hier kommen die Subtasks -->
+            </ul>
+        </div>                    
     </div>
     <div class="submit">
         <button onclick="clearInput()" class="clearInput">

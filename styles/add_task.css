@@ -507,10 +507,6 @@ main {
     outline: none;
 }
 
-.subtasks_input:focus-within {
-   
-}
-
 .checkBTN, .cancelBTN {
     border: none;
     background-color: white;

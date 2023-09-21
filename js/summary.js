@@ -57,3 +57,13 @@ loadTasksFromAPI().then(() => {
     getUpcomingDeadline();
 });
 
+
+const divs = document.querySelectorAll('.link');
+
+function handleClick() {
+  window.location.href = 'board.html'
+}
+
+for (let div of divs) {
+  div.addEventListener('click', handleClick);
+}

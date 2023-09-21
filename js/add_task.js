@@ -15,7 +15,6 @@ async function loadTasksFromAPI() {
     return tasks;
 }
 
-
 async function taskFormJS() { // renders add_task functionality
     bindPrioButtonEvents();
     bindSelectedOptionEvents();
@@ -180,6 +179,46 @@ function bindCategorySelectEvents() {
     });
 }
 
+function bindSubtaskSelectEvents() {
+    const addSubtaskElement = document.querySelector('#add-subtask');
+    const newSubtask = document.querySelector('#new-subtask');
+
+    addSubtaskElement.addEventListener('click', function () {
+        addSubtaskElement.style.display = 'none';
+
+        const inputContainer = document.createElement('div');
+        inputContainer.classList.add('input-container'); // Hinzufügen einer CSS-Klasse für das Styling
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container'); // Hinzufügen einer CSS-Klasse für das Styling
+
+        const inputField = createInputElement();
+
+        const checkButton = createButtonWithImage('assets/img/blueplus.svg', 'checkIMG', 'checkBTN');
+        const cancelButton = createButtonWithImage('assets/img/blueX.svg', 'cancelIMG', 'cancelBTN');
+
+        checkButton.addEventListener('click', function () {
+            validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
+        });
+
+        cancelButton.addEventListener('click', function () {
+            inputField.value = '';
+            restoreAddSubtaskElement([inputContainer, buttonContainer], addSubtaskElement);
+        });
+
+        // Die Buttons in den Button-Container einfügen
+        buttonContainer.appendChild(checkButton);
+        buttonContainer.appendChild(cancelButton);
+
+        // Das Inputfeld und den Button-Container in den allgemeinen Container einfügen
+        inputContainer.appendChild(inputField);
+        inputContainer.appendChild(buttonContainer);
+
+        // Den allgemeinen Container in das DOM einfügen
+        newSubtask.appendChild(inputContainer);
+    });
+}
+
 function createInputElement() {
     const inputField = document.createElement('input');
     inputField.setAttribute('type', 'text');
@@ -206,12 +245,16 @@ function createDivider(src, className) {
     return divider;
 }
 
-function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement) {
-    const subtaskList = document.querySelector('.subtasks-list');
-
+function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
+    const subtaskList = document.getElementById('subtaskList');
+    const parentElement = document.querySelector('.subtasks-container');
+    const referenceElement = document.getElementById('new-subtask');
     const subtaskItem = createSubtaskItem(subtaskValue);
     const subtaskText = createSubtaskText(subtaskValue);
     const buttonContainer = createButtonContainer();
+
+    parentElement.insertBefore(inputContainer, referenceElement);
+    parentElement.insertBefore(buttonContainer, referenceElement);
 
     subtaskItem.appendChild(subtaskText);
 
@@ -233,7 +276,6 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
     removeElements([inputField, checkButton, cancelButton]);
     addSubtaskElement.style.display = 'flex';
 }
-
 
 function createSubtaskItem(subtaskValue) {
     const subtaskItem = document.createElement('li');
@@ -298,10 +340,10 @@ function insertOrRemoveElements(elements, action, referenceElement) {
     });
 }
 
-function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement) {
+function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
     const subtaskValue = inputField.value.trim();
     if (subtaskValue) {
-        addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement);
+        addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
     } else {
         alert('Please enter a subtask.');
     }
@@ -311,49 +353,6 @@ function restoreAddSubtaskElement(elements, addSubtaskElement) {
     insertOrRemoveElements(elements, 'remove');
     addSubtaskElement.style.display = 'flex';
 }
-
-function bindSubtaskSelectEvents() {
-    const addSubtaskElement = document.querySelector('#add-subtask');
-    const subtaskContainer = document.querySelector('#subtasks-container');
-    const newSubtask = document.querySelector('#new-subtask');
-
-    addSubtaskElement.addEventListener('click', function () {
-        addSubtaskElement.style.display = 'none';
-
-        const inputContainer = document.createElement('div');
-        inputContainer.classList.add('input-container'); // Hinzufügen einer CSS-Klasse für das Styling
-
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('button-container'); // Hinzufügen einer CSS-Klasse für das Styling
-
-        const inputField = createInputElement();
-
-        const checkButton = createButtonWithImage('assets/img/blueplus.svg', 'checkIMG', 'checkBTN');
-        const cancelButton = createButtonWithImage('assets/img/blueX.svg', 'cancelIMG', 'cancelBTN');
-
-        checkButton.addEventListener('click', function () {
-            validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement);
-        });
-
-        cancelButton.addEventListener('click', function () {
-            inputField.value = '';
-            restoreAddSubtaskElement([inputContainer, buttonContainer], addSubtaskElement);
-        });
-
-        // Die Buttons in den Button-Container einfügen
-        buttonContainer.appendChild(checkButton);
-        buttonContainer.appendChild(cancelButton);
-
-        // Das Inputfeld und den Button-Container in den allgemeinen Container einfügen
-        inputContainer.appendChild(inputField);
-        inputContainer.appendChild(buttonContainer);
-
-        // Den allgemeinen Container in das DOM einfügen
-        newSubtask.appendChild(inputContainer);
-    });
-}
-
-
 
 function renderContactsTab(contacts) {
     const optionsContainer = document.getElementById('options');
@@ -452,7 +451,6 @@ async function saveNewContact() {
 
 function createInitals(name) {
     let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
-    console.log(initials);
     return initials;
 }
 
@@ -578,8 +576,6 @@ async function addTask() {
 
     // Hinzufügen des neuen Task-Objekts zum tasks Array
     tasks.push(newTask);
-
-    console.log('Neuer Task hinzugefügt:', newTask);
 
     // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
     await saveTasksToAPI();

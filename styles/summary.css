@@ -82,15 +82,12 @@ body{
     
 }
 
-
 .circle {
     height: 5rem;
     width: 5rem;
     border: 3px solid white;
     border-radius: 50%;
 }
-
-
 
 .bigNumbers {
     font-size: 4.5rem;
