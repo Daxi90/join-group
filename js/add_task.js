@@ -3,6 +3,19 @@ async function loadContactsFromAPI() {
     contacts = APIcontacts;
 }
 
+async function loadContactsTab() {
+    let contacts = await getItem('contacts'); // Fetches contacts from API
+    contacts = JSON.parse(contacts);
+    renderContactsTab(contacts);
+}
+
+async function loadTasksFromAPI() {
+    let APItasks = JSON.parse(await getItem('tasks'));
+    tasks = APItasks;
+    return tasks;
+}
+
+
 async function taskFormJS() { // renders add_task functionality
     bindPrioButtonEvents();
     bindSelectedOptionEvents();
@@ -11,6 +24,7 @@ async function taskFormJS() { // renders add_task functionality
     bindCategorySelectEvents();
     bindSubtaskSelectEvents();
     bindSearchEvent();
+    loadTasksFromAPI();
     document.querySelectorAll('.custom-select').forEach(dropdown => {
         dropdown.addEventListener('click', function () {
             const optionsContainer = this.querySelector('.options');
@@ -276,14 +290,6 @@ function removeElements(elements) {
 }
 
 
-function createButtonWithText(text, btnClass) {
-    const button = document.createElement('button');
-    button.innerText = text;
-    button.classList.add(btnClass);
-    return button;
-}
-
-
 function insertOrRemoveElements(elements, action, referenceElement) {
     elements.forEach(element => {
         action === 'insert'
@@ -314,32 +320,40 @@ function bindSubtaskSelectEvents() {
     addSubtaskElement.addEventListener('click', function () {
         addSubtaskElement.style.display = 'none';
 
-        const inputField = createInputElement();
-        const checkButton = createButtonWithImage('/assets/img/blueplus.svg', 'checkBTN', 'checkIMG');
-        const cancelButton = createButtonWithImage('/assets/img/blueX.svg', 'cancelBTN', 'cancelBTN');
+        const inputContainer = document.createElement('div');
+        inputContainer.classList.add('input-container'); // Hinzufügen einer CSS-Klasse für das Styling
 
-        const elementsToInsert = [inputField, checkButton, cancelButton];
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container'); // Hinzufügen einer CSS-Klasse für das Styling
+
+        const inputField = createInputElement();
+
+        const checkButton = createButtonWithImage('/assets/img/blueplus.svg', 'checkIMG', 'checkBTN');
+        const cancelButton = createButtonWithImage('/assets/img/blueX.svg', 'cancelIMG', 'cancelBTN');
 
         checkButton.addEventListener('click', function () {
-            console.log('subtask added');
             validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement);
         });
 
         cancelButton.addEventListener('click', function () {
             inputField.value = '';
-            restoreAddSubtaskElement(elementsToInsert, addSubtaskElement);
+            restoreAddSubtaskElement([inputContainer, buttonContainer], addSubtaskElement);
         });
 
-        insertOrRemoveElements(elementsToInsert, 'insert', newSubtask);
+        // Die Buttons in den Button-Container einfügen
+        buttonContainer.appendChild(checkButton);
+        buttonContainer.appendChild(cancelButton);
+
+        // Das Inputfeld und den Button-Container in den allgemeinen Container einfügen
+        inputContainer.appendChild(inputField);
+        inputContainer.appendChild(buttonContainer);
+
+        // Den allgemeinen Container in das DOM einfügen
+        newSubtask.appendChild(inputContainer);
     });
 }
 
 
-async function loadContactsTab() {
-    let contacts = await getItem('contacts'); // Fetches contacts from API
-    contacts = JSON.parse(contacts);
-    renderContactsTab(contacts);
-}
 
 function renderContactsTab(contacts) {
     const optionsContainer = document.getElementById('options');
