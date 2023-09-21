@@ -299,6 +299,7 @@ input:-ms-input-placeholder {
 .selected-contacts {
     display: flex;
     flex-wrap: wrap;
+    padding: 5px;
 }
 
 .selected-initials {
@@ -504,7 +505,10 @@ main {
 
 .subtasks_input:focus {
     outline: none;
-    background-color: white;
+}
+
+.subtasks_input:focus-within {
+   
 }
 
 .checkBTN, .cancelBTN {
@@ -556,6 +560,12 @@ main {
 input {
     border: none;
     font-size: 16px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .subtask_options {
