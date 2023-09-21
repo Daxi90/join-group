@@ -112,11 +112,15 @@ function closeTaskCard() {
  * @param {number} id - The ID of the task to be removed.
  */
 function removeTask(id) {
-  tasks.splice(id, 1);
+  const taskIndex = tasks.findIndex(task => task.id === id);
+  if (taskIndex !== -1) {
+    tasks.splice(taskIndex, 1);
+  }
   setItem("tasks", tasks);
   closeTaskCard();
   kanbanInit(tasks);
 }
+
 
 /**
  * Handles the click event for a subtask, toggling its completed status.
@@ -371,12 +375,12 @@ function getSelectedCategory() {
 function getSubtasks() {
   return Array.from(document.querySelectorAll('.subtask-item')).map((subtask, index) => {
     const input = subtask.querySelector('input[type="text"]');
-    const span = subtask.querySelector('span');
-    const title = input ? input.value : span.textContent.trim().replace('● ', '');
+    const checkbox = subtask.querySelector('input[type="checkbox"]');
+    const title = input ? input.value : '';
     return {
       id: `${tasks.length}.${index + 1}`,
       title,
-      completed: false
+      completed: checkbox ? checkbox.checked : false
     };
   });
 }
