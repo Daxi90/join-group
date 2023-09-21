@@ -58,7 +58,7 @@ function togglePrioButtonState(target) {
 }
 
 function toggleDropdownIcon(dropdownIcon, isOpen) {
-    const iconPath = isOpen ? '/assets/img/dropdownUp.svg' : '/assets/img/dropdownDown.svg';
+    const iconPath = isOpen ? 'assets/img/dropdownUp.svg' : 'assets/img/dropdownDown.svg';
     if (dropdownIcon) {
         dropdownIcon.src = iconPath;
     }
@@ -215,9 +215,9 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
 
     subtaskItem.appendChild(subtaskText);
 
-    const editButton = createButtonWithImage('./assets/img/blueedit.svg', 'edit-icon', 'edit-button');
-    const deleteButton = createButtonWithImage('./assets/img/trash.svg', 'delete-icon', 'delete-button');
-    const divider = createDivider('/assets/img/smalldivider.svg', 'smalldivider');
+    const editButton = createButtonWithImage('assets/img/blueedit.svg', 'edit-icon', 'edit-button');
+    const deleteButton = createButtonWithImage('assets/img/trash.svg', 'delete-icon', 'delete-button');
+    const divider = createDivider('assets/img/smalldivider.svg', 'smalldivider');
 
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(divider);
@@ -265,7 +265,7 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
 
         subtaskItem.replaceChild(editInput, subtaskTextElement);
 
-        const saveButton = createButtonWithImage('./assets/img/bluecheck.svg', 'check-icon', 'check-button');
+        const saveButton = createButtonWithImage('assets/img/bluecheck.svg', 'check-icon', 'check-button');
         buttonContainer.insertBefore(saveButton, this);
 
         saveButton.addEventListener('click', function () {
@@ -328,8 +328,8 @@ function bindSubtaskSelectEvents() {
 
         const inputField = createInputElement();
 
-        const checkButton = createButtonWithImage('/assets/img/blueplus.svg', 'checkIMG', 'checkBTN');
-        const cancelButton = createButtonWithImage('/assets/img/blueX.svg', 'cancelIMG', 'cancelBTN');
+        const checkButton = createButtonWithImage('assets/img/blueplus.svg', 'checkIMG', 'checkBTN');
+        const cancelButton = createButtonWithImage('assets/img/blueX.svg', 'cancelIMG', 'cancelBTN');
 
         checkButton.addEventListener('click', function () {
             validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement);
