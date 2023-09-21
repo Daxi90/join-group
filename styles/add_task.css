@@ -25,7 +25,7 @@
 }
 
 .date::-webkit-calendar-picker-indicator {
-    background: url('/assets/img/calendarIcon.svg');
+    background: url('../assets/img/calendarIcon.svg');
     color: 4589FF;
     background-size: contain;
     background-repeat: no-repeat;
