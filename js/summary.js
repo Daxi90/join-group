@@ -55,6 +55,7 @@ loadTasksFromAPI().then(() => {
     countTasksByStatus("awaitfeedback", "AFeedback");
     countTasksByStatus("done", "done");
     getUpcomingDeadline();
+    setUsername();
 });
 
 
@@ -66,4 +67,22 @@ function handleClick() {
 
 for (let div of divs) {
   div.addEventListener('click', handleClick);
+}
+
+
+function getUrlParameterMail(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const email = urlParams.get('email');
+
+  if(email){
+    return email;
+  }else{
+    return "Demo User";
+  }
+}
+
+function setUsername(){
+  let username =  document.getElementById('user');
+  username.innerHTML = getUrlParameterMail();
 }
