@@ -8,7 +8,7 @@ function login(event) {
     let user = users.find(u => u.mail === mail.value && u.password === password.value);
 
     if (user) {
-        window.location.href = "board.html";
+        window.location.href = `summary.html?email=${mail.value}`;
     } else {
         mail.setCustomValidity("Your password or your Email has been incorrect");
         mail.reportValidity();
