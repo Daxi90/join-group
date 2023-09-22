@@ -1,5 +1,5 @@
     <!-- Hauptinhalt / Content -->
-    <div class="taskwidth">
+    <form onsubmit="addTask(); return false;" class="taskwidth">
         <div>
             <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
         </div>
@@ -74,14 +74,15 @@
             <ul class="subtasks-list" id="subtaskList">
                 <!-- Hier kommen die Subtasks -->
             </ul>
-        </div>                    
-    </div>
-    <div class="submit">
-        <button onclick="clearInput()" class="clearInput">
-            Clear
-            <svg class="my-svg" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path class="clearstroke" d="M12.0008 12.5001L17.2438 17.7431M6.75781 17.7431L12.0008 12.5001L6.75781 17.7431ZM17.2438 7.25708L11.9998 12.5001L17.2438 7.25708ZM11.9998 12.5001L6.75781 7.25708L11.9998 12.5001Z" stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>          
-        <button onclick="addTask()" class="createTask">Create task <img src="./assets/img/check.svg" alt=""></button>
-    </div>
+        </div> 
+        <div class="submit">
+            <button onclick="clearInput()" class="clearInput" type="button">
+                Clear
+                <svg class="my-svg" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="clearstroke" d="M12.0008 12.5001L17.2438 17.7431M6.75781 17.7431L12.0008 12.5001L6.75781 17.7431ZM17.2438 7.25708L11.9998 12.5001L17.2438 7.25708ZM11.9998 12.5001L6.75781 7.25708L11.9998 12.5001Z" stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>          
+            <button class="createTask">Create task <img src="./assets/img/check.svg" alt=""></button>
+        </div>                   
+    </form>
+    
