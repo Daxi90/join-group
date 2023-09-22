@@ -17,7 +17,7 @@ function sortContacts() {
             return -1
         }
     });
-} 
+}
 
 function renderContactsContacts() {
 
@@ -104,6 +104,7 @@ function getSingleContactData(i) {
     let singleContactInitials = contacts[i]['initials'];
     document.getElementById('contactContainer').innerHTML = renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i);
     cssMediaclass();
+    renderEditContact(singleContactName, singleContactEmail, singleContactPhone, singleContactColor, singleContactInitials);
 }
 
 function renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i) {
@@ -176,7 +177,7 @@ async function editContact() {
 }
 
 function cssMediaclass() {
-    if(screen.width <= 1024) {
+    if (screen.width <= 1024) {
         document.getElementById('contactContainer').style = 'display: flex';
         document.getElementById('contactArrowBackMedia').style = 'display: flex';
     }
@@ -187,7 +188,47 @@ function closeContactMedia() {
     document.getElementById('contactArrowBackMedia').style = 'display: none';
 }
 
-
+function renderEditContact(editName, editEmail, editPhone) {
+    document.getElementById('editContact').innerHTML = `
+    <div class="edit-contact-header">
+        <img src="assets/img/joinLogoWhite.svg">
+        <span class="new-contact-title">Edit contact</span>
+    </div>
+    <div class="new-contact-information">
+        <img class="new-contact-img" src="assets/img/contactWhite.svg">
+        <form class="new-contact-input-container" onsubmit="editContact(); return false;">
+            <div class="new-contact-input-field">
+                <input class="new-contact-input" placeholder="Name" type="text" required
+                    title="Please enter the full name" id="editContactName" pattern="^\w+\s+\w+$">
+                <img src="assets/img/contactGrey.svg">
+            </div>
+            <div class="new-contact-input-field">
+                <input class="new-contact-input" placeholder="Email" id="editContactMail" type="email">
+                <img src="assets/img/mail.svg">
+            </div>
+            <div class="new-contact-input-field">
+                <input class="new-contact-input hide-arrow" placeholder="Phone" id="editContactPhone" type="number">
+                <img src="assets/img/phone.svg">
+            </div>
+            <div class="new-contact-buttons-container">
+                <button class="new-contact-cancel" onclick="closeEditContact()" type="button">
+                    <span>Cancel</span>
+                    <img src="assets/img/X_Grey.svg">
+                </button>
+                <button class="new-contact-create" type="submit" value="submit">
+                    <span>Save</span>
+                    <img src="assets/img/check.svg">
+                </button>
+            </div>
+        </form>
+        <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.
+        </div>
+    </div>
+    `
+    editContactName.value = editName
+    editContactMail.value = editEmail
+    editContactPhone.value = +editPhone
+}
 
 document.addEventListener('DOMContentLoaded', getContacts());
 
