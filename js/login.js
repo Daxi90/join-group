@@ -20,9 +20,10 @@ function login(event) {
     }
 }
 
-
-
-
+function guestLogin() {
+    event.preventDefault();
+    window.location = "summary.html";
+}
 
 function rememberMe() {
     document.getElementById('loginCheckmark').classList.add('d-none');
