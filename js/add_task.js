@@ -457,6 +457,7 @@ function createInitals(name) {
 function showCreateContact() {
     document.getElementById('newContact').classList.add('new-contact-show');
     // document.getElementById('contactBlurOverlay').classList.remove('d-none');
+    console.log('Show');
 }
 
 function closeCreateContact() {

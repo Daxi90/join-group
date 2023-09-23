@@ -237,7 +237,7 @@ function loadAddTaskOffCanvas(){
         });
     });
     addEventListenerToContacts();
-    document.getElementById('add-task-offcanvas').classList.toggle('d-none');
+    document.getElementById('add-task-offcanvas').classList.toggle('show-task-offcanvas');
 }
 
 function addEventListenerToContacts(){
