@@ -235,14 +235,12 @@ function fillFormWithData(taskData) {
     checkbox.type = "checkbox";
     if (isChecked) checkbox.checked = true;
 
-    checkbox.addEventListener("change", function(event) {
-      event.stopPropagation();
+    checkbox.addEventListener("change", function () {
       if (this.checked) {
-        if (!taskData.assignedPersons.includes(contact.id)) {
-          // Füge nur hinzu, wenn die ID noch nicht vorhanden ist
-          taskData.assignedPersons.push(contact.id);
-        }
+        // Fügen Sie die ID des Kontakts zur Liste der zugewiesenen Personen hinzu
+        taskData.assignedPersons.push(contact.id);
       } else {
+        // Entfernen Sie die ID des Kontakts aus der Liste der zugewiesenen Personen
         const index = taskData.assignedPersons.indexOf(contact.id);
         if (index > -1) {
           taskData.assignedPersons.splice(index, 1);
@@ -250,8 +248,6 @@ function fillFormWithData(taskData) {
       }
       updateSelectedContacts(taskData.assignedPersons);
     });
-    
-    
 
     contactLineDiv.appendChild(initialsDiv);
     contactLineDiv.appendChild(nameSpan);
