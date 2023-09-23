@@ -78,24 +78,35 @@ function bindSelectedOptionEvents() {
 function getNameAndColor(element, contacts) {
     const nameElement = element.querySelector('.name');
     const name = nameElement ? nameElement.innerText : null;
-    const initials = contacts.initials;
+    const initialsElement = element.querySelector('.initials'); // Füge diese Zeile hinzu
+    const initials = initialsElement ? initialsElement.innerText : null; // Ändere diese Zeile
     const contact = contacts.find(contact => contact.initials === initials);
     const color = contact ? contact.color : 'gray';
     return { name, color };
 }
 
+
 function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
-        option.addEventListener('click', function () {
-            const checkbox = this.querySelector('input[type="checkbox"]');
-            const { name, color } = getNameAndColor(this, contacts);
-
-            if (checkbox) {
-                toggleCheckboxSelection(checkbox, name, color);
-            }
-        });
+        // Entfernen aller vorherigen Event-Listener
+        option.removeEventListener('click', handleOptionClick);
+        
+        // Hinzufügen des neuen Event-Listener
+        option.addEventListener('click', handleOptionClick);
     });
 }
+
+function handleOptionClick(event) {
+    const optionElement = event.currentTarget;
+    const checkbox = optionElement.querySelector('input[type="checkbox"]');
+    const { name, color } = getNameAndColor(optionElement, contacts);
+
+    // Hier prüfen, ob das Event von der Checkbox oder von einem anderen Kind-Element kommt
+    if (event.target !== checkbox) {
+        toggleCheckboxSelection(checkbox, name, color);
+    }
+}
+
 
 function toggleCheckboxSelection(checkbox, name, color) {
     checkbox.checked = !checkbox.checked;
