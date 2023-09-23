@@ -11,6 +11,14 @@ async function getContacts() {
     renderContactsContacts();
 }
 
+async function getTasks(){
+    try {
+        tasks = JSON.parse(await getItem('tasks'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
+
 function sortContacts() {
     contacts = contacts.sort((a, b) => {
         if (a.name < b.name) {
@@ -140,11 +148,26 @@ function renderClickedContact(singleContactName, singleContactEmail, singleConta
 }
 
 async function deleteContact(i) {
+    let contactId = contacts[i].id;
+    await removeContactFromTasks(contactId);
     contacts.splice(i, 1);
     renderContactsContacts();
     await setItem('contacts', JSON.stringify(contacts));
     document.getElementById('contactContainer').innerHTML = '';
 }
+
+async function removeContactFromTasks(contactId) {
+    await setItem('tasks', JSON.stringify(tasks));
+    tasks.forEach(task => {
+        // Filtern der assignedPersons, um den Kontakt mit der gegebenen ID zu entfernen
+        task.assignedPersons = task.assignedPersons.filter(personId => personId !== contactId);
+    });
+    await setItem('tasks', tasks);
+}
+
+//const contactIdToRemove = 1; // Setze die ID des Kontakts, den du löschen möchtest
+//removeContactFromTasks(contactIdToRemove);
+
 
 function showEditContact(i) {
     document.getElementById('contactBlurOverlay').classList.remove('d-none');
@@ -230,5 +253,7 @@ function renderEditContact(editName, editEmail, editPhone) {
     editContactPhone.value = +editPhone
 }
 
-document.addEventListener('DOMContentLoaded', getContacts());
-
+document.addEventListener('DOMContentLoaded', function(){
+    getContacts();
+    getTasks();
+})
