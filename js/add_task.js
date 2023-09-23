@@ -78,11 +78,13 @@ function bindSelectedOptionEvents() {
 function getNameAndColor(element, contacts) {
     const nameElement = element.querySelector('.name');
     const name = nameElement ? nameElement.innerText : null;
-    const initials = contacts.initials;
+    const initialsElement = element.querySelector('.initials'); // Füge diese Zeile hinzu
+    const initials = initialsElement ? initialsElement.innerText : null; // Ändere diese Zeile
     const contact = contacts.find(contact => contact.initials === initials);
     const color = contact ? contact.color : 'gray';
     return { name, color };
 }
+
 
 function bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
