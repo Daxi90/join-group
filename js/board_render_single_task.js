@@ -299,7 +299,7 @@ function updateSelectedContacts(assignedPersons) {
     }
   }
   selectedContactsContainer.innerHTML = selectedContactsHTML;
-  bindContactLineEvents();
+  //bindContactLineEvents();
 }
 
 /**
