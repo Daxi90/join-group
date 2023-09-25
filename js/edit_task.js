@@ -210,19 +210,23 @@ function renderEditForm(taskId, containerId) {
    * @returns {Object[]} The list of subtask objects.
    */
   function getSubtasks() {
+    const tasks = Array.from(document.querySelectorAll(".task-item")); // Beispiel für die Task-Liste
     return Array.from(document.querySelectorAll(".subtask-item")).map(
       (subtask, index) => {
         const input = subtask.querySelector('input[type="text"]');
         const checkbox = subtask.querySelector('input[type="checkbox"]');
-        const title = input ? input.value : "";
+        const title = input ? input.value : subtask.getAttribute('data-subtask') || "";
+        const completed = checkbox ? checkbox.checked : false;
+  
         return {
           id: `${tasks.length}.${index + 1}`,
           title,
-          completed: checkbox ? checkbox.checked : false,
+          completed,
         };
       }
     );
   }
+  
   
   /**
    * Save the edited task data.
@@ -313,7 +317,7 @@ function renderEditForm(taskId, containerId) {
    */
   function getFormHTML(taskId) {
     return /*html*/ `
-    <form onsubmit="addTask(); return false;" class="taskwidth">
+    <form onsubmit="return false;" class="taskwidth">
         <div>
             <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
         </div>
