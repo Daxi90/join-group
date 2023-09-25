@@ -544,17 +544,6 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
     };
 }
 
-function resetUI() {
-    document.querySelector('.titleInput').value = '';
-    document.querySelector('#description').value = '';
-    const selectedPrioButton = document.querySelector('.prioButton.selected');
-    if (selectedPrioButton) {
-        togglePrioButtonState(selectedPrioButton);
-    }
-    document.querySelector('.selected-contacts').innerHTML = '';
-    resetCategorySelect();
-    document.querySelectorAll('.subtask-item').forEach(item => item.remove());
-}
 
 async function addTask() {
     // Aus den Eingabefeldern extrahierte Daten
@@ -584,7 +573,7 @@ async function addTask() {
     await saveTasksToAPI();
 
     // UI zurücksetzen
-    resetUI();
+    clearInput();
 }
 
 
@@ -605,6 +594,7 @@ function resetCategorySelect() {
 function clearInput() {
     document.querySelector('.titleInput').value = '';
     document.querySelector('#description').value = '';
+    document.querySelector('#duedate').value = '';
     const selectedPrioButton = document.querySelector('.prioButton.selected');
     if (selectedPrioButton) {
         togglePrioButtonState(selectedPrioButton);

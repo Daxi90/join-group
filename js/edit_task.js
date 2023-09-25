@@ -605,6 +605,7 @@ function createButtonWithImage(src, imgClass, btnClass) {
     const image = document.createElement('img');
     image.setAttribute('src', src);
     image.classList.add(imgClass);
+    button.setAttribute('type', 'button');
     button.appendChild(image);
     button.classList.add(btnClass);
     return button;
@@ -709,4 +710,44 @@ async function loadTasksFromAPI() {
     let APItasks = JSON.parse(await getItem('tasks'));
     tasks = APItasks;
     return tasks;
+}
+
+function createDivider(src, className) {
+  const divider = document.createElement('img');
+  divider.setAttribute('src', src);
+  divider.classList.add(className);
+  return divider;
+}
+
+function attachEditListener(editButton, subtaskItem, buttonContainer) {
+  editButton.addEventListener('click', function () {
+      const subtaskTextElement = subtaskItem.querySelector('span:not([class])');
+      this.style.display = 'none';
+
+      const editInput = document.createElement('input');
+      editInput.type = 'text';
+      editInput.value = subtaskTextElement.innerText;
+
+      subtaskItem.replaceChild(editInput, subtaskTextElement);
+
+      const saveButton = createButtonWithImage('assets/img/bluecheck.svg', 'check-icon', 'check-button');
+      buttonContainer.insertBefore(saveButton, this);
+
+      saveButton.addEventListener('click', function () {
+          subtaskTextElement.innerText = editInput.value;
+          subtaskItem.replaceChild(subtaskTextElement, editInput);
+          this.remove();
+          editButton.style.display = 'inline';
+      });
+  });
+}
+
+function attachDeleteListener(deleteButton) {
+  deleteButton.addEventListener('click', function () {
+      this.closest('.subtask-item').remove();
+  });
+}
+
+function removeElements(elements) {
+  elements.forEach(element => element.remove());
 }
