@@ -73,10 +73,11 @@ body {
 
 .sign-up-legal-container {
     margin-bottom: 20px;
+    gap: 20px;
 }
 
 .sign-up-header-container {
     width: 100%;
     display: flex;
-    margin-right: 33px;
+    margin-right: 75px;
 }
