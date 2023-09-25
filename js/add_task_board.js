@@ -281,7 +281,7 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
 
 function createSubtaskItem(subtaskValue) {
     const subtaskItem = document.createElement('li');
-    subtaskItem.classList.add('subtask-item');
+    subtaskItem.classList.add('board-subtask-item');
     subtaskItem.setAttribute('data-subtask', subtaskValue);
     return subtaskItem;
 }

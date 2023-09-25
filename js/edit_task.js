@@ -618,7 +618,7 @@ function edit_bindSubtaskSelectEvents() {
         const cancelButton = createButtonWithImage('assets/img/blueX.svg', 'cancelIMG', 'cancelBTN');
 
         checkButton.addEventListener('click', function () {
-            validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
+            edit_validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
         });
 
         cancelButton.addEventListener('click', function () {
@@ -659,10 +659,10 @@ function createButtonWithImage(src, imgClass, btnClass) {
     return button;
 }
 
-function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
+function edit_validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
     const subtaskValue = inputField.value.trim();
     if (subtaskValue) {
-        addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
+        edit_addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
     } else {
         alert('Please enter a subtask.');
     }
@@ -702,7 +702,7 @@ function edit_bindSearchEvent() {
 }
 
 
-function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
+function edit_addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
     const subtaskList = document.getElementById('subtaskList');
     const parentElement = document.querySelector('.subtasks-container');
     const referenceElement = document.getElementById('new-subtask');
@@ -736,8 +736,8 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
 
 function createSubtaskItem(subtaskValue) {
     const subtaskItem = document.createElement('li');
-    subtaskItem.classList.add('subtask-item');
-    subtaskItem.setAttribute('data-subtask', subtaskValue);
+    subtaskItem.classList.add('board-subtask-item');
+    subtaskItem.setAttribute('board-data-subtask', subtaskValue);
     return subtaskItem;
 }
 
