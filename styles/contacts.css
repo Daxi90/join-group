@@ -113,7 +113,7 @@ body {
 
 .contact-container {
     display: flex;
-    width: 584px;
+    flex-grow: 1;
     padding: 91px 46px;
     flex-direction: column;
     gap: 12px;

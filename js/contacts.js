@@ -200,7 +200,7 @@ async function editContact() {
 }
 
 function cssMediaclass() {
-    if (screen.width <= 1024) {
+    if (screen.width >= 1024) {
         document.getElementById('contactContainer').style = 'display: flex';
         document.getElementById('contactArrowBackMedia').style = 'display: flex';
     }

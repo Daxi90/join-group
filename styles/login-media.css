@@ -84,3 +84,19 @@
         padding:10px;
     }
 }
+
+@media(max-width: 750px) {
+    .login-container {
+        width: 65%;
+    }
+}
+
+@media(max-height: 680px) {
+    .legal {
+        margin-top: 13px;
+    }
+
+    .login-header-container {
+        top: 70px;
+    }
+}
