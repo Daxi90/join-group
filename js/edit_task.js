@@ -427,6 +427,50 @@ function renderEditForm(taskId, containerId) {
     });
 }
 
+async function loadContactsTab() {
+  let contacts = await getItem('contacts'); // Fetches contacts from API
+  contacts = JSON.parse(contacts);
+  renderContactsTab(contacts);
+}
+
+function renderContactsTab(contacts) {
+  const optionsContainer = document.getElementById('options');
+  optionsContainer.innerHTML = '';
+  contacts.forEach(contact => {
+      createContactElement(contact, optionsContainer);
+  });
+}
+
+function createContactElement(contact, container) {
+  let option = document.createElement('div');
+  option.classList.add('option');
+
+  let contactLine = document.createElement('div');
+  contactLine.classList.add('contactLine');
+
+  let initials = document.createElement('div');
+  initials.classList.add('initials');
+  initials.style.backgroundColor = contact.color;
+  initials.innerText = contact.initials;
+  initials.setAttribute('data-contact-id', contact.id);
+
+  let name = document.createElement('span');
+  name.classList.add('name');
+  name.innerText = contact.name;
+
+  contactLine.appendChild(initials);
+  contactLine.appendChild(name);
+
+  let checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+
+  option.appendChild(contactLine);
+  option.appendChild(checkbox);
+
+  container.appendChild(option);
+}
+
+
 function bindPrioButtonEvents() {
     document.querySelectorAll('.prioButton').forEach(button => {
         button.addEventListener('click', function (event) {
