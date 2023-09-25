@@ -9,7 +9,7 @@ function renderEditForm(taskId, containerId) {
   
     container.innerHTML = getFormHTML(taskId);
     // Binden Sie die Event-Listener und andere Initialisierungsfunktionen
-    taskFormJS();
+    editTaskFormJS();
   
     if (taskId !== undefined && taskId !== null) {
       const taskData = getTaskData(taskId);
@@ -412,14 +412,14 @@ function renderEditForm(taskId, containerId) {
    * 
   */
 
-  async function taskFormJS() { // renders add_task functionality
-    bindPrioButtonEvents();
-    bindSelectedOptionEvents();
-    bindContactLineEvents();
-    bindCheckboxEvents();
-    bindCategorySelectEvents();
-    bindSubtaskSelectEvents();
-    bindSearchEvent();
+  async function editTaskFormJS() { // renders add_task functionality
+    edit_bindPrioButtonEvents();
+    edit_bindSelectedOptionEvents();
+    edit_bindContactLineEvents();
+    edit_bindCheckboxEvents();
+    edit_bindCategorySelectEvents();
+    edit_bindSubtaskSelectEvents();
+    edit_bindSearchEvent();
     loadTasksFromAPI();
     document.querySelectorAll('.custom-select').forEach(dropdown => {
         dropdown.addEventListener('click', function () {
@@ -475,7 +475,7 @@ function createContactElement(contact, container) {
 }
 
 
-function bindPrioButtonEvents() {
+function edit_bindPrioButtonEvents() {
     document.querySelectorAll('.prioButton').forEach(button => {
         button.addEventListener('click', function (event) {
             togglePrioButtonState(event.target);
@@ -497,7 +497,7 @@ function togglePrioButtonState(target) {
     }
 }
 
-function bindSelectedOptionEvents() {
+function edit_bindSelectedOptionEvents() {
     document.querySelectorAll('.selected-option').forEach(selectedOption => {
         selectedOption.addEventListener('click', function () {
             const parentElement = this.parentElement;
@@ -515,7 +515,7 @@ function toggleDropdownIcon(dropdownIcon, isOpen) {
     }
 }
 
-function bindContactLineEvents() {
+function edit_bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
@@ -575,7 +575,7 @@ function removeNameFromSelection(name) {
     }
 }
 
-function bindCheckboxEvents() {
+function edit_bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function (event) {
             event.stopPropagation();
@@ -589,7 +589,7 @@ function bindCheckboxEvents() {
     });
 }
 
-function bindCategorySelectEvents() {
+function edit_bindCategorySelectEvents() {
     document.querySelectorAll('.category-select .option').forEach(option => {
         option.addEventListener('click', function () {
             const parent = this.closest('.category-select');
@@ -599,7 +599,7 @@ function bindCategorySelectEvents() {
     });
 }
 
-function bindSubtaskSelectEvents() {
+function edit_bindSubtaskSelectEvents() {
     const addSubtaskElement = document.querySelector('#add-subtask');
     const newSubtask = document.querySelector('#new-subtask');
 
@@ -681,7 +681,7 @@ function insertOrRemoveElements(elements, action, referenceElement) {
     });
 }
 
-function bindSearchEvent() {
+function edit_bindSearchEvent() {
     const searchInput = document.querySelector('.search-contacts');
     searchInput.addEventListener('input', function () {
         const searchValue = this.value.toLowerCase();

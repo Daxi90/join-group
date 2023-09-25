@@ -24,9 +24,9 @@ async function board_taskFormJS() { // renders add_task functionality
     bindSubtaskSelectEvents();
     bindSearchEvent();
     loadTasksFromAPI();
-    document.querySelectorAll('.custom-select').forEach(dropdown => {
+    document.querySelectorAll('.board-custom-select').forEach(dropdown => {
         dropdown.addEventListener('click', function () {
-            const optionsContainer = this.querySelector('.options');
+            const optionsContainer = this.querySelector('.board-options');
             if (optionsContainer) {
                 optionsContainer.style.display = optionsContainer.style.display === 'none' ? 'block' : 'none';
             }
@@ -35,7 +35,7 @@ async function board_taskFormJS() { // renders add_task functionality
 }
 
 function bindPrioButtonEvents() {
-    document.querySelectorAll('.prioButton').forEach(button => {
+    document.querySelectorAll('.board-prioButton').forEach(button => {
         button.addEventListener('click', function (event) {
             togglePrioButtonState(event.target);
         });
@@ -43,16 +43,16 @@ function bindPrioButtonEvents() {
 }
 
 function togglePrioButtonState(target) {
-    const isActive = target.classList.contains('selected');
-    document.querySelectorAll('.prioButton').forEach(button => {
+    const isActive = target.classList.contains('board-selected');
+    document.querySelectorAll('.board-prioButton').forEach(button => {
         button.classList.remove('selected');
-        button.querySelector('.icon').style.display = 'inline';
-        button.querySelector('.icon-active').style.display = 'none';
+        button.querySelector('.board-icon').style.display = 'inline';
+        button.querySelector('.board-icon-active').style.display = 'none';
     });
     if (!isActive) {
         target.classList.add('selected');
-        target.querySelector('.icon').style.display = 'none';
-        target.querySelector('.icon-active').style.display = 'inline';
+        target.querySelector('.board-icon').style.display = 'none';
+        target.querySelector('.board-icon-active').style.display = 'inline';
     }
 }
 
@@ -64,10 +64,10 @@ function toggleDropdownIcon(dropdownIcon, isOpen) {
 }
 
 function bindSelectedOptionEvents() {
-    document.querySelectorAll('.selected-option').forEach(selectedOption => {
+    document.querySelectorAll('.board-selected-option').forEach(selectedOption => {
         selectedOption.addEventListener('click', function () {
             const parentElement = this.parentElement;
-            const dropdownIcon = this.querySelector('.DDB');
+            const dropdownIcon = this.querySelector('.board-DDB');
             const isOpen = parentElement.classList.toggle('open');
             toggleDropdownIcon(dropdownIcon, isOpen);
         });
@@ -76,9 +76,9 @@ function bindSelectedOptionEvents() {
 
 
 function getNameAndColor(element, contacts) {
-    const nameElement = element.querySelector('.name');
+    const nameElement = element.querySelector('.board-name');
     const name = nameElement ? nameElement.innerText : null;
-    const initialsElement = element.querySelector('.initials');
+    const initialsElement = element.querySelector('.board-initials');
     const initials = initialsElement ? initialsElement.innerText : null; 
     const contact = contacts.find(contact => contact.initials === initials);
     const color = contact ? contact.color : 'gray';
@@ -87,7 +87,7 @@ function getNameAndColor(element, contacts) {
 
 
 function bindContactLineEvents() {
-    document.querySelectorAll('.option').forEach(option => {
+    document.querySelectorAll('.board-option').forEach(option => {
         option.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
             const { name, color } = getNameAndColor(this, contacts);
@@ -109,13 +109,13 @@ function toggleCheckboxSelection(checkbox, name, color) {
 }
 
 function bindCheckboxEvents() {
-    document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
+    document.querySelectorAll('.board-option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function (event) {
             event.stopPropagation();
 
-            const optionElement = this.closest('.option');
-            const name = optionElement.querySelector('.name').innerText;
-            const color = optionElement.querySelector('.initials').style.backgroundColor;
+            const optionElement = this.closest('.board-option');
+            const name = optionElement.querySelector('.board-name').innerText;
+            const color = optionElement.querySelector('.board-initials').style.backgroundColor;
 
             toggleCheckboxSelection(this, name, color);
         });
@@ -130,11 +130,11 @@ function addNameToSelection(name) {
         const color = contact.color;
         const id = contact.id;
         const initialsDiv = document.createElement('div');
-        initialsDiv.classList.add('selected-initials');
+        initialsDiv.classList.add('board-selected-initials');
         initialsDiv.style.backgroundColor = color;
         initialsDiv.innerText = initials;
         initialsDiv.setAttribute('data-contact-id', id);
-        document.querySelector('.selected-contacts').appendChild(initialsDiv);
+        document.querySelector('.board-selected-contacts').appendChild(initialsDiv);
     }
 }
 
@@ -142,7 +142,7 @@ function removeNameFromSelection(name) {
     const contact = contacts.find(contact => contact.name === name);
     if (contact) {
         const initials = contact.initials;
-        document.querySelectorAll('.selected-initials').forEach(selectedInitial => {
+        document.querySelectorAll('.board-selected-initials').forEach(selectedInitial => {
             if (selectedInitial.innerText === initials) {
                 selectedInitial.remove();
             }
@@ -152,13 +152,13 @@ function removeNameFromSelection(name) {
 
 
 function bindSearchEvent() {
-    const searchInput = document.querySelector('.search-contacts');
+    const searchInput = document.querySelector('.board-search-contacts');
     searchInput.addEventListener('input', function () {
         const searchValue = this.value.toLowerCase();
-        const options = document.querySelectorAll('.option');
+        const options = document.querySelectorAll('.board-option');
 
         options.forEach(option => {
-            const nameElement = option.querySelector('.name');
+            const nameElement = option.querySelector('.board-name');
             if (nameElement) {
                 const name = nameElement.innerText.toLowerCase();
                 if (name.includes(searchValue)) {
@@ -172,18 +172,18 @@ function bindSearchEvent() {
 }
 
 function bindCategorySelectEvents() {
-    document.querySelectorAll('.category-select .option').forEach(option => {
+    document.querySelectorAll('.board-category-select .board-option').forEach(option => {
         option.addEventListener('click', function () {
-            const parent = this.closest('.category-select');
-            parent.querySelector('.selected-option').innerText = this.innerText;
+            const parent = this.closest('.board-category-select');
+            parent.querySelector('.board-selected-option').innerText = this.innerText;
             parent.classList.remove('open');
         });
     });
 }
 
 function bindSubtaskSelectEvents() {
-    const addSubtaskElement = document.querySelector('#add-subtask');
-    const newSubtask = document.querySelector('#new-subtask');
+    const addSubtaskElement = document.querySelector('#board-add-subtask');
+    const newSubtask = document.querySelector('#board-new-subtask');
 
     addSubtaskElement.addEventListener('click', function () {
         addSubtaskElement.style.display = 'none';
@@ -248,9 +248,9 @@ function createDivider(src, className) {
 }
 
 function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
-    const subtaskList = document.getElementById('subtaskList');
-    const parentElement = document.querySelector('.subtasks-container');
-    const referenceElement = document.getElementById('new-subtask');
+    const subtaskList = document.getElementById('board-subtaskList');
+    const parentElement = document.querySelector('.board-subtasks-container');
+    const referenceElement = document.getElementById('board-new-subtask');
     const subtaskItem = createSubtaskItem(subtaskValue);
     const subtaskText = createSubtaskText(subtaskValue);
     const buttonContainer = createButtonContainer();
@@ -357,7 +357,7 @@ function restoreAddSubtaskElement(elements, addSubtaskElement) {
 }
 
 function renderContactsTab(contacts) {
-    const optionsContainer = document.getElementById('options');
+    const optionsContainer = document.getElementById('board-options');
     optionsContainer.innerHTML = '';
     contacts.forEach(contact => {
         createContactElement(contact, optionsContainer);
@@ -366,7 +366,7 @@ function renderContactsTab(contacts) {
 }
 
 function renderContactsWithID() {
-    let contactListDiv = document.getElementById("contactList");
+    let contactListDiv = document.getElementById("board-contactList");
     contactListDiv.innerHTML = '';  // Den aktuellen Inhalt löschen
     contacts.forEach(contact => {
         let contactDiv = document.createElement("div");
@@ -381,19 +381,19 @@ function renderContactsWithID() {
 
 function createContactElement(contact, container) {
     let option = document.createElement('div');
-    option.classList.add('option');
+    option.classList.add('board-option');
 
     let contactLine = document.createElement('div');
     contactLine.classList.add('contactLine');
 
     let initials = document.createElement('div');
-    initials.classList.add('initials');
+    initials.classList.add('board-initials');
     initials.style.backgroundColor = contact.color;
     initials.innerText = contact.initials;
     initials.setAttribute('data-contact-id', contact.id);
 
     let name = document.createElement('span');
-    name.classList.add('name');
+    name.classList.add('board-name');
     name.innerText = contact.name;
 
     contactLine.appendChild(initials);
@@ -423,9 +423,9 @@ function createAddContactButton(container) {
   }
 
 async function saveNewContact() {
-    let name = document.getElementById('contactName');
-    let mail = document.getElementById('contactMail');
-    let phone = document.getElementById('contactPhone');
+    let name = document.getElementById('board-contactName');
+    let mail = document.getElementById('board-contactMail');
+    let phone = document.getElementById('board-contactPhone');
     let initials = createInitals(name.value);
     let color = colorRandomizer();
     let id = contacts[contacts.length - 1]['id'] + 1;
@@ -474,14 +474,14 @@ function colorRandomizer() {
 }
 
 function getSelectedContactsInitials() {
-    return Array.from(document.querySelectorAll('.selected-contacts .selected-initials'))
+    return Array.from(document.querySelectorAll('.board-selected-contacts .selected-initials'))
         .map(initialElem => initialElem.textContent);
 }
 
 
 // Globales Klick-Event hinzufügen
 document.addEventListener('click', function (event) {
-    const openDropdowns = document.querySelectorAll('.custom-select'); // Ihre Dropdown-Elemente
+    const openDropdowns = document.querySelectorAll('.board-custom-select'); // Ihre Dropdown-Elemente
     let targetElement = event.target; // geklicktes Element
 
     // Über alle offenen Dropdowns iterieren
@@ -503,7 +503,7 @@ document.addEventListener('click', function (event) {
 
         if (!insideDropdown) {
             // Dies ist ein Klick außerhalb des Dropdowns, also Dropdown schließen
-            const optionsContainer = dropdown.querySelector('.options');
+            const optionsContainer = dropdown.querySelector('.board-options');
             if (optionsContainer) {
                 optionsContainer.style.display = 'none'; // Oder Ihre Methode zum Schließen
             }
@@ -516,7 +516,7 @@ function extractInputValue(elementId) {
 }
 
 function extractSelectedPriority() {
-    let priorityButtons = document.querySelectorAll('.prioButton');
+    let priorityButtons = document.querySelectorAll('.board-prioButton');
     let priority = null;
     priorityButtons.forEach(button => {
         if (button.classList.contains('selected')) {
@@ -542,6 +542,111 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
         assignedPersons: assignedTo,
         subtasks: subtasks
     };
+}
+
+async function loadAddTaskOffCanvas(){
+    renderBoardAddTaskForm();
+    await loadContactsFromAPI(); // Kontakte laden
+    await loadContactsTab(); // Kontakt-Tab laden
+    board_taskFormJS();
+
+    document.getElementById('add-task-offcanvas').classList.toggle('show-task-offcanvas');
+}
+
+function renderBoardAddTaskForm(){
+    let offcanvas = document.getElementById('add-task-offcanvas');
+    offcanvas.innerHTML = '';
+
+    offcanvas.innerHTML = /*html */`
+        <img id="board-addContact-closeBtn"style="cursor: pointer;" onclick="loadAddTaskOffCanvas()" src="assets/img/blueX.svg" alt="">
+        <form onsubmit="boardAddTask(); return false;" class="board-taskwidth">
+        <div>
+            <input required type="text" placeholder="Enter a title" id="board-title" class="board-titleInput">
+        </div>
+        <span class="board-FW700">Description</span>
+        <div>
+            <textarea required type="text" class="board-textarea" placeholder="Enter a description" id="board-description"></textarea>
+        </div>
+        <span class="board-FW700">Due date</span>
+        <div id="board-date_container">
+            <input type="date" class="board-date" placeholder="dd/mm/yyyy" id="board-duedate">
+        </div>
+        <div class="board-priority-form">
+            <div class="board-FW700">Priority</div>
+            <div class="board-priorityButtonsContainer">
+                <button type="button" class="board-prioButton board-prioUrgent">
+                    Urgent
+                    <img src="./assets/img/urgentIcon.svg" class="board-icon">
+                    <img class="board-icon-active" src="./assets/img/urgentIcon_white.svg" style="display: none;">
+                </button>
+                <button type="button" class="board-prioButton board-prioMedium">
+                    Medium
+                    <img src="./assets/img/mediumIcon.svg" class="board-icon">
+                    <img class="board-icon-active" src="./assets/img/mediumIcon_white.svg" style="display: none;">
+                </button>
+                <button type="button" class="board-prioButton board-prioLow">
+                    Low 
+                    <img src="./assets/img/lowIcon.svg" class="board-icon">
+                    <img class="board-icon-active" src="./assets/img/lowIcon_white.svg" style="display: none;">
+                </button>
+            </div>
+        </div>                
+        <div class="board-assignedTo-container">
+            <span class="board-FW700">Assigned to</span>
+            <div class="board-custom-select">
+                <div class="board-selected-option board-JuCe">
+                    <input type="text" class="board-search-contacts" placeholder="Select contacts to assign"><div class="board-DDB-container"><img src="./assets/img/dropdownDown.svg" class="board-DDB"></div>
+                </div>                
+                <div id="board-options" class="board-options">
+                   
+                    <div class="board-optionButton">
+                    
+                </div>
+                <button type="button" class="board-addContact">Add new contact <img src="./assets/img/addContact.svg" alt=""></button>
+                </div>
+                
+            </div>
+            <div class="board-selected-contacts"></div>
+        </div>                     
+        <div class="board-category-container">
+            <span class="board-FW700">Category</span>
+            <div class="board-custom-select board-category-select">
+                <div class="board-selected-option board-JuCe">Select Category
+                    <div class="board-DDB-container"><img src="./assets/img/dropdownDown.svg" class="board-DDB"></div>
+                </div>
+                    <div class="board-options">
+                        <div class="board-option">Technical task</div>
+                        <div class="board-option">User story</div>
+                    </div>
+            </div>
+        </div>
+        <div class="board-subtasks-container" id="board-subtasks-container">
+            <div class="board-subtasks-select" id="board-subtasksID">
+                <div class="board-FW700">Subtasks</div>
+                <div class="board-selected-subclass_option board-subclassSB" id="board-add-subtask">
+                    <span class="board-fontgray">Add new Subtask</span>
+                    <div class="board-DDB-container"><img src="./assets/img/blueplus.svg"></div>
+                </div>
+            </div>
+            <div class="board-subtask_options" id="board-new-subtask">
+                <!-- Hier kommen dynamische Input- und Button-Container -->
+            </div>
+            <ul class="board-subtasks-list" id="board-subtaskList">
+                <!-- Hier kommen die Subtasks -->
+            </ul>
+        </div> 
+        <div class="board-submit">
+            <button onclick="board_clearInput()" class="board-clearInput" type="button">
+                Clear
+                <svg class="board-my-svg" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="clearstroke" d="M12.0008 12.5001L17.2438 17.7431M6.75781 17.7431L12.0008 12.5001L6.75781 17.7431ZM17.2438 7.25708L11.9998 12.5001L17.2438 7.25708ZM11.9998 12.5001L6.75781 7.25708L11.9998 12.5001Z" stroke="#4589FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>          
+            <button class="board-createTask">Create task <img src="./assets/img/check.svg" alt=""></button>
+        </div>                   
+    </form>
+    `
+
 }
 
 

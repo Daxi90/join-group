@@ -57,7 +57,7 @@ async function boardAddTask() {
     await saveTasksToAPI();
 
     // UI zurücksetzen
-    clearInput();
+    board_clearInput();
     kanbanInit(tasks);
     loadAddTaskOffCanvas();
 }
@@ -78,6 +78,20 @@ function resetCategorySelect() {
 }
 
 function clearInput() {
+    document.querySelector('.titleInput').value = '';
+    document.querySelector('#description').value = '';
+    document.querySelector('#duedate').value = '';
+    const selectedPrioButton = document.querySelector('.prioButton.selected');
+    if (selectedPrioButton) {
+        togglePrioButtonState(selectedPrioButton);
+    }
+    document.querySelector('.selected-contacts').innerHTML = '';
+    resetCategorySelect();
+    document.querySelectorAll('.subtask-item').forEach(item => item.remove());
+}
+
+
+function board_clearInput() {
     document.querySelector('.titleInput').value = '';
     document.querySelector('#description').value = '';
     document.querySelector('#duedate').value = '';
