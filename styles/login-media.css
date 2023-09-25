@@ -84,3 +84,13 @@
         padding:10px;
     }
 }
+
+@media(max-height: 680px) {
+    .legal {
+        margin-top: 13px;
+    }
+
+    .login-header-container {
+        top: 70px;
+    }
+}

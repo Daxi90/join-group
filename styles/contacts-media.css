@@ -1,3 +1,11 @@
+@media(max-width: 1200px) {
+    .name-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
 @media(max-width: 1024px) {
     .contacts-content {
         width: 100%;
@@ -21,4 +29,6 @@
     #container {
         overflow: auto;
     }
+
+
 }
