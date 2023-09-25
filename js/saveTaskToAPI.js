@@ -29,6 +29,39 @@ async function addTask() {
     clearInput();
 }
 
+async function boardAddTask() {
+    // Aus den Eingabefeldern extrahierte Daten
+    let title = extractInputValue('title');
+    let description = extractInputValue('description');
+    let duedate = extractInputValue('duedate');
+    let priority = extractSelectedPriority();
+
+    let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
+        .map(element => parseInt(element.getAttribute("data-contact-id")));
+
+    let category = document.querySelector('.category-select .selected-option').textContent;
+    let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
+        .map((option, index) => ({
+            id: `${tasks.length}.${index + 1}`,
+            title: option.textContent.trim(),
+            completed: false
+        }));
+
+    // Erstellung des neuen Task-Objekts
+    let newTask = createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks);
+
+    // Hinzufügen des neuen Task-Objekts zum tasks Array
+    tasks.push(newTask);
+
+    // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
+    await saveTasksToAPI();
+
+    // UI zurücksetzen
+    clearInput();
+    kanbanInit(tasks);
+    loadAddTaskOffCanvas();
+}
+
 
 async function saveTasksToAPI() {
     try {
