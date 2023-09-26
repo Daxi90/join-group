@@ -200,7 +200,7 @@ async function editContact() {
 }
 
 function cssMediaclass() {
-    if (screen.width >= 1024) {
+    if (screen.width <= 1024) {
         document.getElementById('contactContainer').style = 'display: flex';
         document.getElementById('contactArrowBackMedia').style = 'display: flex';
     }
@@ -222,7 +222,7 @@ function renderEditContact(editName, editEmail, editPhone) {
         <form class="new-contact-input-container" onsubmit="editContact(); return false;">
             <div class="new-contact-input-field">
                 <input class="new-contact-input" placeholder="Name" type="text" required
-                    title="Please enter the full name" id="editContactName" pattern="^\w+\s+\w+$">
+                    title="Please enter the full name" id="editContactName" pattern="^\\w+\\s+\\w+$">
                 <img src="assets/img/contactGrey.svg">
             </div>
             <div class="new-contact-input-field">
