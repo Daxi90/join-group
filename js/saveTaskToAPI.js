@@ -27,6 +27,11 @@ async function addTask() {
 
     // UI zurücksetzen
     clearInput();
+    addTaskPopup();
+    setTimeout(() => {
+        const popup = document.querySelector('.popup');
+        popup.classList.add('show-popup');
+      }, 100);
 }
 
 async function boardAddTask() {

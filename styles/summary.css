@@ -135,10 +135,13 @@ body{
     text-align: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
+    .taskwidth {
+        width: 370px;
+    }
     .summaryBox {
         padding: 2px;
-        width: 100%;
+        width: 90%;
         margin: 2px;
         height: 100%;
         flex-direction: column;
@@ -150,6 +153,7 @@ body{
     }
 
     .toplayer {
+        width: 360px;
         flex-direction: column;
         gap: 5px;
         height: fit-content;
@@ -180,9 +184,10 @@ body{
     }
 
     .botlayer {
+        width: 360px;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        row-gap: 15px;
+        row-gap: 5px;
         align-items: center;
         justify-content: center;
         justify-items: center;
@@ -193,19 +198,23 @@ body{
 }
 
 @media screen and (max-width: 500px) {
+    main {
+        padding: unset !important;
+    }
+
     .urgentbox {
-        width: 280px;
+        width: 260px;
         height: 80px;
     }
 
     #TaskTD {
-        width: 280px;
+        width: 260px;
     }
 
     #taskIB, #taskIP, #AFeedback, #done {
         width: 102px;
         height: 120Px;
-        padding: 15px 40px 15px 40px;
+        padding: 10px 25px 10px 25px;
 
     }
 }
