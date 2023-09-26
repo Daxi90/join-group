@@ -109,7 +109,7 @@ function renderEditForm(taskId, containerId) {
     for (const subtask of taskData.subtasks) {
       const isChecked = subtask.completed ? "checked" : "";
       subtasksHTML += `
-      <li class="subtask-item">
+      <li class="board-subtask-item">
       <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
       <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
       <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
@@ -162,7 +162,7 @@ function renderEditForm(taskId, containerId) {
    * Get the selected priority.
    * @returns {string} The selected priority.
    */
-  function getSelectedPriority() {
+  function edit_getSelectedPriority() {
     const buttons = document.querySelectorAll(".prioButton");
     for (const button of buttons) {
       if (button.classList.contains("selected")) {
@@ -176,7 +176,7 @@ function renderEditForm(taskId, containerId) {
    * @param {Object[]} contacts - The list of contact objects.
    * @returns {string[]} The IDs of the assigned persons.
    */
-  function getAssignedPersons(contacts) {
+  function edit_getAssignedPersons(contacts) {
     const checkboxes = document.querySelectorAll(
       '#options .option input[type="checkbox"]'
     );
@@ -195,7 +195,7 @@ function renderEditForm(taskId, containerId) {
    * Get the selected category.
    * @returns {Object} The category object.
    */
-  function getSelectedCategory() {
+  function edit_getSelectedCategory() {
     const category = document
       .querySelector(".category-select .selected-option")
       .textContent.trim();
@@ -209,9 +209,8 @@ function renderEditForm(taskId, containerId) {
    * Get the list of subtasks.
    * @returns {Object[]} The list of subtask objects.
    */
-  function getSubtasks() {
-    const tasks = Array.from(document.querySelectorAll(".task-item")); // Beispiel für die Task-Liste
-    return Array.from(document.querySelectorAll(".subtask-item")).map(
+  function edit_getSubtasks() {
+    return Array.from(document.querySelectorAll(".board-subtask-item")).map(
       (subtask, index) => {
         const input = subtask.querySelector('input[type="text"]');
         const checkbox = subtask.querySelector('input[type="checkbox"]');
@@ -240,10 +239,10 @@ function renderEditForm(taskId, containerId) {
     }
   
     updateTaskFields(task, ["title", "description", "duedate"]);
-    task.priority = getSelectedPriority();
-    task.assignedPersons = getAssignedPersons(contacts);
-    task.category = getSelectedCategory();
-    task.subtasks = getSubtasks();
+    task.priority = edit_getSelectedPriority();
+    task.assignedPersons = edit_getAssignedPersons(contacts);
+    task.category = edit_getSelectedCategory();
+    task.subtasks = edit_getSubtasks();
   
     setItem("tasks", tasks); // Speichert die Änderungen
     closeTaskCard();
@@ -431,12 +430,20 @@ function renderEditForm(taskId, containerId) {
     });
 }
 
+/**
+ * Asynchronously loads contacts and renders them in the contacts tab.
+ * @async
+ */
 async function loadContactsTab() {
   let contacts = await getItem('contacts'); // Fetches contacts from API
   contacts = JSON.parse(contacts);
   renderContactsTab(contacts);
 }
 
+/**
+ * Renders the contacts in the contacts tab.
+ * @param {Array} contacts - The list of contacts to render.
+ */
 function renderContactsTab(contacts) {
   const optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
@@ -445,6 +452,11 @@ function renderContactsTab(contacts) {
   });
 }
 
+/**
+ * Creates a contact element and appends it to the given container.
+ * @param {Object} contact - The contact object.
+ * @param {HTMLElement} container - The container to append the contact element to.
+ */
 function createContactElement(contact, container) {
   let option = document.createElement('div');
   option.classList.add('option');
@@ -474,7 +486,9 @@ function createContactElement(contact, container) {
   container.appendChild(option);
 }
 
-
+/**
+ * Binds click events to priority buttons.
+ */
 function edit_bindPrioButtonEvents() {
     document.querySelectorAll('.prioButton').forEach(button => {
         button.addEventListener('click', function (event) {
@@ -483,6 +497,11 @@ function edit_bindPrioButtonEvents() {
     });
 }
 
+
+/**
+ * Toggles the state of a priority button.
+ * @param {HTMLElement} target - The priority button element.
+ */
 function togglePrioButtonState(target) {
     const isActive = target.classList.contains('selected');
     document.querySelectorAll('.prioButton').forEach(button => {
@@ -497,6 +516,9 @@ function togglePrioButtonState(target) {
     }
 }
 
+/**
+ * Binds click events to selected options.
+ */
 function edit_bindSelectedOptionEvents() {
     document.querySelectorAll('.selected-option').forEach(selectedOption => {
         selectedOption.addEventListener('click', function () {
@@ -508,6 +530,11 @@ function edit_bindSelectedOptionEvents() {
     });
 }
 
+/**
+ * Toggles the dropdown icon based on its state.
+ * @param {HTMLElement} dropdownIcon - The dropdown icon element.
+ * @param {boolean} isOpen - The state of the dropdown.
+ */
 function toggleDropdownIcon(dropdownIcon, isOpen) {
     const iconPath = isOpen ? 'assets/img/dropdownUp.svg' : 'assets/img/dropdownDown.svg';
     if (dropdownIcon) {
@@ -515,6 +542,9 @@ function toggleDropdownIcon(dropdownIcon, isOpen) {
     }
 }
 
+/**
+ * Binds click events to contact lines.
+ */
 function edit_bindContactLineEvents() {
     document.querySelectorAll('.option').forEach(option => {
         option.addEventListener('click', function () {
@@ -528,6 +558,12 @@ function edit_bindContactLineEvents() {
     });
 }
 
+/**
+ * Retrieves the name and color from a contact element.
+ * @param {HTMLElement} element - The contact element.
+ * @param {Array} contacts - The list of contacts.
+ * @returns {Object} An object containing the name and color.
+ */
 function getNameAndColor(element, contacts) {
     const nameElement = element.querySelector('.name');
     const name = nameElement ? nameElement.innerText : null;
@@ -538,6 +574,13 @@ function getNameAndColor(element, contacts) {
     return { name, color };
 }
 
+
+/**
+ * Toggles the checkbox selection and updates the UI accordingly.
+ * @param {HTMLInputElement} checkbox - The checkbox element.
+ * @param {string} name - The name of the contact.
+ * @param {string} color - The color associated with the contact.
+ */
 function toggleCheckboxSelection(checkbox, name, color) {
     checkbox.checked = !checkbox.checked;
     if (checkbox.checked) {
@@ -547,7 +590,10 @@ function toggleCheckboxSelection(checkbox, name, color) {
     }
 }
 
-
+/**
+ * Adds a selected name to the UI.
+ * @param {string} name - The name of the contact to add.
+ */
 function addNameToSelection(name) {
     const contact = contacts.find(contact => contact.name === name);
     if (contact) {
@@ -563,6 +609,10 @@ function addNameToSelection(name) {
     }
 }
 
+/**
+ * Removes a selected name from the UI.
+ * @param {string} name - The name of the contact to remove.
+ */
 function removeNameFromSelection(name) {
     const contact = contacts.find(contact => contact.name === name);
     if (contact) {
@@ -575,6 +625,9 @@ function removeNameFromSelection(name) {
     }
 }
 
+/**
+ * Binds click events to checkboxes.
+ */
 function edit_bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function (event) {
@@ -589,6 +642,9 @@ function edit_bindCheckboxEvents() {
     });
 }
 
+/**
+ * Binds click events to category select options.
+ */
 function edit_bindCategorySelectEvents() {
     document.querySelectorAll('.category-select .option').forEach(option => {
         option.addEventListener('click', function () {
@@ -599,6 +655,9 @@ function edit_bindCategorySelectEvents() {
     });
 }
 
+/**
+ * Binds click events to add subtask elements.
+ */
 function edit_bindSubtaskSelectEvents() {
     const addSubtaskElement = document.querySelector('#add-subtask');
     const newSubtask = document.querySelector('#new-subtask');
@@ -639,6 +698,10 @@ function edit_bindSubtaskSelectEvents() {
     });
 }
 
+/**
+ * Creates an input element for subtasks.
+ * @returns {HTMLInputElement} The created input element.
+ */
 function createInputElement() {
     const inputField = document.createElement('input');
     inputField.setAttribute('type', 'text');
@@ -648,6 +711,13 @@ function createInputElement() {
     return inputField;
 }
 
+/**
+ * Creates a button element with an image.
+ * @param {string} src - The source URL of the image.
+ * @param {string} imgClass - The CSS class for the image.
+ * @param {string} btnClass - The CSS class for the button.
+ * @returns {HTMLButtonElement} The created button element.
+ */
 function createButtonWithImage(src, imgClass, btnClass) {
     const button = document.createElement('button');
     const image = document.createElement('img');
@@ -659,6 +729,14 @@ function createButtonWithImage(src, imgClass, btnClass) {
     return button;
 }
 
+/**
+ * Validates and adds a new subtask.
+ * @param {HTMLInputElement} inputField - The input field containing the subtask name.
+ * @param {HTMLButtonElement} checkButton - The check button element.
+ * @param {HTMLButtonElement} cancelButton - The cancel button element.
+ * @param {HTMLElement} addSubtaskElement - The "Add Subtask" element.
+ * @param {HTMLElement} inputContainer - The container for the input field.
+ */
 function edit_validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
     const subtaskValue = inputField.value.trim();
     if (subtaskValue) {
@@ -668,6 +746,11 @@ function edit_validateAndAddSubtask(inputField, checkButton, cancelButton, addSu
     }
 }
 
+/**
+ * Restores the "Add Subtask" element to its initial state.
+ * @param {Array} elements - The elements to remove.
+ * @param {HTMLElement} addSubtaskElement - The "Add Subtask" element.
+ */
 function restoreAddSubtaskElement(elements, addSubtaskElement) {
     insertOrRemoveElements(elements, 'remove');
     addSubtaskElement.style.display = 'flex';
@@ -681,6 +764,9 @@ function insertOrRemoveElements(elements, action, referenceElement) {
     });
 }
 
+/**
+ * Binds the search event to the search input.
+ */
 function edit_bindSearchEvent() {
     const searchInput = document.querySelector('.search-contacts');
     searchInput.addEventListener('input', function () {
@@ -702,6 +788,15 @@ function edit_bindSearchEvent() {
 }
 
 
+/**
+ * Adds a new subtask.
+ * @param {string} subtaskValue - The value of the new subtask.
+ * @param {HTMLInputElement} inputField - The input field for the new subtask.
+ * @param {HTMLButtonElement} checkButton - The check button for the new subtask.
+ * @param {HTMLButtonElement} cancelButton - The cancel button for the new subtask.
+ * @param {HTMLElement} addSubtaskElement - The "Add Subtask" element.
+ * @param {HTMLElement} inputContainer - The container for the input field.
+ */
 function edit_addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
     const subtaskList = document.getElementById('subtaskList');
     const parentElement = document.querySelector('.subtasks-container');
@@ -725,8 +820,8 @@ function edit_addSubtask(subtaskValue, inputField, checkButton, cancelButton, ad
 
     subtaskItem.appendChild(buttonContainer);
 
-    attachEditListener(editButton, subtaskItem, buttonContainer);
-    attachDeleteListener(deleteButton);
+    board_attachEditListener(editButton, subtaskItem, buttonContainer);
+    board_attachDeleteListener(deleteButton);
 
     subtaskList.appendChild(subtaskItem);
 
@@ -734,6 +829,11 @@ function edit_addSubtask(subtaskValue, inputField, checkButton, cancelButton, ad
     addSubtaskElement.style.display = 'flex';
 }
 
+/**
+ * Creates a new subtask item element.
+ * @param {string} subtaskValue - The value of the subtask.
+ * @returns {HTMLLIElement} The created subtask item element.
+ */
 function createSubtaskItem(subtaskValue) {
     const subtaskItem = document.createElement('li');
     subtaskItem.classList.add('board-subtask-item');
@@ -741,25 +841,44 @@ function createSubtaskItem(subtaskValue) {
     return subtaskItem;
 }
 
+/**
+ * Creates a new subtask text element.
+ * @param {string} subtaskValue - The value of the subtask.
+ * @returns {HTMLSpanElement} The created subtask text element.
+ */
 function createSubtaskText(subtaskValue) {
     const subtaskText = document.createElement('span');
     subtaskText.innerText = '● ' + subtaskValue;
     return subtaskText;
 }
 
+/**
+ * Creates a new button container element.
+ * @returns {HTMLDivElement} The created button container element.
+ */
 function createButtonContainer() {
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('button-container');
     return buttonContainer;
 }
 
-
+/**
+ * Asynchronously loads tasks from the API.
+ * @async
+ * @returns {Promise<Array>} A promise that resolves with an array of tasks.
+ */
 async function loadTasksFromAPI() {
     let APItasks = JSON.parse(await getItem('tasks'));
     tasks = APItasks;
     return tasks;
 }
 
+/**
+ * Creates a new divider element.
+ * @param {string} src - The source URL of the image.
+ * @param {string} className - The CSS class for the divider.
+ * @returns {HTMLImageElement} The created divider element.
+ */
 function createDivider(src, className) {
   const divider = document.createElement('img');
   divider.setAttribute('src', src);
@@ -767,7 +886,13 @@ function createDivider(src, className) {
   return divider;
 }
 
-function attachEditListener(editButton, subtaskItem, buttonContainer) {
+/**
+ * Attaches an edit listener to a subtask item.
+ * @param {HTMLButtonElement} editButton - The edit button element.
+ * @param {HTMLLIElement} subtaskItem - The subtask item element.
+ * @param {HTMLDivElement} buttonContainer - The button container element.
+ */
+function board_attachEditListener(editButton, subtaskItem, buttonContainer) {
   editButton.addEventListener('click', function () {
       const subtaskTextElement = subtaskItem.querySelector('span:not([class])');
       this.style.display = 'none';
@@ -790,12 +915,21 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
   });
 }
 
-function attachDeleteListener(deleteButton) {
+/**
+ * Attaches a delete listener to a subtask item.
+ * @param {HTMLButtonElement} deleteButton - The delete button element.
+ */
+function board_attachDeleteListener(deleteButton) {
   deleteButton.addEventListener('click', function () {
-      this.closest('.subtask-item').remove();
+      this.closest('.board-subtask-item').remove();
   });
 }
 
-function removeElements(elements) {
+
+/**
+ * Removes an array of elements from the DOM.
+ * @param {Array<HTMLElement>} elements - The elements to remove.
+ */
+function board_removeElements(elements) {
   elements.forEach(element => element.remove());
 }

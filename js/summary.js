@@ -1,3 +1,15 @@
+function countAllTasks(elementId) {
+  const count = tasks.length;
+  document.querySelector(`#${elementId} h2`).textContent = count;
+}
+
+
+function countUrgentTasks(elementId) {
+  const count = tasks.filter(task => task.priority === 'Urgent').length;
+  document.querySelector(`#${elementId} h2`).textContent = count;
+}
+
+
 function countTasksByStatus(status, elementId) {
     const count = tasks.filter(task => task.status === status).length;
     document.querySelector(`#${elementId} h2`).textContent = count;
@@ -54,6 +66,8 @@ loadTasksFromAPI().then(() => {
     countTasksByStatus("inprogress", "taskIP");
     countTasksByStatus("awaitfeedback", "AFeedback");
     countTasksByStatus("done", "done");
+    countAllTasks("taskIB");
+    countUrgentTasks("urgent")
     getUpcomingDeadline();
     setUsername();
 });

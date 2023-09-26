@@ -543,3 +543,28 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
         subtasks: subtasks
     };
 }
+
+
+function addTaskPopup() {
+    const popup = document.createElement("div");
+
+    popup.className = "popup";
+    popup.innerText = "Task successfully crated!";
+  
+    document.body.appendChild(popup);
+  
+    setTimeout(() => {
+      popup.classList.add('show-popup');
+    }, 100);
+  
+    setTimeout(() => {
+      popup.style.bottom = "-100px";
+      popup.classList.remove('show-popup');
+      
+      setTimeout(() => {
+        popup.remove();
+      }, 500);
+  
+    }, 3000); 
+  }
+  

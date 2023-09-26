@@ -3,7 +3,16 @@ async function addTask() {
     let title = extractInputValue('title');
     let description = extractInputValue('description');
     let duedate = extractInputValue('duedate');
+    if (duedate.value === null || duedate.trim() === ''){
+        console.log(duedate)
+        alert('Bitte wähle ein Datum');
+        return;
+    };
     let priority = extractSelectedPriority();
+    if (priority === null) {
+        alert('Bitte wähle eine Priorität aus.');
+        return;
+    }
 
     let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
         .map(element => parseInt(element.getAttribute("data-contact-id")));
@@ -27,6 +36,11 @@ async function addTask() {
 
     // UI zurücksetzen
     clearInput();
+    addTaskPopup();
+    setTimeout(() => {
+        const popup = document.querySelector('.popup');
+        popup.classList.add('show-popup');
+      }, 100);
 }
 
 async function boardAddTask() {
