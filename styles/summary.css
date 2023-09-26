@@ -2,13 +2,11 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
-#main {
+main {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 912px;
-    height: 591px;
     margin: 0 auto;
 }
 
@@ -100,6 +98,7 @@ body{
 }
 
 .summaryBox {
+    max-width: fit-content;
     width: 95%;
     margin: 0.5%;
     gap: 10px;
@@ -163,6 +162,7 @@ body{
         width: 90%;
         height: 150px;
         cursor: pointer;
+        font-size: smaller;
     }
     #TaskTD {
         width: 90%;
