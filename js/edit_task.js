@@ -109,7 +109,7 @@ function renderEditForm(taskId, containerId) {
     for (const subtask of taskData.subtasks) {
       const isChecked = subtask.completed ? "checked" : "";
       subtasksHTML += `
-      <li class="subtask-item">
+      <li class="board-subtask-item">
       <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
       <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
       <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
@@ -162,7 +162,7 @@ function renderEditForm(taskId, containerId) {
    * Get the selected priority.
    * @returns {string} The selected priority.
    */
-  function getSelectedPriority() {
+  function edit_getSelectedPriority() {
     const buttons = document.querySelectorAll(".prioButton");
     for (const button of buttons) {
       if (button.classList.contains("selected")) {
@@ -176,7 +176,7 @@ function renderEditForm(taskId, containerId) {
    * @param {Object[]} contacts - The list of contact objects.
    * @returns {string[]} The IDs of the assigned persons.
    */
-  function getAssignedPersons(contacts) {
+  function edit_getAssignedPersons(contacts) {
     const checkboxes = document.querySelectorAll(
       '#options .option input[type="checkbox"]'
     );
@@ -195,7 +195,7 @@ function renderEditForm(taskId, containerId) {
    * Get the selected category.
    * @returns {Object} The category object.
    */
-  function getSelectedCategory() {
+  function edit_getSelectedCategory() {
     const category = document
       .querySelector(".category-select .selected-option")
       .textContent.trim();
@@ -209,9 +209,8 @@ function renderEditForm(taskId, containerId) {
    * Get the list of subtasks.
    * @returns {Object[]} The list of subtask objects.
    */
-  function getSubtasks() {
-    const tasks = Array.from(document.querySelectorAll(".task-item")); // Beispiel für die Task-Liste
-    return Array.from(document.querySelectorAll(".subtask-item")).map(
+  function edit_getSubtasks() {
+    return Array.from(document.querySelectorAll(".board-subtask-item")).map(
       (subtask, index) => {
         const input = subtask.querySelector('input[type="text"]');
         const checkbox = subtask.querySelector('input[type="checkbox"]');
@@ -240,10 +239,10 @@ function renderEditForm(taskId, containerId) {
     }
   
     updateTaskFields(task, ["title", "description", "duedate"]);
-    task.priority = getSelectedPriority();
-    task.assignedPersons = getAssignedPersons(contacts);
-    task.category = getSelectedCategory();
-    task.subtasks = getSubtasks();
+    task.priority = edit_getSelectedPriority();
+    task.assignedPersons = edit_getAssignedPersons(contacts);
+    task.category = edit_getSelectedCategory();
+    task.subtasks = edit_getSubtasks();
   
     setItem("tasks", tasks); // Speichert die Änderungen
     closeTaskCard();
@@ -725,8 +724,8 @@ function edit_addSubtask(subtaskValue, inputField, checkButton, cancelButton, ad
 
     subtaskItem.appendChild(buttonContainer);
 
-    attachEditListener(editButton, subtaskItem, buttonContainer);
-    attachDeleteListener(deleteButton);
+    board_attachEditListener(editButton, subtaskItem, buttonContainer);
+    board_attachDeleteListener(deleteButton);
 
     subtaskList.appendChild(subtaskItem);
 
@@ -767,7 +766,7 @@ function createDivider(src, className) {
   return divider;
 }
 
-function attachEditListener(editButton, subtaskItem, buttonContainer) {
+function board_attachEditListener(editButton, subtaskItem, buttonContainer) {
   editButton.addEventListener('click', function () {
       const subtaskTextElement = subtaskItem.querySelector('span:not([class])');
       this.style.display = 'none';
@@ -790,12 +789,12 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
   });
 }
 
-function attachDeleteListener(deleteButton) {
+function board_attachDeleteListener(deleteButton) {
   deleteButton.addEventListener('click', function () {
-      this.closest('.subtask-item').remove();
+      this.closest('.board-subtask-item').remove();
   });
 }
 
-function removeElements(elements) {
+function board_removeElements(elements) {
   elements.forEach(element => element.remove());
 }

@@ -1144,7 +1144,7 @@ board-main {
     border-radius: 25px;
 }
 
-.board-subtask-item .board-button-container button {
+.board-subtask-item .button-container button {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.5s linear;
@@ -1154,8 +1154,8 @@ board-main {
     width: 24px;
 }
 
-.board-subtask-item:hover .board-button-container button,
-.board-subtask-item:hover .board-button-container .board-smalldivider {
+.board-subtask-item:hover .button-container button,
+.board-subtask-item:hover .button-container .board-smalldivider {
     visibility: visible;
     opacity: 1;
     transition: visibility 0s, opacity 0.5s linear;
@@ -1163,7 +1163,7 @@ board-main {
     background: #D2E3FF;;
 }
 
-.board-button-container {
+.button-container {
     display: flex;
     justify-content: space-evenly;
     width: 60px;
