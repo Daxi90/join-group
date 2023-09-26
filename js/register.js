@@ -15,10 +15,13 @@ async function register() {
     let signUpMail = document.getElementById('signUpMail');
     let signUpPassword = document.getElementById('signUpPassword');
     let confirmPassword = document.getElementById('signUpConfirmpassword');
+    let initials = createInitals(signUpUser.value);
     users.push({
         user: signUpUser.value,
         mail: signUpMail.value,
-        password: signUpPassword.value
+        password: signUpPassword.value,
+        login: 0,
+        initials: initials
     })
 
     signUpUser.value = '';
@@ -38,4 +41,10 @@ function checkPrivacyPolicy() {
 function uncheckPrivacyPolicy() {
     document.getElementById('signUpCheckmark').classList.remove('d-none');
     document.getElementById('signUpCheckmarkChecked').classList.add('d-none');
+}
+
+function createInitals(name) {
+    let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+    console.log(initials);
+    return initials;
 }
