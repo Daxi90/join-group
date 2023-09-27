@@ -21,6 +21,7 @@ async function includeHTML() {
 
 document.addEventListener("htmlIncluded", async function () {
   highlightLinks();
+  setUserInitials();
 
   // Prüfen, ob wir uns auf der "board" oder "add_task" Seite befinden
   if (window.location.href.includes("board") || window.location.href.includes("add_task")) {
@@ -57,4 +58,9 @@ function highlightLinks(){
       }
   });
 }
+
+function setUserInitials(){
+  document.getElementById('userInitials').innerHTML = 'DU';
+}
+
 

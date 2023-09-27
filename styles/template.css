@@ -54,8 +54,26 @@ header {
   gap: 16px;
 }
 
-.header-info img {
+.header-info img, #userInitials {
   cursor: pointer;
+}
+
+#userInitials {
+  background-color: white;
+  color: #4589ff;
+  padding: 8px;
+  clip-path: circle(50%);
+  margin: 3px;
+  font-weight: 600;
+  font-size: 20px;
+  user-select: none;
+}
+
+.outerContainer {
+  display: inline-block;
+  margin: 16px;
+  border: 3px solid white;  /* Feine weiße Linie */
+  border-radius: 50%;  /* Rundet die Ecken ab, damit es ein Kreis wird */
 }
 
 #sidebar {
