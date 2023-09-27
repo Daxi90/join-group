@@ -61,6 +61,14 @@ body {
     cursor: pointer;
 }
 
+.sign-up-button-disabled {
+    border-radius: 8px;
+    background: var(--version-2-main-color, #c2d8ff);
+    padding: 10px 20px;
+    border: none;
+    color: #FFF;
+}
+
 .sign-up-button:hover {
     background: var(--ligth-blue, #005DFF);
 }

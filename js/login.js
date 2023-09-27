@@ -34,10 +34,3 @@ function dontRememberMe() {
     document.getElementById('loginCheckmark').classList.remove('d-none');
     document.getElementById('loginCheckmarkChecked').classList.add('d-none');
 }
-
-function createInitals(name) {
-    let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
-    console.log(initials);
-    return initials;
-}
-

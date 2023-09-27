@@ -36,11 +36,17 @@ async function register() {
 function checkPrivacyPolicy() {
     document.getElementById('signUpCheckmark').classList.add('d-none');
     document.getElementById('signUpCheckmarkChecked').classList.remove('d-none');
+    document.getElementById('signUpButton').disabled = false;
+    document.getElementById('signUpButton').classList.remove('sign-up-button-disabled');
+    document.getElementById('signUpButton').classList.add('sign-up-button');
 }
 
 function uncheckPrivacyPolicy() {
     document.getElementById('signUpCheckmark').classList.remove('d-none');
     document.getElementById('signUpCheckmarkChecked').classList.add('d-none');
+    document.getElementById('signUpButton').disabled = true;
+    document.getElementById('signUpButton').classList.add('sign-up-button-disabled');
+    document.getElementById('signUpButton').classList.remove('sign-up-button');
 }
 
 function createInitals(name) {
