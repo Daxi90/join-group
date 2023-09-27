@@ -110,7 +110,8 @@ function toggleCheckboxSelection(checkbox, name, color) {
 
 function bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('click', function (event) {
+        checkbox.addEventListener('change', function (event) {
+            console.log('Checkbox Change Event');
             event.stopPropagation();
 
             const optionElement = this.closest('.option');
@@ -172,6 +173,7 @@ function bindSearchEvent() {
 }
 
 function bindCategorySelectEvents() {
+    console.log('bindCategoryEvnts() called')
     document.querySelectorAll('.category-select .option').forEach(option => {
         option.addEventListener('click', function () {
             const parent = this.closest('.category-select');
@@ -481,11 +483,20 @@ function getSelectedContactsInitials() {
 
 // Globales Klick-Event hinzufügen
 document.addEventListener('click', function (event) {
+    let target = event.target;
+    while (target != null) {
+        if (target.classList.contains('option')) {
+            return;
+        }
+        target = target.parentElement;
+    }
     const openDropdowns = document.querySelectorAll('.custom-select'); // Ihre Dropdown-Elemente
     let targetElement = event.target; // geklicktes Element
 
     // Über alle offenen Dropdowns iterieren
     openDropdowns.forEach(dropdown => {
+        let targetElement = event.target;
+
         // Überprüfen, ob das geklickte Element oder eines seiner Elternelemente das Dropdown ist
         let insideDropdown = false;
 
@@ -502,12 +513,12 @@ document.addEventListener('click', function (event) {
         } while (targetElement);
 
         if (!insideDropdown) {
-            // Dies ist ein Klick außerhalb des Dropdowns, also Dropdown schließen
             const optionsContainer = dropdown.querySelector('.options');
             if (optionsContainer) {
-                optionsContainer.style.display = 'none'; // Oder Ihre Methode zum Schließen
+                optionsContainer.style.display = 'none';
             }
         }
+        
     });
 });
 

@@ -197,7 +197,7 @@ input:-ms-input-placeholder {
     right: 0;
     background: white;
     border-bottom: 1px solid gray;
-    display: none !important;
+    display: none;
     overflow-y: auto;
     max-height: 340px;
 }
@@ -216,8 +216,13 @@ input:-ms-input-placeholder {
     border-radius: 10px;
 }
 
+
+.custom-select .options {
+    display: none;
+  }
+
 .custom-select.open .options {
-    display: block !important;
+    display: block;
 }
 
 .mb20 {
@@ -342,6 +347,7 @@ input:-ms-input-placeholder {
     font-weight: 700;
     font-size: 19px;
     line-height: 22.8px;
+    margin-bottom: 5px;
 }
 
 main {
