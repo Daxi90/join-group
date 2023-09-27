@@ -1,4 +1,5 @@
 async function init() {
+  checkStorageAndRedirect();
   await includeHTML();
 }
 
@@ -63,4 +64,15 @@ function setUserInitials(){
   document.getElementById('userInitials').innerHTML = 'DU';
 }
 
+function checkStorageAndRedirect() {
+  const storedValue = localStorage.getItem('user') || sessionStorage.getItem('user');
+  
+  if (storedValue === 'true') {
+    // Bleib auf der aktuellen Seite oder ruf sie neu auf
+    //location.reload();
+  } else {
+    // Leite zu einer anderen Seite weiter
+    window.location.href = 'login.html';
+  }
+}
 
