@@ -40,3 +40,4 @@ function createInitals(name) {
     console.log(initials);
     return initials;
 }
+
