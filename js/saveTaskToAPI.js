@@ -3,8 +3,7 @@ async function addTask() {
     let title = extractInputValue('title');
     let description = extractInputValue('description');
     let duedate = extractInputValue('duedate');
-    if (duedate.value === null || duedate.trim() === ''){
-        console.log(duedate)
+    if (duedate.value === null || duedate.trim() === ''){ // @David bitte copy/paste
         alert('Bitte wähle ein Datum');
         return;
     };
@@ -18,6 +17,7 @@ async function addTask() {
         .map(element => parseInt(element.getAttribute("data-contact-id")));
 
     let category = document.querySelector('.category-select .selected-option').textContent;
+    
     let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
         .map((option, index) => ({
             id: `${tasks.length}.${index + 1}`,

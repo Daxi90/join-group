@@ -567,4 +567,3 @@ function addTaskPopup() {
   
     }, 3000); 
   }
-  
