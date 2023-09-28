@@ -422,7 +422,7 @@ function createAddContactButton(container) {
     container.appendChild(optionButton);
   }
 
-async function saveNewContact() {
+async function board_saveNewContact() {
     let name = document.getElementById('board-contactName');
     let mail = document.getElementById('board-contactMail');
     let phone = document.getElementById('board-contactPhone');
