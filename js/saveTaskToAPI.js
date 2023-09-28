@@ -50,11 +50,20 @@ async function boardAddTask() {
     let description = extractInputValue('board-description');
     let duedate = extractInputValue('board-duedate');
     let priority = extractSelectedPriority();
+    if (priority === null) {                            // @David bitte copy/paste
+        alert('Bitte wähle eine Priorität aus.');
+        return;
+    }
 
     let assignedTo = Array.from(document.querySelectorAll('.board-selected-initials'))
         .map(element => parseInt(element.getAttribute("data-contact-id")));
 
     let category = document.querySelector('.board-category-select .board-selected-option').textContent;
+    if (category === null || Object.keys(category).length === 0) {    // @David bitte copy/paste
+        alert('Bitte wähle eine Kategorie für diese Aufgabe');
+        return;
+    }
+    
     let subtasks = Array.from(document.querySelectorAll('.board-subtask-item'))
         .map((option, index) => ({
             id: `${tasks.length}.${index + 1}`,

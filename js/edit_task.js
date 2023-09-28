@@ -244,8 +244,14 @@ function saveEditedTaskData(taskId) {
 
     updateTaskFields(task, ["title", "description", "duedate"]);
     task.priority = edit_getSelectedPriority();
+    if(task.priority === undefined){
+      alert('Wähle eine Priorität aus')
+      return;
+    }
+
     task.assignedPersons = edit_getAssignedPersons(contacts);
     task.category = edit_getSelectedCategory();
+
     task.subtasks = edit_getSubtasks();
 
     setItem("tasks", tasks); // Speichert die Änderungen

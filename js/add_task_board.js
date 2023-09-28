@@ -569,7 +569,7 @@ function renderBoardAddTaskForm(){
         </div>
         <span class="board-FW700">Due date</span>
         <div id="board-date_container">
-            <input type="date" class="board-date" placeholder="dd/mm/yyyy" id="board-duedate">
+            <input required type="date" class="board-date" placeholder="dd/mm/yyyy" id="board-duedate">
         </div>
         <div class="board-priority-form">
             <div class="board-FW700">Priority</div>
