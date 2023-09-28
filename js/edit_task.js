@@ -109,7 +109,7 @@ function fillFormWithData(taskData) {
   for (const subtask of taskData.subtasks) {
     const isChecked = subtask.completed ? "checked" : "";
     subtasksHTML += `
-      <li class="board-subtask-item">
+      <li class="edit-board-subtask-item">
       <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
       <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
       <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
@@ -210,13 +210,13 @@ function edit_getSelectedCategory() {
  * @returns {Object[]} The list of subtask objects.
  */
 function edit_getSubtasks() {
-  return Array.from(document.querySelectorAll(".board-subtask-item")).map(
+  return Array.from(document.querySelectorAll(".edit-board-subtask-item")).map(
     (subtask, index) => {
       const input = subtask.querySelector('input[type="text"]');
       const checkbox = subtask.querySelector('input[type="checkbox"]');
       const title = input
         ? input.value
-        : subtask.getAttribute("data-subtask") || "";
+        : subtask.getAttribute("edit-data-subtask") || "";
       const completed = checkbox ? checkbox.checked : false;
 
       return {
@@ -233,7 +233,7 @@ function edit_getSubtasks() {
  * @param {string} taskId - The ID of the task to save.
  */
 function saveEditedTaskData(taskId) {
-  let form = document.querySelector(".taskwidth"); // Angenommen, es gibt nur ein Formular mit der Klasse 'taskwidth'
+  let form = document.querySelector(".edit-taskwidth"); // Angenommen, es gibt nur ein Formular mit der Klasse 'taskwidth'
   if (form.checkValidity()) {
     // Alle Felder sind gültig, fahre mit dem Speichern der Daten fort
     const task = getTaskById(taskId);
@@ -330,7 +330,7 @@ function deleteSubtask(subtaskId, taskId) {
  */
 function getFormHTML(taskId) {
   return /*html*/ `
-    <form onsubmit="return false;" class="taskwidth">
+    <form onsubmit="return false;" class="edit-taskwidth">
         <div>
             <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
         </div>
@@ -857,8 +857,8 @@ function edit_addSubtask(
   const subtaskList = document.getElementById("subtaskList");
   const parentElement = document.querySelector(".subtasks-container");
   const referenceElement = document.getElementById("new-subtask");
-  const subtaskItem = createSubtaskItem(subtaskValue);
-  const subtaskText = createSubtaskText(subtaskValue);
+  const subtaskItem = edit_createSubtaskItem(subtaskValue);
+  const subtaskText = edit_createSubtaskText(subtaskValue);
   const buttonContainer = createButtonContainer();
 
   parentElement.insertBefore(inputContainer, referenceElement);
@@ -898,10 +898,10 @@ function edit_addSubtask(
  * @param {string} subtaskValue - The value of the subtask.
  * @returns {HTMLLIElement} The created subtask item element.
  */
-function createSubtaskItem(subtaskValue) {
+function edit_createSubtaskItem(subtaskValue) {
   const subtaskItem = document.createElement("li");
-  subtaskItem.classList.add("board-subtask-item");
-  subtaskItem.setAttribute("board-data-subtask", subtaskValue);
+  subtaskItem.classList.add("edit-board-subtask-item");
+  subtaskItem.setAttribute("edit-data-subtask", subtaskValue);
   return subtaskItem;
 }
 
@@ -910,7 +910,7 @@ function createSubtaskItem(subtaskValue) {
  * @param {string} subtaskValue - The value of the subtask.
  * @returns {HTMLSpanElement} The created subtask text element.
  */
-function createSubtaskText(subtaskValue) {
+function edit_createSubtaskText(subtaskValue) {
   const subtaskText = document.createElement("span");
   subtaskText.innerText = "● " + subtaskValue;
   return subtaskText;
@@ -989,7 +989,7 @@ function board_attachEditListener(editButton, subtaskItem, buttonContainer) {
  */
 function board_attachDeleteListener(deleteButton) {
   deleteButton.addEventListener("click", function () {
-    this.closest(".board-subtask-item").remove();
+    this.closest(".edit-board-subtask-item").remove();
   });
 }
 

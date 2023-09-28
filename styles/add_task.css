@@ -970,6 +970,10 @@ board-input:-ms-input-placeholder {
     display: flex;
 }
 
+.edit-board-subtask-item:hover .edit-board-subtask-icons {
+    display: flex;
+}
+
 .board-FW700 {
     font-weight: 700;
     font-size: 19px;
@@ -1124,6 +1128,21 @@ board-main {
     justify-content: space-between;
 }
 
+.edit-board-subtask-item:hover {
+    border-radius: 10px;
+    background-color: #D2E3FF;
+    padding: 6px 16px 6px 16px;
+}
+
+
+
+.edit-board-subtask-item {
+    padding: 6px 16px 6px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .board-fontgray {
     color: #D1D1D1;
 }
@@ -1169,6 +1188,27 @@ board-main {
     border-radius: 25px;
     background: #D2E3FF;;
 }
+
+
+.board-subtask-item .button-container button {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    border: none;
+    background-color: white;
+    height: 24px;
+    width: 24px;
+}
+
+.edit-board-subtask-item:hover .edit-button-container button,
+.edit-board-subtask-item:hover .edit-button-container .board-smalldivider {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+    border-radius: 25px;
+    background: #D2E3FF;;
+}
+
 
 .button-container {
     display: flex;
