@@ -805,7 +805,7 @@ board-input:-ms-input-placeholder {
 }
 
 .board-subtasks-container {
-    height: 79px;
+    height: auto;
     width: 440px;
 }
 
