@@ -97,6 +97,10 @@ function renderProgressBar(task){
  * @returns {string} - The HTML string representing the assignees.
  */
 function renderAssignees(task) {
+    if (!task.assignedPersons || task.assignedPersons.length === 0) {
+        return '<div style="height: 10px;"></div>';
+    }
+
     let personsHTML = '';
 
     task.assignedPersons.forEach(personId => {
@@ -111,6 +115,7 @@ function renderAssignees(task) {
 
     return personsHTML;
 }
+
 
 
 
