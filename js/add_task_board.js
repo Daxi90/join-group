@@ -1,5 +1,8 @@
+let id = 0
+
 async function loadContactsFromAPI() {
     APIcontacts = JSON.parse(await getItem('contacts'));
+    id = JSON.parse(await getItem('id'));
     contacts = APIcontacts;
 }
 
@@ -428,7 +431,7 @@ async function board_saveNewContact() {
     let phone = document.getElementById('board-contactPhone');
     let initials = createInitals(name.value);
     let color = colorRandomizer();
-    let id = contacts[contacts.length - 1]['id'] + 1;
+    id = id + 1;
 
     contacts.push({
         name: name.value,
@@ -439,6 +442,7 @@ async function board_saveNewContact() {
         id: id
     });
     await setItem('contacts', JSON.stringify(contacts));
+    await setItem('id', JSON.stringify(id));
     loadContactsFromAPI();
     renderContactsTab(contacts);
     bindCheckboxEvents(contacts);
