@@ -1,7 +1,20 @@
 async function init() {
   // checkStorageAndRedirect();
   await includeHTML();
+  getItem('users');
+  checkLogin();
 }
+
+function checkLogin() {
+  let user = users.find(u => u.loggedIn === 1);
+
+
+  if (!user) {
+      window.location.href = 'login.html';
+  }
+}
+
+
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");

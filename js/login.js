@@ -1,6 +1,7 @@
 let myUserName = [];
 let myPassword = [];
 
+
 function initLogin() {
     loadUsers();
     RememberRememberMe();
@@ -16,8 +17,11 @@ function login(event) {
     let user = users.find(u => u.mail === mail.value && u.password === password.value);
 
     if (user) {
+        saveLocal();
+        login1();
         window.location.href = `summary.html?email=${mail.value}`;
-        saveLocal()
+
+
     } else {
         mail.setCustomValidity("Your password or your Email has been incorrect");
         mail.reportValidity();
@@ -31,6 +35,7 @@ function login(event) {
 
 function guestLogin() {
     event.preventDefault();
+    userLogin = true;
     window.location = "summary.html";
 }
 
@@ -74,4 +79,17 @@ function RememberRememberMe() {
       } else {
         rememberMe();
     }
+}
+
+function login1() {
+    let mail = document.getElementById('email').value;
+
+    let index = users.findIndex(function(item, i) {
+        return item.mail === mail
+    });
+
+    console.log(index);
+    users[index].loggedIn = 1;
+
+    setItem('users', users);
 }

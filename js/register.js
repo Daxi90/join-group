@@ -20,7 +20,7 @@ async function register() {
         user: signUpUser.value,
         mail: signUpMail.value,
         password: signUpPassword.value,
-        login: 0,
+        loggedIn: 0,
         initials: initials
     })
 
