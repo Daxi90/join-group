@@ -63,7 +63,11 @@ function highlightLinks() {
 }
 
 function setUserInitials() {
-  document.getElementById("userInitials").innerHTML = "DU";
+  const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
+  if(loggedInUser){
+    let userData = JSON.parse(loggedInUser);
+    document.getElementById("userInitials").innerHTML = userData.initials;
+  }
 }
 
 function checkStorageAndRedirect() {
