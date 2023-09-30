@@ -35,7 +35,9 @@ function login(event) {
 
 function guestLogin() {
     event.preventDefault();
-    userLogin = true;
+    let user = users[0]
+    let userAsText = JSON.stringify(user);
+    localStorage.setItem('user', userAsText);
     window.location = "summary.html";
 }
 

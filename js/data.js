@@ -2,6 +2,13 @@
 // Am Besten so wie in den Demodaten beschrieben, die ID vom Haupttask + fortlaufende Nummer Beispiel: 1.2 für Haupttask 1 und Subtask 2
 let userLogin = false;
 
+let users = [{
+    user: 'guest guest',
+    mail: 'guestlogin@guest.de',
+    password: 'guest',
+    loggedIn: 0,
+    initials: 'GG'
+}];
 
 let tasks = [
     {
