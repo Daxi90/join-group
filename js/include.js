@@ -86,3 +86,10 @@ function checkStorageAndRedirect() {
     window.location.href = "login.html";
   }
 }
+
+function logOut(){
+  if(localStorage.getItem("user") || sessionStorage.getItem("user")){
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+  }
+}
