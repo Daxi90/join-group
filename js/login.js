@@ -5,6 +5,7 @@ let myPassword = [];
 function initLogin() {
     loadUsers();
     RememberRememberMe();
+    initScreen();
 }
 
 function login(event) {
@@ -88,15 +89,11 @@ function setLoginLocalStorage(user) {
     localStorage.setItem('user', userAsText);
 }
 
-/* function login1() {
-    let mail = document.getElementById('email').value;
-
-    let index = users.findIndex(function(item, i) {
-        return item.mail === mail
-    });
-
-    console.log(index);
-    users[index].loggedIn = 1;
-
-    setItem('users', users);
-} */
+function initScreen() {
+    let body = document.getElementById('body');
+    body.innerHTML += `
+    <div class="start-screen-overlay" id="startScreenOverlay">
+        <img class="logo-animation" src="assets/img/joinLogoWhiteBig.svg">
+    </div>
+    `
+}

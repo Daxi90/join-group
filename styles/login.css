@@ -388,3 +388,71 @@ body {
 .login-media-sign-up {
     display: none;
 }
+
+.start-screen-overlay {
+    z-index: 100;
+    width: 100%;
+    overflow: hidden;
+    height: 100vh;
+    background: var(--version-2-main-color, #4589FF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: start-screen-animation 3s forwards;
+    position: fixed;
+    opacity: 1;
+}
+
+@keyframes start-screen-animation {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+
+}
+
+@-webkit-keyframes start-screen-animation {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.logo-animation {
+    animation: logo-animation 3s forwards;
+}
+
+@keyframes logo-animation {
+    from {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+    }
+    to {
+        position: absolute;
+        left: 5%;
+        top: 67px;
+    }
+}
+
+
+@-webkit-keyframes logo-animation {
+    from {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+    }
+    to {
+        position: absolute;
+        left: 5%;
+        top: 67px;
+    }
+}
