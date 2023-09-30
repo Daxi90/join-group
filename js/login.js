@@ -18,7 +18,7 @@ function login(event) {
 
     if (user) {
         saveLocal();
-        setLoginLocalStorage();
+        setLoginLocalStorage(user);
         window.location.href = `summary.html?email=${mail.value}`;
 
 
@@ -81,13 +81,9 @@ function RememberRememberMe() {
     }
 }
 
-function setLoginLocalStorage() {
-    let uMLogin = document.getElementById('email').value;
-    let uPLogin = document.getElementById('password').value;
-    let uMLoginAsText = JSON.stringify(uMLogin);
-    localStorage.setItem('uMLogin', uMLoginAsText);
-    let uPLoginAsText = JSON.stringify(uPLogin);
-    localStorage.setItem('uPLogin', uPLoginAsText);
+function setLoginLocalStorage(user) {
+    let userAsText = JSON.stringify(user);
+    localStorage.setItem('user', userAsText);
 }
 
 /* function login1() {
