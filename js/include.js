@@ -1,16 +1,6 @@
 async function init() {
   checkStorageAndRedirect();
   await includeHTML();
-  getItem("users");
-  checkLogin();
-}
-
-function checkLogin() {
-  let user = users.find((u) => u.loggedIn === 1);
-
-  if (!user) {
-    window.location.href = "login.html";
-  }
 }
 
 async function includeHTML() {
@@ -73,11 +63,7 @@ function highlightLinks() {
 }
 
 function setUserInitials() {
-  const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
-  if(loggedInUser){
-    let userData = JSON.parse(loggedInUser);
-    document.getElementById("userInitials").innerHTML = userData.initials;
-  }
+  document.getElementById("userInitials").innerHTML = "DU";
 }
 
 function checkStorageAndRedirect() {
