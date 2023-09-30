@@ -1,20 +1,17 @@
 async function init() {
-  // checkStorageAndRedirect();
+  checkStorageAndRedirect();
   await includeHTML();
-  getItem('users');
+  getItem("users");
   checkLogin();
 }
 
 function checkLogin() {
-  let user = users.find(u => u.loggedIn === 1);
-
+  let user = users.find((u) => u.loggedIn === 1);
 
   if (!user) {
-      window.location.href = 'login.html';
+    window.location.href = "login.html";
   }
 }
-
-
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
@@ -38,7 +35,10 @@ document.addEventListener("htmlIncluded", async function () {
   setUserInitials();
 
   // Prüfen, ob wir uns auf der "board" oder "add_task" Seite befinden
-  if (window.location.href.includes("board") || window.location.href.includes("add_task")) {
+  if (
+    window.location.href.includes("board") ||
+    window.location.href.includes("add_task")
+  ) {
     await loadContactsFromAPI(); // Kontakte laden
   }
 
@@ -54,40 +54,35 @@ document.addEventListener("htmlIncluded", async function () {
   }
 });
 
-
-function highlightLinks(){
+function highlightLinks() {
   // Bestimmen Sie die aktuelle Seite durch Abrufen des Pfads der URL
   let path = window.location.pathname;
-  path = path.split('/')
+  path = path.split("/");
 
   // Wählen Sie alle Links im Navigationsmenü aus
-  let links = document.querySelectorAll('.menu-item, .legal-sites a');
+  let links = document.querySelectorAll(".menu-item, .legal-sites a");
 
   // Überprüfen Sie jeden Link
-  links.forEach(link => {
-      // Wenn der Pfad des Links zur aktuellen Seite führt
-      if (link.getAttribute('href').includes(path[2])) {
-          // Dann fügen Sie die "active" Klasse zu diesem Link hinzu
-          link.classList.add('active');
-      }
+  links.forEach((link) => {
+    // Wenn der Pfad des Links zur aktuellen Seite führt
+    if (link.getAttribute("href").includes(path[2])) {
+      // Dann fügen Sie die "active" Klasse zu diesem Link hinzu
+      link.classList.add("active");
+    }
   });
 }
 
-function setUserInitials(){
-  document.getElementById('userInitials').innerHTML = 'DU';
+function setUserInitials() {
+  document.getElementById("userInitials").innerHTML = "DU";
 }
 
+function checkStorageAndRedirect() {
+  const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
 
-
-// function checkStorageAndRedirect() {
-//   const storedValue = localStorage.getItem('user') || sessionStorage.getItem('user');
-  
-//   if (storedValue === 'true') {
-//     // Bleib auf der aktuellen Seite
-
-//   } else {
-//     // Leite zu einer anderen Seite weiter
-//     window.location.href = 'login.html';
-//   }
-// }
-
+  if (loggedInUser) {
+    // Bleib auf der aktuellen Seite
+  } else {
+    // Leite zu einer anderen Seite weiter
+    window.location.href = "login.html";
+  }
+}
