@@ -2,7 +2,6 @@ async function init() {
   checkStorageAndRedirect();
   await includeHTML();
   getItem("users");
-  checkLogin();
 }
 
 function checkLogin() {

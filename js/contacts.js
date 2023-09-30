@@ -3,7 +3,6 @@ let id = 2
 
 async function contactInit() {
     await init();
-    checkLogin();
 }
 
 async function getContacts() {
