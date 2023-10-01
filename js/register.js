@@ -1,5 +1,3 @@
-let users = [];
-
 async function loadUsers() {
     try {
         users = JSON.parse(await getItem('users'));
@@ -20,7 +18,7 @@ async function register() {
         user: signUpUser.value,
         mail: signUpMail.value,
         password: signUpPassword.value,
-        login: 0,
+        loggedIn: 0,
         initials: initials
     })
 

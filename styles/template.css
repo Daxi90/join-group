@@ -67,6 +67,11 @@ header {
   font-weight: 600;
   font-size: 20px;
   user-select: none;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .outerContainer {

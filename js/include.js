@@ -1,5 +1,5 @@
 async function init() {
-  // checkStorageAndRedirect();
+  checkStorageAndRedirect();
   await includeHTML();
 }
 
@@ -25,7 +25,10 @@ document.addEventListener("htmlIncluded", async function () {
   setUserInitials();
 
   // Prüfen, ob wir uns auf der "board" oder "add_task" Seite befinden
-  if (window.location.href.includes("board") || window.location.href.includes("add_task")) {
+  if (
+    window.location.href.includes("board") ||
+    window.location.href.includes("add_task")
+  ) {
     await loadContactsFromAPI(); // Kontakte laden
   }
 
@@ -41,40 +44,46 @@ document.addEventListener("htmlIncluded", async function () {
   }
 });
 
-
-function highlightLinks(){
+function highlightLinks() {
   // Bestimmen Sie die aktuelle Seite durch Abrufen des Pfads der URL
   let path = window.location.pathname;
-  path = path.split('/')
+  path = path.split("/");
 
   // Wählen Sie alle Links im Navigationsmenü aus
-  let links = document.querySelectorAll('.menu-item, .legal-sites a');
+  let links = document.querySelectorAll(".menu-item, .legal-sites a");
 
   // Überprüfen Sie jeden Link
-  links.forEach(link => {
-      // Wenn der Pfad des Links zur aktuellen Seite führt
-      if (link.getAttribute('href').includes(path[2])) {
-          // Dann fügen Sie die "active" Klasse zu diesem Link hinzu
-          link.classList.add('active');
-      }
+  links.forEach((link) => {
+    // Wenn der Pfad des Links zur aktuellen Seite führt
+    if (link.getAttribute("href").includes(path[2])) {
+      // Dann fügen Sie die "active" Klasse zu diesem Link hinzu
+      link.classList.add("active");
+    }
   });
 }
 
-function setUserInitials(){
-  document.getElementById('userInitials').innerHTML = 'DU';
+function setUserInitials() {
+  const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
+  if(loggedInUser){
+    let userData = JSON.parse(loggedInUser);
+    document.getElementById("userInitials").innerHTML = userData.initials;
+  }
 }
 
+function checkStorageAndRedirect() {
+  const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
 
+  if (loggedInUser) {
+    // Bleib auf der aktuellen Seite
+  } else {
+    // Leite zu einer anderen Seite weiter
+    window.location.href = "login.html";
+  }
+}
 
-// function checkStorageAndRedirect() {
-//   const storedValue = localStorage.getItem('user') || sessionStorage.getItem('user');
-  
-//   if (storedValue === 'true') {
-//     // Bleib auf der aktuellen Seite
-
-//   } else {
-//     // Leite zu einer anderen Seite weiter
-//     window.location.href = 'login.html';
-//   }
-// }
-
+function logOut(){
+  if(localStorage.getItem("user") || sessionStorage.getItem("user")){
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+  }
+}

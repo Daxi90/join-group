@@ -1,6 +1,10 @@
 let editContactIndex = 0
 let id = 2
 
+async function contactInit() {
+    await init();
+}
+
 async function getContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));

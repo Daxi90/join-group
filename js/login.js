@@ -1,9 +1,11 @@
 let myUserName = [];
 let myPassword = [];
 
+
 function initLogin() {
     loadUsers();
     RememberRememberMe();
+    initScreen();
 }
 
 function login(event) {
@@ -16,8 +18,11 @@ function login(event) {
     let user = users.find(u => u.mail === mail.value && u.password === password.value);
 
     if (user) {
+        saveLocal();
+        setLoginLocalStorage(user);
         window.location.href = `summary.html?email=${mail.value}`;
-        saveLocal()
+
+
     } else {
         mail.setCustomValidity("Your password or your Email has been incorrect");
         mail.reportValidity();
@@ -31,6 +36,9 @@ function login(event) {
 
 function guestLogin() {
     event.preventDefault();
+    let user = users[0]
+    let userAsText = JSON.stringify(user);
+    localStorage.setItem('user', userAsText);
     window.location = "summary.html";
 }
 
@@ -74,4 +82,18 @@ function RememberRememberMe() {
       } else {
         rememberMe();
     }
+}
+
+function setLoginLocalStorage(user) {
+    let userAsText = JSON.stringify(user);
+    localStorage.setItem('user', userAsText);
+}
+
+function initScreen() {
+    let body = document.getElementById('body');
+    body.innerHTML += `
+    <div class="start-screen-overlay" id="startScreenOverlay">
+        <img class="logo-animation" src="assets/img/joinLogoWhiteBig.svg">
+    </div>
+    `
 }
