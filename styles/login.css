@@ -388,3 +388,13 @@ body {
 .login-media-sign-up {
     display: none;
 }
+
+
+
+.sign-up-link-container-media {
+    display: flex;
+    align-items: center;
+    width: 236px;
+    height: 48px;
+    display: none;
+}

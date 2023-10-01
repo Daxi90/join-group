@@ -62,7 +62,6 @@
 
 @media(max-height: 800px) {
     .new-contact {
-        width: 100%;
         box-shadow: 0;
         border-radius: 0;
     }

@@ -28,13 +28,27 @@ function sortContacts() {
 }
 
 function renderContactsContacts() {
-
     let contactsList = document.getElementById('contacts');
     renderClickedContact();
-    contactsList.innerHTML = ''
+    contactsList.innerHTML = '';
+
+    // Sort the contacts array alphabetically by name
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+    let currentLetter = '';
+
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
+        const firstLetter = contact.name.charAt(0).toUpperCase();
 
+        // Check if the first letter is different from the previous contact's first letter
+        if (firstLetter !== currentLetter) {
+            // Display a section header
+            contactsList.innerHTML += `<div class="section-header">${firstLetter}</div>`;
+            currentLetter = firstLetter;
+        }
+
+        // Render the contact
         contactsList.innerHTML += renderContactContacts(contact, i);
     }
 }
