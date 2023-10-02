@@ -4,7 +4,7 @@ function countAllTasks(elementId) {
 }
 
 function countUrgentTasks(elementId) {
-  const count = tasks.filter((task) => task.priority === "Urgent").length;
+  const count = tasks.filter((task) => task.priority.toLowerCase() === "urgent").length;
   document.querySelector(`#${elementId} h2`).textContent = count;
 }
 
