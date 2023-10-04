@@ -12,6 +12,10 @@ async function addTask() {
 
     let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
         .map(element => parseInt(element.getAttribute("data-contact-id")));
+        if(assignedTo.length < 1) {
+            alert('Bitte wähle einen Kontakt aus.');
+            return;
+        }
 
     let category = document.querySelector('.category-select .selected-option').textContent;
     if (category === null || Object.keys(category).length === 0) {    // @David bitte copy/paste
@@ -57,6 +61,10 @@ async function boardAddTask(status) {
 
     let assignedTo = Array.from(document.querySelectorAll('.board-selected-initials'))
         .map(element => parseInt(element.getAttribute("data-contact-id")));
+        if(assignedTo.length < 1) {
+            alert('Bitte wähle einen Kontakt aus.');
+            return;
+        }
 
     let category = document.querySelector('.board-category-select .board-selected-option').textContent;
     if (category === null || Object.keys(category).length === 0) {    // @David bitte copy/paste
