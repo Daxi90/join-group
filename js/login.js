@@ -5,7 +5,7 @@ let myPassword = [];
 function initLogin() {
     loadUsers();
     RememberRememberMe();
-    initScreen();
+/*     initScreen(); */
 }
 
 function login(event) {
