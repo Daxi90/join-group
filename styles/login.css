@@ -25,7 +25,7 @@ body {
     from{
         position: relative;
         width: 50%;
-        height: 50%;
+        height: 50vh;
         filter: invert(1) grayscale(1) brightness(100);
     }
  }
@@ -408,12 +408,12 @@ body {
     display: none;
 }
 
-.join-logo-blue {
+.start-screen-overlay {
     z-index: 100;
     width: 100%;
     overflow: hidden;
     height: 100vh;
-    background: var(--version-2-main-color, red);
+    background: var(--version-2-main-color, #4589FF);
     display: flex;
     justify-content: center;
     align-items: center;
