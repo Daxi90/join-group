@@ -44,7 +44,7 @@ async function addTask() {
       }, 100);
 }
 
-async function boardAddTask() {
+async function boardAddTask(status) {
     // Aus den Eingabefeldern extrahierte Daten
     let title = extractInputValue('board-title');
     let description = extractInputValue('board-description');
@@ -72,7 +72,7 @@ async function boardAddTask() {
         }));
 
     // Erstellung des neuen Task-Objekts
-    let newTask = createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks);
+    let newTask = boardCreateNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks, status);
 
     // Hinzufügen des neuen Task-Objekts zum tasks Array
     tasks.push(newTask);

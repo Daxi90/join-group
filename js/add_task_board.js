@@ -530,11 +530,11 @@ function extractSelectedPriority() {
     return priority;
 }
 
-function createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks) {
+function boardCreateNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks, status) {
     let newTaskId = tasks.length;
     return {
         id: newTaskId,
-        status: "todo",
+        status: status,
         category: {
             name: category,
             backgroundColor: "#ff0000" // Hier dynamisch generieren
@@ -548,8 +548,8 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
     };
 }
 
-async function loadAddTaskOffCanvas(){
-    renderBoardAddTaskForm();
+async function loadAddTaskOffCanvas(status){
+    renderBoardAddTaskForm(status);
     await loadContactsFromAPI(); // Kontakte laden
     await loadContactsTab(); // Kontakt-Tab laden
     board_taskFormJS();
@@ -557,13 +557,13 @@ async function loadAddTaskOffCanvas(){
     document.getElementById('add-task-offcanvas').classList.toggle('show-task-offcanvas');
 }
 
-function renderBoardAddTaskForm(){
+function renderBoardAddTaskForm(status){
     let offcanvas = document.getElementById('add-task-offcanvas');
     offcanvas.innerHTML = '';
 
     offcanvas.innerHTML = /*html */`
         <img id="board-addContact-closeBtn"style="cursor: pointer;" onclick="loadAddTaskOffCanvas()" src="assets/img/blueX.svg" alt="">
-        <form onsubmit="boardAddTask(); return false;" class="board-taskwidth">
+        <form onsubmit="boardAddTask('${status}'); return false;" class="board-taskwidth">
         <div>
             <input required type="text" placeholder="Enter a title" id="board-title" class="board-titleInput">
         </div>
