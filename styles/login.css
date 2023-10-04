@@ -18,7 +18,18 @@ body {
 .join-logo-blue {
     width: 6.94%;
     height: 11.91vh;
+    animation: realLogoAnimate 3s forwards;
 }
+
+ @keyframes realLogoAnimate{
+    from{
+        position: relative;
+        width: 50%;
+        height: 50vh;
+        filter: invert(1) grayscale(1) brightness(100);
+    }
+ }
+
 
 .sign-up-link-container {
     display: flex;
