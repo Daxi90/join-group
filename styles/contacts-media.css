@@ -26,6 +26,10 @@
         display: inline-flex;
     }
 
+    .new-contact-button-container {
+        display: none !important;
+    }
+
     #container {
         overflow: auto;
     }
@@ -94,7 +98,6 @@
     }
 
     .edit-contact {
-        width: 100%;
         box-shadow: 0;
         border-radius: 0;
     }

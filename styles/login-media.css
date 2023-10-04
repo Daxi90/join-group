@@ -96,7 +96,7 @@
 
 @media(max-width: 750px) {
     .login-container {
-        width: 65%;
+        width: 80%;
     }
 }
 
@@ -123,8 +123,8 @@
     }
 
     .join-logo-blue {
-        width: 44px !important;
-        height: 58.031px !important;
+        width: 31px !important;
+        height: 46.031px !important;
     }
 }
 
