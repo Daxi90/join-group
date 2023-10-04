@@ -408,12 +408,12 @@ body {
     display: none;
 }
 
-.start-screen-overlay {
+.join-logo-blue {
     z-index: 100;
     width: 100%;
     overflow: hidden;
     height: 100vh;
-    background: var(--version-2-main-color, #4589FF);
+    background: var(--version-2-main-color, red);
     display: flex;
     justify-content: center;
     align-items: center;
