@@ -35,7 +35,7 @@
               alt="Search Icon"
             />
           </div>
-            <button onclick="loadAddTaskOffCanvas()" class="add-task-btn">
+            <button onclick="loadAddTaskOffCanvas('todo')" class="add-task-btn">
             Add task
             <img src="assets/img/plus-button.png" alt="Plus Icon" />
           </button>
@@ -45,7 +45,7 @@
           <div id="todoBoard" class="kanban-column"  ondrop="moveTo('todo')" ondragover="allowDrop(event); highlight('todoBoard');" ondragleave="removeHighlight('todoBoard')">
             <div class="flex">
               <h3>To do</h3>
-              <img onclick="loadAddTaskOffCanvas()"
+              <img onclick="loadAddTaskOffCanvas('todo')"
                 class="add-Btn"
                 src="assets/img/plus-button-v1.png"
                 alt=""
@@ -56,21 +56,21 @@
           <div id="inProgressBoard" class="kanban-column" ondrop="moveTo('inprogress')" ondragover="allowDrop(event); highlight('inProgressBoard');" ondragleave="removeHighlight('inProgressBoard')">
             <div class="flex">
               <h3>In Progress</h3>
-              <img onclick="loadAddTaskOffCanvas()" class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
+              <img onclick="loadAddTaskOffCanvas('inprogress')" class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
           <div id="awaitFeedBackBoard" class="kanban-column" ondrop="moveTo('awaitfeedback')" ondragover="allowDrop(event); highlight('awaitFeedBackBoard');" ondragleave="removeHighlight('awaitFeedBackBoard')">
             <div class="flex">
               <h3>Await Feedback</h3>
-              <img onclick="loadAddTaskOffCanvas()" class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
+              <img onclick="loadAddTaskOffCanvas('awaitfeedback')" class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
           <div id="doneBoard" class="kanban-column"  ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('doneBoard');" ondragleave="removeHighlight('doneBoard')">
             <div class="flex">
               <h3>Done</h3>
-              <img onclick="loadAddTaskOffCanvas()" class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
+              <img onclick="loadAddTaskOffCanvas('done')" class="add-Btn" src="assets/img/plus-button-v1.png" alt="Add Task Button" />
           </div>
             <!--Rendered by kanban.js-->
           </div>
