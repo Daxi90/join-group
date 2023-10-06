@@ -32,10 +32,15 @@
 
     #container {
         overflow: auto;
+        margin-bottom: 83.5px;
     }
 }
 
 @media(max-width: 700px) {
+    #container {
+        margin-bottom: 83.5px;
+    }
+
     .new-contact {
         width: 100%;
         overflow: hidden;

@@ -38,7 +38,7 @@
             <span>&lt;Click to Continue&gt;</span>
         </div>
     </div>
-    <div class="contact-blur-overlay d-none" id="contactBlurOverlay">
+    <div class="contact-blur-overlay d-none" id="contactBlurOverlay" onclick="closePopUpsOnClickOverlay()">
 
     </div>
     <div class="new-contact" id="newContact">
@@ -96,7 +96,7 @@
 
                 <!-- Hauptinhalt / Content -->
                 <div class="new-contact-button-container">
-                    <button class="new-contact-button" onclick="showCreateContact()">Add new contact <img
+                    <button class="new-contact-button" onclick="showCreateContactContacts()">Add new contact <img
                             src="assets/img/addContact.svg"></button>
                 </div>
                 <div class="contacts-list" id="contacts">
@@ -108,7 +108,7 @@
             </div>
         </div>
     </div>
-    <div class="addContact-Button-Media" onclick="showCreateContact()">
+    <div class="addContact-Button-Media" onclick="showCreateContactContacts()">
         <img src="assets/img/addContactButtonMedia.svg">
     </div>
     <div class="contact-media-Arrow-Back" onclick="closeContactMedia()" id="contactArrowBackMedia">

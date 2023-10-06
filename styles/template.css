@@ -136,6 +136,10 @@ main {
     height: auto;
     order: 2;
     padding: 5px;
+    position: fixed;
+    bottom: 0px;
+    background-color: white;
+    z-index: 100;
   }
 
   nav ul {

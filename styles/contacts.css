@@ -1,5 +1,5 @@
 body {
-    overflow-x: hidden;
+    font-family: Open Sans;
 }
 
 .contacts-container {
@@ -449,7 +449,7 @@ body {
 
 .addContact-Button-Media {
     position: absolute;
-    bottom: 25px;
+    bottom: 100px;
     right: 25px;
     display: none;
     padding: 16px;
@@ -496,3 +496,4 @@ body {
     line-height: 120%;
     /* 21.6px */
 }
+

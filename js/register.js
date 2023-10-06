@@ -28,7 +28,7 @@ async function register() {
     confirmPassword.value = '';
 
     await setItem('users', JSON.stringify(users));
-    setTimeout(()=>{window. location = 'login.html' },3000);
+    setTimeout(()=>{window. location = 'login.html' }, 2000);
 }
 
 function checkPrivacyPolicy() {
