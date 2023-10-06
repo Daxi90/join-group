@@ -25,7 +25,7 @@ body {
     from{
         position: relative;
         width: 50%;
-        height: 50%;
+        height: 50vh;
         filter: invert(1) grayscale(1) brightness(100);
     }
  }

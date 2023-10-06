@@ -74,13 +74,16 @@ form.edit-taskwidth {
 
 @media (max-width: 1500px) {
   .add-task-card {
-    width: 60%;
+    width: 40%;
   }
 }
 
 @media (max-width: 900px) {
   .single-task-title {
     font-size: 25px !important;
+  }
+  .add-task-card {
+    width: 80%;
   }
 
   .action-buttons {
