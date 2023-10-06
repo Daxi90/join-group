@@ -1,29 +1,20 @@
 let currentDraggedElement;
+let touchTimeout;
 
-function startDragging(id){
-    currentDraggedElement = id;
-    document.getElementById('task-'+id).classList.add('rotate');
-};
+function handleTouchStart(e) {
+    const outerElement = e.target.closest('.kanban-card');
+    if (outerElement) {  // Überprüfe, ob das äußere Element gefunden wurde
+      // Setze einen Timeout von einer Sekunde
+      touchTimeout = setTimeout(function() {
+        showOverlay(outerElement);
+      }, 1000);
+    }
+  }
+  
 
-function allowDrop(ev) {
-    ev.preventDefault();
 
-};
 
-function moveTo(newstatus){
-    tasks[currentDraggedElement].status = newstatus;
-    document.getElementById('todoBoard').classList.remove('onDragOver');
-    document.getElementById('inProgressBoard').classList.remove('onDragOver');
-    document.getElementById('awaitFeedBackBoard').classList.remove('onDragOver');
-    document.getElementById('doneBoard').classList.remove('onDragOver');
-    setItem('tasks', tasks);
-    kanbanInit(tasks);
-};
 
-function highlight(element){
-    document.getElementById(element).classList.add('onDragOver');
-}
 
-function removeHighlight(element){
-    document.getElementById(element).classList.remove('onDragOver');
-}
+
+
