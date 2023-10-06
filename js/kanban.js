@@ -55,6 +55,16 @@ function renderTaskCard(task){
         <div class="board-priority">
             <img src="assets/img/prio-${prio}.svg" alt="priority" />
         </div>
+
+        <!-- Pfeile am unteren Rand -->
+        <div class="arrows">
+            <div class="arrow left-arrow" onclick="previousStatus(event, ${task.id})">
+                <img src="assets/img/arrow-left-line.svg" alt="Left Arrow" />
+            </div>
+            <div class="arrow right-arrow" onclick="nextStatus(event, ${task.id})">
+                <img src="assets/img/arrow-right-line.png" alt="Right Arrow" />
+            </div>
+        </div>
     </div>
     `
 }

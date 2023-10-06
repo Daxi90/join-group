@@ -306,3 +306,41 @@ h3 {
   right: 16px;
   top: 16px;
 }
+
+.arrows {
+  display: none;
+  justify-content: space-between;
+  padding: 10px;  /* Hinzugefügt, um etwas Platz um die Pfeile zu schaffen */
+  position: relative; /* Änderung von 'absolute' zu 'relative' */
+}
+
+.arrow {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  padding: 15px;
+}
+
+.left-arrow {
+  margin-left: 4px;
+}
+
+.right-arrow {
+  margin-right: 4px;
+}
+
+
+/* CSS für Geräte, die wahrscheinlich Touch-Geräte sind */
+@media (pointer: coarse) and (hover: none) {
+  /* Ihre Styles hier */
+  .arrows {
+    display: flex;
+  }
+
+  .board-priority {
+    position: relative;
+    padding-top: 16px;
+    left: 90%;
+  }
+}
+
