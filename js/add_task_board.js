@@ -261,14 +261,16 @@ function createInputElement() {
 }
 
 function createButtonWithImage(src, imgClass, btnClass) {
-  const button = document.createElement("button");
-  const image = document.createElement("img");
-  image.setAttribute("src", src);
-  image.classList.add(imgClass);
-  button.appendChild(image);
-  button.classList.add(btnClass);
-  return button;
-}
+    const button = document.createElement("button");
+    button.setAttribute("type", "button");  // Diese Zeile hinzufügen
+    const image = document.createElement("img");
+    image.setAttribute("src", src);
+    image.classList.add(imgClass);
+    button.appendChild(image);
+    button.classList.add(btnClass);
+    return button;
+  }
+  
 
 function createDivider(src, className) {
   const divider = document.createElement("img");
@@ -316,7 +318,7 @@ function addSubtask(
   subtaskItem.appendChild(buttonContainer);
 
   attachEditListener(editButton, subtaskItem, buttonContainer);
-  attachDeleteListener(deleteButton);
+  board_attachDeleteListener(deleteButton);
 
   subtaskList.appendChild(subtaskItem);
 
@@ -370,9 +372,9 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
   });
 }
 
-function attachDeleteListener(deleteButton) {
+function board_attachDeleteListener(deleteButton) {
   deleteButton.addEventListener("click", function () {
-    this.closest(".subtask-item").remove();
+    this.closest(".board-subtask-item").remove();
   });
 }
 
