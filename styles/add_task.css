@@ -257,7 +257,8 @@ input:-ms-input-placeholder {
 .optionButton {
     display: flex;
     justify-content: center;
-    width: 408px;
+    width: 90%;
+    max-width: 408px;
     height: 56px;
     padding: 8px 16px 8px 16px;
 }
@@ -1258,6 +1259,7 @@ input {
 
     .board-taskwidth {
         width: 95%;
+        margin-bottom: 130px;
     }
 
     .board-titleInput {

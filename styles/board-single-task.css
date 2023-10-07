@@ -84,6 +84,8 @@ form.edit-taskwidth {
   }
   .add-task-card {
     width: 80%;
+    margin-top: 150px;
+    margin-bottom: 200px;
   }
 
   .action-buttons {
