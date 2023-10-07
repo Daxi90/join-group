@@ -46,6 +46,7 @@
         overflow: hidden;
         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
         border-radius: 0;
+        z-index: 102;
     }
 
     .new-contact-input-field {
