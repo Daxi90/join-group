@@ -1,5 +1,5 @@
     <!-- Hauptinhalt / Content -->
-    <form onsubmit="addTask(); return false;" class="taskwidth">
+    <form onsubmit="addTask(); return false;" class="taskwidth" id="form">
         <div>
             <input required type="text" placeholder="Enter a title" id="title" class="titleInput">
         </div>
@@ -55,10 +55,11 @@
                     <div class="DDB-container"><img src="./assets/img/dropdownDown.svg" class="DDB"></div>
                 </div>
                     <div class="options">
-                        <div class="option">Technical task</div>
-                        <div class="option">User story</div>
+                        <div class="option categoryoption" data-wert="Technical task">Technical task</div>
+                        <div class="option categoryoption" data-wert="User story">User story</div>
                     </div>
             </div>
+            <input type="hidden" id="forcategoryselect" required>
         </div>
         <div class="subtasks-container" id="subtasks-container">
             <div class="subtasks-select" id="subtasksID">

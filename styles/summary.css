@@ -204,17 +204,71 @@ main {
 
     .urgentbox {
         width: 260px;
-        height: 80px;
+        height: fit-content;
+        padding: 20px;
     }
 
-    #TaskTD {
+    .taskBox {
         width: 260px;
+        height: fit-content;
+        padding: 20px;
     }
+
+    /* #TaskTD {
+        width: 260px;
+    } */
 
     #taskIB, #taskIP, #AFeedback, #done {
         width: 102px;
         height: 120Px;
         padding: 10px 25px 10px 25px;
 
+    }
+
+}
+
+@media screen and (max-width: 390px) {
+    main {
+        padding: unset !important;
+    }
+
+    .botlayer {
+        width: 330px;
+    }
+
+    .toplayer {
+        width: 330px;
+    }
+
+    .urgentboxleft {
+        width: 2rem;
+       
+    }
+
+    h2 {
+        font-size:large;
+    }
+
+    .bigNumbers {
+        font-size: 3rem;
+    }
+
+    .circle {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    .urgentboxright {
+        width: 1rem;
+    }
+
+    #TaskTD {
+        width: 240px;
+    }
+
+    #taskIB, #taskIP, #AFeedback, #done {
+        width: 102px;
+        height: 120Px;
+        padding: 10px 25px 10px 25px;
     }
 }

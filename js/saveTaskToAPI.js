@@ -1,5 +1,13 @@
 async function addTask() {
+<<<<<<< Updated upstream
     clearErrors();
+=======
+    const hiddenInput = document.getElementById('forcategoryselect');
+  if (!hiddenInput.value) {
+    alert('Bitte wähle eine Kategorie aus.');
+    return false;
+  }
+>>>>>>> Stashed changes
     // Aus den Eingabefeldern extrahierte Daten
     let title = extractInputValue('title');
     let description = extractInputValue('description');

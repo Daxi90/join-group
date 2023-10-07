@@ -24,6 +24,7 @@ async function taskFormJS() { // renders add_task functionality
     bindSubtaskSelectEvents();
     bindSearchEvent();
     loadTasksFromAPI();
+    categoryMandatory();
     document.querySelectorAll('.custom-select').forEach(dropdown => {
         dropdown.addEventListener('click', function () {
             const optionsContainer = this.querySelector('.options');
@@ -238,6 +239,7 @@ function createButtonWithImage(src, imgClass, btnClass) {
     const image = document.createElement("img");
     image.setAttribute("src", src);
     image.classList.add(imgClass);
+    button.setAttribute('type', 'button');
     button.appendChild(image);
     button.classList.add(btnClass);
     return button;
@@ -590,4 +592,27 @@ function addTaskPopup() {
       }, 500);
   
     }, 3000); 
+  }
+
+
+  function categoryMandatory() {
+    const selectCategory = document.querySelectorAll('.categoryoption');
+    const formular = document.getElementById('form');
+    const hiddenInput = document.getElementById('forcategoryselect');
+  
+    // Auswahl-Elemente mit einem Klick-Event versehen
+    selectCategory.forEach((element) => {
+      element.addEventListener('click', function() {
+        const wert = this.getAttribute('data-wert');
+        
+        // Wert im versteckten Input-Feld aktualisieren
+        hiddenInput.value = wert;
+        
+        // Andere Optionen deselektieren
+        selectCategory.forEach(el => el.classList.remove('ausgewaehlt'));
+        
+        // Angeklickte Option als ausgewählt markieren
+        this.classList.add('ausgewaehlt');
+      });
+    });
   }

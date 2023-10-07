@@ -1295,6 +1295,11 @@ input {
     .board-subtasks-container {
         width: 95%;
     }
+
+    .createTask {
+        position: relative;
+        bottom: 70px;
+    }
 }
 
 
