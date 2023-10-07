@@ -479,3 +479,9 @@ body {
         top: 67px;
     }
 }
+
+@media (min-width: 1600px) {
+    .login-container {
+        width: 700px;
+    }
+}
