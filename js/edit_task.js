@@ -233,6 +233,7 @@ function edit_getSubtasks() {
  * @param {string} taskId - The ID of the task to save.
  */
 function saveEditedTaskData(taskId) {
+  clearErrors();
   let form = document.querySelector(".edit-taskwidth"); // Angenommen, es gibt nur ein Formular mit der Klasse 'taskwidth'
   if (form.checkValidity()) {
     // Alle Felder sind gültig, fahre mit dem Speichern der Daten fort
@@ -245,12 +246,21 @@ function saveEditedTaskData(taskId) {
     updateTaskFields(task, ["title", "description", "duedate"]);
     task.priority = edit_getSelectedPriority();
     if(task.priority === undefined){
-      alert('Wähle eine Priorität aus')
+      displayError('.priority', 'Please choose a priority.');
       return;
     }
 
     task.assignedPersons = edit_getAssignedPersons(contacts);
+    if (!task.assignedPersons || task.assignedPersons.length === 0) {
+      displayError('.assignedTo-container', 'Please assign at least one contact.');
+      return;
+    }
+  
     task.category = edit_getSelectedCategory();
+    if (!task.category) {
+      displayError('.category', 'Please select a category.');
+      return;
+    }
 
     task.subtasks = edit_getSubtasks();
 
