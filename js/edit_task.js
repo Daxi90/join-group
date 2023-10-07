@@ -257,8 +257,8 @@ function saveEditedTaskData(taskId) {
     }
   
     task.category = edit_getSelectedCategory();
-    if (!task.category) {
-      displayError('.category', 'Please select a category.');
+    if (task.category === null || Object.keys(task.category).length === 0 || task.category.name === 'Select Category' ) {
+      displayError('.category-container', 'Please select a category.');
       return;
     }
 
