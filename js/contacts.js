@@ -93,7 +93,7 @@ async function createContact() {
     name.value = '';
     mail.value = '';
     phone.value = '';
-    closeCreateContact();
+    closeCreateContactContacts();
 }
 
 function createInitals(name) {
@@ -117,7 +117,7 @@ function showCreateContactContacts() {
     document.getElementById('contactBlurOverlay').classList.remove('d-none');
 }
 
-function closeCreateContact() {
+function closeCreateContactContacts() {
     document.getElementById('newContact').classList.remove('new-contact-show');
     document.getElementById('contactBlurOverlay').classList.add('d-none');
 }
@@ -272,7 +272,7 @@ function renderEditContact(editName, editEmail, editPhone) {
 }
 
 function closePopUpsOnClickOverlay() {
-    closeCreateContact();
+    closeCreateContactContacts();
     closeEditContact();
 }
 
