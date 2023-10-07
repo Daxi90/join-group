@@ -7,20 +7,20 @@ async function addTask() {
  
     let priority = extractSelectedPriority();
     if (priority === null) {                            // @David bitte copy/paste
-        displayError('.priority', 'Bitte wähle eine Priorität aus.');
+        displayError('.priority', 'Please choose a priority.');
         return;
     }
 
     let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
         .map(element => parseInt(element.getAttribute("data-contact-id")));
         if(assignedTo.length < 1) {
-            displayError('.assignedTo-container', 'Bitte wähle einen Kontakt aus.');
+            displayError('.assignedTo-container', 'Please choose a contact.');
             return;
         }
 
     let category = document.querySelector('.category-select .selected-option').textContent.trim();
     if (category === null || Object.keys(category).length === 0 || category === 'Select Category' ) {    // @David bitte copy/paste
-        displayError('.category-container', 'Bitte wähle eine Kategorie für diese Aufgabe.');
+        displayError('.category-container', 'Please choose a category for this task.');
         return;
     }
     
@@ -57,20 +57,20 @@ async function boardAddTask(status) {
     let duedate = extractInputValue('board-duedate');
     let priority = extractSelectedPriority();
     if (priority === null) {                            // @David bitte copy/paste
-        displayError('.board-priority-form', 'Bitte wähle eine Priorität aus.');
+        displayError('.board-priority-form', 'Please choose a priority.');
         return;
     }
 
     let assignedTo = Array.from(document.querySelectorAll('.board-selected-initials'))
         .map(element => parseInt(element.getAttribute("data-contact-id")));
         if(assignedTo.length < 1) {
-            displayError('.board-assignedTo-container', 'Bitte wähle einen Kontakt aus.');
+            displayError('.board-assignedTo-container', 'Please choose a contact.');
             return;
         }
 
     let category = document.querySelector('.board-category-select .board-selected-option').textContent.trim();
     if (category === null || Object.keys(category).length === 0 || category === 'Select Category' ) {    // @David bitte copy/paste
-        displayError('.board-category-container', 'Bitte wähle eine Kategorie für diese Aufgabe.');
+        displayError('.board-category-container', 'Please choose a category for this task.');
         return;
     }
     

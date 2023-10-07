@@ -233,14 +233,16 @@ function createInputElement() {
 }
 
 function createButtonWithImage(src, imgClass, btnClass) {
-    const button = document.createElement('button');
-    const image = document.createElement('img');
-    image.setAttribute('src', src);
+    const button = document.createElement("button");
+    button.setAttribute("type", "button");  // Diese Zeile hinzufügen
+    const image = document.createElement("img");
+    image.setAttribute("src", src);
     image.classList.add(imgClass);
     button.appendChild(image);
     button.classList.add(btnClass);
     return button;
-}
+  }
+  
 
 function createDivider(src, className) {
     const divider = document.createElement('img');
