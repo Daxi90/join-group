@@ -550,7 +550,7 @@ function boardCreateNewTaskObject(title, description, duedate, priority, assigne
 
 async function loadAddTaskOffCanvas(status){
     renderBoardAddTaskForm(status);
-    await loadContactsFromAPI(); // Kontakte laden
+    //loadContactsFromAPI(); // Kontakte laden
     await loadContactsTab(); // Kontakt-Tab laden
     board_taskFormJS();
 
