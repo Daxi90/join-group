@@ -1333,3 +1333,9 @@ input {
   .error-message {
     color: red;
 }
+
+@media (max-width: 768px) {
+    #main {
+        margin-bottom: 83.5px;
+    }
+}
