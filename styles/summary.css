@@ -145,6 +145,8 @@ main {
         height: 100%;
         flex-direction: column;
         gap: 5px;
+        margin-bottom: 150px;
+        margin-top: 230px;
     }
     
     .headline {
