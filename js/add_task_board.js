@@ -537,7 +537,7 @@ function boardCreateNewTaskObject(title, description, duedate, priority, assigne
         status: status,
         category: {
             name: category,
-            backgroundColor: "#ff0000" // Hier dynamisch generieren
+            backgroundColor: getCategoryBackgroundColor(category) // Hier dynamisch generieren
         },
         title: title,
         description: description,
@@ -546,6 +546,17 @@ function boardCreateNewTaskObject(title, description, duedate, priority, assigne
         assignedPersons: assignedTo,
         subtasks: subtasks
     };
+}
+
+function getCategoryBackgroundColor(category) {
+    switch (category) {
+        case 'Technical task':
+            return '#ff0000';
+        case 'User story':
+            return '#00ff00';
+        default:
+            return '#cccccc';  // Grau als Standardfarbe, falls die Kategorie nicht erkannt wird
+    }
 }
 
 async function loadAddTaskOffCanvas(status){

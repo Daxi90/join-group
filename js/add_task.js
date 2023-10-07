@@ -544,7 +544,7 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
         status: "todo",
         category: {
             name: category,
-            backgroundColor: "#ff0000" // Hier dynamisch generieren
+            backgroundColor: addTaskgetCategoryBackgroundColor(category) // Hier dynamisch generieren
         },
         title: title,
         description: description,
@@ -553,6 +553,17 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
         assignedPersons: assignedTo,
         subtasks: subtasks
     };
+}
+
+function addTaskgetCategoryBackgroundColor(category) {
+    switch (category) {
+        case 'Technical task':
+            return '#ff0000';
+        case 'User story':
+            return '#00ff00';
+        default:
+            return '#cccccc';  // Grau als Standardfarbe, falls die Kategorie nicht erkannt wird
+    }
 }
 
 
