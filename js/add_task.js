@@ -561,13 +561,13 @@ function createNewTaskObject(title, description, duedate, priority, assignedTo, 
 
 function addTaskgetCategoryBackgroundColor(category) {
     switch (category) {
-        case 'Technical task':
-            return '#ff0000';
-        case 'User story':
-            return '#00ff00';
+        case "Technical task":
+          return "#FFB3B3"; // Pastellrot
+        case "User story":
+          return "#B3D9FF"; // Pastellblau
         default:
-            return '#cccccc';  // Grau als Standardfarbe, falls die Kategorie nicht erkannt wird
-    }
+          return "#CCCCCC"; // Grau als Standardfarbe, falls die Kategorie nicht erkannt wird
+      }
 }
 
 
