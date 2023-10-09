@@ -1,0 +1,286 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+}
+
+.headline {
+    text-align: center;
+}
+
+.toplayer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 191px;
+    margin-bottom: 20px;
+}
+
+.botlayer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 5px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.taskBox {
+    padding: 40px;
+    border: 0.5px solid lightgray;
+    border-radius: 30px;
+    width: 124px;
+    height: 111px;
+    transition: all 0.3s ease; 
+}
+
+
+.taskBox:hover {
+    transform: scale(1.05);  
+    border-top-left-radius: 0;
+    background-color: #005DFF;
+    color: white;
+    cursor: pointer;
+}
+
+.urgentbox {
+    width: 65%;
+    height: 111px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    padding: 40px;
+    background-color: #4589FF;
+    color: white;
+    align-items: center;
+    transition: all 0.3s ease; 
+    cursor: pointer;
+}
+
+.urgentboxright {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.circle {
+    height: 5rem;
+    width: 5rem;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.bigNumbers {
+    font-size: 4.5rem;
+    margin: unset;
+}
+
+#user {
+    color: #4589FF;
+}
+
+.summaryBox {
+    max-width: fit-content;
+    width: 95%;
+    margin: 0.5%;
+    gap: 10px;
+    display: grid;
+}
+
+.urgentboxleft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:  center;
+    height: 3rem;
+}
+
+.urgentbox:hover {
+    transform: scale(1.05);  
+    border-top-left-radius: 0;  
+    background-color: white;  
+    color: #4589FF; 
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.urgentbox:hover .my-svg {
+    fill: #4589FF;
+}
+
+#TaskTD {
+    background-color: #D2E3FF;
+}
+
+.textcentered {
+    text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .taskwidth {
+        width: 370px;
+    }
+    .summaryBox {
+        padding: 2px;
+        width: 90%;
+        margin: 2px;
+        height: 100%;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .headline {
+        display: none;
+    }
+
+    .toplayer {
+        width: 360px;
+        flex-direction: column;
+        gap: 5px;
+        height: fit-content;
+    }
+    
+    .urgentbox {
+        width: 90%;
+        height: 150px;
+        cursor: pointer;
+        font-size: smaller;
+    }
+    #TaskTD {
+        width: 90%;
+        height: 50px !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    #taskIB, #taskIP, #AFeedback, #done {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 122px;
+        height: 106px;
+    }
+
+    .botlayer {
+        width: 360px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 5px;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+    }
+    .taskBox {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    main {
+        padding: unset !important;
+    }
+
+    .urgentbox {
+        width: 260px;
+        height: fit-content;
+        padding: 20px;
+    }
+
+    .taskBox {
+        width: 260px;
+        height: fit-content;
+        padding: 20px;
+    }
+
+    /* #TaskTD {
+        width: 260px;
+    } */
+
+    #taskIB, #taskIP, #AFeedback, #done {
+        width: 102px;
+        height: 120Px;
+        padding: 10px 25px 10px 25px;
+
+    }
+
+}
+
+@media screen and (max-width: 390px) {
+    main {
+        padding: unset !important;
+    }
+
+    .botlayer img {
+        height: 60px;
+        width: 60px;
+    }
+
+    .summaryBox {
+        height: calc(100% - 50px);
+        padding-bottom: 100px;
+
+    }
+
+    .botlayer {
+        width: 330px;
+        
+    }
+
+    .toplayer {
+        width: 330px;
+    }
+
+    .urgentboxleft {
+        width: 2rem;
+       
+    }
+
+    h2 {
+        font-size:large;
+    }
+
+    .bigNumbers {
+        font-size: 3rem;
+    }
+
+    .circle {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    .urgentboxright {
+        width: 1rem;
+    }
+
+    #TaskTD {
+        width: 240px;
+    }
+
+    #taskIB, #taskIP, #AFeedback, #done {
+        width: 102px;
+        height: 120Px;
+        padding: 10px 25px 10px 25px;
+    }
+}

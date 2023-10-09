@@ -1,0 +1,135 @@
+@media(max-width: 1050px) {
+
+    .login-container {
+        width: 47%;
+    }
+
+    .input-fields-container {
+        width: 300px;
+    }
+
+    .login-link-container {
+        width: 330px;
+    }
+
+    .account-options {
+        width: 315px;
+    }
+
+}
+
+@media(max-width: 540px) {
+    body {
+        flex-direction: column;
+    }
+
+    .login-header-container {
+        top: 15px;
+    }
+
+    .join-logo-blue {
+        width: 64px;
+        height: 78.031px;
+    }
+
+    .sign-up-link-container {
+        display: none;
+    }
+
+    .login-media-sign-up {
+        display: block;
+        width: 80%;
+    }
+
+    .login-container {
+        width: 80%;
+    }
+}
+
+@media(max-width: 500px) {
+    .login-header-container {
+        top: 38px;
+        left: 38px;
+    }
+
+    .login-container {
+        width: 90%;
+        height: auto;
+        padding-bottom: 32px;
+    }
+
+    .input-fields-container {
+        margin-bottom: 0px;
+    }
+
+    .account-options {
+        flex-direction: column-reverse;
+        align-items: center;
+
+        gap: 16px;
+    }
+
+    .login-link-container {
+        flex-direction: column;
+        gap: 21px;
+        align-items: center;
+    }
+
+    .login-button {
+        width: 180px;
+    }
+
+    .login-guest-button {
+        width: 180px;
+        padding:10px;
+    }
+
+    .input-fields-container {
+        width: 80%;
+    }
+
+    .sign-up-link-container-media {
+        display: flex;
+        margin-top: 10px;
+    }
+}
+
+@media(max-width: 750px) {
+    .login-container {
+        width: 80%;
+    }
+}
+
+@media(max-height: 680px) {
+    .legal {
+        margin-top: 13px;
+    }
+
+    .login-header-container {
+        top: 70px;
+    }
+
+    .login-container {
+        padding-bottom: 10px;
+    }
+
+    .login-title {
+        margin-top: 5px;
+    }
+
+    .login-header-container {
+        top: 10px !important;
+        left: 10px !important;
+    }
+
+    .join-logo-blue {
+        width: 31px !important;
+        height: 46.031px !important;
+    }
+}
+
+@media(max-width: 430px) {
+    .input-fields-container {
+        width: 200px;
+    }
+}
