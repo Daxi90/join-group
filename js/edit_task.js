@@ -32,25 +32,19 @@ function getTaskData(taskId) {
  * Populates the form with existing task data.
  * @param {Object} taskData - The task data object.
  */
-function fillFormWithData(taskData) {
-  // Titel und Beschreibung
+// Füllt die grundlegenden Felder des Formulars
+function fillBasicFields(taskData) {
   document.getElementById("title").value = taskData.title;
   document.getElementById("description").value = taskData.description;
-
-  // Fälligkeitsdatum
   document.getElementById("duedate").value = taskData.completionDate;
-
-  // Priorität
   selectPriorityButton(taskData.priority);
+}
 
-  // Dropdown für zugewiesene Kontakte füllen
-  const optionsContainer = document.getElementById("options");
-  optionsContainer.innerHTML = ""; // Löschen Sie zuerst den aktuellen Inhalt
-
+// Erstellt die Kontakt-Optionen im Dropdown
+function createContactOptions(taskData, contacts, optionsContainer) {
+  optionsContainer.innerHTML = "";
   for (const contact of contacts) {
-    const isChecked = taskData.assignedPersons.includes(contact.id)
-      ? "checked"
-      : "";
+    const isChecked = taskData.assignedPersons.includes(contact.id) ? "checked" : "";
     const optionDiv = document.createElement("div");
     optionDiv.className = "option";
 
@@ -73,10 +67,8 @@ function fillFormWithData(taskData) {
 
     checkbox.addEventListener("change", function () {
       if (this.checked) {
-        // Fügen Sie die ID des Kontakts zur Liste der zugewiesenen Personen hinzu
         taskData.assignedPersons.push(contact.id);
       } else {
-        // Entfernen Sie die ID des Kontakts aus der Liste der zugewiesenen Personen
         const index = taskData.assignedPersons.indexOf(contact.id);
         if (index > -1) {
           taskData.assignedPersons.splice(index, 1);
@@ -91,32 +83,41 @@ function fillFormWithData(taskData) {
     optionDiv.appendChild(checkbox);
     optionsContainer.appendChild(optionDiv);
   }
+}
 
-  // Zugewiesene Kontakte im "selected-contacts"-Container anzeigen
-  updateSelectedContacts(taskData.assignedPersons);
-
-  // Kategorie
-  const categorySelect = document.querySelector(
-    ".category-select .selected-option"
-  );
-  if (categorySelect) {
-    categorySelect.textContent = taskData.category.name;
-  }
-
-  // Subtasks
-  const subtasksList = document.querySelector(".subtasks-list");
+// Aktualisiert die Subtasks in der Liste
+function updateSubtasks(taskData, subtasksList) {
   let subtasksHTML = "";
   for (const subtask of taskData.subtasks) {
     const isChecked = subtask.completed ? "checked" : "";
     subtasksHTML += `
       <li class="edit-board-subtask-item">
-      <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
-      <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
-      <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
-    </li>`;
+        <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
+        <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
+        <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
+      </li>`;
   }
   subtasksList.innerHTML = subtasksHTML;
 }
+
+// Hauptfunktion: Formular mit Daten füllen
+function fillFormWithData(taskData) {
+  // const contacts = getContacts();  // Angenommen, es gibt eine Funktion getContacts
+  const optionsContainer = document.getElementById("options");
+  const subtasksList = document.querySelector(".subtasks-list");
+
+  fillBasicFields(taskData);
+  createContactOptions(taskData, contacts, optionsContainer);
+  updateSelectedContacts(taskData.assignedPersons);
+  
+  const categorySelect = document.querySelector(".category-select .selected-option");
+  if (categorySelect) {
+    categorySelect.textContent = taskData.category.name;
+  }
+
+  updateSubtasks(taskData, subtasksList);
+}
+
 
 /**
  * Updates the UI to reflect assigned persons.
