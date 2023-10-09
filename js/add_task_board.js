@@ -87,6 +87,12 @@ function togglePrioButtonState(target) {
   }
 }
 
+/**
+ * Toggles the dropdown icon based on its open or closed state.
+ *
+ * @param {HTMLElement} dropdownIcon - The icon element to update.
+ * @param {boolean} isOpen - Whether the dropdown is currently open.
+ */
 function toggleDropdownIcon(dropdownIcon, isOpen) {
   const iconPath = isOpen
     ? "assets/img/dropdownUp.svg"
@@ -96,6 +102,10 @@ function toggleDropdownIcon(dropdownIcon, isOpen) {
   }
 }
 
+/**
+ * Binds click events to all elements with the class `.board-selected-option`.
+ * Toggles dropdown open state and updates icon accordingly.
+ */
 function bindSelectedOptionEvents() {
   document
     .querySelectorAll(".board-selected-option")
@@ -109,6 +119,14 @@ function bindSelectedOptionEvents() {
     });
 }
 
+
+/**
+ * Gets the name and color of a contact element based on its initials.
+ *
+ * @param {HTMLElement} element - The element containing the contact info.
+ * @param {Array} contacts - The list of contacts.
+ * @returns {Object} An object with name and color properties.
+ */
 function getNameAndColor(element, contacts) {
   const nameElement = element.querySelector(".board-name");
   const name = nameElement ? nameElement.innerText : null;
@@ -119,6 +137,11 @@ function getNameAndColor(element, contacts) {
   return { name, color };
 }
 
+
+/**
+ * Binds click events to elements with the class `.board-option`.
+ * Toggles checkbox and updates UI based on the contact.
+ */
 function bindContactLineEvents() {
   document.querySelectorAll(".board-option").forEach((option) => {
     option.addEventListener("click", function () {
@@ -132,6 +155,14 @@ function bindContactLineEvents() {
   });
 }
 
+
+/**
+ * Toggles the checkbox selection and updates UI accordingly.
+ *
+ * @param {HTMLInputElement} checkbox - The checkbox element to toggle.
+ * @param {string} name - The name associated with the checkbox.
+ * @param {string} color - The color to be applied.
+ */
 function toggleCheckboxSelection(checkbox, name, color) {
   checkbox.checked = !checkbox.checked;
   if (checkbox.checked) {
@@ -141,6 +172,10 @@ function toggleCheckboxSelection(checkbox, name, color) {
   }
 }
 
+
+/**
+ * Binds click events to checkboxes to toggle selection.
+ */
 function bindCheckboxEvents() {
   document
     .querySelectorAll('.board-option input[type="checkbox"]')
@@ -158,6 +193,12 @@ function bindCheckboxEvents() {
     });
 }
 
+
+/**
+ * Adds a selected name to a specific UI component.
+ *
+ * @param {string} name - The name to add.
+ */
 function addNameToSelection(name) {
   const contact = contacts.find((contact) => contact.name === name);
   if (contact) {
@@ -173,6 +214,12 @@ function addNameToSelection(name) {
   }
 }
 
+
+/**
+ * Removes a selected name from a specific UI component.
+ *
+ * @param {string} name - The name to remove.
+ */
 function removeNameFromSelection(name) {
   const contact = contacts.find((contact) => contact.name === name);
   if (contact) {
@@ -187,6 +234,9 @@ function removeNameFromSelection(name) {
   }
 }
 
+/**
+ * Binds search events to filter options.
+ */
 function bindSearchEvent() {
   const searchInput = document.querySelector(".board-search-contacts");
   searchInput.addEventListener("input", function () {
@@ -207,6 +257,10 @@ function bindSearchEvent() {
   });
 }
 
+
+/**
+ * Binds click events to category options to update the selected category.
+ */
 function bindCategorySelectEvents() {
   document
     .querySelectorAll(".board-category-select .board-option")
@@ -220,6 +274,12 @@ function bindCategorySelectEvents() {
     });
 }
 
+
+/**
+ * Creates UI components for subtask input.
+ *
+ * @returns {Object} Components for subtask input.
+ */
 function createSubtaskInputUI() {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
@@ -249,6 +309,10 @@ function createSubtaskInputUI() {
   return { inputContainer, inputField, checkButton, cancelButton };
 }
 
+
+/**
+ * Binds click events to handle subtask additions.
+ */
 function bindSubtaskSelectEvents() {
   const addSubtaskElement = document.querySelector("#board-add-subtask");
   const newSubtask = document.querySelector("#board-new-subtask");
@@ -277,7 +341,11 @@ function bindSubtaskSelectEvents() {
   });
 }
 
-
+/**
+ * Creates an input element.
+ *
+ * @returns {HTMLInputElement} A new input element.
+ */
 function createInputElement() {
   const inputField = document.createElement("input");
   inputField.setAttribute("type", "text");
@@ -287,6 +355,15 @@ function createInputElement() {
   return inputField;
 }
 
+
+/**
+ * Creates a button with an embedded image.
+ *
+ * @param {string} src - The image source.
+ * @param {string} imgClass - The class to be applied to the image.
+ * @param {string} btnClass - The class to be applied to the button.
+ * @returns {HTMLButtonElement} A new button element.
+ */
 function createButtonWithImage(src, imgClass, btnClass) {
     const button = document.createElement("button");
     button.setAttribute("type", "button");  // Diese Zeile hinzufügen
@@ -299,6 +376,13 @@ function createButtonWithImage(src, imgClass, btnClass) {
   }
   
 
+/**
+ * Creates a divider element.
+ *
+ * @param {string} src - The image source for the divider.
+ * @param {string} className - The class to be applied to the divider.
+ * @returns {HTMLImageElement} A new image element acting as a divider.
+ */  
 function createDivider(src, className) {
   const divider = document.createElement("img");
   divider.setAttribute("src", src);
@@ -306,6 +390,12 @@ function createDivider(src, className) {
   return divider;
 }
 
+
+/**
+ * Erstellt die UI-Elemente für eine Subtask.
+ * @param {string} subtaskValue - Der Textwert der Subtask.
+ * @returns {Object} Ein Objekt mit dem Subtask-Item und den Bearbeiten/Löschen Buttons.
+ */
 function createSubtaskUIElements(subtaskValue) {
   const subtaskItem = createSubtaskItem(subtaskValue);
   const subtaskText = createSubtaskText(subtaskValue);
@@ -333,6 +423,10 @@ function createSubtaskUIElements(subtaskValue) {
   return { subtaskItem, editButton, deleteButton };
 }
 
+/**
+ * Fügt eine neue Subtask hinzu.
+ * @param {...*} Verschiedene Elemente und Werte für die Subtask.
+ */
 function addSubtask(
   subtaskValue,
   inputField,
@@ -359,6 +453,11 @@ function addSubtask(
 }
 
 
+/**
+ * Erstellt ein Subtask-Item Element.
+ * @param {string} subtaskValue - Der Textwert der Subtask.
+ * @returns {HTMLElement} Das Subtask-Item Element.
+ */
 function createSubtaskItem(subtaskValue) {
   const subtaskItem = document.createElement("li");
   subtaskItem.classList.add("board-subtask-item");
@@ -366,18 +465,36 @@ function createSubtaskItem(subtaskValue) {
   return subtaskItem;
 }
 
+
+/**
+ * Erstellt ein Textelement für die Subtask.
+ * @param {string} subtaskValue - Der Textwert der Subtask.
+ * @returns {HTMLElement} Das Textelement der Subtask.
+ */
 function createSubtaskText(subtaskValue) {
   const subtaskText = document.createElement("span");
   subtaskText.innerText = "● " + subtaskValue;
   return subtaskText;
 }
 
+
+/**
+ * Erstellt einen Container für die Buttons.
+ * @returns {HTMLElement} Der Button-Container.
+ */
 function createButtonContainer() {
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
   return buttonContainer;
 }
 
+
+/**
+ * Fügt einen EventListener für den Editieren-Button hinzu.
+ * @param {HTMLElement} editButton - Der Editieren-Button.
+ * @param {HTMLElement} subtaskItem - Das Subtask-Item Element.
+ * @param {HTMLElement} [buttonContainer] - Der Button-Container.
+ */
 function attachEditListener(editButton, subtaskItem, buttonContainer) {
   editButton.addEventListener("click", function () {
     const subtaskTextElement = subtaskItem.querySelector("span:not([class])");
@@ -405,16 +522,33 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
   });
 }
 
+
+/**
+ * Fügt einen EventListener für den Löschen-Button hinzu.
+ * @param {HTMLElement} deleteButton - Der Löschen-Button.
+ */
 function board_attachDeleteListener(deleteButton) {
   deleteButton.addEventListener("click", function () {
     this.closest(".board-subtask-item").remove();
   });
 }
 
+
+/**
+ * Entfernt eine Liste von Elementen.
+ * @param {HTMLElement[]} elements - Die Liste von Elementen.
+ */
 function removeElements(elements) {
   elements.forEach((element) => element.remove());
 }
 
+
+/**
+ * Fügt Elemente ein oder entfernt sie, basierend auf der angegebenen Aktion.
+ * @param {HTMLElement[]} elements - Die Liste von Elementen.
+ * @param {string} action - Die Aktion ('insert' oder 'remove').
+ * @param {HTMLElement} referenceElement - Das Referenzelement für die Positionierung.
+ */
 function insertOrRemoveElements(elements, action, referenceElement) {
   elements.forEach((element) => {
     action === "insert"
@@ -423,6 +557,16 @@ function insertOrRemoveElements(elements, action, referenceElement) {
   });
 }
 
+
+/**
+ * Validates the subtask input and adds a new subtask if it's valid.
+ *
+ * @param {HTMLElement} inputField - The input element for the subtask.
+ * @param {HTMLElement} checkButton - The button for confirming the subtask.
+ * @param {HTMLElement} cancelButton - The button for cancelling the subtask addition.
+ * @param {HTMLElement} addSubtaskElement - The element to show after adding a subtask.
+ * @param {HTMLElement} inputContainer - The container holding the input field.
+ */
 function validateAndAddSubtask(
   inputField,
   checkButton,
@@ -445,11 +589,24 @@ function validateAndAddSubtask(
   }
 }
 
+
+/**
+ * Restores the UI element for adding a new subtask.
+ *
+ * @param {Array} elements - An array of elements to be removed.
+ * @param {HTMLElement} addSubtaskElement - The UI element for adding a new subtask.
+ */
 function restoreAddSubtaskElement(elements, addSubtaskElement) {
   insertOrRemoveElements(elements, "remove");
   addSubtaskElement.style.display = "flex";
 }
 
+
+/**
+ * Renders the contacts tab.
+ *
+ * @param {Array} contacts - An array of contact objects.
+ */
 function renderContactsTab(contacts) {
   const optionsContainer = document.getElementById("board-options");
   optionsContainer.innerHTML = "";
@@ -459,6 +616,9 @@ function renderContactsTab(contacts) {
   createAddContactButton(optionsContainer);
 }
 
+/**
+ * Render the contact list with IDs.
+ */
 function renderContactsWithID() {
   let contactListDiv = document.getElementById("board-contactList");
   contactListDiv.innerHTML = ""; // Den aktuellen Inhalt löschen
@@ -471,6 +631,12 @@ function renderContactsWithID() {
   });
 }
 
+
+/**
+ * Create a contact element and append it to the container.
+ * @param {Object} contact - The contact object.
+ * @param {Element} container - The DOM element to append the contact to.
+ */
 function createContactElement(contact, container) {
   let option = document.createElement("div");
   option.classList.add("board-option");
@@ -500,6 +666,11 @@ function createContactElement(contact, container) {
   container.appendChild(option);
 }
 
+
+/**
+ * Create and append an "Add Contact" button to the container.
+ * @param {Element} container - The DOM element to append the button to.
+ */
 function createAddContactButton(container) {
   let optionButton = document.createElement("div");
   optionButton.classList.add("optionButton");
@@ -515,6 +686,10 @@ function createAddContactButton(container) {
   container.appendChild(optionButton);
 }
 
+
+/**
+ * Save a new contact asynchronously.
+ */
 async function board_saveNewContact() {
   let name = document.getElementById("board-contactName");
   let mail = document.getElementById("board-contactMail");
@@ -545,6 +720,12 @@ async function board_saveNewContact() {
   closeCreateContact();
 }
 
+
+/**
+ * Create initials from a name.
+ * @param {string} name - Full name from which initials will be created.
+ * @return {string} - The initials.
+ */
 function createInitals(name) {
   let initials = name
     .split(" ")
@@ -553,17 +734,30 @@ function createInitals(name) {
   return initials;
 }
 
+
+/**
+ * Show the "Create Contact" form.
+ */
 function showCreateContact() {
   document.getElementById("newContact").classList.add("new-contact-show");
   // document.getElementById('contactBlurOverlay').classList.remove('d-none');
   console.log("Show");
 }
 
+
+/**
+ * Close the "Create Contact" form.
+ */
 function closeCreateContact() {
   document.getElementById("newContact").classList.remove("new-contact-show");
   // document.getElementById('contactBlurOverlay').classList.add('d-none');
 }
 
+
+/**
+ * Generate a random color.
+ * @return {string} - The generated hex color.
+ */
 function colorRandomizer() {
   const generateHex = () =>
     `#${Math.floor(Math.random() * 0xffffff)
@@ -573,6 +767,10 @@ function colorRandomizer() {
   return generateHex();
 }
 
+/**
+ * Get initials of all selected contacts.
+ * @return {Array} - Array of initials.
+ */
 function getSelectedContactsInitials() {
   return Array.from(
     document.querySelectorAll(".board-selected-contacts .selected-initials")
@@ -611,10 +809,21 @@ document.addEventListener("click", function (event) {
   });
 });
 
+
+/**
+ * Extract the value of an input element by its ID.
+ * @param {string} elementId - The ID of the element.
+ * @return {string} - The value of the input element.
+ */
 function extractInputValue(elementId) {
   return document.getElementById(elementId).value;
 }
 
+
+/**
+ * Extract the selected priority level.
+ * @return {string|null} - The selected priority or null.
+ */
 function extractSelectedPriority() {
   let priorityButtons = document.querySelectorAll(".board-prioButton");
   let priority = null;
@@ -626,7 +835,10 @@ function extractSelectedPriority() {
   return priority;
 }
 
-
+/**
+ * Get the next task ID.
+ * @return {number} - The next task ID.
+ */
 function getNextTaskId() {
   let maxId = -1;
   tasks.forEach(task => {
