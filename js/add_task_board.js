@@ -1,23 +1,40 @@
 let id = 0;
 
+/**
+ * @function loadContactsFromAPI
+ * @description Loads contacts from the API.
+ */
 async function loadContactsFromAPI() {
   APIcontacts = JSON.parse(await getItem("contacts"));
   id = JSON.parse(await getItem("id"));
   contacts = APIcontacts;
 }
 
+/**
+ * @function loadContactsTab
+ * @description Loads the contacts tab.
+ */
 async function loadContactsTab() {
   let contacts = await getItem("contacts"); // Fetches contacts from API
   contacts = JSON.parse(contacts);
   renderContactsTab(contacts);
 }
 
+/**
+ * @function loadTasksFromAPI
+ * @description Loads tasks from the API.
+ */
 async function loadTasksFromAPI() {
   let APItasks = JSON.parse(await getItem("tasks"));
   tasks = APItasks;
   return tasks;
 }
 
+
+/**
+ * @function board_taskFormJS
+ * @description Renders add_task functionality and binds various events.
+ */
 async function board_taskFormJS() {
   // renders add_task functionality
   bindPrioButtonEvents();
@@ -39,6 +56,10 @@ async function board_taskFormJS() {
   });
 }
 
+/**
+ * @function bindPrioButtonEvents
+ * @description Binds priority button events.
+ */
 function bindPrioButtonEvents() {
   document.querySelectorAll(".board-prioButton").forEach((button) => {
     button.addEventListener("click", function (event) {
@@ -47,6 +68,11 @@ function bindPrioButtonEvents() {
   });
 }
 
+/**
+ * @function togglePrioButtonState
+ * @param {Element} target - The target element.
+ * @description Toggles the priority button state.
+ */
 function togglePrioButtonState(target) {
   const isActive = target.classList.contains("board-selected");
   document.querySelectorAll(".board-prioButton").forEach((button) => {
@@ -593,6 +619,18 @@ function extractSelectedPriority() {
   return priority;
 }
 
+/**
+ * @function boardCreateNewTaskObject
+ * @param {string} title - The title of the task.
+ * @param {string} description - The description of the task.
+ * @param {string} duedate - The due date of the task.
+ * @param {string} priority - The priority of the task.
+ * @param {Array} assignedTo - The list of assigned persons.
+ * @param {string} category - The category of the task.
+ * @param {Array} subtasks - The list of subtasks.
+ * @param {string} status - The status of the task.
+ * @description Creates a new task object.
+ */
 function boardCreateNewTaskObject(
   title,
   description,
@@ -620,6 +658,12 @@ function boardCreateNewTaskObject(
   };
 }
 
+/**
+ * @function getCategoryBackgroundColor
+ * @param {string} category - The category of the task.
+ * @returns {string} - The background color for the category.
+ * @description Gets the background color for a specific category.
+ */
 function getCategoryBackgroundColor(category) {
   switch (category) {
     case "Technical task":
@@ -631,7 +675,11 @@ function getCategoryBackgroundColor(category) {
   }
 }
 
-
+/**
+ * @function loadAddTaskOffCanvas
+ * @param {string} status - The status of the task.
+ * @description Loads the Add Task Off Canvas.
+ */
 async function loadAddTaskOffCanvas(status) {
   renderBoardAddTaskForm(status);
   //loadContactsFromAPI(); // Kontakte laden
@@ -643,6 +691,11 @@ async function loadAddTaskOffCanvas(status) {
     .classList.toggle("show-task-offcanvas");
 }
 
+/**
+ * @function renderBoardAddTaskForm
+ * @param {string} status - The status of the task.
+ * @description Renders the add task form with the provided status.
+ */
 function renderBoardAddTaskForm(status) {
   let offcanvas = document.getElementById("add-task-offcanvas");
   offcanvas.innerHTML = "";
