@@ -543,8 +543,18 @@ function extractSelectedPriority() {
     return priority;
 }
 
+function getNextTaskId() {
+    let maxId = -1;
+    tasks.forEach(task => {
+      if (task.id > maxId) {
+        maxId = task.id;
+      }
+    });
+    return maxId + 1;
+  }
+
 function createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks) {
-    let newTaskId = tasks.length;
+    let newTaskId = getNextTaskId();
     return {
         id: newTaskId,
         status: "todo",

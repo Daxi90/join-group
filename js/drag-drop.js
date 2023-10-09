@@ -27,7 +27,13 @@ function allowDrop(ev) {
  * @param {string} newstatus - The new status to assign to the task.
  */
 function moveTo(newstatus){
-    tasks[currentDraggedElement].status = newstatus;
+    tasks.forEach(task => {
+        if (task.id === currentDraggedElement) {
+            task.status = newstatus;
+        }
+    });
+
+    // Rest des Codes bleibt gleich
     document.getElementById('todoBoard').classList.remove('onDragOver');
     document.getElementById('inProgressBoard').classList.remove('onDragOver');
     document.getElementById('awaitFeedBackBoard').classList.remove('onDragOver');
@@ -35,6 +41,7 @@ function moveTo(newstatus){
     setItem('tasks', tasks);
     kanbanInit(tasks);
 };
+
 
 /**
  * Highlights a board element during drag over.
