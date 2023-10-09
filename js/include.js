@@ -1,8 +1,16 @@
+/**
+ * Initializes the application by checking storage and including HTML.
+ */
 async function init() {
   checkStorageAndRedirect();
   await includeHTML();
 }
 
+
+/**
+ * Includes HTML into elements with the attribute 'w3-include-html'.
+ * Also dispatches a custom event "htmlIncluded" after fetching.
+ */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
@@ -20,6 +28,9 @@ async function includeHTML() {
   document.dispatchEvent(event);
 }
 
+/**
+ * Event listener for "htmlIncluded" custom event.
+ */
 document.addEventListener("htmlIncluded", async function () {
   highlightLinks();
   setUserInitials();
@@ -44,6 +55,10 @@ document.addEventListener("htmlIncluded", async function () {
   }
 });
 
+
+/**
+ * Highlights the links of the current page in the navigation menu.
+ */
 function highlightLinks() {
   // Bestimmen Sie die aktuelle Seite durch Abrufen des Pfads der URL
   let path = window.location.pathname;
@@ -62,6 +77,10 @@ function highlightLinks() {
   });
 }
 
+
+/**
+ * Sets the initials of the logged-in user.
+ */
 function setUserInitials() {
   const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
   if(loggedInUser){
@@ -70,6 +89,10 @@ function setUserInitials() {
   }
 }
 
+
+/**
+ * Checks if a user is logged in. Redirects to login if not.
+ */
 function checkStorageAndRedirect() {
   const loggedInUser = localStorage.getItem("user") || sessionStorage.getItem("user");
 
@@ -81,6 +104,9 @@ function checkStorageAndRedirect() {
   }
 }
 
+/**
+ * Logs the user out by removing user info from storage.
+ */
 function logOut(){
   if(localStorage.getItem("user") || sessionStorage.getItem("user")){
     localStorage.removeItem("user");
