@@ -49,18 +49,18 @@
         </div>
         <div class="new-contact-information">
             <img class="new-contact-img" src="assets/img/contactWhite.svg">
-            <form class="new-contact-input-container" onsubmit="createContact(); return false;">
+            <form class="new-contact-input-container" method="post" onsubmit="createContact(); return false;"> <!-- method="post -->
                 <div class="new-contact-input-field">
                     <input class="new-contact-input" placeholder="Name" type="text" required
                         title="Please enter the full name" id="contactName" pattern="^\w+\s+\w+$">
                     <img src="assets/img/contactGrey.svg">
                 </div>
                 <div class="new-contact-input-field">
-                    <input class="new-contact-input" placeholder="Email" id="contactMail" type="email">
+                    <input class="new-contact-input" placeholder="Email" id="contactMail" type="email" name="email" value="" required> <!-- value="" required -->
                     <img src="assets/img/mail.svg">
                 </div>
                 <div class="new-contact-input-field">
-                    <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number">
+                    <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number" name="phone" value="" required> <!-- value="" required -->
                     <img src="assets/img/phone.svg">
                 </div>
                 <div class="new-contact-buttons-container">
