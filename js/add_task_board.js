@@ -220,6 +220,35 @@ function bindCategorySelectEvents() {
     });
 }
 
+function createSubtaskInputUI() {
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("input-container");
+
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
+  const inputField = createInputElement();
+
+  const checkButton = createButtonWithImage(
+    "assets/img/blueplus.svg",
+    "checkIMG",
+    "checkBTN"
+  );
+  const cancelButton = createButtonWithImage(
+    "assets/img/blueX.svg",
+    "cancelIMG",
+    "cancelBTN"
+  );
+
+  buttonContainer.appendChild(checkButton);
+  buttonContainer.appendChild(cancelButton);
+
+  inputContainer.appendChild(inputField);
+  inputContainer.appendChild(buttonContainer);
+
+  return { inputContainer, inputField, checkButton, cancelButton };
+}
+
 function bindSubtaskSelectEvents() {
   const addSubtaskElement = document.querySelector("#board-add-subtask");
   const newSubtask = document.querySelector("#board-new-subtask");
@@ -227,24 +256,7 @@ function bindSubtaskSelectEvents() {
   addSubtaskElement.addEventListener("click", function () {
     addSubtaskElement.style.display = "none";
 
-    const inputContainer = document.createElement("div");
-    inputContainer.classList.add("input-container"); // Hinzufügen einer CSS-Klasse für das Styling
-
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container"); // Hinzufügen einer CSS-Klasse für das Styling
-
-    const inputField = createInputElement();
-
-    const checkButton = createButtonWithImage(
-      "assets/img/blueplus.svg",
-      "checkIMG",
-      "checkBTN"
-    );
-    const cancelButton = createButtonWithImage(
-      "assets/img/blueX.svg",
-      "cancelIMG",
-      "cancelBTN"
-    );
+    const { inputContainer, inputField, checkButton, cancelButton } = createSubtaskInputUI();
 
     checkButton.addEventListener("click", function () {
       validateAndAddSubtask(
@@ -258,24 +270,13 @@ function bindSubtaskSelectEvents() {
 
     cancelButton.addEventListener("click", function () {
       inputField.value = "";
-      restoreAddSubtaskElement(
-        [inputContainer, buttonContainer],
-        addSubtaskElement
-      );
+      restoreAddSubtaskElement([inputContainer], addSubtaskElement);
     });
 
-    // Die Buttons in den Button-Container einfügen
-    buttonContainer.appendChild(checkButton);
-    buttonContainer.appendChild(cancelButton);
-
-    // Das Inputfeld und den Button-Container in den allgemeinen Container einfügen
-    inputContainer.appendChild(inputField);
-    inputContainer.appendChild(buttonContainer);
-
-    // Den allgemeinen Container in das DOM einfügen
     newSubtask.appendChild(inputContainer);
   });
 }
+
 
 function createInputElement() {
   const inputField = document.createElement("input");
@@ -305,26 +306,11 @@ function createDivider(src, className) {
   return divider;
 }
 
-function addSubtask(
-  subtaskValue,
-  inputField,
-  checkButton,
-  cancelButton,
-  addSubtaskElement,
-  inputContainer
-) {
-  const subtaskList = document.getElementById("board-subtaskList");
-  const parentElement = document.querySelector(".board-subtasks-container");
-  const referenceElement = document.getElementById("board-new-subtask");
+function createSubtaskUIElements(subtaskValue) {
   const subtaskItem = createSubtaskItem(subtaskValue);
   const subtaskText = createSubtaskText(subtaskValue);
   const buttonContainer = createButtonContainer();
-
-  parentElement.insertBefore(inputContainer, referenceElement);
-  parentElement.insertBefore(buttonContainer, referenceElement);
-
-  subtaskItem.appendChild(subtaskText);
-
+  
   const editButton = createButtonWithImage(
     "assets/img/blueedit.svg",
     "edit-icon",
@@ -336,14 +322,34 @@ function addSubtask(
     "delete-button"
   );
   const divider = createDivider("assets/img/smalldivider.svg", "smalldivider");
-
+  
   buttonContainer.appendChild(editButton);
   buttonContainer.appendChild(divider);
   buttonContainer.appendChild(deleteButton);
-
+  
+  subtaskItem.appendChild(subtaskText);
   subtaskItem.appendChild(buttonContainer);
+  
+  return { subtaskItem, editButton, deleteButton };
+}
 
-  attachEditListener(editButton, subtaskItem, buttonContainer);
+function addSubtask(
+  subtaskValue,
+  inputField,
+  checkButton,
+  cancelButton,
+  addSubtaskElement,
+  inputContainer
+) {
+  const subtaskList = document.getElementById("board-subtaskList");
+  const parentElement = document.querySelector(".board-subtasks-container");
+  const referenceElement = document.getElementById("board-new-subtask");
+
+  parentElement.insertBefore(inputContainer, referenceElement);
+
+  const { subtaskItem, editButton, deleteButton } = createSubtaskUIElements(subtaskValue);
+  
+  attachEditListener(editButton, subtaskItem);
   board_attachDeleteListener(deleteButton);
 
   subtaskList.appendChild(subtaskItem);
@@ -351,6 +357,7 @@ function addSubtask(
   removeElements([inputField, checkButton, cancelButton]);
   addSubtaskElement.style.display = "flex";
 }
+
 
 function createSubtaskItem(subtaskValue) {
   const subtaskItem = document.createElement("li");
