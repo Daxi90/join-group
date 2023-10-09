@@ -28,6 +28,7 @@ function getTaskData(taskId) {
   return tasks.find((task) => task.id === taskId);
 }
 
+<<<<<<< HEAD
 function fillInputById(id, value) {
   const element = document.getElementById(id);
   if (element) {
@@ -51,6 +52,67 @@ function updateCategorySelect(taskData) {
 
 function populateSubtasks(taskData) {
   const subtasksList = document.querySelector(".subtasks-list");
+=======
+/**
+ * Populates the form with existing task data.
+ * @param {Object} taskData - The task data object.
+ */
+// Füllt die grundlegenden Felder des Formulars
+function fillBasicFields(taskData) {
+  document.getElementById("title").value = taskData.title;
+  document.getElementById("description").value = taskData.description;
+  document.getElementById("duedate").value = taskData.completionDate;
+  selectPriorityButton(taskData.priority);
+}
+
+// Erstellt die Kontakt-Optionen im Dropdown
+function createContactOptions(taskData, contacts, optionsContainer) {
+  optionsContainer.innerHTML = "";
+  for (const contact of contacts) {
+    const isChecked = taskData.assignedPersons.includes(contact.id) ? "checked" : "";
+    const optionDiv = document.createElement("div");
+    optionDiv.className = "option";
+
+    const contactLineDiv = document.createElement("div");
+    contactLineDiv.className = "contactLine";
+
+    const initialsDiv = document.createElement("div");
+    initialsDiv.className = "initials";
+    initialsDiv.setAttribute("data-contact-id", contact.id);
+    initialsDiv.style.backgroundColor = contact.color;
+    initialsDiv.textContent = contact.initials;
+
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "name";
+    nameSpan.textContent = contact.name;
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    if (isChecked) checkbox.checked = true;
+
+    checkbox.addEventListener("change", function () {
+      if (this.checked) {
+        taskData.assignedPersons.push(contact.id);
+      } else {
+        const index = taskData.assignedPersons.indexOf(contact.id);
+        if (index > -1) {
+          taskData.assignedPersons.splice(index, 1);
+        }
+      }
+      updateSelectedContacts(taskData.assignedPersons);
+    });
+
+    contactLineDiv.appendChild(initialsDiv);
+    contactLineDiv.appendChild(nameSpan);
+    optionDiv.appendChild(contactLineDiv);
+    optionDiv.appendChild(checkbox);
+    optionsContainer.appendChild(optionDiv);
+  }
+}
+
+// Aktualisiert die Subtasks in der Liste
+function updateSubtasks(taskData, subtasksList) {
+>>>>>>> d5155455cb7f098932cbfa2bc72313e0c78149f1
   let subtasksHTML = "";
 
   for (const subtask of taskData.subtasks) {
@@ -66,6 +128,7 @@ function populateSubtasks(taskData) {
   subtasksList.innerHTML = subtasksHTML;
 }
 
+<<<<<<< HEAD
 function fillFormWithData(taskData) {
   fillInputById("title", taskData.title);
   fillInputById("description", taskData.description);
@@ -138,6 +201,24 @@ function createOptionForContact(contact, taskData, optionsContainer) {
   optionDiv.appendChild(contactLineDiv);
   optionDiv.appendChild(checkbox);
   optionsContainer.appendChild(optionDiv);
+=======
+// Hauptfunktion: Formular mit Daten füllen
+function fillFormWithData(taskData) {
+  // const contacts = getContacts();  // Angenommen, es gibt eine Funktion getContacts
+  const optionsContainer = document.getElementById("options");
+  const subtasksList = document.querySelector(".subtasks-list");
+
+  fillBasicFields(taskData);
+  createContactOptions(taskData, contacts, optionsContainer);
+  updateSelectedContacts(taskData.assignedPersons);
+  
+  const categorySelect = document.querySelector(".category-select .selected-option");
+  if (categorySelect) {
+    categorySelect.textContent = taskData.category.name;
+  }
+
+  updateSubtasks(taskData, subtasksList);
+>>>>>>> d5155455cb7f098932cbfa2bc72313e0c78149f1
 }
 
 
