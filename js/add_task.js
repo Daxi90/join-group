@@ -1056,7 +1056,6 @@ function extractSelectedPriority() {
     return priority;
 }
 
-<<<<<<< Updated upstream
 function getNextTaskId() {
     let maxId = -1;
     tasks.forEach(task => {
@@ -1069,25 +1068,6 @@ function getNextTaskId() {
 
 function createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks) {
     let newTaskId = getNextTaskId();
-=======
-
-/**
- * Creates a new task object with the provided properties.
- *
- * This function creates a new task object with the specified properties and assigns it a unique ID.
- *
- * @param {string} title - The title of the task.
- * @param {string} description - The description of the task.
- * @param {string} duedate - The completion date of the task.
- * @param {string} priority - The priority of the task.
- * @param {Array<string>} assignedTo - An array of persons assigned to the task.
- * @param {string} category - The category of the task.
- * @param {Array<string>} subtasks - An array of subtasks associated with the task.
- * @returns {Object} A new task object with the specified properties.
- */
-function createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks) {
-    let newTaskId = tasks.length; // Assign a unique ID to the new task
->>>>>>> Stashed changes
     return {
         id: newTaskId,
         status: "todo",
