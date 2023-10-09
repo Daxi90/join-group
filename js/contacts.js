@@ -1,10 +1,18 @@
 let editContactIndex = 0
 let id = 2
 
+/**
+ * Initializes the contact application.
+ * @returns {Promise<void>}
+ */
 async function contactInit() {
-    await init();
+    await init(); // Initialize the application (assumes an 'init' function exists).
 }
 
+/**
+ * Retrieves and displays contacts from storage.
+ * @returns {Promise<void>}
+ */
 async function getContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
@@ -12,10 +20,14 @@ async function getContacts() {
     } catch (e) {
         console.error('Loading error:', e);
     }
-    renderContactsContacts();
+    renderContactsContacts(); // Render the contacts on the UI.
 }
 
-async function getTasks(){
+/**
+ * Retrieves tasks from storage.
+ * @returns {Promise<void>}
+ */
+async function getTasks() {
     try {
         tasks = JSON.parse(await getItem('tasks'));
     } catch (e) {
@@ -23,17 +35,23 @@ async function getTasks(){
     }
 }
 
+/**
+ * Sorts the contacts array alphabetically by name.
+ */
 function sortContacts() {
     contacts = contacts.sort((a, b) => {
         if (a.name < b.name) {
-            return -1
+            return -1;
         }
     });
 }
 
+/**
+ * Renders the list of contacts grouped by the first letter of their names.
+ */
 function renderContactsContacts() {
     let contactsList = document.getElementById('contacts');
-    renderClickedContact();
+    renderClickedContact(); // Render the clicked contact (if any).
     contactsList.innerHTML = '';
 
     // Sort the contacts array alphabetically by name
@@ -57,6 +75,12 @@ function renderContactsContacts() {
     }
 }
 
+/**
+ * Renders the HTML for a single contact.
+ * @param {Object} contact - The contact object to render.
+ * @param {number} i - The index of the contact in the array.
+ * @returns {string} - The HTML representation of the contact.
+ */
 function renderContactContacts(contact, i) {
     return `
         <div class="contact" id="contact${i}" onclick="getSingleContactData(${i})">
@@ -66,9 +90,12 @@ function renderContactContacts(contact, i) {
                 <span class="c-mail">${contact['email']}</span>
             </div>
         </div>
-        `;
+    `;
 }
 
+/**
+ * Creates a new contact and adds it to the contacts list.
+ */
 async function createContact() {
     let name = document.getElementById('contactName');
     let mail = document.getElementById('contactMail');
@@ -96,75 +123,138 @@ async function createContact() {
     closeCreateContactContacts();
 }
 
+/**
+ * Generates initials from a given name.
+ * @param {string} name - The name to generate initials from.
+ * @returns {string} - The generated initials.
+ */
 function createInitals(name) {
     let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
     console.log(initials);
     return initials;
 }
 
+/**
+ * Generates a random color in hexadecimal format.
+ * @returns {string} - The generated color in hexadecimal format.
+ */
 function colorRandomizer() {
     const generateHex = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0')}`;
 
     return generateHex();
 }
 
+
+
+/**
+ * Closes the error message element by adding the 'd-none' class.
+ */
 function closeErrorMsg() {
     document.getElementById('errorMsg').classList.add('d-none');
 }
 
+/**
+ * Displays the form for creating a new contact by adding the 'new-contact-show' class.
+ * Also removes the 'd-none' class from the contact blur overlay.
+ */
 function showCreateContactContacts() {
     document.getElementById('newContact').classList.add('new-contact-show');
     document.getElementById('contactBlurOverlay').classList.remove('d-none');
 }
 
+/**
+ * Closes the form for creating a new contact by removing the 'new-contact-show' class.
+ * Also adds the 'd-none' class to the contact blur overlay to hide it.
+ */
 function closeCreateContactContacts() {
     document.getElementById('newContact').classList.remove('new-contact-show');
     document.getElementById('contactBlurOverlay').classList.add('d-none');
 }
 
+/**
+ * Retrieves data for a single contact and renders it on the UI.
+ * @param {number} i - The index of the contact in the contacts array.
+ */
 function getSingleContactData(i) {
     let singleContactName = contacts[i]['name'];
     let singleContactEmail = contacts[i]['email'];
     let singleContactPhone = contacts[i]['phone'];
     let singleContactColor = contacts[i]['color'];
     let singleContactInitials = contacts[i]['initials'];
-    document.getElementById('contactContainer').innerHTML = renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i);
-    cssMediaclass();
-    renderEditContact(singleContactName, singleContactEmail, singleContactPhone, singleContactColor, singleContactInitials);
+
+    // Update the 'contactContainer' element with the rendered contact details.
+    document.getElementById('contactContainer').innerHTML = renderClickedContact(
+        singleContactName,
+        singleContactEmail,
+        singleContactPhone,
+        singleContactInitials,
+        singleContactColor,
+        i
+    );
+
+    cssMediaclass(); // Apply CSS based on screen width.
+    renderEditContact(
+        singleContactName,
+        singleContactEmail,
+        singleContactPhone,
+        singleContactColor,
+        singleContactInitials
+    ); // Render the edit contact section.
 }
 
-function renderClickedContact(singleContactName, singleContactEmail, singleContactPhone, singleContactInitials, singleContactColor, i) {
-    return `              
-    <div class="name-container">
-        <div class="singleContactColorCircle" style="background-color:${singleContactColor}">
-            <div class="contact-initals">
-                ${singleContactInitials}
+/**
+ * Renders the details of a clicked contact.
+ * @param {string} singleContactName - The name of the contact.
+ * @param {string} singleContactEmail - The email address of the contact.
+ * @param {string} singleContactPhone - The phone number of the contact.
+ * @param {string} singleContactInitials - The initials of the contact.
+ * @param {string} singleContactColor - The color associated with the contact.
+ * @param {number} i - The index of the contact in the contacts array.
+ * @returns {string} - The HTML representation of the contact details.
+ */
+function renderClickedContact(
+    singleContactName,
+    singleContactEmail,
+    singleContactPhone,
+    singleContactInitials,
+    singleContactColor,
+    i
+) {
+    return `
+        <div class="name-container">
+            <div class="singleContactColorCircle" style="background-color:${singleContactColor}">
+                <div class="contact-initals">
+                    ${singleContactInitials}
+                </div>
+            </div>
+            <div class="contact-name">
+                <span class="contact-name-name">${singleContactName}</span>
+                <div class="contact-name-icons-container">
+                    <button class="contact-button" onclick="showEditContact(${i})">
+                        <img class="contact-icon" src="assets/img/edit.svg">
+                        <div class="contact-button-text" type="button">Edit</div>
+                    </button>
+                    <button class="contact-button" onclick="deleteContact(${i})">
+                        <img class="contact-icon" src="assets/img/delete.svg">
+                        <div class="contact-button-text" type="button">Delete</div>
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="contact-name">
-            <span class="contact-name-name">${singleContactName}</span>
-            <div class="contact-name-icons-container">
-                <button class="contact-button" onclick="showEditContact(${i})">
-                    <img class="contact-icon" src="assets/img/edit.svg">
-                    <div class="contact-button-text" type="button">Edit</div>
-                </button>
-                <button class="contact-button" onclick="deleteContact(${i})">
-                    <img class="contact-icon" src="assets/img/delete.svg">
-                    <div class="contact-button-text" type="button" >Delete</div>
-                </button>
-            </div>
+        <div class="contact-information">
+            <span class="contact-information-title">Contact Information</span>
+            <span class="contact-information-subtitle">Email</span>
+            <a id="mail" class="contact-information-mail" href="mailto:${singleContactEmail}">${singleContactEmail}</a>
+            <span class="contact-information-subtitle">Phone</span>
+            <span id="phone">${singleContactPhone}</span>
         </div>
-    </div>
-    <div class="contact-information">
-        <span class="contact-information-title">Contact Information</span>
-        <span class="contact-information-subtitle">Email</span>
-        <a id="mail" class="contact-information-mail" href="mailto:${singleContactEmail}">${singleContactEmail}</a>
-        <span class="contact-information-subtitle">Phone</span>
-        <span id="phone">${singleContactPhone}</span>
-    </div>
     `;
 }
 
+/**
+ * Deletes a contact from the contacts list and associated tasks, then updates the UI.
+ * @param {number} i - The index of the contact to delete in the contacts array.
+ */
 async function deleteContact(i) {
     let contactId = contacts[i].id;
     await removeContactFromTasks(contactId);
@@ -174,37 +264,45 @@ async function deleteContact(i) {
     document.getElementById('contactContainer').innerHTML = '';
 }
 
+/**
+ * Removes a contact from tasks by filtering assignedPersons based on contactId.
+ * @param {number} contactId - The ID of the contact to remove from tasks.
+ */
 async function removeContactFromTasks(contactId) {
     await setItem('tasks', JSON.stringify(tasks));
     tasks.forEach(task => {
-        // Filtern der assignedPersons, um den Kontakt mit der gegebenen ID zu entfernen
         task.assignedPersons = task.assignedPersons.filter(personId => personId !== contactId);
     });
     await setItem('tasks', tasks);
 }
 
-//const contactIdToRemove = 1; // Setze die ID des Kontakts, den du löschen möchtest
-//removeContactFromTasks(contactIdToRemove);
-
-
+/**
+ * Displays the form for editing a contact by removing 'd-none' class from the overlay and adding 'edit-contact-show' class.
+ * @param {number} i - The index of the contact to edit in the contacts array.
+ */
 function showEditContact(i) {
     document.getElementById('contactBlurOverlay').classList.remove('d-none');
     document.getElementById('editContact').classList.add('edit-contact-show');
-    editContactIndex = i
+    editContactIndex = i; 
 }
 
+/**
+ * Closes the form for editing a contact by adding 'd-none' class to the overlay and removing 'edit-contact-show' class.
+ */
 function closeEditContact() {
     document.getElementById('contactBlurOverlay').classList.add('d-none');
     document.getElementById('editContact').classList.remove('edit-contact-show');
 }
 
+/**
+ * Edits the details of a contact and updates it in the contacts list and UI.
+ */
 async function editContact() {
-
     let name = document.getElementById("editContactName");
     let email = document.getElementById("editContactMail");
     let phone = document.getElementById("editContactPhone");
     let initials = createInitals(name.value);
-    let contactIndex = editContactIndex
+    let contactIndex = editContactIndex;
 
     contacts[contactIndex].name = name.value;
     contacts[contactIndex].email = email.value;
@@ -212,11 +310,15 @@ async function editContact() {
     contacts[contactIndex].initials = initials;
 
     await setItem('contacts', JSON.stringify(contacts));
+
     renderContactsContacts();
     closeEditContact();
-    getSingleContactData(contactIndex)
+    getSingleContactData(contactIndex);
 }
 
+/**
+ * Adjusts the CSS properties of elements based on screen width for media-specific styling.
+ */
 function cssMediaclass() {
     if (screen.width <= 1024) {
         document.getElementById('contactContainer').style = 'display: flex';
@@ -224,11 +326,20 @@ function cssMediaclass() {
     }
 }
 
+/**
+ * Closes the media-specific contact display by updating CSS properties.
+ */
 function closeContactMedia() {
     document.getElementById('contactContainer').style = 'z-index: 0';
     document.getElementById('contactArrowBackMedia').style = 'display: none';
 }
 
+/**
+ * Renders the edit contact form with specified data.
+ * @param {string} editName - The name of the contact being edited.
+ * @param {string} editEmail - The email address of the contact being edited.
+ * @param {string} editPhone - The phone number of the contact being edited.
+ */
 function renderEditContact(editName, editEmail, editPhone) {
     document.getElementById('editContact').innerHTML = `
     <div class="edit-contact-header">
@@ -265,46 +376,42 @@ function renderEditContact(editName, editEmail, editPhone) {
         <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.
         </div>
     </div>
-    `
-    editContactName.value = editName
-    editContactMail.value = editEmail
-    editContactPhone.value = +editPhone
+    `;
+    editContactName.value = editName;
+    editContactMail.value = editEmail;
+    editContactPhone.value = +editPhone;
 }
 
+/**
+ * Closes create and edit contact pop-up forms when clicking on the overlay.
+ */
 function closePopUpsOnClickOverlay() {
     closeCreateContactContacts();
     closeEditContact();
 }
 
+/**
+ * this function checks if email or phone input has a value
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const inputs = Array.from(
-      document.querySelectorAll('input[name=email], input[name=phone]')
+        document.querySelectorAll('input[name=email], input[name=phone]')
     );
-  
-    const inputListener = e => {
-      inputs
-        .filter(i => i !== e.target)
-        .forEach(i => (i.required = !e.target.value.length));
-    };
-  
-    inputs.forEach(i => i.addEventListener('input', inputListener));
-  });
 
-/*   document.addEventListener('DOMContentLoaded', function() {
-    const inputs = Array.from(
-      document.querySelectorAll('input[name=email], input[name=phone]')
-    );
-  
     const inputListener = e => {
-      inputs
-        .filter(i => i !== e.target)
-        .forEach(i => (i.required = !e.target.value.length));
+        inputs
+            .filter(i => i !== e.target)
+            .forEach(i => (i.required = !e.target.value.length));
     };
-  
-    inputs.forEach(i => i.addEventListener('input', inputListener));
-  }); */
 
+    inputs.forEach(i => i.addEventListener('input', inputListener));
+});
+
+/**
+ * An event listener that triggers when the DOM content is fully loaded.
+ * It calls functions to initialize and retrieve contacts and tasks data.
+ */
 document.addEventListener('DOMContentLoaded', function(){
     getContacts();
     getTasks();
-})
+});
