@@ -47,8 +47,8 @@ function rememberMe() {
     document.getElementById('loginCheckmark').classList.add('d-none');
     document.getElementById('loginCheckmarkChecked').classList.remove('d-none');
     loadLocal();
-    document.getElementById('email').value = myUserName
-    document.getElementById('password').value = myPassword
+    document.getElementById('email').value = myUserName;
+    document.getElementById('password').value = myPassword;
 }
 
 function saveLocal() {
@@ -87,13 +87,4 @@ function RememberRememberMe() {
 function setLoginLocalStorage(user) {
     let userAsText = JSON.stringify(user);
     localStorage.setItem('user', userAsText);
-}
-
-function initScreen() {
-    let body = document.getElementById('body');
-    body.innerHTML += `
-    <div class="start-screen-overlay" id="startScreenOverlay">
-        <img class="logo-animation" src="assets/img/joinLogoWhiteBig.svg">
-    </div>
-    `
 }
