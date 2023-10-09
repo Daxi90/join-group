@@ -28,95 +28,118 @@ function getTaskData(taskId) {
   return tasks.find((task) => task.id === taskId);
 }
 
-/**
- * Populates the form with existing task data.
- * @param {Object} taskData - The task data object.
- */
-function fillFormWithData(taskData) {
-  // Titel und Beschreibung
-  document.getElementById("title").value = taskData.title;
-  document.getElementById("description").value = taskData.description;
-
-  // Fälligkeitsdatum
-  document.getElementById("duedate").value = taskData.completionDate;
-
-  // Priorität
-  selectPriorityButton(taskData.priority);
-
-  // Dropdown für zugewiesene Kontakte füllen
-  const optionsContainer = document.getElementById("options");
-  optionsContainer.innerHTML = ""; // Löschen Sie zuerst den aktuellen Inhalt
-
-  for (const contact of contacts) {
-    const isChecked = taskData.assignedPersons.includes(contact.id)
-      ? "checked"
-      : "";
-    const optionDiv = document.createElement("div");
-    optionDiv.className = "option";
-
-    const contactLineDiv = document.createElement("div");
-    contactLineDiv.className = "contactLine";
-
-    const initialsDiv = document.createElement("div");
-    initialsDiv.className = "initials";
-    initialsDiv.setAttribute("data-contact-id", contact.id);
-    initialsDiv.style.backgroundColor = contact.color;
-    initialsDiv.textContent = contact.initials;
-
-    const nameSpan = document.createElement("span");
-    nameSpan.className = "name";
-    nameSpan.textContent = contact.name;
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    if (isChecked) checkbox.checked = true;
-
-    checkbox.addEventListener("change", function () {
-      if (this.checked) {
-        // Fügen Sie die ID des Kontakts zur Liste der zugewiesenen Personen hinzu
-        taskData.assignedPersons.push(contact.id);
-      } else {
-        // Entfernen Sie die ID des Kontakts aus der Liste der zugewiesenen Personen
-        const index = taskData.assignedPersons.indexOf(contact.id);
-        if (index > -1) {
-          taskData.assignedPersons.splice(index, 1);
-        }
-      }
-      updateSelectedContacts(taskData.assignedPersons);
-    });
-
-    contactLineDiv.appendChild(initialsDiv);
-    contactLineDiv.appendChild(nameSpan);
-    optionDiv.appendChild(contactLineDiv);
-    optionDiv.appendChild(checkbox);
-    optionsContainer.appendChild(optionDiv);
+function fillInputById(id, value) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.value = value;
   }
+}
 
-  // Zugewiesene Kontakte im "selected-contacts"-Container anzeigen
-  updateSelectedContacts(taskData.assignedPersons);
+function clearAndFillOptionsContainer(optionsContainer, contacts, taskData) {
+  optionsContainer.innerHTML = "";
+  for (const contact of contacts) {
+    createOptionForContact(contact, taskData, optionsContainer);
+  }
+}
 
-  // Kategorie
-  const categorySelect = document.querySelector(
-    ".category-select .selected-option"
-  );
+function updateCategorySelect(taskData) {
+  const categorySelect = document.querySelector(".category-select .selected-option");
   if (categorySelect) {
     categorySelect.textContent = taskData.category.name;
   }
+}
 
-  // Subtasks
+function populateSubtasks(taskData) {
   const subtasksList = document.querySelector(".subtasks-list");
   let subtasksHTML = "";
+
   for (const subtask of taskData.subtasks) {
     const isChecked = subtask.completed ? "checked" : "";
     subtasksHTML += `
       <li class="edit-board-subtask-item">
-      <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
-      <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
-      <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
-    </li>`;
+        <input type="checkbox" id="subtask-${subtask.id}" ${isChecked}>
+        <input type="text" value="${subtask.title}" id="edit-subtask-${subtask.id}" oninput="editSubtask('${subtask.id}', '${taskData.id}', this.value)">
+        <img style="cursor: pointer;" onclick="deleteSubtask('${subtask.id}', '${taskData.id}')" src="./assets/img/trash.svg" class="delete-icon">
+      </li>`;
   }
+
   subtasksList.innerHTML = subtasksHTML;
 }
+
+function fillFormWithData(taskData) {
+  fillInputById("title", taskData.title);
+  fillInputById("description", taskData.description);
+  fillInputById("duedate", taskData.completionDate);
+
+  selectPriorityButton(taskData.priority);
+
+  const optionsContainer = document.getElementById("options");
+  clearAndFillOptionsContainer(optionsContainer, contacts, taskData);
+
+  updateSelectedContacts(taskData.assignedPersons);
+
+  updateCategorySelect(taskData);
+  populateSubtasks(taskData);
+}
+
+
+function createElementWithClass(tag, className) {
+  const element = document.createElement(tag);
+  element.className = className;
+  return element;
+}
+
+function createInitialsDiv(contact) {
+  const div = createElementWithClass('div', 'initials');
+  div.setAttribute('data-contact-id', contact.id);
+  div.style.backgroundColor = contact.color;
+  div.textContent = contact.initials;
+  return div;
+}
+
+function createNameSpan(contact) {
+  const span = createElementWithClass('span', 'name');
+  span.textContent = contact.name;
+  return span;
+}
+
+function createCheckbox(contact, taskData) {
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.checked = taskData.assignedPersons.includes(contact.id);
+  checkbox.addEventListener('change', function () {
+    toggleContactAssignment(this.checked, contact.id, taskData.assignedPersons);
+  });
+  return checkbox;
+}
+
+function toggleContactAssignment(isChecked, contactId, assignedPersons) {
+  if (isChecked) {
+    assignedPersons.push(contactId);
+  } else {
+    const index = assignedPersons.indexOf(contactId);
+    if (index > -1) {
+      assignedPersons.splice(index, 1);
+    }
+  }
+  updateSelectedContacts(assignedPersons);
+}
+
+function createOptionForContact(contact, taskData, optionsContainer) {
+  const optionDiv = createElementWithClass('div', 'option');
+  const contactLineDiv = createElementWithClass('div', 'contactLine');
+
+  const initialsDiv = createInitialsDiv(contact);
+  const nameSpan = createNameSpan(contact);
+  const checkbox = createCheckbox(contact, taskData);
+
+  contactLineDiv.appendChild(initialsDiv);
+  contactLineDiv.appendChild(nameSpan);
+  optionDiv.appendChild(contactLineDiv);
+  optionDiv.appendChild(checkbox);
+  optionsContainer.appendChild(optionDiv);
+}
+
 
 /**
  * Updates the UI to reflect assigned persons.
@@ -228,50 +251,69 @@ function edit_getSubtasks() {
   );
 }
 
-/**
- * Save the edited task data.
- * @param {string} taskId - The ID of the task to save.
- */
-function saveEditedTaskData(taskId) {
+function clearFormAndValidate(form) {
   clearErrors();
-  let form = document.querySelector(".edit-taskwidth"); // Angenommen, es gibt nur ein Formular mit der Klasse 'taskwidth'
-  if (form.checkValidity()) {
-    // Alle Felder sind gültig, fahre mit dem Speichern der Daten fort
-    const task = getTaskById(taskId);
-    if (!task) {
-      console.error(`Task with ID ${taskId} not found.`);
-      return;
-    }
-
-    updateTaskFields(task, ["title", "description", "duedate"]);
-    task.priority = edit_getSelectedPriority();
-    if(task.priority === undefined){
-      displayError('.priority', 'Please choose a priority.');
-      return;
-    }
-
-    task.assignedPersons = edit_getAssignedPersons(contacts);
-    if (!task.assignedPersons || task.assignedPersons.length === 0) {
-      displayError('.assignedTo-container', 'Please assign at least one contact.');
-      return;
-    }
-  
-    task.category = edit_getSelectedCategory();
-    if (task.category === null || Object.keys(task.category).length === 0 || task.category.name === 'Select Category' ) {
-      displayError('.category-container', 'Please select a category.');
-      return;
-    }
-
-    task.subtasks = edit_getSubtasks();
-
-    setItem("tasks", tasks); // Speichert die Änderungen
-    closeTaskCard();
-    kanbanInit(tasks);
-  } else {
-    // Mindestens ein Feld ist ungültig, zeige eine Fehlermeldung an oder handle es entsprechend
-    console.error("Form is invalid");
-  }
+  return form.checkValidity();
 }
+
+function updateTaskIfFound(task, taskId) {
+  if (!task) {
+    console.error(`Task with ID ${taskId} not found.`);
+    return false;
+  }
+  return true;
+}
+
+function updateAndValidatePriority(task) {
+  task.priority = edit_getSelectedPriority();
+  if(task.priority === undefined) {
+    displayError('.priority', 'Please choose a priority.');
+    return false;
+  }
+  return true;
+}
+
+function updateAndValidateAssignedPersons(task, contacts) {
+  task.assignedPersons = edit_getAssignedPersons(contacts);
+  if (!task.assignedPersons || task.assignedPersons.length === 0) {
+    displayError('.assignedTo-container', 'Please assign at least one contact.');
+    return false;
+  }
+  return true;
+}
+
+function updateAndValidateCategory(task) {
+  task.category = edit_getSelectedCategory();
+  if (task.category === null || Object.keys(task.category).length === 0 || task.category.name === 'Select Category') {
+    displayError('.category-container', 'Please select a category.');
+    return false;
+  }
+  return true;
+}
+
+function saveEditedTaskData(taskId) {
+  const form = document.querySelector(".edit-taskwidth");
+  if (!clearFormAndValidate(form)) {
+    console.error("Form is invalid");
+    return;
+  }
+
+  const task = getTaskById(taskId);
+  if (!updateTaskIfFound(task, taskId)) return;
+
+  updateTaskFields(task, ["title", "description", "duedate"]);
+
+  if (!updateAndValidatePriority(task)) return;
+  if (!updateAndValidateAssignedPersons(task, contacts)) return;
+  if (!updateAndValidateCategory(task)) return;
+
+  task.subtasks = edit_getSubtasks();
+
+  setItem("tasks", tasks); // Speichert die Änderungen
+  closeTaskCard();
+  kanbanInit(tasks);
+}
+
 
 /**
  * Selects the appropriate priority button based on the task's priority.
@@ -685,9 +727,27 @@ function edit_bindCategorySelectEvents() {
   });
 }
 
-/**
- * Binds click events to add subtask elements.
- */
+function createInputAndButtonContainer() {
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("input-container");
+
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
+  return { inputContainer, buttonContainer };
+}
+
+function addEventsToButtons(checkButton, cancelButton, inputField, addSubtaskElement, inputContainer) {
+  checkButton.addEventListener("click", function () {
+    edit_validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
+  });
+
+  cancelButton.addEventListener("click", function () {
+    inputField.value = "";
+    restoreAddSubtaskElement([inputContainer, buttonContainer], addSubtaskElement);
+  });
+}
+
 function edit_bindSubtaskSelectEvents() {
   const addSubtaskElement = document.querySelector("#add-subtask");
   const newSubtask = document.querySelector("#new-subtask");
@@ -695,55 +755,24 @@ function edit_bindSubtaskSelectEvents() {
   addSubtaskElement.addEventListener("click", function () {
     addSubtaskElement.style.display = "none";
 
-    const inputContainer = document.createElement("div");
-    inputContainer.classList.add("input-container"); // Hinzufügen einer CSS-Klasse für das Styling
-
-    const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container"); // Hinzufügen einer CSS-Klasse für das Styling
+    const { inputContainer, buttonContainer } = createInputAndButtonContainer();
 
     const inputField = createInputElement();
+    const checkButton = createButtonWithImage("assets/img/blueplus.svg", "checkIMG", "checkBTN");
+    const cancelButton = createButtonWithImage("assets/img/blueX.svg", "cancelIMG", "cancelBTN");
 
-    const checkButton = createButtonWithImage(
-      "assets/img/blueplus.svg",
-      "checkIMG",
-      "checkBTN"
-    );
-    const cancelButton = createButtonWithImage(
-      "assets/img/blueX.svg",
-      "cancelIMG",
-      "cancelBTN"
-    );
+    addEventsToButtons(checkButton, cancelButton, inputField, addSubtaskElement, inputContainer);
 
-    checkButton.addEventListener("click", function () {
-      edit_validateAndAddSubtask(
-        inputField,
-        checkButton,
-        cancelButton,
-        addSubtaskElement,
-        inputContainer
-      );
-    });
-
-    cancelButton.addEventListener("click", function () {
-      inputField.value = "";
-      restoreAddSubtaskElement(
-        [inputContainer, buttonContainer],
-        addSubtaskElement
-      );
-    });
-
-    // Die Buttons in den Button-Container einfügen
     buttonContainer.appendChild(checkButton);
     buttonContainer.appendChild(cancelButton);
 
-    // Das Inputfeld und den Button-Container in den allgemeinen Container einfügen
     inputContainer.appendChild(inputField);
     inputContainer.appendChild(buttonContainer);
 
-    // Den allgemeinen Container in das DOM einfügen
     newSubtask.appendChild(inputContainer);
   });
 }
+
 
 /**
  * Creates an input element for subtasks.
@@ -847,15 +876,26 @@ function edit_bindSearchEvent() {
   });
 }
 
-/**
- * Adds a new subtask.
- * @param {string} subtaskValue - The value of the new subtask.
- * @param {HTMLInputElement} inputField - The input field for the new subtask.
- * @param {HTMLButtonElement} checkButton - The check button for the new subtask.
- * @param {HTMLButtonElement} cancelButton - The cancel button for the new subtask.
- * @param {HTMLElement} addSubtaskElement - The "Add Subtask" element.
- * @param {HTMLElement} inputContainer - The container for the input field.
- */
+function createSubtaskElements(subtaskValue) {
+  const subtaskItem = edit_createSubtaskItem(subtaskValue);
+  const subtaskText = edit_createSubtaskText(subtaskValue);
+  const buttonContainer = createButtonContainer();
+  subtaskItem.appendChild(subtaskText);
+  return { subtaskItem, buttonContainer };
+}
+
+function attachButtonsToContainer(buttonContainer) {
+  const editButton = createButtonWithImage("assets/img/blueedit.svg", "edit-icon", "edit-button");
+  const deleteButton = createButtonWithImage("assets/img/trash.svg", "delete-icon", "delete-button");
+  const divider = createDivider("assets/img/smalldivider.svg", "smalldivider");
+
+  buttonContainer.appendChild(editButton);
+  buttonContainer.appendChild(divider);
+  buttonContainer.appendChild(deleteButton);
+
+  return { editButton, deleteButton };
+}
+
 function edit_addSubtask(
   subtaskValue,
   inputField,
@@ -867,30 +907,12 @@ function edit_addSubtask(
   const subtaskList = document.getElementById("subtaskList");
   const parentElement = document.querySelector(".subtasks-container");
   const referenceElement = document.getElementById("new-subtask");
-  const subtaskItem = edit_createSubtaskItem(subtaskValue);
-  const subtaskText = edit_createSubtaskText(subtaskValue);
-  const buttonContainer = createButtonContainer();
+
+  const { subtaskItem, buttonContainer } = createSubtaskElements(subtaskValue);
+  const { editButton, deleteButton } = attachButtonsToContainer(buttonContainer);
 
   parentElement.insertBefore(inputContainer, referenceElement);
   parentElement.insertBefore(buttonContainer, referenceElement);
-
-  subtaskItem.appendChild(subtaskText);
-
-  const editButton = createButtonWithImage(
-    "assets/img/blueedit.svg",
-    "edit-icon",
-    "edit-button"
-  );
-  const deleteButton = createButtonWithImage(
-    "assets/img/trash.svg",
-    "delete-icon",
-    "delete-button"
-  );
-  const divider = createDivider("assets/img/smalldivider.svg", "smalldivider");
-
-  buttonContainer.appendChild(editButton);
-  buttonContainer.appendChild(divider);
-  buttonContainer.appendChild(deleteButton);
 
   subtaskItem.appendChild(buttonContainer);
 
@@ -902,6 +924,7 @@ function edit_addSubtask(
   removeElements([inputField, checkButton, cancelButton]);
   addSubtaskElement.style.display = "flex";
 }
+
 
 /**
  * Creates a new subtask item element.

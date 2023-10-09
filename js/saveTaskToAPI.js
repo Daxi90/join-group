@@ -1,101 +1,120 @@
-async function addTask() {
+async function validateInputs() {
+    let priority = extractSelectedPriority();
+    if (priority === null) {
+      displayError('.priority', 'Please choose a priority.');
+      return null;
+    }
+  
+    let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
+      .map(element => parseInt(element.getAttribute("data-contact-id")));
+    if (assignedTo.length < 1) {
+      displayError('.assignedTo-container', 'Please choose a contact.');
+      return null;
+    }
+  
+    let category = document.querySelector('.category-select .selected-option').textContent.trim();
+    if (!category || category === 'Select Category') {
+      displayError('.category-container', 'Please choose a category for this task.');
+      return null;
+    }
+  
+    return { priority, assignedTo, category };
+  }
+  
+  async function addTask() {
     clearErrors();
-
-    // Aus den Eingabefeldern extrahierte Daten
+  
     let title = extractInputValue('title');
     let description = extractInputValue('description');
     let duedate = extractInputValue('duedate');
- 
-    let priority = extractSelectedPriority();
-    if (priority === null) {                            // @David bitte copy/paste
-        displayError('.priority', 'Please choose a priority.');
-        return;
+   
+    const validationResults = await validateInputs();
+    if (validationResults === null) {
+      return;
     }
-
-    let assignedTo = Array.from(document.querySelectorAll('.selected-initials'))
-        .map(element => parseInt(element.getAttribute("data-contact-id")));
-        if(assignedTo.length < 1) {
-            displayError('.assignedTo-container', 'Please choose a contact.');
-            return;
-        }
-
-    let category = document.querySelector('.category-select .selected-option').textContent.trim();
-    if (category === null || Object.keys(category).length === 0 || category === 'Select Category' ) {    // @David bitte copy/paste
-        displayError('.category-container', 'Please choose a category for this task.');
-        return;
-    }
-    
+  
+    let { priority, assignedTo, category } = validationResults;
+  
     let subtasks = Array.from(document.querySelectorAll('.subtask-item'))
-        .map((option, index) => ({
-            id: `${tasks.length}.${index + 1}`,
-            title: option.textContent.trim(),
-            completed: false
-        }));
-
-    // Erstellung des neuen Task-Objekts
+      .map((option, index) => ({
+          id: `${tasks.length}.${index + 1}`,
+          title: option.textContent.trim(),
+          completed: false
+      }));
+  
     let newTask = createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks);
-
-    // Hinzufügen des neuen Task-Objekts zum tasks Array
+    
     tasks.push(newTask);
-
-    // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
+  
     await saveTasksToAPI();
-
-    // UI zurücksetzen
+  
     clearInput();
     addTaskPopup();
+    showPopupWithDelay();
+  }
+  
+  function showPopupWithDelay() {
     setTimeout(() => {
-        const popup = document.querySelector('.popup');
-        popup.classList.add('show-popup');
-      }, 100);
-}
+      const popup = document.querySelector('.popup');
+      popup.classList.add('show-popup');
+    }, 100);
+  }
+  
 
-async function boardAddTask(status) {
+  async function boardValidateInputs() {
+    let priority = extractSelectedPriority();
+    if (priority === null) {
+      displayError('.board-priority-form', 'Please choose a priority.');
+      return null;
+    }
+  
+    let assignedTo = Array.from(document.querySelectorAll('.board-selected-initials'))
+      .map(element => parseInt(element.getAttribute("data-contact-id")));
+    if (assignedTo.length < 1) {
+      displayError('.board-assignedTo-container', 'Please choose a contact.');
+      return null;
+    }
+  
+    let category = document.querySelector('.board-category-select .board-selected-option').textContent.trim();
+    if (!category || category === 'Select Category') {
+      displayError('.board-category-container', 'Please choose a category for this task.');
+      return null;
+    }
+  
+    return { priority, assignedTo, category };
+  }
+  
+  async function boardAddTask(status) {
     clearErrors();
-    // Aus den Eingabefeldern extrahierte Daten
     let title = extractInputValue('board-title');
     let description = extractInputValue('board-description');
     let duedate = extractInputValue('board-duedate');
-    let priority = extractSelectedPriority();
-    if (priority === null) {                            // @David bitte copy/paste
-        displayError('.board-priority-form', 'Please choose a priority.');
-        return;
-    }
-
-    let assignedTo = Array.from(document.querySelectorAll('.board-selected-initials'))
-        .map(element => parseInt(element.getAttribute("data-contact-id")));
-        if(assignedTo.length < 1) {
-            displayError('.board-assignedTo-container', 'Please choose a contact.');
-            return;
-        }
-
-    let category = document.querySelector('.board-category-select .board-selected-option').textContent.trim();
-    if (category === null || Object.keys(category).length === 0 || category === 'Select Category' ) {    // @David bitte copy/paste
-        displayError('.board-category-container', 'Please choose a category for this task.');
-        return;
-    }
     
+    const validationResults = await boardValidateInputs();
+    if (validationResults === null) {
+      return;
+    }
+  
+    let { priority, assignedTo, category } = validationResults;
+  
     let subtasks = Array.from(document.querySelectorAll('.board-subtask-item'))
-        .map((option, index) => ({
-            id: `${tasks.length}.${index + 1}`,
-            title: option.textContent.trim(),
-            completed: false
-        }));
-
-    // Erstellung des neuen Task-Objekts
+      .map((option, index) => ({
+        id: `${tasks.length}.${index + 1}`,
+        title: option.textContent.trim(),
+        completed: false
+      }));
+  
     let newTask = boardCreateNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks, status);
-
-    // Hinzufügen des neuen Task-Objekts zum tasks Array
+    
     tasks.push(newTask);
-
-    // Hier die Funktion aufrufen, die den neuen Task an Ihre API sendet
+  
     await saveTasksToAPI();
-
-    // UI zurücksetzen
+  
     board_clearInput();
     kanbanInit(tasks);
     loadAddTaskOffCanvas();
-}
+  }
+  
 
 
 async function saveTasksToAPI() {
