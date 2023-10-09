@@ -214,7 +214,7 @@ async function editContact() {
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsContacts();
     closeEditContact();
-    console.log(contacts);
+    getSingleContactData(contactIndex)
 }
 
 function cssMediaclass() {
