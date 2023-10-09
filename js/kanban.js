@@ -203,6 +203,11 @@ function kanbanInit(tasksToRender){
     }
 }
 
+/**
+ * Loads tasks from the API and dispatches an event.
+ *
+ * @async
+ */
 async function loadTasksFromAPI() {
     try {
         let APItasks = await JSON.parse(await getItem('tasks'));
@@ -214,6 +219,11 @@ async function loadTasksFromAPI() {
     }
 }
 
+/**
+ * Loads contacts from the API and dispatches an event.
+ *
+ * @async
+ */
 async function loadContactsFromAPI() {
     try {
         let APIContacts = await JSON.parse(await getItem('contacts'));
@@ -225,6 +235,11 @@ async function loadContactsFromAPI() {
     }
 }
 
+/**
+ * Loads tasks and contacts from the API, then initializes the Kanban board.
+ *
+ * @async
+ */
 async function loadDataFromAPI() {
     tasks = await JSON.parse(await getItem('tasks'));
     contacts = await JSON.parse(await getItem('contacts'));
@@ -236,7 +251,9 @@ document.addEventListener('DOMContentLoaded', async function(){
 })
 
 
-
+/**
+ * Adds an event listener to the selected option.
+ */
 function addEventListenerToContacts(){
     let contactChoice = document.querySelector('.selected-option');
     contactChoice.addEventListener('click', function(){
@@ -244,6 +261,9 @@ function addEventListenerToContacts(){
     })
 }
 
+/**
+ * Binds click events to contact line options.
+ */
 function new_bindContactLineEvents() {
 
     document.querySelectorAll('.option').forEach(option => {
@@ -258,6 +278,13 @@ function new_bindContactLineEvents() {
     });
 }
 
+/**
+ * Toggles the selection of a checkbox.
+ *
+ * @param {HTMLElement} checkbox - The checkbox element.
+ * @param {string} name - The name associated with the checkbox.
+ * @param {string} color - The color associated with the checkbox.
+ */
 function new_toggleCheckboxSelection(checkbox, name, color) {
     checkbox.checked = !checkbox.checked;
     if (checkbox.checked) {
@@ -267,6 +294,9 @@ function new_toggleCheckboxSelection(checkbox, name, color) {
     }
 }
 
+/**
+ * Binds click events to checkboxes.
+ */
 function new_bindCheckboxEvents() {
     document.querySelectorAll('.option input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('click', function (event) {
@@ -281,7 +311,11 @@ function new_bindCheckboxEvents() {
     });
 }
 
-
+/**
+ * Adds a name to the selected contacts.
+ *
+ * @param {string} name - The name to be added.
+ */
 function new_addNameToSelection(name) {
     const contact = contacts.find(contact => contact.name === name);
     if (contact) {
@@ -297,6 +331,11 @@ function new_addNameToSelection(name) {
     }
 }
 
+/**
+ * Removes a name from the selected contacts.
+ *
+ * @param {string} name - The name to be removed.
+ */
 function new_removeNameFromSelection(name) {
     const contact = contacts.find(contact => contact.name === name);
     if (contact) {

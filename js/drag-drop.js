@@ -1,15 +1,31 @@
+/** @type {number} - The ID of the currently dragged element. */
 let currentDraggedElement;
 
+/**
+ * Initiates dragging for a task.
+ *
+ * @param {number} id - The ID of the task to be dragged.
+ */
 function startDragging(id){
     currentDraggedElement = id;
     document.getElementById('task-'+id).classList.add('rotate');
 };
 
+/**
+ * Allows the drop event to occur.
+ *
+ * @param {Event} ev - The drop event.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 
 };
 
+/**
+ * Moves a task to a new status.
+ *
+ * @param {string} newstatus - The new status to assign to the task.
+ */
 function moveTo(newstatus){
     tasks[currentDraggedElement].status = newstatus;
     document.getElementById('todoBoard').classList.remove('onDragOver');
@@ -20,15 +36,30 @@ function moveTo(newstatus){
     kanbanInit(tasks);
 };
 
+/**
+ * Highlights a board element during drag over.
+ *
+ * @param {string} element - The ID of the board element to be highlighted.
+ */
 function highlight(element){
     document.getElementById(element).classList.add('onDragOver');
 }
 
+/**
+ * Removes highlight from a board element.
+ *
+ * @param {string} element - The ID of the board element to remove highlight from.
+ */
 function removeHighlight(element){
     document.getElementById(element).classList.remove('onDragOver');
 }
 
-
+/**
+ * Changes the status of a task to its previous status.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} taskId - The ID of the task whose status is to be changed.
+ */
 function previousStatus(event, taskId) {
     event.stopPropagation();
 
@@ -39,6 +70,12 @@ function previousStatus(event, taskId) {
     kanbanInit(tasks);
 }
 
+/**
+ * Changes the status of a task to its next status.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} taskId - The ID of the task whose status is to be changed.
+ */
 function nextStatus(event, taskId) {
     event.stopPropagation();
 
@@ -49,6 +86,12 @@ function nextStatus(event, taskId) {
     kanbanInit(tasks);
 }
 
+/**
+ * Gets the next status in the sequence for a given status.
+ *
+ * @param {string} currentStatus - The current status of a task.
+ * @returns {string} - The next status in the sequence.
+ */
 function getNextStatus(currentStatus) {
     const availableStatus = ['todo', 'inprogress', 'awaitfeedback', 'done'];
     let indexOfCurrentStatus = availableStatus.indexOf(currentStatus);
@@ -60,6 +103,12 @@ function getNextStatus(currentStatus) {
     }
 }
 
+/**
+ * Gets the previous status in the sequence for a given status.
+ *
+ * @param {string} currentStatus - The current status of a task.
+ * @returns {string} - The previous status in the sequence.
+ */
 function getPreviousStatus(currentStatus) {
     const availableStatus = ['todo', 'inprogress', 'awaitfeedback', 'done'];
     let indexOfCurrentStatus = availableStatus.indexOf(currentStatus);
