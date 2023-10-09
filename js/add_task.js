@@ -351,9 +351,11 @@ function insertOrRemoveElements(elements, action, referenceElement) {
 function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer) {
     const subtaskValue = inputField.value.trim();
     if (subtaskValue) {
+        clearErrors();
         addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
     } else {
-        alert('Please enter a subtask.');
+        clearErrors();
+        displayError('.subtasks-container', 'Please choose a priority.');
     }
 }
 
