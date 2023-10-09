@@ -28,6 +28,11 @@ function getTaskData(taskId) {
   return tasks.find((task) => task.id === taskId);
 }
 
+/**
+ * Fill an input element by its ID with a given value.
+ * @param {string} id - The ID of the input element.
+ * @param {*} value - The value to set.
+ */
 function fillInputById(id, value) {
   const element = document.getElementById(id);
   if (element) {
@@ -35,6 +40,13 @@ function fillInputById(id, value) {
   }
 }
 
+
+/**
+ * Clear and populate the options container with contact options.
+ * @param {Element} optionsContainer - The DOM container for the options.
+ * @param {Array} contacts - Array of contact objects.
+ * @param {Object} taskData - The task data object.
+ */
 function clearAndFillOptionsContainer(optionsContainer, contacts, taskData) {
   optionsContainer.innerHTML = "";
   for (const contact of contacts) {
@@ -42,6 +54,10 @@ function clearAndFillOptionsContainer(optionsContainer, contacts, taskData) {
   }
 }
 
+/**
+ * Update the category selection with task data.
+ * @param {Object} taskData - The task data object.
+ */
 function updateCategorySelect(taskData) {
   const categorySelect = document.querySelector(".category-select .selected-option");
   if (categorySelect) {
@@ -49,6 +65,10 @@ function updateCategorySelect(taskData) {
   }
 }
 
+/**
+ * Populate the subtasks list with given task data.
+ * @param {Object} taskData - The task data object.
+ */
 function populateSubtasks(taskData) {
   const subtasksList = document.querySelector(".subtasks-list");
   let subtasksHTML = "";
@@ -66,6 +86,10 @@ function populateSubtasks(taskData) {
   subtasksList.innerHTML = subtasksHTML;
 }
 
+/**
+ * Fill a form with task data.
+ * @param {Object} taskData - The task data object.
+ */
 function fillFormWithData(taskData) {
   fillInputById("title", taskData.title);
   fillInputById("description", taskData.description);
@@ -82,13 +106,23 @@ function fillFormWithData(taskData) {
   populateSubtasks(taskData);
 }
 
-
+/**
+ * Create a DOM element with a specified tag and class name.
+ * @param {string} tag - The HTML tag name for the element.
+ * @param {string} className - The class name for the element.
+ * @return {Element} - The created DOM element.
+ */
 function createElementWithClass(tag, className) {
   const element = document.createElement(tag);
   element.className = className;
   return element;
 }
 
+/**
+ * Create a div element for initials.
+ * @param {Object} contact - The contact object.
+ * @return {Element} - The created div element.
+ */
 function createInitialsDiv(contact) {
   const div = createElementWithClass('div', 'initials');
   div.setAttribute('data-contact-id', contact.id);
@@ -97,12 +131,23 @@ function createInitialsDiv(contact) {
   return div;
 }
 
+/**
+ * Create a span element for a contact name.
+ * @param {Object} contact - The contact object.
+ * @return {Element} - The created span element.
+ */
 function createNameSpan(contact) {
   const span = createElementWithClass('span', 'name');
   span.textContent = contact.name;
   return span;
 }
 
+/**
+ * Create a checkbox element.
+ * @param {Object} contact - The contact object.
+ * @param {Object} taskData - The task data object.
+ * @return {Element} - The created input checkbox element.
+ */
 function createCheckbox(contact, taskData) {
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
@@ -113,6 +158,12 @@ function createCheckbox(contact, taskData) {
   return checkbox;
 }
 
+/**
+ * Toggle the assignment of a contact to a task.
+ * @param {boolean} isChecked - Whether the checkbox is checked or not.
+ * @param {string} contactId - The ID of the contact.
+ * @param {Array} assignedPersons - Array of assigned persons.
+ */
 function toggleContactAssignment(isChecked, contactId, assignedPersons) {
   if (isChecked) {
     assignedPersons.push(contactId);
@@ -125,6 +176,12 @@ function toggleContactAssignment(isChecked, contactId, assignedPersons) {
   updateSelectedContacts(assignedPersons);
 }
 
+/**
+ * Create and populate an option for a contact.
+ * @param {Object} contact - The contact object.
+ * @param {Object} taskData - The task data object.
+ * @param {Element} optionsContainer - The DOM container for the options.
+ */
 function createOptionForContact(contact, taskData, optionsContainer) {
   const optionDiv = createElementWithClass('div', 'option');
   const contactLineDiv = createElementWithClass('div', 'contactLine');
@@ -251,11 +308,22 @@ function edit_getSubtasks() {
   );
 }
 
+/**
+ * Clears any form errors and checks form validity.
+ * @param {HTMLFormElement} form - The form element to validate.
+ * @return {boolean} - True if the form is valid, false otherwise.
+ */
 function clearFormAndValidate(form) {
   clearErrors();
   return form.checkValidity();
 }
 
+/**
+ * Checks if a task with the specified ID exists.
+ * @param {Object} task - The task object to update.
+ * @param {string} taskId - The ID of the task.
+ * @return {boolean} - True if task exists, false otherwise.
+ */
 function updateTaskIfFound(task, taskId) {
   if (!task) {
     console.error(`Task with ID ${taskId} not found.`);
@@ -264,6 +332,11 @@ function updateTaskIfFound(task, taskId) {
   return true;
 }
 
+/**
+ * Updates and validates task priority.
+ * @param {Object} task - The task object to update.
+ * @return {boolean} - True if priority is valid, false otherwise.
+ */
 function updateAndValidatePriority(task) {
   task.priority = edit_getSelectedPriority();
   if(task.priority === undefined) {
@@ -273,6 +346,12 @@ function updateAndValidatePriority(task) {
   return true;
 }
 
+/**
+ * Updates and validates assigned persons for a task.
+ * @param {Object} task - The task object to update.
+ * @param {Array} contacts - Array of available contacts.
+ * @return {boolean} - True if assigned persons are valid, false otherwise.
+ */
 function updateAndValidateAssignedPersons(task, contacts) {
   task.assignedPersons = edit_getAssignedPersons(contacts);
   if (!task.assignedPersons || task.assignedPersons.length === 0) {
@@ -282,6 +361,11 @@ function updateAndValidateAssignedPersons(task, contacts) {
   return true;
 }
 
+/**
+ * Updates and validates the category for a task.
+ * @param {Object} task - The task object to update.
+ * @return {boolean} - True if the category is valid, false otherwise.
+ */
 function updateAndValidateCategory(task) {
   task.category = edit_getSelectedCategory();
   if (task.category === null || Object.keys(task.category).length === 0 || task.category.name === 'Select Category') {
@@ -291,6 +375,10 @@ function updateAndValidateCategory(task) {
   return true;
 }
 
+/**
+ * Saves edited task data.
+ * @param {string} taskId - The ID of the task to save.
+ */
 function saveEditedTaskData(taskId) {
   const form = document.querySelector(".edit-taskwidth");
   if (!clearFormAndValidate(form)) {
@@ -727,6 +815,10 @@ function edit_bindCategorySelectEvents() {
   });
 }
 
+/**
+ * Creates div containers for input and button.
+ * @return {Object} - An object containing the created input and button containers.
+ */
 function createInputAndButtonContainer() {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
@@ -737,6 +829,15 @@ function createInputAndButtonContainer() {
   return { inputContainer, buttonContainer };
 }
 
+
+/**
+ * Adds click events to check and cancel buttons.
+ * @param {HTMLElement} checkButton - The check button element.
+ * @param {HTMLElement} cancelButton - The cancel button element.
+ * @param {HTMLInputElement} inputField - The input field element.
+ * @param {HTMLElement} addSubtaskElement - The element to add subtasks to.
+ * @param {HTMLElement} inputContainer - The container for the input field.
+ */
 function addEventsToButtons(checkButton, cancelButton, inputField, addSubtaskElement, inputContainer) {
   checkButton.addEventListener("click", function () {
     edit_validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
@@ -748,6 +849,9 @@ function addEventsToButtons(checkButton, cancelButton, inputField, addSubtaskEle
   });
 }
 
+/**
+ * Binds subtask selection events.
+ */
 function edit_bindSubtaskSelectEvents() {
   const addSubtaskElement = document.querySelector("#add-subtask");
   const newSubtask = document.querySelector("#new-subtask");
@@ -876,6 +980,11 @@ function edit_bindSearchEvent() {
   });
 }
 
+/**
+ * Creates HTML elements for a subtask.
+ * @param {string} subtaskValue - The text content of the subtask.
+ * @returns {Object} - An object containing the subtask item and its button container.
+ */
 function createSubtaskElements(subtaskValue) {
   const subtaskItem = edit_createSubtaskItem(subtaskValue);
   const subtaskText = edit_createSubtaskText(subtaskValue);
@@ -884,6 +993,11 @@ function createSubtaskElements(subtaskValue) {
   return { subtaskItem, buttonContainer };
 }
 
+/**
+ * Attaches buttons to a button container element.
+ * @param {HTMLElement} buttonContainer - The container to which the buttons are attached.
+ * @returns {Object} - An object containing the edit and delete buttons.
+ */
 function attachButtonsToContainer(buttonContainer) {
   const editButton = createButtonWithImage("assets/img/blueedit.svg", "edit-icon", "edit-button");
   const deleteButton = createButtonWithImage("assets/img/trash.svg", "delete-icon", "delete-button");
@@ -896,6 +1010,16 @@ function attachButtonsToContainer(buttonContainer) {
   return { editButton, deleteButton };
 }
 
+
+/**
+ * Adds a subtask to the subtask list.
+ * @param {string} subtaskValue - The text content of the subtask.
+ * @param {HTMLInputElement} inputField - The input field for entering subtask text.
+ * @param {HTMLElement} checkButton - The button to confirm adding the subtask.
+ * @param {HTMLElement} cancelButton - The button to cancel adding the subtask.
+ * @param {HTMLElement} addSubtaskElement - The element that triggers the add subtask process.
+ * @param {HTMLElement} inputContainer - The container holding the input field and buttons.
+ */
 function edit_addSubtask(
   subtaskValue,
   inputField,
