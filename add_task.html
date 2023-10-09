@@ -32,29 +32,28 @@
             </div>
             <div class="new-contact-information">
                 <img class="new-contact-img" src="./assets/img/contactWhite.svg">
-                <form class="new-contact-input-container" onsubmit="saveNewContact(); return false;">
+                <form class="new-contact-input-container" method="post" onsubmit="createContact(); return false;"> <!-- method="post -->
                     <div class="new-contact-input-field">
                         <input class="new-contact-input" placeholder="Name" type="text" required
                             title="Please enter the full name" id="contactName" pattern="^\w+\s+\w+$">
-                        <!-- onblur="validateNameInput()" -->
-                        <img src="./assets/img/contactGrey.svg">
+                        <img src="assets/img/contactGrey.svg">
                     </div>
                     <div class="new-contact-input-field">
-                        <input class="new-contact-input" placeholder="Email" id="contactMail" type="email">
-                        <img src="./assets/img/mail.svg">
+                        <input class="new-contact-input" placeholder="Email" id="contactMail" type="email" name="email" value="" required> <!-- value="" required -->
+                        <img src="assets/img/mail.svg">
                     </div>
                     <div class="new-contact-input-field">
-                        <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number">
-                        <img src="./assets/img/phone.svg">
+                        <input class="new-contact-input hide-arrow" placeholder="Phone" id="contactPhone" type="number" name="phone" value="" required> <!-- value="" required -->
+                        <img src="assets/img/phone.svg">
                     </div>
                     <div class="new-contact-buttons-container">
-                        <button type="button" class="new-contact-cancel" onclick="closeCreateContact()">
+                        <button type="button" class="new-contact-cancel" onclick="closeCreateContactContacts()">
                             <span>Cancel</span>
-                            <img src="./assets/img/X_Grey.svg">
+                            <img src="assets/img/X_Grey.svg">
                         </button>
                         <button class="new-contact-create" type="submit" value="submit">
                             <span>Create contact</span>
-                            <img src="./assets/img/check.svg">
+                            <img src="assets/img/check.svg">
                         </button>
                     </div>
                 </form>
