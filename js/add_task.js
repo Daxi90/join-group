@@ -1200,8 +1200,3 @@ function bindInputValidation() {
     }
 }
 
-<<<<<<< Updated upstream
-=======
-
-  
->>>>>>> Stashed changes
