@@ -77,6 +77,7 @@ async function taskFormJS() {
         bindSearchEvent();
         await loadTasksFromAPI(); // Using await since loadTasksFromAPI is asynchronous
         categoryMandatory();
+        bindInputValidation();
         
         document.querySelectorAll('.custom-select').forEach(dropdown => {
             dropdown.addEventListener('click', function () {
@@ -321,7 +322,6 @@ function bindSearchEvent() {
  * The `.category-select` parent will also be closed.
  */
 function bindCategorySelectEvents() {
-    console.log('bindCategoryEvnts() called');
     document.querySelectorAll('.category-select .option').forEach(option => {
         option.addEventListener('click', function () {
             const parent = this.closest('.category-select');
@@ -1167,5 +1167,41 @@ function categoryMandatory() {
         this.classList.add('ausgewaehlt');
       });
     });
+}   
+
+/**
+ * Bindet die Validierungslogik für die E-Mail- und Telefon-Eingabefelder.
+ */
+function bindInputValidation() {
+    const emailInput = document.getElementById('contactMail');
+    const phoneInput = document.getElementById('contactPhone');
+    const submitButton = document.getElementById('submitButton');
+
+    if (emailInput && phoneInput && submitButton) {
+        /**
+         * Überprüft, ob mindestens eines der Eingabefelder einen Wert hat.
+         * @param {HTMLInputElement} input1 - Das erste Eingabefeld.
+         * @param {HTMLInputElement} input2 - Das zweite Eingabefeld.
+         * @returns {boolean}
+         */
+        function validateAtLeastOneField(input1, input2) {
+            return input1.value.length > 0 || input2.value.length > 0;
+        }
+
+        // Event-Listener für den Submit-Button
+        submitButton.addEventListener('click', function(e) {
+            if (!validateAtLeastOneField(emailInput, phoneInput)) {
+                e.preventDefault();
+                alert('Bitte füllen Sie mindestens eines der Felder aus.');
+            }
+        });
+    } else {
+        console.warn("Eines oder mehrere benötigte Elemente wurden nicht gefunden.");
+    }
 }
 
+<<<<<<< Updated upstream
+=======
+
+  
+>>>>>>> Stashed changes
