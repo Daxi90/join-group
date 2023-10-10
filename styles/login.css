@@ -18,7 +18,7 @@ body {
 .join-logo-blue {
     width: 6.94%;
     height: 11.91vh;
-    animation: realLogoAnimate 3s forwards;
+    animation: realLogoAnimate 1.5s forwards;
 }
 
  @keyframes realLogoAnimate{
@@ -421,7 +421,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: start-screen-animation 3s forwards;
+    animation: start-screen-animation 1.5s forwards;
     position: fixed;
     opacity: 1;
 }
@@ -450,7 +450,7 @@ body {
 }
 
 .logo-animation {
-    animation: logo-animation 3s forwards;
+    animation: logo-animation 1.5s forwards;
 }
 
 @keyframes logo-animation {
