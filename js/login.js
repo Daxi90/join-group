@@ -16,7 +16,6 @@ let myPassword = [];
 function initLogin() {
     loadUsers();
     RememberRememberMe();
-    initScreen();
 }
 
 /**
@@ -51,8 +50,7 @@ function login(event) {
  * Handles the guest login process.
  * @param {Event} event - The click event triggering the guest login.
  */
-function guestLogin(event) {
-    event.preventDefault();
+function guestLogin() {
     let user = users[0];
     let userAsText = JSON.stringify(user);
     localStorage.setItem('user', userAsText);
