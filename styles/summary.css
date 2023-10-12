@@ -217,9 +217,14 @@ main {
     }
 
     .taskBox {
-        width: 260px;
+        max-width: 260px !important;
         height: fit-content;
         padding: 20px;
+    }
+
+    .botlayer {
+        width: 260px;
+        justify-self: center;
     }
 
     /* #TaskTD {

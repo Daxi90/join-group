@@ -179,6 +179,7 @@ input:-ms-input-placeholder {
     min-height: 79px;
     height: auto;
     width: 440px;
+    border-bottom: 1px solid gray;
 }
 
 .custom-select {
@@ -200,7 +201,6 @@ input:-ms-input-placeholder {
     left: 0;
     right: 0;
     background: white;
-    border-bottom: 1px solid gray;
     display: none;
     overflow-y: auto;
     max-height: 340px;
@@ -462,10 +462,10 @@ main {
     flex-direction: row;
     justify-content: space-between;
     padding: 12px 16px 12px 16px;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
 }
 
-.subclassSB:hover {
+.subtasks-container:hover {
     border-bottom: 1px solid #4589FF;
 }
 
@@ -576,9 +576,6 @@ input {
     align-items: center;
 }
 
-.subtask_options {
-    border-top: 1px solid gray;
-}
 
 @media only screen and (max-width: 520px) {
     .clearInput {

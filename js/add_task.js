@@ -78,6 +78,7 @@ async function taskFormJS() {
         await loadTasksFromAPI(); // Using await since loadTasksFromAPI is asynchronous
         categoryMandatory();
         bindInputValidation();
+        setMinDudateToday();
         
         document.querySelectorAll('.custom-select').forEach(dropdown => {
             dropdown.addEventListener('click', function () {
@@ -1200,3 +1201,8 @@ function bindInputValidation() {
     }
 }
 
+function setMinDudateToday(){
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('duedate').setAttribute('min', today)
+
+}
