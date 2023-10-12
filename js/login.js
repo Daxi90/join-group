@@ -102,6 +102,8 @@ function dontRememberMe() {
     document.getElementById('loginCheckmark').classList.remove('d-none');
     document.getElementById('loginCheckmarkChecked').classList.add('d-none');
     localStorage.removeItem('rememberRememberMe');
+    localStorage.removeItem('mail');
+    localStorage.removeItem('password');
 }
 
 /**
