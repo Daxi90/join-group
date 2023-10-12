@@ -915,6 +915,7 @@ async function loadAddTaskOffCanvas(status) {
   //loadContactsFromAPI(); // Kontakte laden
   await loadContactsTab(); // Kontakt-Tab laden
   board_taskFormJS();
+  boardSetMinDudateToday();
 
   document
     .getElementById("add-task-offcanvas")

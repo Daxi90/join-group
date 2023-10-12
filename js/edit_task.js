@@ -215,7 +215,6 @@ function updateSelectedContacts(assignedPersons) {
     }
   }
   selectedContactsContainer.innerHTML = selectedContactsHTML;
-  //bindContactLineEvents();
 }
 
 /**
@@ -480,7 +479,7 @@ function getFormHTML(taskId) {
         </div>
         <span class="FW700">Due date</span>
         <div>
-            <input required type="date" class="date" placeholder="dd/mm/yyyy" id="duedate">
+            <input required type="date" class="date" placeholder="dd/mm/yyyy" id="edit-duedate">
         </div>
         <div class="priority">
             <div class="FW700">Priority</div>
@@ -553,6 +552,20 @@ function getFormHTML(taskId) {
       `;
 }
 
+function editSetMinDudateToday(){
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('edit-duedate').setAttribute('min', today)
+
+}
+
+function boardSetMinDudateToday(){
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('board-duedate').setAttribute('min', today)
+
+}
+
+
+
 /**
  *
  * Logic for initialize Form
@@ -566,6 +579,7 @@ function getFormHTML(taskId) {
 
 async function editTaskFormJS() {
   // renders add_task functionality
+  editSetMinDudateToday();
   edit_bindPrioButtonEvents();
   edit_bindSelectedOptionEvents();
   edit_bindContactLineEvents();
