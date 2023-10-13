@@ -279,10 +279,8 @@ function createContainers() {
   
 /**
  * Binds an event listener to the check button.
- * 
  * Adds a click event listener to the provided check button that calls 
  * the validateAndAddSubtask function.
- *
  * @param {HTMLElement} checkButton - The button element for confirmation.
  * @param {HTMLElement} inputField - The input element for the subtask.
  * @param {HTMLElement} cancelButton - The button element for canceling.
@@ -363,9 +361,7 @@ document.addEventListener('click', function (event) {
 
 /**
  * Retrieves the background color associated with a task category.
- *
  * This function returns the background color associated with the specified task category.
- *
  * @param {string} category - The category of the task.
  * @returns {string} The background color for the specified category.
  */
@@ -381,10 +377,8 @@ function addTaskgetCategoryBackgroundColor(category) {
 }
 
 
-
 /**
  * Displays a popup message indicating that a task has been successfully created.
- *
  * This function creates and displays a popup message on the screen to indicate that a task
  * has been successfully created. The popup message will automatically disappear after a
  * few seconds, and then the page will be redirected.
@@ -476,8 +470,14 @@ function bindInputValidation() {
 }
 
 
-function setMinDudateToday(){
+/**
+ * Sets the 'min' attribute of the input field with ID 'duedate' to today's date.
+ * This ensures that the user cannot select a date prior to today in that input field.
+ */
+function setMinDudateToday() {
+    // Get today's date and convert it to ISO string format
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById('duedate').setAttribute('min', today)
-
+  
+    // Set the 'min' attribute of the 'duedate' input field to today's date
+    document.getElementById('duedate').setAttribute('min', today);
 }

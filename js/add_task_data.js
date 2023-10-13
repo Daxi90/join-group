@@ -56,4 +56,3 @@ async function loadTasksFromAPI() {
         throw new Error("Failed to load tasks.");
     }
 }
-

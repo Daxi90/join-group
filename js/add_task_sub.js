@@ -35,15 +35,12 @@ function bindSubtaskSelectEvents() {
     });
 }
 
-  
 
 /**
  * Creates and returns an input element for subtasks.
- * 
  * This function creates an HTML input element specifically designed for entering subtasks.
  * The input has an 'id' attribute set to 'subtask-input', a placeholder that reads 'Add new Subtask', 
  * and a CSS class 'subtasks_input'.
- * 
  * @returns {HTMLInputElement} - The created input element configured for subtasks.
  */
 function createInputElement() {
@@ -58,10 +55,8 @@ function createInputElement() {
 
 /**
  * Creates a button element with an embedded image.
- *
  * This function creates an HTML button element and embeds an image inside it. 
  * It allows for custom classes to be applied to both the image and the button.
- *
  * @param {string} src - The source URL for the image.
  * @param {string} imgClass - The CSS class to apply to the image.
  * @param {string} btnClass - The CSS class to apply to the button.
@@ -81,10 +76,8 @@ function createButtonWithImage(src, imgClass, btnClass) {
 
 /**
  * Creates an image element to act as a divider.
- *
  * This function creates an HTML image element intended to be used as a divider. 
  * A custom CSS class can be applied to the image.
- *
  * @param {string} src - The source URL for the image.
  * @param {string} className - The CSS class to apply to the image.
  * @returns {HTMLImageElement} - The created image element.
@@ -99,7 +92,6 @@ function createDivider(src, className) {
 
 /**
  * Inserts a list of elements before a reference element within a parent element.
- *
  * @param {HTMLElement} parentElement - The parent element in which to insert elements.
  * @param {Array<HTMLElement>} elements - An array of elements to insert.
  * @param {HTMLElement} referenceElement - The reference element before which to insert the new elements.
@@ -128,12 +120,13 @@ function createAndAppendButtons(buttonContainer) {
     
     return [editButton, deleteButton];
 }
+
+
 /**
  * Adds a new subtask.
  * This function creates and places a new subtask in the DOM based on the entered value.
  * It also places the corresponding Edit and Delete buttons and removes the UI elements
  * for subtask creation.
- *
  * @param {string} subtaskValue - The text value of the new subtask.
  * @param {HTMLInputElement} inputField - The input field for the subtask.
  * @param {HTMLButtonElement} checkButton - The confirmation button for the subtask.
@@ -169,10 +162,8 @@ function addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubt
 
 /**
  * Creates a new subtask list item.
- * 
  * This function creates a new list item (li) element, assigns it the 'subtask-item' 
  * class, and sets its 'data-subtask' attribute to the specified subtask value.
- * 
  * @param {string} subtaskValue - The text value of the new subtask.
  * @returns {HTMLLIElement} A newly created list item element for the subtask.
  */
@@ -186,10 +177,8 @@ function createSubtaskItem(subtaskValue) {
 
 /**
  * Creates a new subtask text element.
- * 
  * This function creates a new span element and sets its inner text to a bullet point 
  * followed by the specified subtask value.
- * 
  * @param {string} subtaskValue - The text value of the new subtask.
  * @returns {HTMLSpanElement} A newly created span element containing the subtask text.
  */
@@ -199,11 +188,10 @@ function createSubtaskText(subtaskValue) {
     return subtaskText;
 }
 
+
 /**
  * Creates a new button container element.
- * 
  * This function creates a new div element and assigns it a class of 'button-container'.
- * 
  * @returns {HTMLDivElement} A newly created div element with the class 'button-container'.
  */
 function createButtonContainer() {
@@ -215,11 +203,9 @@ function createButtonContainer() {
 
 /**
  * Attaches an edit event listener to an edit button.
- * 
  * This function binds a click event to the given edit button.
  * Upon clicking, the subtask item's text is replaced by an input field for editing.
  * A new save button is also created and inserted.
- * 
  * @param {HTMLButtonElement} editButton - The edit button element.
  * @param {HTMLLIElement} subtaskItem - The subtask item element.
  * @param {HTMLDivElement} buttonContainer - The button container element.
@@ -248,13 +234,10 @@ function attachEditListener(editButton, subtaskItem, buttonContainer) {
 }
 
 
-
 /**
  * Attaches a delete event listener to a delete button.
- * 
  * This function binds a click event to the given delete button.
  * Upon clicking, the closest subtask item is removed from the DOM.
- * 
  * @param {HTMLButtonElement} deleteButton - The delete button element.
  */
 function attachDeleteListener(deleteButton) {
@@ -264,12 +247,9 @@ function attachDeleteListener(deleteButton) {
 }
 
 
-
 /**
  * Removes an array of elements from the DOM.
- *
  * This function iterates over an array of DOM elements and removes each one from the DOM.
- * 
  * @param {HTMLElement[]} elements - An array of DOM elements to be removed.
  */
 function removeElements(elements) {
@@ -277,14 +257,11 @@ function removeElements(elements) {
 }
 
 
-
 /**
  * Inserts or removes an array of elements in the DOM based on the specified action.
- *
  * This function iterates over an array of DOM elements and either inserts each one
  * before a reference element in the DOM or removes each one from the DOM,
  * depending on the action specified.
- *
  * @param {HTMLElement[]} elements - An array of DOM elements to be inserted or removed.
  * @param {'insert'|'remove'} action - The action to perform: either 'insert' to insert the elements or 'remove' to remove them.
  * @param {HTMLElement} referenceElement - The DOM element before which the elements should be inserted (only relevant if action is 'insert').
@@ -300,11 +277,9 @@ function insertOrRemoveElements(elements, action, referenceElement) {
 
 /**
  * Validates the input and adds a new subtask if valid.
- *
  * This function trims the input value, checks if it is not empty,
  * and then calls the `addSubtask` function to add a new subtask.
  * If the input is empty, an alert box is shown to the user.
- *
  * @param {HTMLInputElement} inputField - The input field containing the subtask description.
  * @param {HTMLElement} checkButton - The button that triggers the validation.
  * @param {HTMLElement} cancelButton - The button that cancels the subtask addition.
@@ -325,11 +300,9 @@ function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtask
 
 /**
  * Restores the visibility of the "Add Subtask" element and removes specific elements.
- *
  * This function calls `insertOrRemoveElements` with the 'remove' action to remove 
  * any given elements. It then sets the display style of `addSubtaskElement` to 'flex',
  * making it visible again.
- *
  * @param {Array<HTMLElement>} elements - An array of elements to remove.
  * @param {HTMLElement} addSubtaskElement - The element that shows the option to add a new subtask.
  */
