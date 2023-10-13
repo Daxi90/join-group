@@ -76,24 +76,6 @@ function renderContactsContacts() {
 }
 
 /**
- * Renders the HTML for a single contact.
- * @param {Object} contact - The contact object to render.
- * @param {number} i - The index of the contact in the array.
- * @returns {string} - The HTML representation of the contact.
- */
-function renderContactContacts(contact, i) {
-    return `
-        <div class="contact" id="contact${i}" onclick="getSingleContactData(${i})">
-            <div class="c-initals" style="background-color:${contact['color']}">${contact['initials']}</div>
-            <div class="c-information">
-                <span class="c-name">${contact['name']}</span>
-                <span class="c-mail">${contact['email']}</span>
-            </div>
-        </div>
-    `;
-}
-
-/**
  * Creates a new contact and adds it to the contacts list.
  */
 async function createContact() {
@@ -202,54 +184,7 @@ function getSingleContactData(i) {
     ); // Render the edit contact section.
 }
 
-/**
- * Renders the details of a clicked contact.
- * @param {string} singleContactName - The name of the contact.
- * @param {string} singleContactEmail - The email address of the contact.
- * @param {string} singleContactPhone - The phone number of the contact.
- * @param {string} singleContactInitials - The initials of the contact.
- * @param {string} singleContactColor - The color associated with the contact.
- * @param {number} i - The index of the contact in the contacts array.
- * @returns {string} - The HTML representation of the contact details.
- */
-function renderClickedContact(
-    singleContactName,
-    singleContactEmail,
-    singleContactPhone,
-    singleContactInitials,
-    singleContactColor,
-    i
-) {
-    return `
-        <div class="name-container">
-            <div class="singleContactColorCircle" style="background-color:${singleContactColor}">
-                <div class="contact-initals">
-                    ${singleContactInitials}
-                </div>
-            </div>
-            <div class="contact-name">
-                <span class="contact-name-name">${singleContactName}</span>
-                <div class="contact-name-icons-container">
-                    <button class="contact-button" onclick="showEditContact(${i})">
-                        <img class="contact-icon" src="assets/img/edit.svg">
-                        <div class="contact-button-text" type="button">Edit</div>
-                    </button>
-                    <button class="contact-button" onclick="deleteContact(${i})">
-                        <img class="contact-icon" src="assets/img/delete.svg">
-                        <div class="contact-button-text" type="button">Delete</div>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="contact-information">
-            <span class="contact-information-title">Contact Information</span>
-            <span class="contact-information-subtitle">Email</span>
-            <a id="mail" class="contact-information-mail" href="mailto:${singleContactEmail}">${singleContactEmail}</a>
-            <span class="contact-information-subtitle">Phone</span>
-            <span id="phone">${singleContactPhone}</span>
-        </div>
-    `;
-}
+
 
 /**
  * Deletes a contact from the contacts list and associated tasks, then updates the UI.
@@ -332,54 +267,6 @@ function cssMediaclass() {
 function closeContactMedia() {
     document.getElementById('contactContainer').style = 'z-index: 0';
     document.getElementById('contactArrowBackMedia').style = 'display: none';
-}
-
-/**
- * Renders the edit contact form with specified data.
- * @param {string} editName - The name of the contact being edited.
- * @param {string} editEmail - The email address of the contact being edited.
- * @param {string} editPhone - The phone number of the contact being edited.
- */
-function renderEditContact(editName, editEmail, editPhone) {
-    document.getElementById('editContact').innerHTML = `
-    <div class="edit-contact-header">
-        <img src="assets/img/joinLogoWhite.svg">
-        <span class="new-contact-title">Edit contact</span>
-    </div>
-    <div class="new-contact-information">
-        <img class="new-contact-img" src="assets/img/contactWhite.svg">
-        <form class="new-contact-input-container" onsubmit="editContact(); return false;">
-            <div class="new-contact-input-field">
-                <input class="new-contact-input" placeholder="Name" type="text" required
-                    title="Please enter the full name" id="editContactName" pattern="^\\w+\\s+\\w+$">
-                <img src="assets/img/contactGrey.svg">
-            </div>
-            <div class="new-contact-input-field">
-                <input class="new-contact-input" placeholder="Email" id="editContactMail" type="email">
-                <img src="assets/img/mail.svg">
-            </div>
-            <div class="new-contact-input-field">
-                <input class="new-contact-input hide-arrow" placeholder="Phone" id="editContactPhone" type="number">
-                <img src="assets/img/phone.svg">
-            </div>
-            <div class="new-contact-buttons-container">
-                <button class="new-contact-cancel" onclick="closeEditContact()" type="button">
-                    <span>Cancel</span>
-                    <img src="assets/img/X_Grey.svg">
-                </button>
-                <button class="new-contact-create" type="submit" value="submit">
-                    <span>Save</span>
-                    <img src="assets/img/check.svg">
-                </button>
-            </div>
-        </form>
-        <div id="error-message" style="color: red; display: none;">Please enter two words in the Name field.
-        </div>
-    </div>
-    `;
-    editContactName.value = editName;
-    editContactMail.value = editEmail;
-    editContactPhone.value = +editPhone;
 }
 
 /**

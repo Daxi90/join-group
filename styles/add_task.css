@@ -993,6 +993,7 @@ board-main {
     margin-top: 24px;
     gap: 4px;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .board-clearInput {
