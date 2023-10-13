@@ -3,7 +3,6 @@ let currentDraggedElement;
 
 /**
  * Initiates dragging for a task.
- *
  * @param {number} id - The ID of the task to be dragged.
  */
 function startDragging(id){
@@ -13,7 +12,6 @@ function startDragging(id){
 
 /**
  * Allows the drop event to occur.
- *
  * @param {Event} ev - The drop event.
  */
 function allowDrop(ev) {
@@ -23,7 +21,6 @@ function allowDrop(ev) {
 
 /**
  * Moves a task to a new status.
- *
  * @param {string} newstatus - The new status to assign to the task.
  */
 function moveTo(newstatus){
@@ -45,7 +42,6 @@ function moveTo(newstatus){
 
 /**
  * Highlights a board element during drag over.
- *
  * @param {string} element - The ID of the board element to be highlighted.
  */
 function highlight(element){
@@ -54,7 +50,6 @@ function highlight(element){
 
 /**
  * Removes highlight from a board element.
- *
  * @param {string} element - The ID of the board element to remove highlight from.
  */
 function removeHighlight(element){
@@ -63,7 +58,6 @@ function removeHighlight(element){
 
 /**
  * Changes the status of a task to its previous status.
- *
  * @param {Event} event - The event object.
  * @param {number} taskId - The ID of the task whose status is to be changed.
  */
@@ -79,7 +73,6 @@ function previousStatus(event, taskId) {
 
 /**
  * Changes the status of a task to its next status.
- *
  * @param {Event} event - The event object.
  * @param {number} taskId - The ID of the task whose status is to be changed.
  */
@@ -95,7 +88,6 @@ function nextStatus(event, taskId) {
 
 /**
  * Gets the next status in the sequence for a given status.
- *
  * @param {string} currentStatus - The current status of a task.
  * @returns {string} - The next status in the sequence.
  */
@@ -112,7 +104,6 @@ function getNextStatus(currentStatus) {
 
 /**
  * Gets the previous status in the sequence for a given status.
- *
  * @param {string} currentStatus - The current status of a task.
  * @returns {string} - The previous status in the sequence.
  */

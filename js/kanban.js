@@ -15,7 +15,6 @@ searchBar.addEventListener('input', function(){
 
 /**
  * Filters tasks by their title.
- *
  * @param {Object} task - The task object.
  * @param {string} task.title - The title of the task.
  * @returns {boolean} - True if the task title includes the search value, false otherwise.
@@ -27,52 +26,7 @@ function filterByName(task){
 
 
 /**
- * Renders a task card as an HTML string.
- *
- * @param {Object} task - The task object.
- * @param {number} task.id - The ID of the task.
- * @param {string} task.title - The title of the task.
- * @param {string} task.description - The description of the task.
- * @param {Object} task.category - The category object associated with the task.
- * @param {string} task.priority - The priority of the task.
- * @returns {string} - The HTML string representing the task card.
- */
-function renderTaskCard(task){
-    let prio = task.priority.toLocaleLowerCase();
-
-    renderAssignees(task);
-    return /*html*/`
-    <div draggable="true" ondragstart="startDragging(${task.id})" class="kanban-card" id="task-${task.id}" onclick="renderTaskCardById(${task.id})">
-        <div class="category" style="background-color: ${task.category.backgroundColor}">${task.category.name}</div>
-        <h4 class="task-title">${task.title}</h4>
-        <p class="short-desc">${task.description}</p>
-
-        ${task.subtasks.length > 0 ? `<div class="progress"> ${renderProgressBar(task)} </div>` : ''}
-
-        <div class="assignees">
-            ${renderAssignees(task)}
-        </div>
-        <div class="board-priority">
-            <img src="assets/img/prio-${prio}.svg" alt="priority" />
-        </div>
-
-        <!-- Pfeile am unteren Rand -->
-        <div class="arrows">
-            <div class="arrow left-arrow" onclick="previousStatus(event, ${task.id})">
-                <img src="assets/img/arrow-left-line.svg" alt="Left Arrow" />
-            </div>
-            <div class="arrow right-arrow" onclick="nextStatus(event, ${task.id})">
-                <img src="assets/img/arrow-right-line.png" alt="Right Arrow" />
-            </div>
-        </div>
-    </div>
-    `
-}
-
-
-/**
  * Renders a progress bar as an HTML string.
- *
  * @param {Object} task - The task object.
  * @param {Array} task.subtasks - An array of subtasks.
  * @returns {string} - The HTML string representing the progress bar.
@@ -101,7 +55,6 @@ function renderProgressBar(task){
 
 /**
  * Renders assignees as an HTML string.
- *
  * @param {Object} task - The task object.
  * @param {Array<number>} task.assignedPersons - An array of assigned person IDs.
  * @returns {string} - The HTML string representing the assignees.
@@ -131,7 +84,6 @@ function renderAssignees(task) {
 
 /**
  * Clears the content of a container except for its header.
- *
  * @param {string} element - The ID of the container element.
  */
 function clearContainer(element){
@@ -144,7 +96,6 @@ function clearContainer(element){
 
 /**
  * Renders a "No Tasks" card as an HTML string.
- *
  * @param {string} status - The status indicating why there are no tasks.
  * @returns {string} - The HTML string representing the "No Tasks" card.
  */
@@ -159,7 +110,6 @@ function noTasksCard(status){
 
 /**
  * Initializes the kanban boards by rendering the tasks based on their statuses.
- *
  * @param {Array<Object>} tasksToRender - An array of tasks to render.
  */
 function kanbanInit(tasksToRender){
@@ -205,7 +155,6 @@ function kanbanInit(tasksToRender){
 
 /**
  * Loads tasks from the API and dispatches an event.
- *
  * @async
  */
 async function loadTasksFromAPI() {
@@ -221,7 +170,6 @@ async function loadTasksFromAPI() {
 
 /**
  * Loads contacts from the API and dispatches an event.
- *
  * @async
  */
 async function loadContactsFromAPI() {
@@ -237,7 +185,6 @@ async function loadContactsFromAPI() {
 
 /**
  * Loads tasks and contacts from the API, then initializes the Kanban board.
- *
  * @async
  */
 async function loadDataFromAPI() {
@@ -280,7 +227,6 @@ function new_bindContactLineEvents() {
 
 /**
  * Toggles the selection of a checkbox.
- *
  * @param {HTMLElement} checkbox - The checkbox element.
  * @param {string} name - The name associated with the checkbox.
  * @param {string} color - The color associated with the checkbox.
@@ -313,7 +259,6 @@ function new_bindCheckboxEvents() {
 
 /**
  * Adds a name to the selected contacts.
- *
  * @param {string} name - The name to be added.
  */
 function new_addNameToSelection(name) {
@@ -333,7 +278,6 @@ function new_addNameToSelection(name) {
 
 /**
  * Removes a name from the selected contacts.
- *
  * @param {string} name - The name to be removed.
  */
 function new_removeNameFromSelection(name) {
