@@ -1,4 +1,63 @@
 /**
+ * Extracts the value of an input element by its ID.
+ *
+ * This function retrieves the value of an input element with the specified ID.
+ *
+ * @param {string} elementId - The ID of the input element.
+ * @returns {string} The value of the input element.
+ */
+function extractInputValue(elementId) {
+  return document.getElementById(elementId).value;
+}
+
+
+/**
+* Extracts the selected priority from a group of priority buttons.
+*
+* This function searches for the selected priority among a group of priority buttons by checking which button has the 'selected' class.
+*
+* @returns {string|null} The selected priority or null if no priority is selected.
+*/
+function extractSelectedPriority() {
+  let priorityButtons = document.querySelectorAll('.prioButton');
+  let priority = null;
+  priorityButtons.forEach(button => {
+      if (button.classList.contains('selected')) {
+          priority = button.textContent.trim();
+      }
+  });
+  return priority;
+}
+
+function getNextTaskId() {
+  let maxId = -1;
+  tasks.forEach(task => {
+    if (task.id > maxId) {
+      maxId = task.id;
+    }
+  });
+  return maxId + 1;
+}
+
+function createNewTaskObject(title, description, duedate, priority, assignedTo, category, subtasks) {
+  let newTaskId = getNextTaskId();
+  return {
+      id: newTaskId,
+      status: "todo",
+      category: {
+          name: category,
+          backgroundColor: addTaskgetCategoryBackgroundColor(category) // Dynamically generate the background color here
+      },
+      title: title,
+      description: description,
+      completionDate: duedate,
+      priority: priority,
+      assignedPersons: assignedTo,
+      subtasks: subtasks
+  };
+}
+
+/**
  * Validates the inputs from the user for adding a task.
  * @returns {Object|null} An object containing priority, assignedTo, and category, or null if validation fails.
  */
