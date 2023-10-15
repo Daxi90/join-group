@@ -63,13 +63,19 @@ function removeHighlight(element){
  */
 function previousStatus(event, taskId) {
     event.stopPropagation();
-
-    let currentStatus = tasks[taskId].status;
-    let previousStatus = getPreviousStatus(currentStatus);
-    tasks[taskId].status = previousStatus;
+  
+    let task = tasks.find(task => task.id === taskId);
+  
+    if (task) {
+      let currentStatus = task.status;
+      let previousStatus = getPreviousStatus(currentStatus);
+      task.status = previousStatus;
+    }
+  
     setItem('tasks', tasks);
     kanbanInit(tasks);
-}
+  }
+  
 
 /**
  * Changes the status of a task to its next status.
@@ -78,13 +84,19 @@ function previousStatus(event, taskId) {
  */
 function nextStatus(event, taskId) {
     event.stopPropagation();
-
-    let currentStatus = tasks[taskId].status;
-    let nextStatus = getNextStatus(currentStatus);
-    tasks[taskId].status = nextStatus;
+  
+    let task = tasks.find(task => task.id === taskId);
+  
+    if (task) {
+      let currentStatus = task.status;
+      let nextStatus = getNextStatus(currentStatus);
+      task.status = nextStatus;
+    }
+    
     setItem('tasks', tasks);
     kanbanInit(tasks);
-}
+  }
+  
 
 /**
  * Gets the next status in the sequence for a given status.
