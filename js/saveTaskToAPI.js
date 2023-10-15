@@ -29,6 +29,24 @@ function extractSelectedPriority() {
   return priority;
 }
 
+/**
+* Extracts the selected priority from a group of priority buttons.
+*
+* This function searches for the selected priority among a group of priority buttons by checking which button has the 'selected' class.
+*
+* @returns {string|null} The selected priority or null if no priority is selected.
+*/
+function board_extractSelectedPriority() {
+  let priorityButtons = document.querySelectorAll('.board-prioButton');
+  let priority = null;
+  priorityButtons.forEach(button => {
+      if (button.classList.contains('selected')) {
+          priority = button.textContent.trim();
+      }
+  });
+  return priority;
+}
+
 function getNextTaskId() {
   let maxId = -1;
   tasks.forEach(task => {
@@ -149,7 +167,7 @@ function showPopupWithDelay() {
  * @returns {Object|null} An object containing priority, assignedTo, and category, or null if validation fails.
  */
 async function boardValidateInputs() {
-  let priority = extractSelectedPriority();
+  let priority = board_extractSelectedPriority();
   if (priority === null) {
     displayError(".board-priority-form", "Please choose a priority.");
     return null;
