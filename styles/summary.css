@@ -210,6 +210,16 @@ main {
         padding: unset !important;
     }
 
+    .taskwidth img {
+        height: 55px;
+        width: 55Px;
+    }
+
+    .circle {
+        height: 60px;
+        width: 60px;
+    }
+
     .urgentbox {
         width: 260px;
         height: fit-content;
@@ -225,6 +235,8 @@ main {
     .botlayer {
         width: 260px;
         justify-self: center;
+        font-size: small;
+        white-space: nowrap;
     }
 
     /* #TaskTD {
@@ -245,12 +257,16 @@ main {
         padding: unset !important;
     }
 
+    .summaryBox {
+        width: auto;
+    }
+
     .botlayer {
-        width: 330px;
+        width: 310px;
     }
 
     .toplayer {
-        width: 330px;
+        width: 320px;
     }
 
     .urgentboxleft {
@@ -263,20 +279,16 @@ main {
     }
 
     .bigNumbers {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
-    .circle {
-        height: 4rem;
-        width: 4rem;
-    }
 
     .urgentboxright {
         width: 1rem;
     }
 
     #TaskTD {
-        width: 240px;
+        width: 310px;
     }
 
     #taskIB, #taskIP, #AFeedback, #done {

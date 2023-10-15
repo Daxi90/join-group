@@ -293,7 +293,6 @@ function validateAndAddSubtask(inputField, checkButton, cancelButton, addSubtask
         addSubtask(subtaskValue, inputField, checkButton, cancelButton, addSubtaskElement, inputContainer);
     } else {
         clearErrors();
-        displayError('.subtasks-container', 'Please choose a priority.');
     }
 }
 
