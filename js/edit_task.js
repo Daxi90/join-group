@@ -93,7 +93,7 @@ function populateSubtasks(taskData) {
 function fillFormWithData(taskData) {
   fillInputById("title", taskData.title);
   fillInputById("description", taskData.description);
-  fillInputById("duedate", taskData.completionDate);
+  fillInputById("edit-duedate", taskData.completionDate);
 
   selectPriorityButton(taskData.priority);
 
