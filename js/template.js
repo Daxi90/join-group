@@ -280,10 +280,10 @@ function renderTaskCard(task){
         <!-- Pfeile am unteren Rand -->
         <div class="arrows">
             <div class="arrow left-arrow" onclick="previousStatus(event, ${task.id})">
-                <img src="assets/img/arrow-left-line.svg" alt="Left Arrow" />
+                <img src="assets/img/arrow-up-line.svg" alt="Left Arrow" />
             </div>
             <div class="arrow right-arrow" onclick="nextStatus(event, ${task.id})">
-                <img src="assets/img/arrow-right-line.png" alt="Right Arrow" />
+                <img src="assets/img/arrow-down-line.svg" alt="Right Arrow" />
             </div>
         </div>
     </div>

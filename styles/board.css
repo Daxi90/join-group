@@ -343,6 +343,13 @@ h3 {
   position: relative; /* Änderung von 'absolute' zu 'relative' */
 }
 
+.arrow.left-arrow{
+  width: 26px;
+}
+.arrow.right-arrow{
+  width: 26px;
+}
+
 .arrow {
   cursor: pointer;
   width: 15px;
