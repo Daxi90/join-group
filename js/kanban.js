@@ -88,10 +88,10 @@ function renderAssignees(task) {
  */
 function clearContainer(element){
     let container = document.getElementById(element);
-    let headerContent = container.firstElementChild;
-    container.innerHTML = '';
-    container.appendChild(headerContent);
-}
+    let cardsContainer = container.querySelector('.kanban-cards');
+    cardsContainer.innerHTML = '';
+  }
+  
 
 
 /**
@@ -113,10 +113,10 @@ function noTasksCard(status){
  * @param {Array<Object>} tasksToRender - An array of tasks to render.
  */
 function kanbanInit(tasksToRender){
-    let todoContainer = document.getElementById('todoBoard');
-    let inProgressContainer = document.getElementById('inProgressBoard');
-    let awaitFeedbackContainer = document.getElementById('awaitFeedBackBoard');
-    let doneContainer = document.getElementById('doneBoard');
+    let todoContainer = document.getElementById('kanban-todo-container');
+    let inProgressContainer = document.getElementById('kanban-inprogress-container');
+    let awaitFeedbackContainer = document.getElementById('kanban-awaitFeedBack-container');
+    let doneContainer = document.getElementById('kanban-done-container');
 
     clearContainer('todoBoard');
     clearContainer('inProgressBoard');
@@ -139,16 +139,16 @@ function kanbanInit(tasksToRender){
     });
 
     // Überprüfen ob Karten hinzugefügt wurden. Falls nicht, die "Keine Tasks"-Karte hinzufügen
-    if(todoContainer.children.length == 1) {
+    if(todoContainer.children.length < 1) {
         todoContainer.innerHTML += noTasksCard("ToDo");
     }
-    if(inProgressContainer.children.length == 1) {
+    if(inProgressContainer.children.length < 1) {
         inProgressContainer.innerHTML += noTasksCard("In Progress");
     }
-    if(awaitFeedbackContainer.children.length == 1) {
+    if(awaitFeedbackContainer.children.length < 1) {
         awaitFeedbackContainer.innerHTML += noTasksCard("Awaiting Feedback");
     }
-    if(doneContainer.children.length == 1) {
+    if(doneContainer.children.length < 1) {
         doneContainer.innerHTML += noTasksCard("Done");
     }
 }

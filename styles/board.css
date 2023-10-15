@@ -124,7 +124,6 @@
   display: flex;
   justify-content: space-between;
   height: 100%;
-  overflow: auto;
   gap: 32px;
   flex-wrap: nowrap;
   overflow: auto;
@@ -148,6 +147,7 @@
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   position: relative;
+  min-width: 250px;
 }
 
 /* Für WebKit-Browser (wie Chrome und Safari) */
@@ -164,6 +164,35 @@
 .kanban-column {
   scrollbar-width: none;
 }
+
+@media (max-width: 768px) {
+  .kanban-column {
+    width: 100%;
+  }
+
+  .kanban-cards {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    padding: 16px;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .kanban-board {
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  .kanban-column {
+    width: 100%;
+  }
+  .kanban-cards {
+    display: flex;
+    overflow-x: auto;
+  }
+}
+
 
 .flex {
   display: flex;

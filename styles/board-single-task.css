@@ -24,7 +24,7 @@
 
 @media (max-width: 950px) {
   .kanban-column {
-    min-width: 300px;
+    min-width: 200px;
   }
 }
 
