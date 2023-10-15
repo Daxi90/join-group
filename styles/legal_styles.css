@@ -14,16 +14,6 @@
     line-height: 120%; /* 73.2px */
 }
 
-#main-menu{
-    visibility: hidden;
-}
-
-@media screen and (max-width: 769px) {
-    #main-menu {
-        visibility: visible !important;
-    }
-}
-
 .legal-header{
     display: flex;
     align-items: center;
