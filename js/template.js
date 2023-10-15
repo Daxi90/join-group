@@ -402,5 +402,5 @@ function renderEditContact(editName, editEmail, editPhone) {
     `;
     editContactName.value = editName;
     editContactMail.value = editEmail;
-    editContactPhone.value = +editPhone;
+    editContactPhone.value = editPhone;
 }

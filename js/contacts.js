@@ -164,6 +164,7 @@ function getSingleContactData(i) {
     let singleContactColor = contacts[i]['color'];
     let singleContactInitials = contacts[i]['initials'];
 
+
     // Update the 'contactContainer' element with the rendered contact details.
     document.getElementById('contactContainer').innerHTML = renderClickedContact(
         singleContactName,
@@ -183,7 +184,6 @@ function getSingleContactData(i) {
         singleContactInitials
     ); // Render the edit contact section.
 }
-
 
 
 /**
@@ -215,10 +215,9 @@ async function removeContactFromTasks(contactId) {
  * Displays the form for editing a contact by removing 'd-none' class from the overlay and adding 'edit-contact-show' class.
  * @param {number} i - The index of the contact to edit in the contacts array.
  */
-function showEditContact(i) {
+function showEditContact() {
     document.getElementById('contactBlurOverlay').classList.remove('d-none');
     document.getElementById('editContact').classList.add('edit-contact-show');
-    editContactIndex = i; 
 }
 
 /**

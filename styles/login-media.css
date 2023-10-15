@@ -70,18 +70,20 @@
     }
 
     .login-link-container {
-        flex-direction: column;
-        gap: 21px;
+        gap: 15px;
         align-items: center;
+        width: 267px;
     }
 
     .login-button {
-        width: 180px;
+        font-size: 17px;
+        width: 160px;
     }
 
     .login-guest-button {
-        width: 180px;
+        width: 160px;
         padding:10px;
+        font-size: 17px;
     }
 
     .input-fields-container {
@@ -90,7 +92,7 @@
 
     .sign-up-link-container-media {
         display: flex;
-        margin-top: 10px;
+        margin-top: 25px;
     }
 }
 
@@ -118,13 +120,13 @@
     }
 
     .login-header-container {
-        top: 10px !important;
-        left: 10px !important;
+        top: 15px !important;
+        left: 15px !important;
     }
 
     .join-logo-blue {
-        width: 31px !important;
-        height: 46.031px !important;
+        width: 41px !important;
+        height: 56.031px !important;
     }
 }
 

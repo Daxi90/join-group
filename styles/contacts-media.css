@@ -46,7 +46,7 @@
         overflow: hidden;
         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
         border-radius: 0;
-        z-index: 102;
+        z-index: 103;
     }
 
     .new-contact-input-field {
@@ -59,6 +59,7 @@
 
     .contact-container {
         padding: 0;
+        z-index: 101;
     }
 
     .contact-information {
@@ -68,6 +69,10 @@
 
     .name-container {
         margin: 10px;
+    }
+
+    .contact {
+        width: 300px;
     }
 
     .new-contact-header {
@@ -86,6 +91,7 @@
         overflow: hidden;
         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
         border-radius: 0;
+        z-index: 103;
     }
 
     .edit-contact-header {
