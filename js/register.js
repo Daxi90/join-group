@@ -65,6 +65,5 @@ function uncheckPrivacyPolicy() {
  */
 function createInitals(name) {
     let initials = name.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
-    console.log(initials);
     return initials;
 }
