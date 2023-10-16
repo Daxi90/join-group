@@ -17,7 +17,7 @@
         position: absolute;
         z-index: 49;
         width: 50%;
-        height: 70vh;
+        height: 74vh;
         background-color: white;
         display: none;
     }
@@ -38,6 +38,7 @@
 @media(max-width: 769px) {
     .contact-container {
         width: 88%;
+        height: 70vh;
     }
 
     .contacts-content {
