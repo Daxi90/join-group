@@ -254,18 +254,20 @@ async function editContact() {
  * Adjusts the CSS properties of elements based on screen width for media-specific styling.
  */
 function cssMediaclass() {
-    if (screen.width <= 1024) {
-        document.getElementById('contactContainer').style = 'display: flex';
-        document.getElementById('contactArrowBackMedia').style = 'display: flex';
-    }
+
+        document.getElementById('contactContainer').classList.add('mediaquery-d-flex');
+        document.getElementById('contactContainer').classList.add('mediaquery-z-index');
+        document.getElementById('contactArrowBackMedia').classList.add('mediaquery-d-flex');
+
 }
 
 /**
  * Closes the media-specific contact display by updating CSS properties.
  */
 function closeContactMedia() {
-    document.getElementById('contactContainer').style = 'z-index: 0';
-    document.getElementById('contactArrowBackMedia').style = 'display: none';
+    document.getElementById('contactArrowBackMedia').classList.remove('mediaquery-d-flex');
+    document.getElementById('contactContainer').classList.remove('mediaquery-d-flex');
+    document.getElementById('contactContainer').classList.remove('mediaquery-z-index');
 }
 
 /**
