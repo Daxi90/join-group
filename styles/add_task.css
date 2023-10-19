@@ -239,11 +239,11 @@ input:-ms-input-placeholder {
 
 
 .custom-select .options {
-    display: none;
+    display: none !important;
   }
 
 .custom-select.open .options {
-    display: block;
+    display: block !important;
 }
 
 .mb20 {

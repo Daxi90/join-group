@@ -17,7 +17,7 @@ async function taskFormJS() {
         bindSearchEvent();
         await loadTasksFromAPI(); // Using await since loadTasksFromAPI is asynchronous
         categoryMandatory();
-        bindInputValidation();
+        // bindInputValidation();
         setMinDudateToday();
         
         document.querySelectorAll('.custom-select').forEach(dropdown => {
@@ -438,36 +438,36 @@ function categoryMandatory() {
 }   
 
 
-/**
- * Binds validation logic for inputs for emails and phonenumbers.
- */
-function bindInputValidation() {
-    const emailInput = document.getElementById('contactMail');
-    const phoneInput = document.getElementById('contactPhone');
-    const submitButton = document.getElementById('submitButton');
+// /**
+//  * Binds validation logic for inputs for emails and phonenumbers.
+//  */
+// function bindInputValidation() {
+//     const emailInput = document.getElementById('contactMail');
+//     const phoneInput = document.getElementById('contactPhone');
+//     const submitButton = document.getElementById('submitButton');
 
-    if (emailInput && phoneInput && submitButton) {
-        /**
-         * Validates weather one of the iputfilds has a value.
-         * @param {HTMLInputElement} input1 - First input field.
-         * @param {HTMLInputElement} input2 - Second input field.
-         * @returns {boolean}
-         */
-        function validateAtLeastOneField(input1, input2) {
-            return input1.value.length > 0 || input2.value.length > 0;
-        }
+//     if (emailInput && phoneInput && submitButton) {
+//         /**
+//          * Validates weather one of the iputfilds has a value.
+//          * @param {HTMLInputElement} input1 - First input field.
+//          * @param {HTMLInputElement} input2 - Second input field.
+//          * @returns {boolean}
+//          */
+//         function validateAtLeastOneField(input1, input2) {
+//             return input1.value.length > 0 || input2.value.length > 0;
+//         }
 
-        // Event-Listener for submit-button
-        submitButton.addEventListener('click', function(e) {
-            if (!validateAtLeastOneField(emailInput, phoneInput)) {
-                e.preventDefault();
-                alert('Bitte füllen Sie mindestens eines der Felder aus.');
-            }
-        });
-    } else {
-        console.warn("Eines oder mehrere benötigte Elemente wurden nicht gefunden.");
-    }
-}
+//         // Event-Listener for submit-button
+//         submitButton.addEventListener('click', function(e) {
+//             if (!validateAtLeastOneField(emailInput, phoneInput)) {
+//                 e.preventDefault();
+//                 alert('Bitte füllen Sie mindestens eines der Felder aus.');
+//             }
+//         });
+//     } else {
+//         console.warn("Eines oder mehrere benötigte Elemente wurden nicht gefunden.");
+//     }
+// }
 
 
 /**
