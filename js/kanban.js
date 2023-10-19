@@ -292,3 +292,34 @@ function new_removeNameFromSelection(name) {
     }
 }
 
+/**
+ * Creates a new contact and adds it to the contacts list.
+ */
+async function boardCreateContact() {
+    let name = document.getElementById('contactName');
+    let mail = document.getElementById('contactMail');
+    let phone = document.getElementById('contactPhone');
+    let initials = createInitals(name.value);
+    let color = colorRandomizer();
+    id = id + 1;
+
+    contacts.push({
+        name: name.value,
+        email: mail.value,
+        phone: phone.value,
+        initials: initials,
+        color: color,
+        id: id
+    });
+
+    await setItem('contacts', JSON.stringify(contacts));
+    await setItem('id', JSON.stringify(id));
+
+
+    name.value = '';
+    mail.value = '';
+    phone.value = '';
+    closeCreateContact();
+    await loadContactsTab(); // Kontakt-Tab laden
+    board_taskFormJS();
+}
