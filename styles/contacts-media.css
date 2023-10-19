@@ -33,6 +33,18 @@
     #container {
         overflow: auto;
     }
+
+    .mediaquery-d-flex {
+        display: flex;
+    }
+
+    .mediaquery-d-none {
+        display: none;
+    }
+
+    .mediaquery-z-index {
+        z-index: 100;
+    }
 }
 
 @media(max-width: 769px) {
@@ -115,6 +127,8 @@
         border-radius: 0;
 
     }
+
+
 }
 
 @media(max-width: 500px) {
