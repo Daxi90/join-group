@@ -508,7 +508,7 @@ async function editTaskFormJS() {
    */
   function edit_createSubtaskText(subtaskValue) {
     const subtaskText = document.createElement("span");
-    subtaskText.innerText = "● " + subtaskValue;
+    subtaskText.innerText = subtaskValue;
     return subtaskText;
   }
   

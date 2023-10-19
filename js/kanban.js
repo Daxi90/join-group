@@ -291,3 +291,4 @@ function new_removeNameFromSelection(name) {
         });
     }
 }
+

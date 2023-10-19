@@ -319,36 +319,44 @@ function bindCancelButtonEventListener(cancelButton, inputField, inputContainer,
  * This function adds a click event listener to the entire document to manage interactions with dropdown menus. It closes any open dropdowns when a click occurs outside of the dropdown or its related elements.
  * @param {Event} event - The click event.
  */
-document.addEventListener("click", function (event) {
-    const openDropdowns = document.querySelectorAll(".custom-select"); // Ihre Dropdown-Elemente
-    let targetElement = event.target; // geklicktes Element
-  
-    // Über alle offenen Dropdowns iterieren
-    openDropdowns.forEach((dropdown) => {
-      // Überprüfen, ob das geklickte Element oder eines seiner Elternelemente das Dropdown ist
-      let insideDropdown = false;
-  
-      do {
-        if (targetElement == dropdown) {
-          // Dies ist ein Klick innerhalb des Dropdowns
-          insideDropdown = true;
-          break;
+document.addEventListener('click', function (event) {
+    let target = event.target;
+    while (target != null) {
+        if (target.classList.contains('option')) {
+            return;
         }
-        // Gehen Sie das DOM hoch
-        if (targetElement) {
-          targetElement = targetElement.parentNode;
+        target = target.parentElement;
+    }
+    const openDropdowns = document.querySelectorAll('.custom-select'); // Your dropdown elements
+    let targetElement = event.target; // Clicked element
+
+    // Iterate through all open dropdowns
+    openDropdowns.forEach(dropdown => {
+        let targetElement = event.target;
+
+        // Check if the clicked element or any of its parent elements is the dropdown
+        let insideDropdown = false;
+
+        do {
+            if (targetElement == dropdown) {
+                // This is a click inside the dropdown
+                insideDropdown = true;
+                break;
+            }
+            // Traverse up the DOM
+            if (targetElement) {
+                targetElement = targetElement.parentNode;
+            }
+        } while (targetElement);
+
+        if (!insideDropdown) {
+            const optionsContainer = dropdown.querySelector('.options');
+            if (optionsContainer) {
+                optionsContainer.style.display = 'none';
+            }
         }
-      } while (targetElement);
-  
-      if (!insideDropdown) {
-        // Dies ist ein Klick außerhalb des Dropdowns, also Dropdown schließen
-        const optionsContainer = dropdown.querySelector(".options");
-        if (optionsContainer) {
-          optionsContainer.style.display = "none"; // Oder Ihre Methode zum Schließen
-        }
-      }
     });
-  });
+});
 
 
 /**

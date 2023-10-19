@@ -105,6 +105,7 @@ async function createContact() {
     closeCreateContactContacts();
 }
 
+
 /**
  * Generates initials from a given name.
  * @param {string} name - The name to generate initials from.
