@@ -69,6 +69,11 @@
         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
         border-radius: 0;
         z-index: 103;
+        transform: translateX(100%);
+    }
+
+    .new-contact-show {
+        transform: translateX(0%);
     }
 
     .new-contact-input-field {
@@ -116,6 +121,11 @@
         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
         border-radius: 0;
         z-index: 103;
+        transform: translateX(-100%);
+    }
+
+    .edit-contact-show {
+        transform: translateX(0%);
     }
 
     .edit-contact-header {
