@@ -210,3 +210,17 @@ function getSelectedContactsInitials() {
     return Array.from(document.querySelectorAll('.selected-contacts .selected-initials'))
         .map(initialElem => initialElem.textContent);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = Array.from(
+        document.querySelectorAll('input[name=email], input[name=phone]')
+    );
+
+    const inputListener = e => {
+        inputs
+            .filter(i => i !== e.target)
+            .forEach(i => (i.required = !e.target.value.length));
+    };
+
+    inputs.forEach(i => i.addEventListener('input', inputListener));
+});
