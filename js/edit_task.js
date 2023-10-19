@@ -283,11 +283,25 @@ function edit_getSelectedCategory() {
   const category = document
     .querySelector(".category-select .selected-option")
     .textContent.trim();
+  
+  let backgroundColor;
+  switch (category) {
+    case "Technical task":
+      backgroundColor = "#FFB3B3";
+      break;
+    case "User story":
+      backgroundColor = "#B3D9FF";
+      break;
+    default:
+      backgroundColor = "#CCCCCC";
+  }
+
   return {
     name: category,
-    backgroundColor: "#ff0000", // Standardwert
+    backgroundColor: backgroundColor,
   };
 }
+
 
 /**
  * Get the list of subtasks.
