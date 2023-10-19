@@ -233,9 +233,14 @@ function getTaskById(taskId) {
  */
 function updateTaskFields(task, fieldIds) {
   fieldIds.forEach((id) => {
-    task[id] = document.getElementById(id).value;
+    let field = id;
+    if (id === "edit-duedate") {
+      field = "completionDate";
+    }
+    task[field] = document.getElementById(id).value;
   });
 }
+
 
 /**
  * Get the selected priority.
@@ -388,7 +393,7 @@ function saveEditedTaskData(taskId) {
   const task = getTaskById(taskId);
   if (!updateTaskIfFound(task, taskId)) return;
 
-  updateTaskFields(task, ["title", "description", "duedate"]);
+  updateTaskFields(task, ["title", "description", "edit-duedate"]);
 
   if (!updateAndValidatePriority(task)) return;
   if (!updateAndValidateAssignedPersons(task, contacts)) return;
